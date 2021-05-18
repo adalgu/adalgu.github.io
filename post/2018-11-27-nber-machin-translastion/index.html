@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.7.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Gunn Kim">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="인공지능의 영향에 대한 흥미로운 연구 페이퍼가 있어서 소개합니다. NBER에서 2018년 8월에 나온 Working Paper입니다. 기계와의 경쟁, 제2의 기계시대 등">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://gunn.kim/post/2018-11-27-nber-machin-translastion/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nanum+Gothic%7CNoto+Serif+KR%7CNoto+Sans+KR&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-161857308-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           document.location = url;
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target);  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'UA-161857308-1', {});
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hud1e4a02091c0cd7dd9ce20cf2020f12f_133591_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hud1e4a02091c0cd7dd9ce20cf2020f12f_133591_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="https://gunn.kim/post/2018-11-27-nber-machin-translastion/">
+
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@adalgu">
+  <meta property="twitter:creator" content="@adalgu">
+  
+  <meta property="og:site_name" content="Exobrain">
+  <meta property="og:url" content="https://gunn.kim/post/2018-11-27-nber-machin-translastion/">
+  <meta property="og:title" content="&lt;NBER&gt; 인공지능이 해외직구를 늘린다? | Exobrain">
+  <meta property="og:description" content="인공지능의 영향에 대한 흥미로운 연구 페이퍼가 있어서 소개합니다. NBER에서 2018년 8월에 나온 Working Paper입니다. 기계와의 경쟁, 제2의 기계시대 등"><meta property="og:image" content="https://gunn.kim/post/2018-11-27-nber-machin-translastion/featured.jpg">
+  <meta property="twitter:image" content="https://gunn.kim/post/2018-11-27-nber-machin-translastion/featured.jpg"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2018-11-27T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2018-11-27T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://gunn.kim/post/2018-11-27-nber-machin-translastion/"
+  },
+  "headline": "\u003cNBER\u003e 인공지능이 해외직구를 늘린다?",
+  
+  "image": [
+    "https://gunn.kim/post/2018-11-27-nber-machin-translastion/featured.jpg"
+  ],
+  
+  "datePublished": "2018-11-27T00:00:00Z",
+  "dateModified": "2018-11-27T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Gunn Kim"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Exobrain",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "img/https://gunn.kim/"
+    }
+  },
+  "description": "인공지능의 영향에 대한 흥미로운 연구 페이퍼가 있어서 소개합니다. NBER에서 2018년 8월에 나온 Working Paper입니다. 기계와의 경쟁, 제2의 기계시대 등"
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>&lt;NBER&gt; 인공지능이 해외직구를 늘린다? | Exobrain</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">Exobrain</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">Exobrain</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-end" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/post"><span>Blog</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+            
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="https://notion.gunn.kim/" target="_blank" rel="noopener"><span>Notion Pages</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/talks"><span>Talks</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/about"><span>About</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      <li class="nav-item">
+        <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>&lt;NBER&gt; 인공지능이 해외직구를 늘린다?</h1>
+
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    2018년 11월 27일
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    3 min read
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/economy/">economy</a></span>
+  
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 360px;">
+  <div style="position: relative">
+    <img src="/post/2018-11-27-nber-machin-translastion/featured_hu3d7bb323fcb228fbc524a384022a9d4d_75382_720x0_resize_q90_lanczos.jpg" alt="" class="featured-image">
+    
+  </div>
+</div>
+
+
+<script data-ad-client="ca-pub-3695098602071408" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+  <div class="article-container">
+
+    <div class="article-style">
+
+      <p>인공지능의 영향에 대한 흥미로운 연구 페이퍼가 있어서 소개합니다.</p>
+<p><img src="2018-11-27-NBER-machin-translastion0.png" alt="그림1"></p>
+<p>NBER에서 2018년 8월에 나온 <a href="https://www.nber.org/papers/w24917">Working Paper</a>입니다. 기계와의 경쟁, 제2의 기계시대 등으로 많이 알려진 MIT의 에릭 브린욜프슨 교수와 함께 2명의 저자가 함께 쓴 보고서 입니다. NBER의 11월 <a href="https://papers.nber.org/digest/nov18/w24917.shtml">Research Digest</a>에서 다루어서 우연히 보게되었습니다.</p>
+<p><img src="2018-11-27-NBER-machin-translastion1.png" alt="그림2"></p>
+<p>해당 연구는 바둑이나 사물인식 등 최근 인공지능이 인간의 능력을 앞서는 분야가 늘어나고 있는 상황인데, 이것의 경제적 효과에 대한 증거를 제시하는 연구가 없다는 점에서 시작한 연구라고 합니다. 연구자들은 이베이(eBay)의 거래 데이터를 이용해서 이베이가 인공지능 기반의 번역(machine translation)을 도입한 이후 얼마나 해외 직구가 많이 늘어났는지를 살펴보았습니다. 그 결과 이베이의 라틴 아메리카 매출(해외직구)이 이전에 비해서 17.5%가 늘어난 것으로 나타났습니다. 인공지능에 기반한 번역 소프트웨어의 성능 향상이 번역과 관련된 탐색 비용(translation-related search costs)을 줄여준 결과로 나타났습니다. 이들은 이러한 연구 결과가 언어 장벽이 국제 무역을 막고 있는 중요한 원인 임을 보여주는 것이며, 인공지능이 이러한 장벽을 낮춤으로써 경제적 효율성을 높이는데 기여하고 있음을 보여준다고 밝히고 있습니다.</p>
+<p>개인적으로 중국 알리바바의 글로벌 전자상거래 플랫폼 서비스인 알리 익스프레스를 자주 이용합니다. 위 연구와 유사한 경험을 할 수 있는데요.</p>
+<p>먼저, 상품명이 때로는 어색한 번역들이 있기는 합니다면, 대부분은 충분히 이해할 수 있을 정도로 번역을 해주어서 상품을 사는데 크게 지장이 없었던 경험이었구요. 또한, 구매 후기를 보면, 러시아, 브라질, 스페인 등등 전세계 각국의 사람들이 후기를 남겨놓을 것을 볼 수가 있고, 이를 또한 한글이나 영어 등으로 번역한 결과를 읽을 수도 있습니다.</p>
+<p>해외 구매가 국내 구매에 비해서 여러가지 위험 요인들이 많기에 불안한데, 저런 번역된 정보는 상품을 구매하는데 중요한 영향을 주었다고 생각됩니다.</p>
+<p>이렇게 경험 정도로 그치는 문제를 가설을 가지고, 데이터를 분석해서 결론을 이끌어 내는 모습은 연구자의 중요한 자질로 생각됩니다. 최근에 NBER 페이퍼들을 보면 비전통적인 데이터를 가지고 기존 답하지 못한 문제들에 대한 결론을 내는 시도들을 많이 보게 됩니다. 크게는 빅데이터라고 불리고, 작게는 사람의 행위 데이터(bahavior data)에 대한 연구자들의 접근이 확대되면서 나타나는 현상이라고 생각됩니다. 우리나라에도 여느 나라 못지않게 디지털화가 진행되고 축적되는 데이터도 많아지는 만큼 비슷한 시도들이 더 많아 지면 좋겠네요.</p>
+
+    </div>
+
+    
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/nber/">NBER</a>
+  
+  <a class="badge badge-light" href="/tags/article/">Article</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://gunn.kim/post/2018-11-27-nber-machin-translastion/&amp;text=&amp;lt;NBER&amp;gt;%20%ec%9d%b8%ea%b3%b5%ec%a7%80%eb%8a%a5%ec%9d%b4%20%ed%95%b4%ec%99%b8%ec%a7%81%ea%b5%ac%eb%a5%bc%20%eb%8a%98%eb%a6%b0%eb%8b%a4?" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://gunn.kim/post/2018-11-27-nber-machin-translastion/&amp;t=&amp;lt;NBER&amp;gt;%20%ec%9d%b8%ea%b3%b5%ec%a7%80%eb%8a%a5%ec%9d%b4%20%ed%95%b4%ec%99%b8%ec%a7%81%ea%b5%ac%eb%a5%bc%20%eb%8a%98%eb%a6%b0%eb%8b%a4?" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=&amp;lt;NBER&amp;gt;%20%ec%9d%b8%ea%b3%b5%ec%a7%80%eb%8a%a5%ec%9d%b4%20%ed%95%b4%ec%99%b8%ec%a7%81%ea%b5%ac%eb%a5%bc%20%eb%8a%98%eb%a6%b0%eb%8b%a4?&amp;body=https://gunn.kim/post/2018-11-27-nber-machin-translastion/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://gunn.kim/post/2018-11-27-nber-machin-translastion/&amp;title=&amp;lt;NBER&amp;gt;%20%ec%9d%b8%ea%b3%b5%ec%a7%80%eb%8a%a5%ec%9d%b4%20%ed%95%b4%ec%99%b8%ec%a7%81%ea%b5%ac%eb%a5%bc%20%eb%8a%98%eb%a6%b0%eb%8b%a4?" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=&amp;lt;NBER&amp;gt;%20%ec%9d%b8%ea%b3%b5%ec%a7%80%eb%8a%a5%ec%9d%b4%20%ed%95%b4%ec%99%b8%ec%a7%81%ea%b5%ac%eb%a5%bc%20%eb%8a%98%eb%a6%b0%eb%8b%a4?%20https://gunn.kim/post/2018-11-27-nber-machin-translastion/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=https://gunn.kim/post/2018-11-27-nber-machin-translastion/&amp;title=&amp;lt;NBER&amp;gt;%20%ec%9d%b8%ea%b3%b5%ec%a7%80%eb%8a%a5%ec%9d%b4%20%ed%95%b4%ec%99%b8%ec%a7%81%ea%b5%ac%eb%a5%bc%20%eb%8a%98%eb%a6%b0%eb%8b%a4?" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      <img class="portrait mr-3" src="https://s.gravatar.com/avatar/84693a0d2bb41f2e8db251e38ee69454?s=200')" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://gunn.kim/">Gunn Kim</a></h5>
+      <h6 class="card-subtitle">Data Economist</h6>
+      <p class="card-text">Work at tech company as an economist.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    <li>
+      <a href="mailto:adalgu@gmail.com" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://facebook.com/adalgu" target="_blank" rel="noopener">
+        <i class="fab fa-facebook"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://gitlab.com/adalgu" target="_blank" rel="noopener">
+        <i class="fab fa-gitlab"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/adalgu" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://linkedin.com/in/digitaleconomy" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+<section id="comments">
+  
+    
+<div id="disqus_thread"></div>
+<script>
+  let disqus_config = function () {
+    
+    
+    
+  };
+  (function() {
+    if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+      document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+      return;
+    }
+    var d = document, s = d.createElement('script'); s.async = true;
+    s.src = 'https://' + "adalgu" + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+</section>
+
+
+
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha256-1zu+3BnLYV9LdiY85uXMzii3bdrkelyp37e0ZyTAQh0=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r,%20python,%20sql.min.js"></script>
+        
+      
+
+    
+
+    
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.a0d331bcd05dbe8b31e244f796710f08.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    © Gunn Kim, 2021 &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

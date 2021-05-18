@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.7.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Gunn Kim">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="모빌리티 데이터를 분석하다보니 좌표데이터 계산할 일이 생기고 있다. 위치 데이터는 특정 행정동(Hcode)이나 H3 코드를 기준으로 집계해 볼 수도 있고, 개별 지">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://gunn.kim/post/2020-06-04-wgs84-distance-sql/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nanum+Gothic%7CNoto+Serif+KR%7CNoto+Sans+KR&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-161857308-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           document.location = url;
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target);  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'UA-161857308-1', {});
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hud1e4a02091c0cd7dd9ce20cf2020f12f_133591_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hud1e4a02091c0cd7dd9ce20cf2020f12f_133591_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="https://gunn.kim/post/2020-06-04-wgs84-distance-sql/">
+
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@adalgu">
+  <meta property="twitter:creator" content="@adalgu">
+  
+  <meta property="og:site_name" content="Exobrain">
+  <meta property="og:url" content="https://gunn.kim/post/2020-06-04-wgs84-distance-sql/">
+  <meta property="og:title" content="[SQL/파이썬] WGS84좌표의 위도 경도 값으로 거리 구하기 | Exobrain">
+  <meta property="og:description" content="모빌리티 데이터를 분석하다보니 좌표데이터 계산할 일이 생기고 있다. 위치 데이터는 특정 행정동(Hcode)이나 H3 코드를 기준으로 집계해 볼 수도 있고, 개별 지"><meta property="og:image" content="https://gunn.kim/post/2020-06-04-wgs84-distance-sql/featured10-25.png">
+  <meta property="twitter:image" content="https://gunn.kim/post/2020-06-04-wgs84-distance-sql/featured10-25.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2020-06-04T03:07:40&#43;00:00">
+    
+    <meta property="article:modified_time" content="2020-06-04T03:07:40&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://gunn.kim/post/2020-06-04-wgs84-distance-sql/"
+  },
+  "headline": "[SQL/파이썬] WGS84좌표의 위도 경도 값으로 거리 구하기",
+  
+  "image": [
+    "https://gunn.kim/post/2020-06-04-wgs84-distance-sql/featured10-25.png"
+  ],
+  
+  "datePublished": "2020-06-04T03:07:40Z",
+  "dateModified": "2020-06-04T03:07:40Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Gunn Kim"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Exobrain",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "img/https://gunn.kim/"
+    }
+  },
+  "description": "모빌리티 데이터를 분석하다보니 좌표데이터 계산할 일이 생기고 있다. 위치 데이터는 특정 행정동(Hcode)이나 H3 코드를 기준으로 집계해 볼 수도 있고, 개별 지"
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>[SQL/파이썬] WGS84좌표의 위도 경도 값으로 거리 구하기 | Exobrain</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">Exobrain</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">Exobrain</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-end" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/post"><span>Blog</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+            
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="https://notion.gunn.kim/" target="_blank" rel="noopener"><span>Notion Pages</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/talks"><span>Talks</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/about"><span>About</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      <li class="nav-item">
+        <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>[SQL/파이썬] WGS84좌표의 위도 경도 값으로 거리 구하기</h1>
+
+  
+  <p class="page-subtitle">서버를 계산시키고, 로컬에선 결과만 보자</p>
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    2020년 6월 4일
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    2 min read
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/python/">python</a></span>
+  
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 426px;">
+  <div style="position: relative">
+    <img src="/post/2020-06-04-wgs84-distance-sql/featured10-25_hu84e1cb68597634246c4df7716b557816_94381_720x0_resize_lanczos_2.png" alt="" class="featured-image">
+    
+  </div>
+</div>
+
+
+<script data-ad-client="ca-pub-3695098602071408" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+  <div class="article-container">
+
+    <div class="article-style">
+
+      <p>모빌리티 데이터를 분석하다보니 좌표데이터 계산할 일이 생기고 있다.</p>
+<p>위치 데이터는 특정 행정동(Hcode)이나 H3 코드를 기준으로 집계해 볼 수도 있고,
+개별 지점의 좌표를 가지고 계산해 볼 수도 있는데, 지점과 지점간 거리를 계산할 경우에는 좌표간 거리를 구하는 것이 필요하다.</p>
+<p>좌표데이터는 WGS84 좌표나 WTM 좌표로 기록하고 있는데, 둘간에 상호 전환이 가능하다.</p>
+<blockquote>
+<p>WGS84는 세계 지구 좌표 시스템(World Geodetic System, WGS)으로 1984년에 제정되었다. 지구를 타원체로 가정하고 위치를 특정한다. &gt; 주로 GPS 좌표에서 이용하는 것으로 구글맵에서 사용한다. 타원상의 좌표간 거리를 계산하는 것이라 거리를 잴 때 조금 계산식이 복잡하다.
+WTM 좌표는 WGS84처럼 타원체를 사용하되, 이를 평면 좌표계로 투영한 좌표이다. 일반적인 종이책 지도처럼 실제 위치를 평면에 투영한 좌표라고 &gt; 보면 된다. 평면으로 투영된 좌표이기 때문에 지점간 거리를 구할 때 단순한 피타고라스 정리(a^2+b^2=c^2)으로 구하면 된다.</p>
+</blockquote>
+<p>좌표간의 거리는 로컬의 파이썬에서도 구현해되지만, 데이터가 많을 경우 로컬 머신으로는 시간이 많이 걸린다. 그럴땐 서버에서 계산하는 것이 빠르므로 SQL로 바로 거리를 계산하는 것이 좋다. SQL에서 이를 구현하면 아래와 같다. 파이썬에서 SQL 코드를 실행하는 것을 가정한다.</p>
+<p>변수는 기준점이 x, y, 테이블의 각 지점 좌표가 P_wgs84x, P_wgs84y이다.
+SQL 코드를 실행시키면, distance라는 칼럼에서 기준점과의 거리를 계산해서 보여준다.</p>
+<blockquote>
+<p>여기서 종종 실수하는 것이, x,y와 위도,경도를 잘못 넣는 것.
+x는 가로 상의 지점이니 경도(Longitude)를 넣어야 하고, y는 세로 상의 지점이니 위도(Latitude)를 넣어야 한다.
+순서가 엇갈려 있어서 휴먼 에러가 발생하기 쉬우니 x,y대신에 위도는 lon, 경도는 lat으로 변수명을 바꾸어 놓는 것이 편할 수 있다.</p>
+</blockquote>
+<h3 id="wgs84----">WGS84 좌표 거리 구하기 코드</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#f92672">/</span><span style="color:#f92672">/</span> WGW84 <span style="color:#960050;background-color:#1e0010">좌</span><span style="color:#960050;background-color:#1e0010">표</span><span style="color:#960050;background-color:#1e0010">의</span> <span style="color:#960050;background-color:#1e0010">거</span><span style="color:#960050;background-color:#1e0010">리</span> <span style="color:#960050;background-color:#1e0010">구</span><span style="color:#960050;background-color:#1e0010">하</span><span style="color:#960050;background-color:#1e0010">기</span>
+
+x <span style="color:#f92672">=</span> <span style="color:#ae81ff">126</span>.<span style="color:#ae81ff">964321</span>
+y <span style="color:#f92672">=</span> <span style="color:#ae81ff">37</span>.<span style="color:#ae81ff">529523</span>
+
+query<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">SELECT _,
+</span><span style="color:#e6db74">(6371_acos(cos(radians({center_y}))*cos(radians(P_wgs84y))*cos(radians(P_wgs84x)
+</span><span style="color:#e6db74">\-radians({center_x}))+sin(radians({center_y}))*sin(radians(P_wgs84y))))
+</span><span style="color:#e6db74">AS distance
+</span><span style="color:#e6db74">FROM MAB_WGS84</span></code></pre></div>
+<h3 id="wtm----">WTM 좌표 거리 구하기 코드</h3>
+<p>좌표가 WTM일 경우엔,
+변수는 기준점이 x, y, 테이블의 각 지점 좌표가 coord_x_wtm, coord_y_wtm이다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#f92672">/</span><span style="color:#f92672">/</span> WTM <span style="color:#960050;background-color:#1e0010">좌</span><span style="color:#960050;background-color:#1e0010">표</span><span style="color:#960050;background-color:#1e0010">의</span> <span style="color:#960050;background-color:#1e0010">거</span><span style="color:#960050;background-color:#1e0010">리</span> <span style="color:#960050;background-color:#1e0010">구</span><span style="color:#960050;background-color:#1e0010">하</span><span style="color:#960050;background-color:#1e0010">기</span>
+
+x <span style="color:#f92672">=</span> <span style="color:#ae81ff">126</span>.<span style="color:#ae81ff">964321</span>
+y <span style="color:#f92672">=</span> <span style="color:#ae81ff">37</span>.<span style="color:#ae81ff">529523</span>
+
+query<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">SELECT *,
+</span><span style="color:#e6db74">sqrt(({center_x} - coord_x_wtm) * ({center_x} - coord_x_wtm)
+</span><span style="color:#e6db74">\+ ({center_y} - coord_y_wtm) * ({center_y} - coord_y_wtm))
+</span><span style="color:#e6db74">AS distance
+</span><span style="color:#e6db74">FROM MAP_WTM</span></code></pre></div>
+<ul>
+<li>참고 :</li>
+<li><a href="https://blog.acronym.co.kr/283">https://blog.acronym.co.kr/283</a></li>
+<li><a href="https://pnot.tistory.com/8">https://pnot.tistory.com/8</a></li>
+</ul>
+
+    </div>
+
+    
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/sql/">sql</a>
+  
+  <a class="badge badge-light" href="/tags/python/">python</a>
+  
+  <a class="badge badge-light" href="/tags/gis/">gis</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://gunn.kim/post/2020-06-04-wgs84-distance-sql/&amp;text=[SQL/%ed%8c%8c%ec%9d%b4%ec%8d%ac]%20WGS84%ec%a2%8c%ed%91%9c%ec%9d%98%20%ec%9c%84%eb%8f%84%20%ea%b2%bd%eb%8f%84%20%ea%b0%92%ec%9c%bc%eb%a1%9c%20%ea%b1%b0%eb%a6%ac%20%ea%b5%ac%ed%95%98%ea%b8%b0" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://gunn.kim/post/2020-06-04-wgs84-distance-sql/&amp;t=[SQL/%ed%8c%8c%ec%9d%b4%ec%8d%ac]%20WGS84%ec%a2%8c%ed%91%9c%ec%9d%98%20%ec%9c%84%eb%8f%84%20%ea%b2%bd%eb%8f%84%20%ea%b0%92%ec%9c%bc%eb%a1%9c%20%ea%b1%b0%eb%a6%ac%20%ea%b5%ac%ed%95%98%ea%b8%b0" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=[SQL/%ed%8c%8c%ec%9d%b4%ec%8d%ac]%20WGS84%ec%a2%8c%ed%91%9c%ec%9d%98%20%ec%9c%84%eb%8f%84%20%ea%b2%bd%eb%8f%84%20%ea%b0%92%ec%9c%bc%eb%a1%9c%20%ea%b1%b0%eb%a6%ac%20%ea%b5%ac%ed%95%98%ea%b8%b0&amp;body=https://gunn.kim/post/2020-06-04-wgs84-distance-sql/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://gunn.kim/post/2020-06-04-wgs84-distance-sql/&amp;title=[SQL/%ed%8c%8c%ec%9d%b4%ec%8d%ac]%20WGS84%ec%a2%8c%ed%91%9c%ec%9d%98%20%ec%9c%84%eb%8f%84%20%ea%b2%bd%eb%8f%84%20%ea%b0%92%ec%9c%bc%eb%a1%9c%20%ea%b1%b0%eb%a6%ac%20%ea%b5%ac%ed%95%98%ea%b8%b0" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=[SQL/%ed%8c%8c%ec%9d%b4%ec%8d%ac]%20WGS84%ec%a2%8c%ed%91%9c%ec%9d%98%20%ec%9c%84%eb%8f%84%20%ea%b2%bd%eb%8f%84%20%ea%b0%92%ec%9c%bc%eb%a1%9c%20%ea%b1%b0%eb%a6%ac%20%ea%b5%ac%ed%95%98%ea%b8%b0%20https://gunn.kim/post/2020-06-04-wgs84-distance-sql/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=https://gunn.kim/post/2020-06-04-wgs84-distance-sql/&amp;title=[SQL/%ed%8c%8c%ec%9d%b4%ec%8d%ac]%20WGS84%ec%a2%8c%ed%91%9c%ec%9d%98%20%ec%9c%84%eb%8f%84%20%ea%b2%bd%eb%8f%84%20%ea%b0%92%ec%9c%bc%eb%a1%9c%20%ea%b1%b0%eb%a6%ac%20%ea%b5%ac%ed%95%98%ea%b8%b0" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      <img class="portrait mr-3" src="https://s.gravatar.com/avatar/84693a0d2bb41f2e8db251e38ee69454?s=200')" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://gunn.kim/">Gunn Kim</a></h5>
+      <h6 class="card-subtitle">Data Economist</h6>
+      <p class="card-text">Work at tech company as an economist.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    <li>
+      <a href="mailto:adalgu@gmail.com" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://facebook.com/adalgu" target="_blank" rel="noopener">
+        <i class="fab fa-facebook"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://gitlab.com/adalgu" target="_blank" rel="noopener">
+        <i class="fab fa-gitlab"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/adalgu" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://linkedin.com/in/digitaleconomy" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+<section id="comments">
+  
+    
+<div id="disqus_thread"></div>
+<script>
+  let disqus_config = function () {
+    
+    
+    
+  };
+  (function() {
+    if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+      document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+      return;
+    }
+    var d = document, s = d.createElement('script'); s.async = true;
+    s.src = 'https://' + "adalgu" + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+</section>
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/2020-03-04-python-r-online/">[무설치] 파이썬과 R을 온라인에서 바로 코딩하는 꿀팁</a></li>
+      
+      <li><a href="/post/2020-03-02-mistake-80pro-error/">[파이썬] 코딩, 나를 키운 건 팔할이 오타다</a></li>
+      
+      <li><a href="/project/writing-tool-project/">Writing Tool Project</a></li>
+      
+      <li><a href="/project/python-study-project/">Python Study Project</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha256-1zu+3BnLYV9LdiY85uXMzii3bdrkelyp37e0ZyTAQh0=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r,%20python,%20sql.min.js"></script>
+        
+      
+
+    
+
+    
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.a0d331bcd05dbe8b31e244f796710f08.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    © Gunn Kim, 2021 &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

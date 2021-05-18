@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags | Exobrain</title>
+    <link>https://gunn.kim/tags/</link>
+      <atom:link href="https://gunn.kim/tags/index.xml" rel="self" type="application/rss+xml" />
+    <description>Tags</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Gunn Kim, 2021</copyright><lastBuildDate>Tue, 18 May 2021 14:57:53 +0900</lastBuildDate>
+    <image>
+      <url>https://gunn.kim/images/icon_hud1e4a02091c0cd7dd9ce20cf2020f12f_133591_512x512_fill_lanczos_center_2.png</url>
+      <title>Tags</title>
+      <link>https://gunn.kim/tags/</link>
+    </image>
+    
+    <item>
+      <title>insight</title>
+      <link>https://gunn.kim/tags/insight/</link>
+      <pubDate>Tue, 18 May 2021 14:57:53 +0900</pubDate>
+      <guid>https://gunn.kim/tags/insight/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ambiguous dance company</title>
+      <link>https://gunn.kim/tags/ambiguous-dance-company/</link>
+      <pubDate>Mon, 04 Jan 2021 01:01:38 +0900</pubDate>
+      <guid>https://gunn.kim/tags/ambiguous-dance-company/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>leenalchi</title>
+      <link>https://gunn.kim/tags/leenalchi/</link>
+      <pubDate>Mon, 04 Jan 2021 01:01:38 +0900</pubDate>
+      <guid>https://gunn.kim/tags/leenalchi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>covid19</title>
+      <link>https://gunn.kim/tags/covid19/</link>
+      <pubDate>Sun, 03 Jan 2021 23:38:43 +0900</pubDate>
+      <guid>https://gunn.kim/tags/covid19/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>openapi</title>
+      <link>https://gunn.kim/tags/openapi/</link>
+      <pubDate>Sun, 03 Jan 2021 23:38:43 +0900</pubDate>
+      <guid>https://gunn.kim/tags/openapi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>https://gunn.kim/tags/python/</link>
+      <pubDate>Sun, 03 Jan 2021 23:38:43 +0900</pubDate>
+      <guid>https://gunn.kim/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>colab</title>
+      <link>https://gunn.kim/tags/colab/</link>
+      <pubDate>Thu, 24 Dec 2020 17:21:56 +0900</pubDate>
+      <guid>https://gunn.kim/tags/colab/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gist</title>
+      <link>https://gunn.kim/tags/gist/</link>
+      <pubDate>Thu, 24 Dec 2020 17:21:56 +0900</pubDate>
+      <guid>https://gunn.kim/tags/gist/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hugo</title>
+      <link>https://gunn.kim/tags/hugo/</link>
+      <pubDate>Thu, 24 Dec 2020 17:21:56 +0900</pubDate>
+      <guid>https://gunn.kim/tags/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mobility</title>
+      <link>https://gunn.kim/tags/mobility/</link>
+      <pubDate>Thu, 19 Nov 2020 00:00:00 +0000</pubDate>
+      <guid>https://gunn.kim/tags/mobility/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pandas</title>
+      <link>https://gunn.kim/tags/pandas/</link>
+      <pubDate>Wed, 04 Nov 2020 16:57:43 +0900</pubDate>
+      <guid>https://gunn.kim/tags/pandas/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>life</title>
+      <link>https://gunn.kim/tags/life/</link>
+      <pubDate>Mon, 05 Oct 2020 12:17:36 +0900</pubDate>
+      <guid>https://gunn.kim/tags/life/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>R</title>
+      <link>https://gunn.kim/tags/r/</link>
+      <pubDate>Thu, 24 Sep 2020 10:16:37 +0900</pubDate>
+      <guid>https://gunn.kim/tags/r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>epilogue</title>
+      <link>https://gunn.kim/tags/epilogue/</link>
+      <pubDate>Mon, 31 Aug 2020 20:04:52 +0900</pubDate>
+      <guid>https://gunn.kim/tags/epilogue/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>dash</title>
+      <link>https://gunn.kim/tags/dash/</link>
+      <pubDate>Wed, 08 Jul 2020 09:36:44 +0900</pubDate>
+      <guid>https://gunn.kim/tags/dash/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>대시보드</title>
+      <link>https://gunn.kim/tags/%EB%8C%80%EC%8B%9C%EB%B3%B4%EB%93%9C/</link>
+      <pubDate>Wed, 08 Jul 2020 09:36:44 +0900</pubDate>
+      <guid>https://gunn.kim/tags/%EB%8C%80%EC%8B%9C%EB%B3%B4%EB%93%9C/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>opendata</title>
+      <link>https://gunn.kim/tags/opendata/</link>
+      <pubDate>Sat, 13 Jun 2020 21:36:34 +0900</pubDate>
+      <guid>https://gunn.kim/tags/opendata/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gis</title>
+      <link>https://gunn.kim/tags/gis/</link>
+      <pubDate>Thu, 04 Jun 2020 03:07:40 +0000</pubDate>
+      <guid>https://gunn.kim/tags/gis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sql</title>
+      <link>https://gunn.kim/tags/sql/</link>
+      <pubDate>Thu, 04 Jun 2020 03:07:40 +0000</pubDate>
+      <guid>https://gunn.kim/tags/sql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>apollo11</title>
+      <link>https://gunn.kim/tags/apollo11/</link>
+      <pubDate>Wed, 25 Mar 2020 15:59:16 +0900</pubDate>
+      <guid>https://gunn.kim/tags/apollo11/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>crisis</title>
+      <link>https://gunn.kim/tags/crisis/</link>
+      <pubDate>Wed, 25 Mar 2020 15:59:16 +0900</pubDate>
+      <guid>https://gunn.kim/tags/crisis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>netflix</title>
+      <link>https://gunn.kim/tags/netflix/</link>
+      <pubDate>Wed, 25 Mar 2020 15:59:16 +0900</pubDate>
+      <guid>https://gunn.kim/tags/netflix/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>education</title>
+      <link>https://gunn.kim/tags/education/</link>
+      <pubDate>Thu, 12 Mar 2020 01:03:39 +0900</pubDate>
+      <guid>https://gunn.kim/tags/education/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>exobrain</title>
+      <link>https://gunn.kim/tags/exobrain/</link>
+      <pubDate>Thu, 12 Mar 2020 01:03:39 +0900</pubDate>
+      <guid>https://gunn.kim/tags/exobrain/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>fire</title>
+      <link>https://gunn.kim/tags/fire/</link>
+      <pubDate>Sun, 08 Mar 2020 02:33:29 +0900</pubDate>
+      <guid>https://gunn.kim/tags/fire/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>entertainment</title>
+      <link>https://gunn.kim/tags/entertainment/</link>
+      <pubDate>Sat, 07 Mar 2020 20:00:00 +0900</pubDate>
+      <guid>https://gunn.kim/tags/entertainment/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tv</title>
+      <link>https://gunn.kim/tags/tv/</link>
+      <pubDate>Sat, 07 Mar 2020 20:00:00 +0900</pubDate>
+      <guid>https://gunn.kim/tags/tv/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>규범경제학</title>
+      <link>https://gunn.kim/tags/%EA%B7%9C%EB%B2%94%EA%B2%BD%EC%A0%9C%ED%95%99/</link>
+      <pubDate>Fri, 06 Mar 2020 17:31:12 +0000</pubDate>
+      <guid>https://gunn.kim/tags/%EA%B7%9C%EB%B2%94%EA%B2%BD%EC%A0%9C%ED%95%99/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>부동산</title>
+      <link>https://gunn.kim/tags/%EB%B6%80%EB%8F%99%EC%82%B0/</link>
+      <pubDate>Fri, 06 Mar 2020 17:31:12 +0000</pubDate>
+      <guid>https://gunn.kim/tags/%EB%B6%80%EB%8F%99%EC%82%B0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>실증경제학</title>
+      <link>https://gunn.kim/tags/%EC%8B%A4%EC%A6%9D%EA%B2%BD%EC%A0%9C%ED%95%99/</link>
+      <pubDate>Fri, 06 Mar 2020 17:31:12 +0000</pubDate>
+      <guid>https://gunn.kim/tags/%EC%8B%A4%EC%A6%9D%EA%B2%BD%EC%A0%9C%ED%95%99/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>집</title>
+      <link>https://gunn.kim/tags/%EC%A7%91/</link>
+      <pubDate>Fri, 06 Mar 2020 17:31:12 +0000</pubDate>
+      <guid>https://gunn.kim/tags/%EC%A7%91/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>error</title>
+      <link>https://gunn.kim/tags/error/</link>
+      <pubDate>Mon, 02 Mar 2020 10:26:04 +0900</pubDate>
+      <guid>https://gunn.kim/tags/error/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>코딩</title>
+      <link>https://gunn.kim/tags/%EC%BD%94%EB%94%A9/</link>
+      <pubDate>Mon, 02 Mar 2020 10:26:04 +0900</pubDate>
+      <guid>https://gunn.kim/tags/%EC%BD%94%EB%94%A9/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>writing</title>
+      <link>https://gunn.kim/tags/writing/</link>
+      <pubDate>Tue, 25 Feb 2020 10:07:27 +0900</pubDate>
+      <guid>https://gunn.kim/tags/writing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mb</title>
+      <link>https://gunn.kim/tags/mb/</link>
+      <pubDate>Mon, 24 Feb 2020 14:56:03 +0900</pubDate>
+      <guid>https://gunn.kim/tags/mb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>검색트렌드</title>
+      <link>https://gunn.kim/tags/%EA%B2%80%EC%83%89%ED%8A%B8%EB%A0%8C%EB%93%9C/</link>
+      <pubDate>Mon, 24 Feb 2020 14:56:03 +0900</pubDate>
+      <guid>https://gunn.kim/tags/%EA%B2%80%EC%83%89%ED%8A%B8%EB%A0%8C%EB%93%9C/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>타다</title>
+      <link>https://gunn.kim/tags/%ED%83%80%EB%8B%A4/</link>
+      <pubDate>Mon, 24 Feb 2020 14:56:03 +0900</pubDate>
+      <guid>https://gunn.kim/tags/%ED%83%80%EB%8B%A4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>사설</title>
+      <link>https://gunn.kim/tags/%EC%82%AC%EC%84%A4/</link>
+      <pubDate>Thu, 20 Feb 2020 21:53:42 +0900</pubDate>
+      <guid>https://gunn.kim/tags/%EC%82%AC%EC%84%A4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mindset</title>
+      <link>https://gunn.kim/tags/mindset/</link>
+      <pubDate>Tue, 11 Feb 2020 20:17:20 +0900</pubDate>
+      <guid>https://gunn.kim/tags/mindset/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>아니콘다</title>
+      <link>https://gunn.kim/tags/%EC%95%84%EB%8B%88%EC%BD%98%EB%8B%A4/</link>
+      <pubDate>Mon, 10 Feb 2020 17:20:38 +0900</pubDate>
+      <guid>https://gunn.kim/tags/%EC%95%84%EB%8B%88%EC%BD%98%EB%8B%A4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>파이썬</title>
+      <link>https://gunn.kim/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/</link>
+      <pubDate>Mon, 10 Feb 2020 17:20:38 +0900</pubDate>
+      <guid>https://gunn.kim/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>경제</title>
+      <link>https://gunn.kim/tags/%EA%B2%BD%EC%A0%9C/</link>
+      <pubDate>Mon, 12 Aug 2019 00:00:00 +0900</pubDate>
+      <guid>https://gunn.kim/tags/%EA%B2%BD%EC%A0%9C/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>경제학</title>
+      <link>https://gunn.kim/tags/%EA%B2%BD%EC%A0%9C%ED%95%99/</link>
+      <pubDate>Mon, 12 Aug 2019 00:00:00 +0900</pubDate>
+      <guid>https://gunn.kim/tags/%EA%B2%BD%EC%A0%9C%ED%95%99/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>인공지능</title>
+      <link>https://gunn.kim/tags/%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5/</link>
+      <pubDate>Mon, 12 Aug 2019 00:00:00 +0900</pubDate>
+      <guid>https://gunn.kim/tags/%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>갈라파고스</title>
+      <link>https://gunn.kim/tags/%EA%B0%88%EB%9D%BC%ED%8C%8C%EA%B3%A0%EC%8A%A4/</link>
+      <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>https://gunn.kim/tags/%EA%B0%88%EB%9D%BC%ED%8C%8C%EA%B3%A0%EC%8A%A4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>모빌리티</title>
+      <link>https://gunn.kim/tags/%EB%AA%A8%EB%B9%8C%EB%A6%AC%ED%8B%B0/</link>
+      <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>https://gunn.kim/tags/%EB%AA%A8%EB%B9%8C%EB%A6%AC%ED%8B%B0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>제주도</title>
+      <link>https://gunn.kim/tags/%EC%A0%9C%EC%A3%BC%EB%8F%84/</link>
+      <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>https://gunn.kim/tags/%EC%A0%9C%EC%A3%BC%EB%8F%84/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>우리식자본주의</title>
+      <link>https://gunn.kim/tags/%EC%9A%B0%EB%A6%AC%EC%8B%9D%EC%9E%90%EB%B3%B8%EC%A3%BC%EC%9D%98/</link>
+      <pubDate>Wed, 17 Jul 2019 00:00:00 +0000</pubDate>
+      <guid>https://gunn.kim/tags/%EC%9A%B0%EB%A6%AC%EC%8B%9D%EC%9E%90%EB%B3%B8%EC%A3%BC%EC%9D%98/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>인공위성</title>
+      <link>https://gunn.kim/tags/%EC%9D%B8%EA%B3%B5%EC%9C%84%EC%84%B1/</link>
+      <pubDate>Mon, 28 Jan 2019 15:00:00 +0000</pubDate>
+      <guid>https://gunn.kim/tags/%EC%9D%B8%EA%B3%B5%EC%9C%84%EC%84%B1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>정찰</title>
+      <link>https://gunn.kim/tags/%EC%A0%95%EC%B0%B0/</link>
+      <pubDate>Mon, 28 Jan 2019 15:00:00 +0000</pubDate>
+      <guid>https://gunn.kim/tags/%EC%A0%95%EC%B0%B0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>radical markets</title>
+      <link>https://gunn.kim/tags/radical-markets/</link>
+      <pubDate>Wed, 16 Jan 2019 00:00:00 +0000</pubDate>
+      <guid>https://gunn.kim/tags/radical-markets/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SKY캐슬</title>
+      <link>https://gunn.kim/tags/sky%EC%BA%90%EC%8A%AC/</link>
+      <pubDate>Sat, 12 Jan 2019 23:00:00 +0000</pubDate>
+      <guid>https://gunn.kim/tags/sky%EC%BA%90%EC%8A%AC/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>에세이</title>
+      <link>https://gunn.kim/tags/%EC%97%90%EC%84%B8%EC%9D%B4/</link>
+      <pubDate>Sat, 12 Jan 2019 23:00:00 +0000</pubDate>
+      <guid>https://gunn.kim/tags/%EC%97%90%EC%84%B8%EC%9D%B4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Blogdown</title>
+      <link>https://gunn.kim/tags/blogdown/</link>
+      <pubDate>Fri, 21 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>https://gunn.kim/tags/blogdown/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>공공데이터포털</title>
+      <link>https://gunn.kim/tags/%EA%B3%B5%EA%B3%B5%EB%8D%B0%EC%9D%B4%ED%84%B0%ED%8F%AC%ED%84%B8/</link>
+      <pubDate>Mon, 10 Dec 2018 05:43:43 +0000</pubDate>
+      <guid>https://gunn.kim/tags/%EA%B3%B5%EA%B3%B5%EB%8D%B0%EC%9D%B4%ED%84%B0%ED%8F%AC%ED%84%B8/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>빅데이터</title>
+      <link>https://gunn.kim/tags/%EB%B9%85%EB%8D%B0%EC%9D%B4%ED%84%B0/</link>
+      <pubDate>Mon, 10 Dec 2018 05:43:43 +0000</pubDate>
+      <guid>https://gunn.kim/tags/%EB%B9%85%EB%8D%B0%EC%9D%B4%ED%84%B0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>오픈API</title>
+      <link>https://gunn.kim/tags/%EC%98%A4%ED%94%88api/</link>
+      <pubDate>Mon, 10 Dec 2018 05:43:43 +0000</pubDate>
+      <guid>https://gunn.kim/tags/%EC%98%A4%ED%94%88api/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>글쓰기</title>
+      <link>https://gunn.kim/tags/%EA%B8%80%EC%93%B0%EA%B8%B0/</link>
+      <pubDate>Thu, 06 Dec 2018 15:00:00 +0000</pubDate>
+      <guid>https://gunn.kim/tags/%EA%B8%80%EC%93%B0%EA%B8%B0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Article</title>
+      <link>https://gunn.kim/tags/article/</link>
+      <pubDate>Tue, 27 Nov 2018 00:00:00 +0000</pubDate>
+      <guid>https://gunn.kim/tags/article/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>NBER</title>
+      <link>https://gunn.kim/tags/nber/</link>
+      <pubDate>Tue, 27 Nov 2018 00:00:00 +0000</pubDate>
+      <guid>https://gunn.kim/tags/nber/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>RMARKDOWN</title>
+      <link>https://gunn.kim/tags/rmarkdown/</link>
+      <pubDate>Sun, 25 Nov 2018 00:00:00 +0000</pubDate>
+      <guid>https://gunn.kim/tags/rmarkdown/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Markdown</title>
+      <link>https://gunn.kim/tags/markdown/</link>
+      <pubDate>Thu, 22 Nov 2018 13:40:18 +0000</pubDate>
+      <guid>https://gunn.kim/tags/markdown/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>RSTUDIO</title>
+      <link>https://gunn.kim/tags/rstudio/</link>
+      <pubDate>Wed, 14 Nov 2018 00:00:00 +0000</pubDate>
+      <guid>https://gunn.kim/tags/rstudio/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

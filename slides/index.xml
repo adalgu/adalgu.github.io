@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Slides | Exobrain</title>
+    <link>https://gunn.kim/slides/</link>
+      <atom:link href="https://gunn.kim/slides/index.xml" rel="self" type="application/rss+xml" />
+    <description>Slides</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Gunn Kim, 2021</copyright><lastBuildDate>Wed, 29 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Gunn&#39;s Side Project</title>
+      <link>https://gunn.kim/slides/side-project/</link>
+      <pubDate>Wed, 29 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>https://gunn.kim/slides/side-project/</guid>
+      <description>&lt;h1 id=&#34;--gunns--&#34;&gt;[슬라이드 제목] Gunn&#39;s 사이드 프로젝트&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://brunch.co.kr/@adalgu&#34;&gt;브런치&lt;/a&gt; | &lt;a href=&#34;https://sourcethemes.com/academic/docs/managing-content/#create-slides&#34;&gt;참고 문서&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;features&#34;&gt;Features&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Efficiently write slides in Markdown&lt;/li&gt;
+&lt;li&gt;3-in-1: Create, Present, and Publish your slides&lt;/li&gt;
+&lt;li&gt;Supports speaker notes&lt;/li&gt;
+&lt;li&gt;Mobile friendly slides&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;controls&#34;&gt;Controls&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Next: &lt;code&gt;Right Arrow&lt;/code&gt; or &lt;code&gt;Space&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Previous: &lt;code&gt;Left Arrow&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Start: &lt;code&gt;Home&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Finish: &lt;code&gt;End&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Overview: &lt;code&gt;Esc&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Speaker notes: &lt;code&gt;S&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Fullscreen: &lt;code&gt;F&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Zoom: &lt;code&gt;Alt + Click&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/hakimel/reveal.js#pdf-export&#34;&gt;PDF Export&lt;/a&gt;: &lt;code&gt;E&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;code-highlighting&#34;&gt;Code Highlighting&lt;/h2&gt;
+&lt;p&gt;Inline code: &lt;code&gt;variable&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Code block:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;porridge = &amp;quot;blueberry&amp;quot;
+if porridge == &amp;quot;blueberry&amp;quot;:
+    print(&amp;quot;Eating...&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;data.frame()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;math&#34;&gt;Math&lt;/h2&gt;
+&lt;p&gt;In-line math: $x + y = z$&lt;/p&gt;
+&lt;p&gt;Block math:&lt;/p&gt;
+&lt;p&gt;$$
+f\left( x \right) = ;\frac{{2\left( {x + 4} \right)\left( {x - 4} \right)}}{{\left( {x + 4} \right)\left( {x + 1} \right)}}
+$$&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;fragments&#34;&gt;Fragments&lt;/h2&gt;
+&lt;p&gt;Make content appear incrementally&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{{% fragment %}} One {{% /fragment %}}
+{{% fragment %}} **Two** {{% /fragment %}}
+{{% fragment %}} Three {{% /fragment %}}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Press &lt;code&gt;Space&lt;/code&gt; to play!&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;fragment &#34; &gt;
+One
+&lt;/span&gt;
+&lt;span class=&#34;fragment &#34; &gt;
+&lt;del&gt;&lt;strong&gt;Two&lt;/strong&gt;&lt;/del&gt; {{ % /fragment %}}
+&lt;span class=&#34;fragment &#34; &gt;
+Three
+&lt;/span&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;A fragment can accept two optional parameters:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;class&lt;/code&gt;: use a custom style (requires definition in custom CSS)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;weight&lt;/code&gt;: sets the order in which a fragment appears&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;speaker-notes&#34;&gt;Speaker Notes&lt;/h2&gt;
+&lt;p&gt;Add speaker notes to your presentation&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;{{% speaker_note %}}
+- Only the speaker can read these notes
+- Press `S` key to view
+{{% /speaker_note %}}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Press the &lt;code&gt;S&lt;/code&gt; key to view the speaker notes!&lt;/p&gt;
+&lt;aside class=&#34;notes&#34;&gt;
+  &lt;ul&gt;
+&lt;li&gt;Only the speaker can read these notes&lt;/li&gt;
+&lt;li&gt;Press &lt;code&gt;S&lt;/code&gt; key to view&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/aside&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;themes&#34;&gt;Themes&lt;/h2&gt;
+&lt;h3 id=&#34;heading&#34;&gt;테마&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;black: Black background, white text, blue links (default)&lt;/li&gt;
+&lt;li&gt;white: White background, black text, blue links&lt;/li&gt;
+&lt;li&gt;league: Gray background, white text, blue links&lt;/li&gt;
+&lt;li&gt;beige: Beige background, dark text, brown links&lt;/li&gt;
+&lt;li&gt;sky: Blue background, thin dark text, blue links&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;night: Black background, thick white text, orange links&lt;/li&gt;
+&lt;li&gt;serif: Cappuccino background, gray text, brown links&lt;/li&gt;
+&lt;li&gt;simple: White background, black text, blue links&lt;/li&gt;
+&lt;li&gt;solarized: Cream-colored background, dark green text, blue links&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;section data-noprocess data-shortcode-slide
+&lt;pre&gt;&lt;code&gt;  data-background-image=&amp;quot;/img/boards.jpg&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;custom-slide&#34;&gt;Custom Slide&lt;/h2&gt;
+&lt;p&gt;Customize the slide style and background&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;{{&amp;lt; slide background-image=&amp;quot;/img/boards.jpg&amp;quot; &amp;gt;}}
+{{&amp;lt; slide background-color=&amp;quot;#0000FF&amp;quot; &amp;gt;}}
+{{&amp;lt; slide class=&amp;quot;my-style&amp;quot; &amp;gt;}}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;custom-css-example&#34;&gt;Custom CSS Example&lt;/h2&gt;
+&lt;p&gt;Let&#39;s make headers navy colored.&lt;/p&gt;
+&lt;p&gt;Create &lt;code&gt;assets/css/reveal_custom.css&lt;/code&gt; with:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-css&#34;&gt;.reveal section h1,
+.reveal section h2,
+.reveal section h3 {
+  color: navy;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;questions&#34;&gt;Questions?&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://spectrum.chat/academic&#34;&gt;Ask&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://sourcethemes.com/academic/docs/managing-content/#create-slides&#34;&gt;Documentation&lt;/a&gt;&lt;/p&gt;
+&lt;/span&gt;</description>
+    </item>
+    
+    <item>
+      <title>Radical Markets</title>
+      <link>https://gunn.kim/slides/radicalmarkets/</link>
+      <pubDate>Wed, 16 Jan 2019 00:00:00 +0000</pubDate>
+      <guid>https://gunn.kim/slides/radicalmarkets/</guid>
+      <description>&lt;h2 id=&#34;radical-markets-br--&#34;&gt;Radical Markets &lt;br/&gt; (급진적 시장)&lt;/h2&gt;
+&lt;p&gt;T2
+&lt;br/&gt;김건우&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;--&#34;&gt;책 표지와 목차&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;radicalmarkets0.png&#34; alt=&#34;그림&#34;&gt;
+&lt;img src=&#34;radicalmarkets3.png&#34; alt=&#34;목차그림&#34;&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;-&#34;&gt;챕터별 요약&lt;/h2&gt;
+&lt;h3 id=&#34;imagining-radical-markets&#34;&gt;&lt;em&gt;Imagining Radical Markets&lt;/em&gt;&lt;/h3&gt;
+&lt;div style=&#34;text-align: left&#34;&gt;
+&lt;h6 id=&#34;--1---------------------&#34;&gt;* 챕터 1에서는 간단한 세금이 시장 지배력 남용에 대한 유인을 감소시키고, 경쟁을 제한시킬 수 있는지를 보여준다. 이것은 사유 재산 위의 시장을 사용하는 시장으로 전환시킨다.&lt;/h6&gt;
+&lt;h6 id=&#34;--2-----public-goods-----&#34;&gt;* 챕터 2에서는 기존에 정부에 의해서 공급되어온 공공재(public goods)를 위한 효율적인 시장에 대해서 보여준다.&lt;/h6&gt;
+&lt;h6 id=&#34;--3---------&#34;&gt;* 챕터 3에서는 효율적이고, 정치적으로 지속가능한 이주 노동 시장에 대한 정책을 소개한다.&lt;/h6&gt;
+&lt;h6 id=&#34;--4------------&#34;&gt;* 챕터 4에서는 기업에 대한 기관투자자의 이상한 소유를 막는 금융 지주 회사의 제한에 대해서 주장한다.&lt;/h6&gt;
+&lt;h6 id=&#34;--5---------&#34;&gt;* 챕터 5에서는 디지털 경제에 시장의 힘이 어떻게 확산될 수 있을지를 보여준다.&lt;/h6&gt;
+&lt;/div&gt;
+&lt;hr&gt;
+&lt;div style=&#34;text-align: left&#34;&gt;
+&lt;h3 id=&#34;intro-the-crisis-of-the-liberal-order&#34;&gt;[Intro] The Crisis of the Liberal Order&lt;/h3&gt;
+&lt;p&gt;&amp;ldquo;No longer bold reforms, they box us in.&amp;rdquo;&lt;/p&gt;
+&lt;br/&gt; 
+&lt;h3 id=&#34;ch1-property-is-monopoly&#34;&gt;[Ch1] Property is Monopoly&lt;/h3&gt;
+&lt;p&gt;비크리가 제안한 경매개념을 전면화하여 자산 소유에 대한 개념을 바꾸자. &amp;ldquo;알박기를 막자&amp;rdquo;
+자산 소유자가 스스로 가격을 매기고, 그에 따라 세금을 내되, 누군가 그 가격 이상으로 매수 의향을 보이면 즉각 소유권을 이전해야 한다.
+사용권에 따른 이득은 인정하되, 점유권은 제한하는 방식.&lt;/p&gt;
+&lt;/div&gt;
+&lt;hr&gt;
+&lt;div style=&#34;text-align: left&#34;&gt;
+&lt;h3 id=&#34;ch2-radical-democracy&#34;&gt;[Ch2] Radical Democracy&lt;/h3&gt;
+&lt;p&gt;1인1표는 최선이 아니다. 오히려 다수의 횡포가 발생하거나, 권력의 합법적 독점이 보장된다.
+유권자에게 정책참여 사용할 수 있는 크레딧을 지급하여 투표권을 살 수 있도록 하는 능동적 투표 시스템을 도입하여 개선하자.&lt;/p&gt;
+&lt;/div&gt;
+&lt;hr&gt;
+&lt;div style=&#34;text-align: left&#34;&gt;
+&lt;h3 id=&#34;ch3-uniting-the-worlds-workers&#34;&gt;[Ch3] Uniting the World&#39;s Workers&lt;/h3&gt;
+&lt;p&gt;&amp;ldquo;자본의 세계는 평평하고, 노동의 세계는 그랜드 캐년이 득실거린다.(자본시장 개방, 반이민정책)&amp;rdquo;
+&lt;br/&gt;&amp;quot;Visas between Individuals Program (VIP)&amp;quot;-비자 시스템에도 경매 도입. 정부가 탑다운으로 이민자를 가리는 대신, 개인 각자의 거래를 통해서 결정하자. 구글과 같은 세계 최고 인재를 영입하는 다국적 기업만 누리는 현재의 비자 정책을 폐기하고, 모든 개인이 비자 스폰서가 될 수 있도록 하자.&lt;/p&gt;
+&lt;/div&gt;
+&lt;hr&gt;
+&lt;div style=&#34;text-align: left&#34;&gt;
+&lt;h3 id=&#34;ch4-dismembering-the-octopus&#34;&gt;[Ch4] Dismembering the Octopus&lt;/h3&gt;
+&lt;p&gt;&amp;ldquo;펀드의 문어발 확장을 막자&amp;rdquo;
+&lt;br/&gt;&amp;quot;대형 기관투자자들의 자본시장 독점을 막기 위한 새로운 반독점법&amp;rdquo;
+&lt;br/&gt;20세기 초에 스탠다드 오일이 있었다면, 지금은 글로벌 대형운용기관이 존재.
+&lt;br/&gt;전세계 주요 산업을 지배하는 이들의 편중된 지배권을 분산시키자.&lt;/p&gt;
+&lt;/div&gt;
+&lt;hr&gt;
+&lt;div style=&#34;text-align: left&#34;&gt;
+&lt;h3 id=&#34;ch5-data-as-labor&#34;&gt;[Ch5] Data as Labor&lt;/h3&gt;
+&lt;p&gt;&amp;ldquo;무료이용, 무상 데이터 기여&amp;rdquo; 패러다임은 old하다.
+&lt;br/&gt;&amp;quot;인공지능 산업이 발전할 수록 현재의 데이터 유통 시스템은 비효율을 양산한다. 차별적인 보상이 없기에 좋은 데이터를 기여할 유인이 없으며, 생산에는 기여했으나 보상이 없으므로 자본 대비 노동 비중이 줄어든다.&amp;rdquo;
+&lt;br/&gt;&amp;quot;대형 플랫폼 업체들의 데이터를 공급하고 있는 현재는 노동으로 규정되지 않는 행위를 노동으로 규정해 보상하자&amp;rdquo;&lt;/p&gt;
+&lt;/div&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;into-the-book&#34;&gt;Into the book&lt;/h1&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;---&#34;&gt;브라질 리오 데 자네이루&lt;/h3&gt;
+&lt;h4 id=&#34;favelas-vs-leblon-rio-vs-new-york&#34;&gt;(Favelas vs. Leblon, Rio vs. New York)&lt;/h4&gt;
+&lt;p&gt;Why has this paradise fallen? &lt;/br&gt; How can its potential be fulfilled?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;LEFT: The government should tax the rich to supply homes, medical care, and jobs for the poor.&lt;/li&gt;
+&lt;li&gt;RIGHT: Yes, and you end up with Venezuela or Zimbabwe. The government needs to privatize state-owned industries, enforce property rights, lower taxes, and reduce regulation. Get the economy going, and ineqaulity will take care of itself.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;TECHNOCRATIC MIDDLE: We need an economy carefully regulated by internaltionally trained experts, targeted interventions that have been tested by randomized controlled trials, and political reform that protects human rights.
+&lt;/br&gt;&lt;/br&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h6 id=&#34;the-longstanding-belief-that-a-developing-country-like-brazil-will-eventually-end-up-as-a-developed-country-like-the-united-states-is-under-scrutiny-and-people-are-beginning-to-wonder-if-things-are-moving-in-reverse-meanwhile-the-standard-prescriptions-for-reform-are-the-same-as-they-have-been-for-the-last-half-century-increase-taxes-and-redistribute-strengthen-markets-and-privatize-or-improve-governance-and-expertise&#34;&gt;The long-standing belief that a &amp;ldquo;developing country&amp;rdquo; like Brazil will eventually end up as a &amp;ldquo;developed country&amp;rdquo; like the United States is under scrutiny, and people are beginning to wonder if things are moving in reverse. Meanwhile, the standard prescriptions for reform are the same as they have been for the last half century: increase taxes and redistribute; strengthen markets and privatize; or improve governance and expertise.&lt;/h6&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;auction-as-radical-markets-12&#34;&gt;Auction as Radical Markets (1/2)&lt;/h3&gt;
+&lt;h5 id=&#34;the-arguments-of-both-the-right-and-the-left-had-something-to-offer-when-they-originated-in-the-nenteenth-and-early-twentieth-centruries-but-today-their-potential-is-spent&#34;&gt;The arguments of both the Right and the Left had something to offer when they originated in the nenteenth and early twentieth centruries, but today their potential is spent.&lt;/h5&gt;
+&lt;p&gt;Market Fundamentalism, an ideology they assume to have been proven in economic theory and historical experience.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;existed in the Anglo-Saxon world in the nineteenth century.&lt;/li&gt;
+&lt;li&gt;Capitalism to refer to this idealized historical version of markets, in which govenments focus on protecting private property and enforcing contracts.)&lt;/li&gt;
+&lt;li&gt;contrast Market Fundamantalism with Market Radicalism, which is our own commitment to understand, restructure, and improve markets at their very roots.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;auction-as-radical-markets-22&#34;&gt;Auction as Radical Markets (2/2)&lt;/h3&gt;
+&lt;p&gt;Left idea that exising social arrangements generate unfair inequality and undermine collective action. But Left&#39;s flaw has been its reliance on the discretionary power of government bureaucratic elites to fix social ills.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;these elites are sometimes arbitrary, corrupt, incompetent, or, perceived that way whether they are or not, distrusted by the public. To harness the radicalsim we believe is inherent in markets, we must decentralize power while spurring collective action.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The Radical Markets we envision are institutional arrangements that allow the fundamental principles of market allocation - free exchange disciplined by competition and open to all comers-to play out fully. An auction is the quintessential Radical Market. Because the rules of an auction require people to bid against each other, the object on the block winds up in the hands of the person who wants it most-with the caveat that differences in bids may represent differences in wealth as well as desire.&lt;/p&gt;
+&lt;p&gt;다수의 사람들은 경매를 부동산이나 미술품, 자금조달 등에서만 사용하는 것으로 알고 있지만, 일반인의 눈에 닫지 않는 인터넷에서는 일상적으로 경매가 이루어지고 있다. 경매의 확대가 리오를 구할 것.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;rio-for-sale-a-thought-experiment12&#34;&gt;Rio for Sale: A Thought Experiment(1/2)&lt;/h3&gt;
+&lt;p&gt;리오의 모든 빌딩, 사업, 공장 등이 모두 경매를 통해서 가격이 매겨진다고 가정하자. 누구든지 시가(going price)보다 더 높은 가격을 부르면 그 소유권을 가져갈 수 있다. 경매는 자동차와 같은 일상적인 소유물 뿐만 아니라 공장의 오염 배출권 같은 정치적인 과정에서도 이루어진다.&lt;/p&gt;
+&lt;p&gt;값을 부르는 것(bidding)은 스마트폰 앱으로 자동으로 계산된다고 가정한다. 법은 이렇게 소유권이 넘어가는 것을 확실하게 해서 혼동을 없앤다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Incentives are in place to care for and develop assets, and ensure that privacy and other values are also preserved. All of the revenue generated by this auction would be returened to citizens, equally, as a &amp;ldquo;social dividend,&amp;rdquo; or used to fund public projects, which is how revenues from oil sales in Alaska and Norway are used.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;rio-for-sale-a-thought-experiment22&#34;&gt;Rio for Sale: A Thought Experiment(2/2)&lt;/h3&gt;
+&lt;p&gt;이러한 경매 세상에서는,&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;첫째, 사람들이 사유재산에 대해서 다르게 생각한다. 집을 소유하는 것과 해변의 한 지점을 소유하는 것 사이의 뚜렷했던 라인이 사라진다. 사유 재산은 상당 부분 공공 소유가 되고, 우리 주변의 소유권들이 부분적으로 우리것이 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;둘째, 영속적인 경매는 토지와 다른 자원의 낭비를 막는다. 언덕 지역을 가장 높은 가격에 산다고 부른 사람은 절대로 그 곳을 위험천만한 슬럼으로 만들지는 않을 것이다. 도시 중심부를 가장 비싼게 산 사람은 고만고만한 콘도가 아니라 마천루를 건설할 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;셋째, 경제적 불평등의 주요 원천을 종식시킬 것이다. 이러한 제도가 시행될 경우 가장 먼저 머릿속에 그리게 되는 상황은 부자가 모든 가치있는 것들을 다 사버린다는 것이다. 그러나 부자라는 것이 무엇을 의미하는가? 기업, 토지 등등을 많이 소유한 사람 아닌가? 그러나 모든 것이 항상 경매에 부쳐진다면, 아무도 그러한 자산을 소유하려고 하지는 않을 것이다. 혜택은 모두가 동등하게 누릴 수 있다. 1장에서 자세히 설명한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;넷째, 리오의 경매 시스템은 주요한 정치적 의사결정을 정치인이 아니라 시민의 손에 넘김으로서 부패를 제약한다. 공공의 삶이 개선되면서 범죄는 감소하고 거리의 삶은 회복되며 사설 커뮤니티로의 도망은 멈춘다. 일반적으로 공공 영역을 대체하고, 침해하는 이미지를 가진 시장과는 다르게 래디컬 마켓은 공공의 신뢰를 회복시킨다. 2장에서 이를 자세히 설명한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;radical-heroes13&#34;&gt;Radical Heroes(1/3)&lt;/h3&gt;
+&lt;p&gt;우리의 주장은 애덤 스미스의 지적 유산까지 거슬러 올라간다. 애덤 스미스는 시장 근본주의자들이 인용하기를 좋아하는 인물이다. 그러나 스미스는 급진적인 인물이었다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;먼저, 경제적 조직의 근원에 대해서 깊히 탐구하여 오늘날까지 영향을 미치는 이론을 제시하였다.&lt;/li&gt;
+&lt;li&gt;둘째, 당시에 퍼져있던 생각과 제도에 대해서 공격하고 새로운 제도과 개혁을 제안하였다. 애덤 스미스가 보수적이라고 여겨지는 이유는 당시에 정책과 사고를 바꾸는데 너무나 성공해서 현재의 주류적인 아이디어가 되었기 때문이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;radical-heroes23&#34;&gt;Radical Heroes(2/3)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;시장 근본주의자들은 애덤 스미스와 애덤 스미스의 이상화된 버전의 시장에 기반하여 꽃피운 20세기 중반의 보수적 경제학자들(하이에크, 프리드먼, 스티글러)과 구분짓고자 하는데,
+그들은 자유주의 경제학과 정치를 서포트하기 위해서 애덤 스미스의 비전을 이용했기 때문이다. 시장 근본주의자들은 스미스의 급진적인 정신을 공유하는 헨리 조지와 같은 경제학자들은 무시하려고 한다. 헨리 조지는 진보적인 시대가 시작되는데 사상을 제공하였으며, 그의 책은 역사상 가장 많이 읽힌 경제학자 이지만, 냉정시기 좌파-우파의 싸움때문에 그의 비전은 사라져 버렸다. 묻혀버렸다.
+헨지 조지는 보수적인 애덤 스미스 계승자보다 불평등에 대해서 더 많이 우려하였으며, 사유재산권이 진정한 시장 경제로 가는 길목에 서서 막고 있다고 인식하였다.&lt;/li&gt;
+&lt;li&gt;이 문제를 해결하기 위해서 그는 토지에 대한 공동 소유 체제를 만들수 있는 세금 제도를 제안하였다.
+20세기중반 &amp;lsquo;조지스트&amp;rsquo; 경제학자 중에  가장 중요한 인물이자 이 책을 통해서 기리고자 하는 경제학자는 윌리엄 스펜서 비크리(Vickrey)이다.
+그의 연구에서 추구한 이상은 우리와 닮아있다. 그는 도시의 조직과 대부분의 도시에서 과도하게 낭비되고 있는 자원에 대해서 연구했다. 남미에서 도시 계획과 조세 정책에 대해서 열정적으로 자문했다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&amp;ldquo;It was while he was designing a fiscal system for Venezuela that he produced the paper that finally undermined his best efforts at ensuring his obscurity.&amp;rdquo;
+&amp;ldquo;Counterspeculation, Auctions, and Competitive Sealed Tenders&amp;rdquo;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;radical-heroes33&#34;&gt;Radical Heroes(3/3)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;베네수엘라 자문하는 일때문에 1961년에 나온 입지적인 논문의 성과가 금방 잊혀졌다. 1961년 논문은 10년 후에야 재발견되었고, 1996년 &amp;ldquo;메커니즘 디자인&amp;quot;이라는 새로운 경제학 분야를 만드는데 기여한 공로로 노벨 경제학상을 받게 해주었다.
+1961년 논문은 경매를 통해서 주요 사회문제를 해결하는 것에 대한 최초의 연구였다. 비커리의 아이디어는 경제 이론과 정책을 크게 바꾸어 놓았다. 전세계 정부는 비커리의 아이디어를 이용해서 전파 사용권을 경매로 매각한다. 페이스북, 구글, 빙 등은 경매를 통해서 광고 공간을 배분한다. 우버, 리프트와 같은 차량공유 앱들의 가격 정책에도 영향을 미쳤으며, 도시 게획과 도로 혼잡(congestion) 문제에서도 이용되고 있다.&lt;/li&gt;
+&lt;li&gt;그러나 위 어떤 것도 비커리의 연구를 자극한 야심을 담고 있지 못한다. 그가 노벨 경제학상을 받았을 때 그는 노벨상이 헨리 조지의 혁신적인 생각과 메커니즘 디자인의 급진적인 잠재력에 대해서 알릴 수 있는 &amp;ldquo;bully pulpit&amp;rdquo;(대중에게 널리 알릴 수 있는 권한)되기를 희망했다고 전해진다. 그러나 그는 노벨상 수상 3일 후에 심장마비로 작고했다. 그가 생존해 있었다 하더라도 그의 이상을 대중에게 전파하는 것이 쉽지는 않았을 것이다. 1996년 당시는 경제가 전세계적으로 호황이었고, 글로벌 차원의 협력이 막 시작되는 시기였기때문이다. 아무도 그에게 관심을 주려 하지 않았을 것이기 때문이다. 그리고 비커리의 접근은 현실적인 장벽에도 부딪혔을 것이다.&lt;/li&gt;
+&lt;li&gt;그러나 현재는 경제와 정치의 발전이 더이상 화창하지가 않다. 동시에, 경제학과 기술의 발전으로 비커리의 접근이 직면했었던 현실적 한계를 극복할 수 있다. 이 책은 비커리가 살아 있었다면 나누고자 했던 잃어버린 불리 풀핏이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;the-crisis-of-the-liberal-order&#34;&gt;The Crisis of the Liberal Order&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;The Berlin Wall fell, the &amp;ldquo;American way&amp;rdquo; dominated intellectual discussions.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;Most of the work done by academics in the area of economics, law, and policy were devoted to justifying existing market institutions or offering moderate reforms than, in essence, preserved the status quo.&amp;rdquo;
+&lt;br/&gt;&lt;strong&gt;The financial crisis of 2008&lt;/strong&gt;
+&lt;br/&gt;Economic progress was illusory.
+With the old ways of doing things in doubt and new directions unclear, public opinion polarized.
+Ideas have not kept up with the crisis.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;세계화와 국제 기구가 희생양이 되었지만, 지속가능한 대안이 나오지는 않았음. 잘나가는 선진국조차 낡아빠진 테크노크래틱한 접근에서 한발짝도 나아가지 못했음. 대안을 찾기 위해서 오늘날 사회 조직을 기초를 닦은 선구자들의 성과물을 다시 살펴보기 시작했음.&lt;/li&gt;
+&lt;li&gt;아담 스미스, 마퀴스 콩드르세, 제레미 벤담, 존 스튜어트 밀, 헨리 조지, 레옹 왈라스, 베아트리스 웹 등의 18세기 후반과 19세기의 &amp;ldquo;political economists&amp;quot;와 &amp;ldquo;Philosophical Radicals&amp;quot;한 사상가들임. 당시 사상가들은 현재와는 다른 시대와 살았지만, 지금과 비슷한 도전을 받고 있었음. 18세기부터 내려온 정치와 경제 체계가 당시의 기술, 인구구조, 세계화, 문화권 확장 등을 따라잡지 못하고 있었음.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;inequality13&#34;&gt;Inequality(1/3)&lt;/h3&gt;
+&lt;p&gt;현 시대 가장 큰 문제는 날로 커지고 있는 양극화다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;radicalmarkets4.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;inequality23&#34;&gt;Inequality(2/3)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;불평등은 신자유주의 경제학자들이 주장하는 활발한 경제 성장의 대가인가? 일부 학자들은 소득 양극화는 개인들의 숙련도 격차가 확대되면서 나타나는 현상이라고 주장. 그러나 양극화는 단순히 임금 노동자들의 소득 양극화로만 나타나는 현상이 아님.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;1970년대 이래로 노동소득 배율의 급격한 하락이 관찰됨. 기업의 초과 이윤(독점이윤)이 GDP에 차지하는 비중은 상승, 마크업도 상승하였음. 동시에 이들 기업 가치는 함께 상승하였음.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;radicalmarkets5.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;inequality33&#34;&gt;Inequality(3/3)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;결과적으로 양극화의 심화는 경제 성장에 따른 당연한 결과가 아니라 시장 지배력의 증가에 기인한 것임.&lt;/li&gt;
+&lt;li&gt;반면, 국가 사이의 양극화는 다른 양상을 보임. 1820년 부터 1970년까지 국가간 불평등은 10배가 상승하였음. 반면에 국가 내에서의 불평등은 약 1/5로 감소하였음. 1970년대 이후로는 반대 경향이 관참됨. 국제 불평등도는 1/5로 감소한 반면에, 선진국내의 불평등은 상승하였음.&lt;/li&gt;
+&lt;li&gt;국제 불평등도(International equality)가 왕성한 경제 성장에서 기인하는 것이라면 감수할 수 있다. 그러나 국제 불평등도가 글로벌화가 가속되고, 식민지들이 완전히 사라진 시점에 감소하기 시작하였다는 것은 국제 불평등도가 자유 시장이 아니라 식민지와 폐쇄된 국제 시장에 기인하는 것임을 암시하기도 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;stagnation12&#34;&gt;Stagnation(1/2)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;가장 최근 경제 철학의 전환이 이루어진 것은 1970년대 스태그플레이션이 일어났을 때이다. 인플레이션이 완전 고용의 비용이라는 케인지안의 주장이 지배하던 시절이었다. 신자유주의와 공급 중시 경제철학이 대두하기 시작하였다. 그들은 감세, 규제 완화, 민영화 등 자본주의를 더 강화하는 것이 경제 성장을 촉진할 것이라고 주장하였다. 불평등이 심화되더라도 트리클 다운 효과로 인해서 모두의 삶이 더 나아질 것이라 주장하였다. 그러나 낙수효과는 커녕 경제 전체의 생산성이 둔화되는 결과가 초래되었다. 2차대전 이후 2004년까지 미국의 평균 생산성 증가율은 2.25%였으니 2005년 이후에는 1.25%로 낮아졌다. 다른 주요 선진국들도 마찬가지 패턴이 관찰되었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;장기 실업에 대한 국가별 정책 차이에 따라서 실업과 misemployment가 발생하였다. 유럽은 실업률이 올라갔고, 미국은 경제활동참가률이 96%에서 88% 수준으로 하락하였다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;전반적인 노동과 자본의 비효율적인 배분은 경제 성장률 상승을 제약하였다. 오늘날 젊은 세대는 부모세대보다 더 못사는 세대가 될 가능성이 높아졌다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;stagnation22&#34;&gt;Stagnation(2/2)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;스태그플레이션이 케인지안에서 네오리버럴에게 권력을 넘겨주었듯이, 현재의 저성장-양극화도 네오리버럴에게 같은 문제를 제기하게 되었다. 그들에 따르면 경제성장의 대가로 양극화가 있었야 했다. 그러나 지금은 양극화도 심해지고, 경제도 저성장에 빠졌다. 이른바 &lt;code&gt;Stagnequality&lt;/code&gt;가 대두하였다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;conflict&#34;&gt;Conflict&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;역사는 사회 기반이 와해될 때 파시스트나 울트라국가주의자들이 권력을 잡는다는 것을 보여주었다. 군중의 부를 약속하면서 부자로부터가 아니라 해외의 적이나 소수자 그룹과 같은 내부의 타인에게 화살을 돌리는 경우가 많았다. 최근 세계 정세는 극우주의가 좌익세력보다 더 확대되는 경향을 보인다. 선진국에서 극우세력의 힘이 강해지는 한켠에서 중국, 인도, 터키, 멕시코 등에서는 권위주의와 국가주의가 등장하고 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;But judges are members of the elite and tend to be out of touch with what life is like for many ordinary citizens. 법관들의 판결은 문화적 갈등을 잠재우기보다 종종 더욱 심화시킨다.&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;국가 주권과 국제 질서 사이의 긴장을 완화시키는 역할을 했던 WTO나 EU같은 국제기구는 부국과 빈국의 이해를 조정하는데 실패하고 있다. 한마디로 글로벌 거버넌스 제도(국제질서)가 legitimacy 위기에 직면했다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;the-markets-and-their-discontents&#34;&gt;The Markets and Their Discontents&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;우리의 영웅들인 &amp;ldquo;철학적 급진주의자&amp;quot;들은 봉건적 시장독점에서 자유시자으로 경제 체계를 바꾸어서 당시의 대중의 욕구를 반영한 정치시스템을 구축하고, 내부의 갈등을 완화시키며, 다수의 대중이 혜택을 받고, 전통적인 엘리트의 힘을 약화시키는 국제 협력 시스템을 구축하고자 했었다. 현재 우리에게 필요한 바로 그것들이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;아담 스미스는 개별 구성원들의 호의가 아니라 이득에 따라서 경제가 돌아가는 시장을 이야기 하였다. Self-interested behavior가 public good이 될 수 있다는 주장은 지금은 진부하지만 당시에는 기본 상식과 배치되는 매우 쇼킹한 발상이었다.
+과거에는 &amp;ldquo;Moral economies&amp;quot;가 작동하는 시절이었다. 자기이익에 기반한 행위가 번영의 원천이라는 인식은 약했다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;도덕에 기반한 경제가 시장 경제보다 장점이 있기도 했다. 그러나 교역의 범위와 규모가 커지면서 모럴 이코노미는 해체되었다. 우리는 대량생산과 글로벌 공급 사슬로 부터 이득을 얻고 있다. 왜냐하면 고정 비용이 전세계 수천만 사람들에게 분산되고, 분업과 전문화를 통해서 전세계에서 가장 유리한 조건의 투입을 달성할 수 있기 때문이다. 그러나 전세계 다수가 동시에 상품을 소비한다면, 그들이 상품에 이상이 있을때 함께 보이콧하기는 힘들다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;중앙의 계획에 기반한 경제는 &amp;ldquo;wage slavery&amp;quot;로 가는 것을 막는 대안으로 여겼으나 궁극적으로 실패하였다. 개개인의 다양성과 선호를 계획에 일일이 다 담을수는 없었기 때문이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;결과적으로 시장 경제는 과거 모럴경제보다 규모와 효율성에서 우월한 체제로 남았고, 대안으로 제시되었던 막시즘에 비해서도 거대한 경제를 운영하는데 우월한 것으로 나타났다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;the-rule-of-a-true-market&#34;&gt;The Rule of a True Market&lt;/h3&gt;
+&lt;p&gt;시장 경제에 대한 다른 더 나은 대안이 없다는 시장은 어떻게 조직되어야 하는지 질문할 필요가 있다.
+자유 시장(개인의 의지에 반하여 권력이 행사될 경우는 다른사람의 권익을 침하는 것을 막을 경우이다), 경쟁적인 시장(가격에 대한 영향력), 개방된 시장(국경, 인종, 성 등에 관계없이 시장 교환에 참가할 수 있어야 한다)&lt;/p&gt;
+&lt;p&gt;봉건적 질서, 귀족의 독점이 사라진 사이 새로운 형태의 독점이 등장했다. 그들은 공장, 철도, 자연 자원을 모두 독차지 했고, 정치와 언론을 부패하게 했다. 이에 대한 대안으로 새로운 자유주의적 개혁자들이 등장하였는데, 헨리 조지, 레옹 왈라스, 베아트리체 웹 등이다. 철학적 급진주의자들의 유산을 이어 받아서 독점 기업들의 힘을 제약하는 반독점정책, 노조 지원법 등을 만들었다. 사회보험, 누진적 조세, 의무 교육 등이 기회에 대한 접근을 높여서 경쟁을 강화시켰다. 글로벌 협력이 확대되면서 리버럴한 질서가 강화되었다.&lt;/p&gt;
+&lt;p&gt;그러나 사유 재산권은 시장 지배력을 강화시켜 불평등을 심화시켰다. 1인1표는 다수가 소수를 억압하는 도구가 되었다.
+2차 세계 대전에서의 승리와 냉전에서의 승리는 자만을 불러왔고, 현실 안주와 내부 분열을 초래했다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;perfect-competition-opium-of-the-elites&#34;&gt;Perfect Competition: Opium of the Elites&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Hosing market vs. Grain market&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;완전경쟁은 비현실적인 가정이다.&lt;/p&gt;
+&lt;p&gt;완전경쟁은 커녕 시장 지배력이 만연해 있고, 현재의 자본주의 구조에 내재하고 있으며, 저성장-양극화와 정치적 갈등의 지배적인 원천이다.
+민간 독점의 한켠에서 정부에서 독점적으로 제공하는 상품과 서비스에도 문제가 있다. 정치적 영향력에 대한 시장이 필요하다.
+돈으로 정치가 좌우되면 문제가 있는 것으로 쉽게 생각할 수 있지만, 현재의 1인1표제는 다수가 소수를 억안한다는 점에서 이상적인 모델이 아니다.&lt;/p&gt;
+&lt;p&gt;정치 뿐만 아니다. 이민 제한 정책은 국가간 노동력 이동을 막고 있고, 디지털 경제에서 가장 중요한 자원인 데이터는 데이터 제공자에게 제대로 보상되고 있지 않다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;quot;완전 경쟁으로 상정된 시장이 독점과 시장의 부존으로 채워져 있다.&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;ch1-property-is-monopoly1&#34;&gt;Ch1: Property Is Monopoly&lt;/h1&gt;
+&lt;p&gt;&lt;br/&gt;&lt;a href=&#34;https://dynalist.io/u/MtmRWjlOvFAy5gkv7CncSmm4&#34;&gt;2.Radical-Markets-Ch1.pdf&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;monopoly-problem&#34;&gt;Monopoly Problem&lt;/h3&gt;
+&lt;p&gt;&amp;ldquo;하이퍼루프와 토지 소유권&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;Several holdouts would quickly squash the project.&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;But eminent domain (by government) is often unfair and always politically controversial.&amp;rdquo;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;capitalism-and-freedom-or-capitalism-and-monopoly&#34;&gt;Capitalism and Freedom or Capitalism and Monopoly?&lt;/h3&gt;
+&lt;p&gt;Capitalism advanced in tandem with the scientific and technological innovations that made trade a valuable and significant part of the economy.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;allocative efficiency : achieving the most efficient use of property&lt;/li&gt;
+&lt;li&gt;investment efficiency : people care best for things they own&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;그러나 당시 자본주의의 이득은 부루주아지에게 집중되었고, 귀족들은 토지를 비효율적으로 방치하고 있었음.
+헨리 조지의 &amp;lt;진보와 빈곤&amp;gt;이 등장하여 19세기 자본주의 사회의 역설을 비판적으로 고찰
+① 경제법칙과 도덕법칙은 하나이다. ② 독점과 토지사유는 도덕법칙에 어긋나는 경제적 불의이다. ③ 이 같은 경제적 불의가 존재하는 한 진보 속의 빈곤 주기적 불황 사회와 문명의 쇠퇴는 불가피하다. ④ 자유거래와 토지가치세를 실행하지 않으면 이러한 문제들 (land value taxation) 은 해결할 길이 없다.&lt;/p&gt;
+&lt;p&gt;Like a monopolist, the landowner can earn higher returns on the sale of her land by holding out for a generous offer (effectively withholding supply from the market) rather than selling to the first person who offers a fair price. In the meantime, the land is unused or underused. Thus, private ownership may actually hamper allocative efficiency.
+Monopoly power blocked the path of progress.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;central-planning-corporate-planning&#34;&gt;Central Planning, Corporate Planning&lt;/h3&gt;
+&lt;p&gt;Nobel Laureate Ronald Coase called these frustrations the “transaction costs of the market.”
+So, while corporate planning played an important role in the economy, and helped overcome many local mo-nopoly problems, it never supplanted markets as the primary means of organization.
+&amp;ldquo;중앙 계획=사회주의&amp;rdquo;, &amp;ldquo;분산 계획=시장 경제&amp;rdquo;
+1시장 = 1000개 기업 &amp;ndash;&amp;gt; 완전경쟁
+1시장 = 1개 기업 &amp;ndash;&amp;gt; 독점
+독점 시장에서는 기업 계획=중앙 계획=사회주의&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;markets-without-property&#34;&gt;Markets without Property&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;“Property is only another name for monopoly.”(Jevons)&lt;/li&gt;
+&lt;li&gt;“Declaring indi-vidual land ownership . . . means . . . thwarting the beneficial effects of free competition by preventing the land from being used as is most advantageous for society.”(Walras)&lt;/li&gt;
+&lt;li&gt;“tragedy of the commons.”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The land and the building, even the neigh-borhood, are so tied together, it would be hard to figure out a separate value for each of them.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;the-battle-for-the-soul-of-socialism&#34;&gt;The Battle for the Soul of “Socialism”&lt;/h3&gt;
+&lt;p&gt;Ludwig von Mises and Friedrich Hayek, who were students of the third marginal revolutionary, Carl Menger, pointed out the flaw in central planning: those who undertake it lack the information and analytical capacity to make the best allocative decisions. People’s valuations are private information; the genius of the market is its capacity for disseminating this in-formation from consumers to producers through the price system. Central planning, in contrast, results in massive mis-allocation of resources—the production of goods no one wanted—that was characteristic of real-  world socialist econo-mies like that of the Soviet Union.&lt;/p&gt;
+&lt;p&gt;In his 1966 edition of The Theory of Price, he promoted the “Coase Theorem” as a justification for the sim-plistic idea that private bargaining that takes place under any set of strong and clearly defined property rights will usually lead to efficient outcomes. This misinterpretation assumes away the monopoly problem, implying the superiority of pri-vate property because it enhances investment efficiency.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;name-your-priceand-your-tax&#34;&gt;Name Your Price—and Your Tax&lt;/h3&gt;
+&lt;p&gt;&amp;ldquo;We refer to this tax as a “common ownership self- assessed tax” (COST) on wealth. The COST on wealth is also the cost of (holding) wealth. “Common ownership” refers to the way in which the tax modifies traditional private property. The two most important “sticks” in the bundle of rights that compose private property are the “right to use” and the “right to ex-clude.” With a COST, both rights are partly transferred from the possessor to the public at large.&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;자산에 대한 가격을 소유자가 스스로 매기고, 그에 근간해서 세금을 징수&amp;hellip; 해당 가격 이상으로 사곘다는 매수자가 나타나면 소유권을 넘겨주어야 하는 경매시스템을 도입&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;ch5-data-as-labor1&#34;&gt;Ch5: Data as Labor&lt;/h3&gt;
+&lt;p&gt;&lt;br/&gt;&lt;a href=&#34;https://www.aeaweb.org/conference/2018/preliminary/paper/2Y7N88na&#34;&gt;https://www.aeaweb.org/conference/2018/preliminary/paper/2Y7N88na&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;data-as-labor12sup1sup&#34;&gt;Data as Labor(1/2)&lt;sup&gt;[1]&lt;/sup&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;현대 디지털 경제에서 사용자는 온라인 서비스나 플랫폼을 무료로 사용하는 대신에 플랫폼 소유자에게 무료로 데이터를 제공&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 데이터는 생산한 사용자가 소유권을 갖기 보다는 플랫폼 소유자에게 “자본”으로서 사유되는데, 시카고대 경제학과 교수를 지내기도 한 웨일과 동료들에 따르면 이러한 디지털 경제는 “비효율적” 혹은 “비생산적”이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;자본으로서 데이터가 유통되는 시스템은 기업가정신의 함양에는 도움이 되나, 데이터에 기반한 인공지능 산업이 발전할수록 비효율적일 수 있다는 것. 무엇보다도 효과적 학습에 기여하는 양질의 데이터 생산에 대해 차별적으로 보상해 주지 않기 때문.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;자본으로서 데이터가 유통되는 사회에서 데이터가 핵심 생산요소를 차지할수록 자본에 비한 노동의 비중은 작아지고, 궁극에는 생산에 기여한 노동과 무관한 기본소득이 노동의 댓가인 임금을 대체할 수밖에 없다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;.footnote[[1]연세대 강정한 인용]&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;data-as-labor22&#34;&gt;Data as Labor(2/2)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;자본으로서 데이터 유통에 대한 대안으로, 웨일 그룹은 노동으로서 데이터를 유통시키고 데이터 생산에 기여한 노동의 몫만큼 보상할 것을 제안한다. 이러한 제도 하에서는 더이상 무료 서비스에 대한 무료 데이터 제공이라는 사회적 합의가 유효하지 않다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그보다는 데이터 생산 활동을 노동시장화시켜서 전통적인 임금 노동 시장의 쇠퇴를 보완해야 한다. 데이터에 대한 소유권은 자본가가 아닌 디지털 시민 개개인에게 있다. 그들의 활동은 소비가 아닌 생산 활동으로서 존엄성을 회복하고, 궁극적으로 시민들이 더 가치있는 데이터를 생산할 유인력이 높아질 것.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 보상체계를 마련하는 과정은 인공지능을 인간의 노동을 대체하는 힘이 아닌, 인간의 노동 생산성을 향상시키는 기술로서 자리매김시키는 정치경제학적 사회변동이 될 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

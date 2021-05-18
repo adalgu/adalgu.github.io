@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>data recipe | Exobrain</title>
+    <link>https://gunn.kim/categories/data-recipe/</link>
+      <atom:link href="https://gunn.kim/categories/data-recipe/index.xml" rel="self" type="application/rss+xml" />
+    <description>data recipe</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Gunn Kim, 2021</copyright><lastBuildDate>Sun, 25 Nov 2018 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://gunn.kim/images/icon_hud1e4a02091c0cd7dd9ce20cf2020f12f_133591_512x512_fill_lanczos_center_2.png</url>
+      <title>data recipe</title>
+      <link>https://gunn.kim/categories/data-recipe/</link>
+    </image>
+    
+    <item>
+      <title>Rstudio에서 작성하는 Rmarkdown(not .md) 파일</title>
+      <link>https://gunn.kim/post/rstudio%EC%97%90%EC%84%9C-%EC%9E%91%EC%84%B1%ED%95%98%EB%8A%94-rmarkdown-not-md-%ED%8C%8C%EC%9D%BC/</link>
+      <pubDate>Sun, 25 Nov 2018 00:00:00 +0000</pubDate>
+      <guid>https://gunn.kim/post/rstudio%EC%97%90%EC%84%9C-%EC%9E%91%EC%84%B1%ED%95%98%EB%8A%94-rmarkdown-not-md-%ED%8C%8C%EC%9D%BC/</guid>
+      <description>
+
+
+&lt;div id=&#34;----&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;여기서 작성하는 내용은 떻게 나타날까?&lt;/h4&gt;
+&lt;p&gt;md파일로 보이나?&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>얼마나 빨리 마크다운을 웹으로 포스팅 할 수 있을까?</title>
+      <link>https://gunn.kim/post/2018-11-22-markdown-to-web/</link>
+      <pubDate>Thu, 22 Nov 2018 13:40:18 +0000</pubDate>
+      <guid>https://gunn.kim/post/2018-11-22-markdown-to-web/</guid>
+      <description>&lt;p&gt;마크다운을 이용해서 얼마나 빨리 복잡한 문서 작성이 가능할까?&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;플레인 텍스트&lt;/li&gt;
+&lt;li&gt;HTML&lt;/li&gt;
+&lt;li&gt;Word with Graph&lt;/li&gt;
+&lt;li&gt;Rmarkdown with &lt;code&gt;R code&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;PPT by Rstudio&lt;/li&gt;
+&lt;li&gt;자동생성 문서 using &lt;code&gt;Gitlab CI&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;그리고?&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>&lt;TEST3&gt; posting from Rstudio</title>
+      <link>https://gunn.kim/post/posting-from-rstudio/</link>
+      <pubDate>Wed, 14 Nov 2018 00:00:00 +0000</pubDate>
+      <guid>https://gunn.kim/post/posting-from-rstudio/</guid>
+      <description>&lt;h2 id=&#34;rstudio--&#34;&gt;Rstudio를 이용한 포스팅&lt;/h2&gt;
+&lt;h3 id=&#34;-&#34;&gt;잘 나올까?&lt;/h3&gt;
+&lt;p&gt;결국 Rstudio가 하는 것은 프론트 매터를 만들어 주는 것인가?&lt;/p&gt;
+&lt;p&gt;Rmd 작성 가능&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Rstudio로 포스팅 2탄 - R마크다운</title>
+      <link>https://gunn.kim/post/rstudio%EB%A1%9C-%ED%8F%AC%EC%8A%A4%ED%8C%85-2%ED%83%84-r%EB%A7%88%ED%81%AC%EB%8B%A4%EC%9A%B4/</link>
+      <pubDate>Wed, 14 Nov 2018 00:00:00 +0000</pubDate>
+      <guid>https://gunn.kim/post/rstudio%EB%A1%9C-%ED%8F%AC%EC%8A%A4%ED%8C%85-2%ED%83%84-r%EB%A7%88%ED%81%AC%EB%8B%A4%EC%9A%B4/</guid>
+      <description>
+
+
+&lt;div id=&#34;r--&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;R마크다운으로 작성하는 포스팅&lt;/h2&gt;
+&lt;div id=&#34;--&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;어떻게 구현되는 것인가?&lt;/h3&gt;
+&lt;p&gt;마크다운과는 어떻게 다르게 나타날까?&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>R 실습 노트</title>
+      <link>https://gunn.kim/post/2018-11-09-r-practice-note/</link>
+      <pubDate>Fri, 09 Nov 2018 00:00:00 +0000</pubDate>
+      <guid>https://gunn.kim/post/2018-11-09-r-practice-note/</guid>
+      <description>
+
+
+&lt;div id=&#34;r-&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;2018-11-09 R 실습&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div id=&#34;r-&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;3.6 R의 패키지&lt;/h2&gt;
+&lt;div id=&#34;dplyr----&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;3.6.1 dplyr를 이용한 데이터 가공의 문법&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;주석&gt;은 이렇게 단다. &lt;a href=&#34;#fn1&#34; class=&#34;footnoteRef&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;code&gt;`한줄 code는 이렇게`&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;````
+여러줄 코드는 이렇게 백스틱 4개를 이용해서 코드를 감쌈
+````&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;--&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;디플라이어 패키지 로딩&lt;/h1&gt;
+&lt;p&gt;library(dplyr)&lt;br /&gt;
+library(gapminder) &lt;a href=&#34;#fn2&#34; class=&#34;footnoteRef&#34; id=&#34;fnref2&#34;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div id=&#34;dplyr---tbl_df-glimpse&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;3.6.2 dplyr()의 유용한 유틸리티 : tbl_df(), glimpse, %&amp;gt;%&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;dplyrtbldf&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;dplyr::tbldf()&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;i2 &amp;lt;- tbl_df(iris)  
+i2  &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;dplyrglimpse&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;dplyr::glimpse()&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;glimpse(i2)&lt;/code&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;-----&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;파이프 연산자 %&amp;gt;%, 코드 가독성을 높이는 연산자&lt;/h1&gt;
+&lt;/div&gt;
+&lt;div id=&#34;x-fy-fxy&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;x %&amp;gt;% f(y) = f(x,y)&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;iris %&amp;gt;% head  
+iris %&amp;gt;% head()  
+head(iris)  
+
+iris %&amp;gt;% head(15)  &lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;dplyr--&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;3.6.3 dplyr 핵심 동사&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;**#dplyr (1) 행을 선택하는 filter()**
+#filter(df, 조건)  
+filter(gapminder, country==&amp;#39;Korea, Rep.&amp;#39;)
+filter(gapminder, country==&amp;#39;Korea, Rep.&amp;#39; &amp;amp; year==2007)
+
+gapminder %&amp;gt;% filter(country==&amp;#39;Korea, Rep.&amp;#39;)  
+gapminder %&amp;gt;% filter(country==&amp;#39;Korea, Rep.&amp;#39;)  
+
+
+**#dplyr (2) 행(관측치)을 정렬하는 arrange()**  
+arrange(gapminder, year, country)  
+gapminder %&amp;gt;% arrange(year, country)  
+
+dplyr::arrange(gapminder, year, country)  
+gapminder %&amp;gt;% dplyr::arrange(year, country)  
+
+**#dplyr (3) 열(변수)을 선택하는 select()**  
+select(gapminder, pop, gdpPercap)  
+gapminder %&amp;gt;% select(pop, gdpPercap)  
+
+**#dplyr (4) 변수를 변환하는 mutate()**  
+gapminder %&amp;gt;%
+  mutate(total_gdp = pop * gdpPercap,
+        le_gdp_ratio = lifeExp / gdpPercap,
+        lgrk = le_gdp_ratio * 100)
+
+**#dplyr (5) 요약 통계량을 계산하는 summarize()**
+gapminder %&amp;gt;%  
+  summarize(n_obs = n(),  
+            n_countries = n_distinct(country),  
+            n_years = n_distinct(year),  
+            med_gdpc = median(gdpPercap),  
+            max_gdppc = max(gdpPercap))`
+
+**#dplyr (6) 랜덤 샘플을 위한 sample_n()과 sample_frac()**  
+sample_n(gapminder, 10) #정해진 숫자의 행을 랜덤 샘플링  
+sample_frac(gapminder, 0.01) #1%의 련덤 샘플 출력  
+
+**#dplyr (7) 고유한 행을 찾아내는 distinct()**  
+distinct(select(gapminder, country))  
+
+gapminder %&amp;gt;%   
+  select(country) %&amp;gt;% 
+  distinct()  &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;r-code-chunk&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;&lt;참고&gt; R code chunk&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;r-----echotrue--false&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;R 코드 청크의 내용까지 출력하려면 echo=TRUE, 생략은 FALSE&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://bookdown.org/yihui/rmarkdown/r-code.html&#34;&gt;R 코드 청크에 대한 참고링크&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;{r, echo=TRUE} 예시 실행코드까지 출력&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(dplyr)
+library(gapminder)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: 패키지 &amp;#39;gapminder&amp;#39;는 R 버전 3.5.2에서 작성되었습니다&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;gapminder %&amp;gt;%
+  select(country) %&amp;gt;%
+  distinct()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 142 x 1
+##    country    
+##    &amp;lt;fct&amp;gt;      
+##  1 Afghanistan
+##  2 Albania    
+##  3 Algeria    
+##  4 Angola     
+##  5 Argentina  
+##  6 Australia  
+##  7 Austria    
+##  8 Bahrain    
+##  9 Bangladesh 
+## 10 Belgium    
+## # ... with 132 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34; style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;{r, echo=FALSE} 실행코드 출력 안하고, 결과만 출력&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 142 x 1
+##    country    
+##    &amp;lt;fct&amp;gt;      
+##  1 Afghanistan
+##  2 Albania    
+##  3 Algeria    
+##  4 Angola     
+##  5 Argentina  
+##  6 Australia  
+##  7 Austria    
+##  8 Bahrain    
+##  9 Bangladesh 
+## 10 Belgium    
+## # ... with 132 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;3&#34; style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;library로 dplyr 패키지 로딩 안하기&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(gapminder)
+gapminder %&amp;gt;%
+  dplyr::select(country) %&amp;gt;%
+  dplyr::distinct()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 142 x 1
+##    country    
+##    &amp;lt;fct&amp;gt;      
+##  1 Afghanistan
+##  2 Albania    
+##  3 Algeria    
+##  4 Angola     
+##  5 Argentina  
+##  6 Australia  
+##  7 Austria    
+##  8 Bahrain    
+##  9 Bangladesh 
+## 10 Belgium    
+## # ... with 132 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;4&#34; style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;테이블 그리기&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;knitr::kable(iris[1:5, ], caption = &amp;#39;A caption 표제목&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:tables-mtcars&#34;&gt;Table 1: &lt;/span&gt;A caption 표제목&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;right&#34;&gt;Sepal.Length&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Sepal.Width&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Petal.Length&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Petal.Width&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Species&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;5.1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.2&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;setosa&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;4.9&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.2&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;setosa&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;4.7&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.3&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.2&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;setosa&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;4.6&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.2&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;setosa&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;5.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.6&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.2&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;setosa&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div id=&#34;group_by---&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;3.6.4 group_by()를 이용한 그룹 연산&lt;/h3&gt;
+&lt;p&gt;명령어 세트를 그룹으로 나눈 후 연산 적용하는 것&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;----&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;각 대륙별 기대 수명의 중간값&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(gapminder)
+library(dplyr)
+gapminder %&amp;gt;%
+  filter(year == 2007) %&amp;gt;%
+  group_by(continent) %&amp;gt;%
+  summarize(median(lifeExp))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 5 x 2
+##   continent `median(lifeExp)`
+##   &amp;lt;fct&amp;gt;                 &amp;lt;dbl&amp;gt;
+## 1 Africa                 52.9
+## 2 Americas               72.9
+## 3 Asia                   72.4
+## 4 Europe                 78.6
+## 5 Oceania                80.7&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;dplyr-----&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;3.6.5 dplyr 명령의 공통점, 함수형 프로그래밍, 체이닝&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(gapminder)
+d1 = filter(gapminder, year == 2007)
+d2 = group_by(d1, continent)
+d3 = summarize(d2, lifeExp = median(lifeExp))
+arrange(d3, -lifeExp)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 5 x 2
+##   continent lifeExp
+##   &amp;lt;fct&amp;gt;       &amp;lt;dbl&amp;gt;
+## 1 Oceania      80.7
+## 2 Europe       78.6
+## 3 Americas     72.9
+## 4 Asia         72.4
+## 5 Africa       52.9&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;gapminder %&amp;gt;%
+  filter(year==2007) %&amp;gt;%
+  group_by(continent) %&amp;gt;%
+  summarize(lifeExp = median(lifeExp)) %&amp;gt;%
+  arrange(-lifeExp)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 5 x 2
+##   continent lifeExp
+##   &amp;lt;fct&amp;gt;       &amp;lt;dbl&amp;gt;
+## 1 Oceania      80.7
+## 2 Europe       78.6
+## 3 Americas     72.9
+## 4 Asia         72.4
+## 5 Africa       52.9&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;dplyr----&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;3.6.6 dplyr에서 테이블을 결합하는 조인 연산자&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;This is a footnote.&lt;a href=&#34;#fnref1&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn2&#34;&gt;&lt;p&gt;dplyr::함수() 형식으로 함수를 사용할 경우 로딩 생략 가능&lt;a href=&#34;#fnref2&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

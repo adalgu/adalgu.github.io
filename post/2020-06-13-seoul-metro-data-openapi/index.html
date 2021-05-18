@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.7.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Gunn Kim">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="공공데이터 포털를 활용할 일들이 많아지고 있다. 몇해 전부터 정부와 지자체에서 열심히 데이터를 공개해주고 있어서 이를 쏠쏠하게 활용해볼 수 있다. 오픈API로 데">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://gunn.kim/post/2020-06-13-seoul-metro-data-openapi/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nanum+Gothic%7CNoto+Serif+KR%7CNoto+Sans+KR&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-161857308-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           document.location = url;
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target);  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'UA-161857308-1', {});
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hud1e4a02091c0cd7dd9ce20cf2020f12f_133591_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hud1e4a02091c0cd7dd9ce20cf2020f12f_133591_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="https://gunn.kim/post/2020-06-13-seoul-metro-data-openapi/">
+
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@adalgu">
+  <meta property="twitter:creator" content="@adalgu">
+  
+  <meta property="og:site_name" content="Exobrain">
+  <meta property="og:url" content="https://gunn.kim/post/2020-06-13-seoul-metro-data-openapi/">
+  <meta property="og:title" content="[파이썬] 서울 공공데이터 포털 Open API를 이용해서 지하철 승차인원수 구하기 | Exobrain">
+  <meta property="og:description" content="공공데이터 포털를 활용할 일들이 많아지고 있다. 몇해 전부터 정부와 지자체에서 열심히 데이터를 공개해주고 있어서 이를 쏠쏠하게 활용해볼 수 있다. 오픈API로 데"><meta property="og:image" content="https://gunn.kim/post/2020-06-13-seoul-metro-data-openapi/featured.png">
+  <meta property="twitter:image" content="https://gunn.kim/post/2020-06-13-seoul-metro-data-openapi/featured.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2020-06-13T21:36:34&#43;09:00">
+    
+    <meta property="article:modified_time" content="2020-06-13T21:36:34&#43;09:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://gunn.kim/post/2020-06-13-seoul-metro-data-openapi/"
+  },
+  "headline": "[파이썬] 서울 공공데이터 포털 Open API를 이용해서 지하철 승차인원수 구하기",
+  
+  "image": [
+    "https://gunn.kim/post/2020-06-13-seoul-metro-data-openapi/featured.png"
+  ],
+  
+  "datePublished": "2020-06-13T21:36:34+09:00",
+  "dateModified": "2020-06-13T21:36:34+09:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Gunn Kim"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Exobrain",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "img/https://gunn.kim/"
+    }
+  },
+  "description": "공공데이터 포털를 활용할 일들이 많아지고 있다. 몇해 전부터 정부와 지자체에서 열심히 데이터를 공개해주고 있어서 이를 쏠쏠하게 활용해볼 수 있다. 오픈API로 데"
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>[파이썬] 서울 공공데이터 포털 Open API를 이용해서 지하철 승차인원수 구하기 | Exobrain</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">Exobrain</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">Exobrain</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-end" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/post"><span>Blog</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+            
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="https://notion.gunn.kim/" target="_blank" rel="noopener"><span>Notion Pages</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/talks"><span>Talks</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/about"><span>About</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      <li class="nav-item">
+        <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+<div class="article-container pt-3">
+  <h1>[파이썬] 서울 공공데이터 포털 Open API를 이용해서 지하철 승차인원수 구하기</h1>
+
+  
+  <p class="page-subtitle">Open API로 불러온 데이터를 Pandas로 다루기</p>
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    2020년 6월 13일
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    7 min read
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/python/">python</a></span>
+  
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 220px; max-height: 40px;">
+  <div style="position: relative">
+    <img src="/post/2020-06-13-seoul-metro-data-openapi/featured.png" alt="" class="featured-image">
+    
+  </div>
+</div>
+
+
+<script data-ad-client="ca-pub-3695098602071408" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+  <div class="article-container">
+
+    <div class="article-style">
+
+      <p>공공데이터 포털를 활용할 일들이 많아지고 있다. 몇해 전부터 정부와 지자체에서 열심히 데이터를 공개해주고 있어서 이를 쏠쏠하게 활용해볼 수 있다. 오픈API로 데이터를 불러서 데이터프레임에만 데이터를 잘 쌓아놓으면 이래저래 활용하기가 매우 쉬워진다.</p>
+<p><img src="featured49-37.png" alt=""></p>
+<p>오늘은 서울시 공공데이터 포털인 <a href="https://data.seoul.go.kr">&lsquo;서울 열린데이터 광장&rsquo;</a>에서 지하철 승하차 인원 정보를 불러와서 코로나 이후 지하철 이용이 어떻게 변했는지 알아보자.</p>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-3695098602071408"
+     data-ad-slot="9658705895"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<blockquote>
+<p>참고로 공공데이터포털에는 한국정보화진흥원에서 운영하는 정부 공식 <a href="https://www.data.go.kr">&lsquo;공공데이터포털&rsquo;</a>도 있고, 통계청에서 운영하는 <a href="https://kosis.kr/openapi/index/index.jsp">Kosis 공유서비스</a>, <a href="https://ecos.bok.or.kr">한국은행 Ecos</a> 등등 엄청 많다.</p>
+</blockquote>
+<p>전체 흐름은 다음과 같다.</p>
+<ol>
+<li>회원가입 및 일반인증키 신청</li>
+<li>오픈API로 데이터 불러오기</li>
+<li>불러온 데이터를 데이터프레임에 저장하기</li>
+<li>for 루프문으로 원하는 기간의 데이터를 데이터프레임에 저장하기</li>
+<li>필요한 값의 시계열만 데이터프레임에 저장하기</li>
+<li>저장한 데이터를 시각화하기</li>
+</ol>
+<h2 id="---">회원가입 및 일반인증키 신청</h2>
+<p>일단 서울 열린데이터 광장에서 회원가입 후에 오픈API를 이용할 수 있는 인증키를 발급받자. 회원가입-일반인증키 신청의 2단계만 거치면 완료된다.</p>
+<ul>
+<li>서울 열린데이터 광장 : <a href="https://data.seoul.go.kr/">https://data.seoul.go.kr/</a></li>
+</ul>
+<h2 id="api--">오픈API로 데이터 불러오기</h2>
+<blockquote>
+<p>[참고] Colab(코랩) 파이썬 코드 예제 바로가기 :</p>
+<blockquote>
+<p><a href="/post/2020-11-04-colab-code-open-data-seoul-metro/">[파이썬/colab] 공공데이터 Open API를 이용한 지하철 승차인원 구하기 예제코드</a></p>
+</blockquote>
+</blockquote>
+<p>오픈API로 데이터를 불러오기 위해서 사용할 라이브러리를 불러온다.</p>
+<pre><code class="language-py3">import urllib.request 
+import json 
+import pandas as pd 
+from pandas.io.json import json_normalize 
+</code></pre>
+<p>이어서 오픈API url로 데이터를 불러온다. <a href="https://data.seoul.go.kr/dataList/OA-12914/S/1/datasetView.do">&lsquo;서울 지하철호선별 역별 승하차 인원 정보&rsquo;</a>에 가면 샘플 url이 있는데, 이를 이용해서 원하는 날짜의 데이터를 불러올 수 있다.</p>
+<pre><code>기본 형태는 아래와 같다.
+http://openapi.seoul.go.kr:8088/(인증키)/json/CardSubwayStatsNew/1/1000/20200601
+
+인증키에 앞서 받아온 인증키를 넣으면 된다. 인증키를 감싸고 있는 () 괄호는 빼야한다.
+인증키가 123yourkeyhere라고하면, url은 아래와 같다.
+http://openapi.seoul.go.kr:8088/123yourkeyhere/
+
+인증키 다음에는 받아올 데이터의 형태를 지정하는 것인데, xml, xls, json 중에서 결정할 수 있는데, 
+여기서는 json을 사용하였다.
+http://openapi.seoul.go.kr:8088/123yourkeyhere/json/
+
+json 다음에 있는 것이 불러올 데이터의 테이블명이다. 지하철 승하차 인원 테이블은 'CardSubwayStatsNew'이다.
+http://openapi.seoul.go.kr:8088/123yourkeyhere/json/CardSubwayStatsNew/
+
+테이블명 다음의 숫자 1과 숫자 1000은 한번에 불러올 데이터 행의 시작과 끝번호이다. 
+서울시 지하철 모든 노선의 역(서울시 소재, 2020년 6월 현재 기준)의 갯수가 
+589개니까 1과 1000으로 지정하면 무방하다.
+(참고로 서울시 열린데이터 광장의 오픈 API로 한번에 부를 수 있는 행의 수는 1000개다. 
+가령, 1행에서 3000행을 한번에 부르게 된다면 에러난다.)
+http://openapi.seoul.go.kr:8088/123yourkeyhere/json/CardSubwayStatsNew/1/1000/
+
+숫자 1과 숫자 1000 다음에 나오는 날짜는 데이터를 불러올 날짜다. YYYYMMDD 형태로 불러올 수 있다.
+2020년 6월 1일의 서울시 전체 지하철역 승하차 인원을 불러오기 위해서는 아래 url을 입력하면 된다.
+(인증키는 본인의 인증키를 입력해야 한다.)
+
+최종 완성본 url: 
+http://openapi.seoul.go.kr:8088/123yourkeyhere/json/CardSubwayStatsNew/1/1000/20200601
+</code></pre>
+<h2 id="---1">불러온 데이터를 데이터프레임에 저장하기</h2>
+<p>최종 완성된 url을 가지고 데이터를 불러와서 이를 다루기 쉽도록 데이터프레임에 저장해 보자.
+데이터프레임을 위해서 판다스(pandas) 라이브러리는 맨 앞에서 불러왔었다.</p>
+<pre><code># url 변수에 최종 완성본 url을 넣자
+url = &quot;http://openapi.seoul.go.kr:8088/123yourkeyhere/json/CardSubwayStatsNew/1/1000/20200601&quot;
+
+# url을 불러오고 이것을 인코딩을 utf-8로 전환하여 결과를 받자.
+response = urllib.request.urlopen(url) 
+json_str = response.read().decode(&quot;utf-8&quot;)
+
+# 받은 데이터가 문자열이라서 이를 json으로 변환한다.
+json_object = json.loads(json_str)
+</code></pre>
+<p>이제 json 형태로 받아진 데이터를 판다스에 저장하자.
+먼저, json_object를 실행해 보면, 아래와 같이 나타난다.
+<img src="featured36-40.png" alt=""></p>
+<p>위의 데이터에서 필요한 데이터는 &lsquo;CardSubwayStatsNew'의 하위에 있는 &lsquo;row'에 있음을 확인할 수 있다.
+이제 row에 해당하는 데이터를 데이터프레임으로 불러와 보자.</p>
+<pre><code># ['CardSubwayStatsNew']['row']를 데이터프레임 df로 불러오는 것은 아래와 같다.
+df=pd.json_normalize(json_object['CardSubwayStatsNew']['row'])
+</code></pre>
+<p>df를 부르면 아래와 같이 저장된 것을 볼 수 있다.
+<img src="featured37-54.png" alt=""></p>
+<p>여기까지 한것을 한번 모아서 보자. 총 5줄이다.</p>
+<pre><code>url = &quot;http://openapi.seoul.go.kr:8088/123yourkeyhere/json/CardSubwayStatsNew/1/1000/20200601&quot;
+response = urllib.request.urlopen(url) 
+json_str = response.read().decode(&quot;utf-8&quot;)
+json_object = json.loads(json_str)
+df=pd.json_normalize(json_object['CardSubwayStatsNew']['row'])
+</code></pre>
+<h2 id="for------">for 루프문으로 원하는 기간의 데이터를 데이터프레임에 저장하기</h2>
+<p>지하철 이용객의 변화를 보기 위해서는 시계열을 살펴봐야 한다. 위에서 하루치 데이터를 데이터프레임으로 불러왔는데, 이것을 원하는 기간에 저장하도록 만들어 보자.</p>
+<p>먼저, 원하는 기간의 날짜를 리스트에 넣어야 한다. 판다스를 이용해서 간단하게 할 수 있다.</p>
+<pre><code># 2020년 1월 20일부터 2020년 2월 5일까지 데이터를 불러온다고 하자. 
+dt_index = pd.date_range(start='20200120', end='20200205')
+</code></pre>
+<p>dt_index는 아래와 같다.
+<img src="featured44-49.png" alt=""></p>
+<p>이것을 리스트로 변환하자.</p>
+<pre><code>dt_list = dt_index.strftime(&quot;%Y%m%d&quot;).tolist()
+</code></pre>
+<p>결과는 아래와 같다.
+<img src="featured46-33.png" alt=""></p>
+<p>이제 for 문을 날짜 리스트에 따라 돌려가며 부르면 된다.</p>
+<pre><code>dt_index = pd.date_range(start='20200120', end='20200205')
+dt_list = dt_index.strftime(&quot;%Y%m%d&quot;).tolist()
+
+# for 문으로 하루치 데이터 부르는 작업을 리스트에 저장된 기간에 반복한다.
+# url을 바꿔가면서 데이터를 부르기 위해서 url의 끝부문 날짜에 변수 i를 넣어준다.
+# 불러온 데이터를 append 메소드를 이용하여 데이터프레임 하단에 붙인다.
+for i in dt_list:
+    url=&quot;http://openapi.seoul.go.kr:8088/123yourkeyhere/json/CardSubwayStatsNew/1/1000/&quot; + i
+    response = urllib.request.urlopen(url) 
+    json_str = response.read().decode(&quot;utf-8&quot;)
+    json_object = json.loads(json_str)
+    df_temp=pd.json_normalize(json_object['CardSubwayStatsNew']['row'])
+    df=df.append(df_temp)
+</code></pre>
+<blockquote>
+<p>[주의]
+for 문을 돌리기 전에 데이터를 불여넣을 데이터프레임 df를 하나 만들어 두자. 하루치 데이터를 불러온 작업을 for 문 돌리기 전에 한번 실행해 놓으면 된다. 또는 생성되는 칼럼에 맞게 하나 만들면 된다. 데이터프레임 만드는 것은 아래 섹션에 추가하였다. 이것을 안하면 df가 없다고 에러가 뜬다.</p>
+</blockquote>
+<p>이제 2020년 1월 20일부터 2020년 2월 5일까지 서울 지하철 이용객 수를 확인해 보자.</p>
+<p><img src="featured59-02.png" alt=""></p>
+<p>데이터가 잘 불러져서 데이터프레임에 차곡차곡 쌓여있는걸 볼 수 있다.</p>
+<h2 id="----">필요한 값의 시계열만 데이터프레임에 저장하기</h2>
+<p>하루치 데이터만 해도 500행이 넘어가니 1월 20일~2월 5일 데이터만 불러도 시간이 조금 소요된다.
+그래서 위 루프문 돌릴때 필요한 노선이나 역을 기준으로 데이터를 뽑아서 저장할 수도 있고, 하루 전체 승하차 인원 합을 구해서 저장해도 된다.</p>
+<p>애초에 필요한 것이 노선과 역에 관계없이 서울시 지하철 하루 이용객수 추이다. 데이터프레임에 저장할 때, 하루치 인원 합을 구해서 저장해 보자.</p>
+<pre><code># 일간 서울시 지하철 전체 승차, 하차 인원의 합을 구하는 명령어는 다음과 같다.
+df_temp['RIDE_PASGR_NUM'].sum()
+df_temp['ALIGHT_PASGR_NUM'].sum()
+
+# 이것을 df.loc[j]를 이용해서 df라는 데이터프레임에 일별로 하나씩 차곡차곡 쌓도록 했다.
+df.loc[j] = [i, df_temp['RIDE_PASGR_NUM'].sum(), df_temp['ALIGHT_PASGR_NUM'].sum()]
+
+# for 루프문 돌기 전에 빈 데이터프레임을 하나 만들어줬다.
+df = pd.DataFrame({'DATE':[], 'RIDE':[], 'ALIGHT':[]})
+</code></pre>
+<p>위 내용을 정리하면 다음과 같다.</p>
+<pre><code>dt_index = pd.date_range(start='20200120', end='20200205')
+dt_list = dt_index.strftime(&quot;%Y%m%d&quot;).tolist()
+df = pd.DataFrame({'DATE':[], 'RIDE':[], 'ALIGHT':[]})
+j=1
+for i in dt_list:
+    url=&quot;http://openapi.seoul.go.kr:8088/123yourkeyhere/json/CardSubwayStatsNew/1/1000/&quot; + i
+    response = urllib.request.urlopen(url) 
+    json_str = response.read().decode(&quot;utf-8&quot;)
+    json_object = json.loads(json_str)
+    pd.json_normalize(json_object['CardSubwayStatsNew']['row'])
+    df_temp=pd.json_normalize(json_object['CardSubwayStatsNew']['row'])
+    df.loc[j] = [i, df_temp['RIDE_PASGR_NUM'].sum(), df_temp['ALIGHT_PASGR_NUM'].sum()]
+    print(i,j) #이것은 작동이 잘되는지 보려고 임시로 넣은 줄
+    j=j+1
+</code></pre>
+<h2 id="--">저장한 데이터를 시각화하기</h2>
+<p>데이터는 준비가 끝났다. 이제 이것을 그래프로 그려보자.</p>
+<p>우선 데이터 형태를 살펴보면, 아래와 같다.
+<img src="featured10-32.png" alt=""></p>
+<p>날짜를 인덱스로 만들자. 아래 명령을 실행하면, &lsquo;DATE&rsquo; 칼럼이 인덱스로 지정되고, 위 그림과 아래 그림처럼 표의 모양이 살짝 바뀐다.</p>
+<pre><code>df_concat.set_index('DATE')
+</code></pre>
+<p><img src="featured12-01.png" alt=""></p>
+<p>아래 명령어로 X축은 &lsquo;DATE'로된 그래프를 쉽게 그릴 수 있다.</p>
+<pre><code>df.plot('DATE')
+</code></pre>
+<p><img src="featured15-52.png" alt=""></p>
+<p>이걸 조금 응응해 보면,
+2019년과 2020년의 지하철 승하차 인원 비교를 해볼 수 있다.
+<img src="featured17-01.png" alt=""></p>
+<p>3월, 4월, 5월 평균 이용객수가 각각 전년동월 대비 -40.3%, -36.8%, -32.2%다. 6월은 6월 10일까지 -16.2% 수준인데, 평일에 비해서 주말에 지하철 이용객 수가 현저하게 작으므로 주말효과가 반영되어 덜 감소한 것으로 보인다. 최악의 수준에서는 회복 중이지만, 수도권 지역감염에 대한 우려가 커지고 있어 작년 수준을 회복하기는 쉽지 않을 것임을 예고하고 있다.</p>
+<h2 id="heading">나가며</h2>
+<p>서울시 공공데이터포털의 데이터 속보성이 생각보다 괜찮다. 글을 작성하는 6월 13일에 6월 10일까지의 지하철 이용객수가 오픈 API로 접근 가능했다. 이정도 수치면, 실시간으로 모니터링하는 웹사이트나 앱을 간단히 만들어서 코로나19에 대한 사람들의 우려 수준을 가늠해 보는데 활용해 볼 수도 있을 것 같다. 마찬가지로, 버스 이용량, 고속도로 통행량, 시내도로 통행속도, 따릉이 이용실적 등등 코로나19 이후 달라지고 있는 이동패턴을 공공데이터포털에 올라는 데이터를 이용해서 살펴볼 수 있을 것으로 보인다.</p>
+
+    </div>
+
+    
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/python/">python</a>
+  
+  <a class="badge badge-light" href="/tags/openapi/">openapi</a>
+  
+  <a class="badge badge-light" href="/tags/opendata/">opendata</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://gunn.kim/post/2020-06-13-seoul-metro-data-openapi/&amp;text=[%ed%8c%8c%ec%9d%b4%ec%8d%ac]%20%ec%84%9c%ec%9a%b8%20%ea%b3%b5%ea%b3%b5%eb%8d%b0%ec%9d%b4%ed%84%b0%20%ed%8f%ac%ed%84%b8%20Open%20API%eb%a5%bc%20%ec%9d%b4%ec%9a%a9%ed%95%b4%ec%84%9c%20%ec%a7%80%ed%95%98%ec%b2%a0%20%ec%8a%b9%ec%b0%a8%ec%9d%b8%ec%9b%90%ec%88%98%20%ea%b5%ac%ed%95%98%ea%b8%b0" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://gunn.kim/post/2020-06-13-seoul-metro-data-openapi/&amp;t=[%ed%8c%8c%ec%9d%b4%ec%8d%ac]%20%ec%84%9c%ec%9a%b8%20%ea%b3%b5%ea%b3%b5%eb%8d%b0%ec%9d%b4%ed%84%b0%20%ed%8f%ac%ed%84%b8%20Open%20API%eb%a5%bc%20%ec%9d%b4%ec%9a%a9%ed%95%b4%ec%84%9c%20%ec%a7%80%ed%95%98%ec%b2%a0%20%ec%8a%b9%ec%b0%a8%ec%9d%b8%ec%9b%90%ec%88%98%20%ea%b5%ac%ed%95%98%ea%b8%b0" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=[%ed%8c%8c%ec%9d%b4%ec%8d%ac]%20%ec%84%9c%ec%9a%b8%20%ea%b3%b5%ea%b3%b5%eb%8d%b0%ec%9d%b4%ed%84%b0%20%ed%8f%ac%ed%84%b8%20Open%20API%eb%a5%bc%20%ec%9d%b4%ec%9a%a9%ed%95%b4%ec%84%9c%20%ec%a7%80%ed%95%98%ec%b2%a0%20%ec%8a%b9%ec%b0%a8%ec%9d%b8%ec%9b%90%ec%88%98%20%ea%b5%ac%ed%95%98%ea%b8%b0&amp;body=https://gunn.kim/post/2020-06-13-seoul-metro-data-openapi/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://gunn.kim/post/2020-06-13-seoul-metro-data-openapi/&amp;title=[%ed%8c%8c%ec%9d%b4%ec%8d%ac]%20%ec%84%9c%ec%9a%b8%20%ea%b3%b5%ea%b3%b5%eb%8d%b0%ec%9d%b4%ed%84%b0%20%ed%8f%ac%ed%84%b8%20Open%20API%eb%a5%bc%20%ec%9d%b4%ec%9a%a9%ed%95%b4%ec%84%9c%20%ec%a7%80%ed%95%98%ec%b2%a0%20%ec%8a%b9%ec%b0%a8%ec%9d%b8%ec%9b%90%ec%88%98%20%ea%b5%ac%ed%95%98%ea%b8%b0" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=[%ed%8c%8c%ec%9d%b4%ec%8d%ac]%20%ec%84%9c%ec%9a%b8%20%ea%b3%b5%ea%b3%b5%eb%8d%b0%ec%9d%b4%ed%84%b0%20%ed%8f%ac%ed%84%b8%20Open%20API%eb%a5%bc%20%ec%9d%b4%ec%9a%a9%ed%95%b4%ec%84%9c%20%ec%a7%80%ed%95%98%ec%b2%a0%20%ec%8a%b9%ec%b0%a8%ec%9d%b8%ec%9b%90%ec%88%98%20%ea%b5%ac%ed%95%98%ea%b8%b0%20https://gunn.kim/post/2020-06-13-seoul-metro-data-openapi/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=https://gunn.kim/post/2020-06-13-seoul-metro-data-openapi/&amp;title=[%ed%8c%8c%ec%9d%b4%ec%8d%ac]%20%ec%84%9c%ec%9a%b8%20%ea%b3%b5%ea%b3%b5%eb%8d%b0%ec%9d%b4%ed%84%b0%20%ed%8f%ac%ed%84%b8%20Open%20API%eb%a5%bc%20%ec%9d%b4%ec%9a%a9%ed%95%b4%ec%84%9c%20%ec%a7%80%ed%95%98%ec%b2%a0%20%ec%8a%b9%ec%b0%a8%ec%9d%b8%ec%9b%90%ec%88%98%20%ea%b5%ac%ed%95%98%ea%b8%b0" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      <img class="portrait mr-3" src="https://s.gravatar.com/avatar/84693a0d2bb41f2e8db251e38ee69454?s=200')" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://gunn.kim/">Gunn Kim</a></h5>
+      <h6 class="card-subtitle">Data Economist</h6>
+      <p class="card-text">Work at tech company as an economist.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    <li>
+      <a href="mailto:adalgu@gmail.com" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://facebook.com/adalgu" target="_blank" rel="noopener">
+        <i class="fab fa-facebook"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://gitlab.com/adalgu" target="_blank" rel="noopener">
+        <i class="fab fa-gitlab"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/adalgu" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://linkedin.com/in/digitaleconomy" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+<section id="comments">
+  
+    
+<div id="disqus_thread"></div>
+<script>
+  let disqus_config = function () {
+    
+    
+    
+  };
+  (function() {
+    if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+      document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+      return;
+    }
+    var d = document, s = d.createElement('script'); s.async = true;
+    s.src = 'https://' + "adalgu" + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+</section>
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/2020-06-04-wgs84-distance-sql/">[SQL/파이썬] WGS84좌표의 위도 경도 값으로 거리 구하기</a></li>
+      
+      <li><a href="/post/2020-03-04-python-r-online/">[무설치] 파이썬과 R을 온라인에서 바로 코딩하는 꿀팁</a></li>
+      
+      <li><a href="/post/2020-03-02-mistake-80pro-error/">[파이썬] 코딩, 나를 키운 건 팔할이 오타다</a></li>
+      
+      <li><a href="/project/writing-tool-project/">Writing Tool Project</a></li>
+      
+      <li><a href="/project/python-study-project/">Python Study Project</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha256-1zu+3BnLYV9LdiY85uXMzii3bdrkelyp37e0ZyTAQh0=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r,%20python,%20sql.min.js"></script>
+        
+      
+
+    
+
+    
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.a0d331bcd05dbe8b31e244f796710f08.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    © Gunn Kim, 2021 &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

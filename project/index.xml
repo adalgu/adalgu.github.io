@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects | Exobrain</title>
+    <link>https://gunn.kim/project/</link>
+      <atom:link href="https://gunn.kim/project/index.xml" rel="self" type="application/rss+xml" />
+    <description>Projects</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Gunn Kim, 2021</copyright><lastBuildDate>Sun, 08 Mar 2020 02:33:29 +0900</lastBuildDate>
+    <image>
+      <url>https://gunn.kim/images/icon_hud1e4a02091c0cd7dd9ce20cf2020f12f_133591_512x512_fill_lanczos_center_2.png</url>
+      <title>Projects</title>
+      <link>https://gunn.kim/project/</link>
+    </image>
+    
+    <item>
+      <title>Fire Project</title>
+      <link>https://gunn.kim/project/fire-project/</link>
+      <pubDate>Sun, 08 Mar 2020 02:33:29 +0900</pubDate>
+      <guid>https://gunn.kim/project/fire-project/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;FIRE movement
+From Wikipedia, the free encyclopedia
+The FIRE (Financial Independence, Retire Early) movement is a lifestyle movement whose goal is financial independence and retiring early. The model became particularly popular among millennials in the 2010s, gaining traction through online communities via information shared in blogs, podcasts, and online discussion forums.&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Data Recipe Project</title>
+      <link>https://gunn.kim/project/data-recipe-project/</link>
+      <pubDate>Thu, 05 Mar 2020 11:22:58 +0900</pubDate>
+      <guid>https://gunn.kim/project/data-recipe-project/</guid>
+      <description>&lt;h1 id=&#34;------&#34;&gt;데이터 분석 방법을 요리법처럼 쉽게 다루어 보기&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;데이터 레시피(Data Recipe)이란?
+&lt;ol&gt;
+&lt;li&gt;데이터 요리법&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;준비하기
+&lt;ol&gt;
+&lt;li&gt;요리도구 준비 - 환경세팅
+&lt;ol&gt;
+&lt;li&gt;파이썬, R&lt;/li&gt;
+&lt;li&gt;Git, Github&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;재료 준비
+&lt;ol&gt;
+&lt;li&gt;Data OPEN API&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;양념 준비&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;재료 손질하기 - 데이터 전처리
+&lt;ol&gt;
+&lt;li&gt;판다스, 데이터프레임&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;끊이고, 지지고. 볶기 - 기구가 요리하기=컴퓨터가 모델돌리기&lt;/li&gt;
+&lt;li&gt;양념하기 - 사람이 개입해서 파라미터 조정하기&lt;/li&gt;
+&lt;li&gt;플레이팅하기 - 비쥬얼라이제이션&lt;/li&gt;
+&lt;li&gt;사진찍기 - 보고서만들기&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Writing Tool Project</title>
+      <link>https://gunn.kim/project/writing-tool-project/</link>
+      <pubDate>Tue, 25 Feb 2020 10:07:27 +0900</pubDate>
+      <guid>https://gunn.kim/project/writing-tool-project/</guid>
+      <description>&lt;ol start=&#34;0&#34;&gt;
+&lt;li&gt;프롤로그
+&lt;ul&gt;
+&lt;li&gt;예전부터 만들고 싶은 앱이 있었는데, 글쓰기 도구다. 시중에도 많은 글쓰기 관련 앱과 책들이 있지만, 내가 원하는 도구는 아직 보지 못한 것 같다. 그래서 직접 만들어 보고자 구상한 것을 정리해 보고자 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;앱 기능
+&lt;ul&gt;
+&lt;li&gt;내가 글 쓰기 할 때 필요한 것
+&lt;ul&gt;
+&lt;li&gt;첫째, 글의 틀을 미리 세팅해 놓는 것 : 백지에 글을 쓰기보다, 글의 틀이 만들어져 있으면 시작하기가 편하다. 몇가지 예시가 있어도 도움이 된다.&lt;/li&gt;
+&lt;li&gt;둘째, 링크, 이미지 등을 쉽게 가져올 수 있는 것 : 글만 있는 글은 보기가 싫다. 간단한 이미지가 있어서 보고 싶어진다. 좋은 글쓰기 툴들은 글에 포함되는 이미지나 링크, 영상을 쉽게 가져올 수 있다. 브런치, 네이버 블로그 등등.&lt;/li&gt;
+&lt;li&gt;셋째, 오타 수정이 간편 : 맞춤법이나 오타는 옥의 티다. 퇴고할 때 오타는 자동으로 고칠 수 있으면, 더 풍부한 표현에 집중할 수 있다.&lt;/li&gt;
+&lt;li&gt;넷째, 글의 분량 : A4지 몇장, 200자 원고지 몇장, 몇분짜리 글 등의 글쓰기 분량이 정해져 있다. 글을 쓰면서 분량을 알 수 있으면 참고하는데 좋다.&lt;/li&gt;
+&lt;li&gt;다섯째, 두괄식 검사 : 글쓰기 테크닉에는 여러 방법이 있겠지만, 일단은 두괄식 글쓰기가 쓰는 사람이나 읽는 사람이 편하다. 두괄식으로 문단의 소주제문을 미리 완성해 놓으면, 글을 전체 얼개를 잡는데 도움이 된다. 문단의 첫문장만 뽑아서 보여주는 앱!&lt;/li&gt;
+&lt;li&gt;여섯째, 주제어 검색 : 자연어 처리 기능을 이용해서 주제어나 반복어를 뽑아 주면 좋다. 태그 등에 바로 활용할 수 있다.&lt;/li&gt;
+&lt;li&gt;일곱째, 제목 제안 : 완성된 글을 분석하여 적절한 제목을 복수로 제안한다. 비슷한 상황에서 유사한 종류의 글 중에 주목을 끌었던 제목을 참고하여 제안한다.ㄴ&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;구현 방법
+&lt;ol&gt;
+&lt;li&gt;파이썬으로 기본 앱을 만든다.
+&lt;ol&gt;
+&lt;li&gt;파이썬 자연어처리 라이브러리를 이용해서 글을 분석할 수 있는 모듈을 만든다.&lt;/li&gt;
+&lt;li&gt;VS CODE로 글쓰기 앱의 목업을 만들어 본다.&lt;/li&gt;
+&lt;li&gt;API를 활용해서 오타 수정 등의 기능을 구현한다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;좋은 글에 대한 DB를 구축한다.
+&lt;ol&gt;
+&lt;li&gt;참고할 만한 글들을 모아서 db를 구축하고,&lt;/li&gt;
+&lt;li&gt;이 글들에서 공통적인 패턴을 찾아서 인사이트를 뽑는다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;웹, 앱, 워드 애드온 버전을 만든다.
+&lt;ol&gt;
+&lt;li&gt;웹에서 간단하게 해 볼 수 있도록..&lt;/li&gt;
+&lt;li&gt;모바일이나 로컬 앱으로도 해볼 수 있도록&lt;/li&gt;
+&lt;li&gt;워드나 구글독스 애드온 버전을 만들어서 활용할 수 있도록&amp;hellip;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;깃허브에 코드를 올린다.
+&lt;ol&gt;
+&lt;li&gt;공유 받아서 만든 것이니 나도 공유해서 미려하나마 기여한다.&lt;/li&gt;
+&lt;li&gt;피드백을 받아서 개선한다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;에필로그
+&lt;ol&gt;
+&lt;li&gt;교훈과 의미를 정리한다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Python Study Project</title>
+      <link>https://gunn.kim/project/python-study-project/</link>
+      <pubDate>Tue, 25 Feb 2020 08:30:27 +0900</pubDate>
+      <guid>https://gunn.kim/project/python-study-project/</guid>
+      <description>&lt;h1 id=&#34;--&#34;&gt;파이썬 기초 마스터&lt;/h1&gt;
+&lt;h3 id=&#34;---int-d-str-s-tf&#34;&gt;변수 : 숫자(사칙연산, int, %d), 문자열(str, %s), 불리안(T/F)&lt;/h3&gt;
+&lt;h3 id=&#34;--ifelifelse&#34;&gt;조건문 : if~elif~else&lt;/h3&gt;
+&lt;h3 id=&#34;--forrange-list-tuple-dictionary-while-break-continue&#34;&gt;반복문 : for(range, list, tuple, dictionary), while (break, continue)&lt;/h3&gt;
+&lt;h3 id=&#34;--return-&#34;&gt;함수 : return, 모듈&lt;/h3&gt;
+&lt;h3 id=&#34;--list-tuple-dictionary&#34;&gt;자료구조 : list, tuple, dictionary&lt;/h3&gt;
+&lt;h3 id=&#34;---self--&#34;&gt;클래스: 오브젝트, 메소드, self 인자, 상속&lt;/h3&gt;
+&lt;h3 id=&#34;----1--2&#34;&gt;패키지 : 라이브러리 = 모듈1 + 모듈2&lt;/h3&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>외장두뇌 프로젝트</title>
+      <link>https://gunn.kim/project/exobrain-project/</link>
+      <pubDate>Tue, 18 Feb 2020 01:00:55 +0900</pubDate>
+      <guid>https://gunn.kim/project/exobrain-project/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;The web as a second brain.&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;외장두뇌는 한마디로 나의 두번째 두뇌로써 웹을 활용하는 프로젝트이다.
+정보 저장이 될 수도 있고, 정보 정리가 될 수도 있으며, 정보 출력이 될 수도 있다.&lt;/p&gt;
+&lt;h2 id=&#34;-&#34;&gt;외장두뇌 프로젝트&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;외장두뇌 프로젝트는 퍼블릭(공개)과 프라이빗(비공개) 2가지 채널로 운영하고 있습니다. 본 웹사이트 &lt;a href=&#34;https://gunn.kim&#34;&gt;gunn.kim&lt;/a&gt;은 public 외장두뇌 프로젝트이며, private 외장두뇌 프로젝트는 디지털 기록도구인 &lt;a href=&#34;https://dynalist.io&#34;&gt;Dynalist&lt;/a&gt;를 이용하여 가동 중에 있습니다. 2020년 3월 현재 Dynalist에서 &lt;a href=&#34;https://notion.so&#34;&gt;Notion&lt;/a&gt;으로의 이동을 준비 중입니다.&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;외장두뇌 프로젝트
+&lt;ul&gt;
+&lt;li&gt;Public : &lt;a href=&#34;https://gunn.kim&#34;&gt;https://gunn.kim&lt;/a&gt;으로 접속, 현재는 gitlab 기반의 정적 웹 페이지(static web page)로 운영. 추후에 블로그 기능을 넘어 동적 정보처리 기능을 붙일 예정.&lt;/li&gt;
+&lt;li&gt;Private : &lt;a href=&#34;https://dynalist.io&#34;&gt;Dynalist&lt;/a&gt;로 진행. Feedly와 Pocket, IFTTT, 구글캘린더로 보조. 궁극적으로 웹과 통합하여 운영할 예정. 기성 서비스 중에 &lt;strong&gt;Notion&lt;/strong&gt; 이 가장 유사한 형태.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;heading&#34;&gt;&amp;lt;입력하기&amp;gt;&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Feedly로 RSS 구독&lt;/li&gt;
+&lt;li&gt;Pocket으로 아티클 수집&lt;/li&gt;
+&lt;li&gt;IFTTT로 컨텐츠 자동 처리&lt;/li&gt;
+&lt;li&gt;Notion으로 컨텐츠를 1차 가공&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;heading1&#34;&gt;&amp;lt;출력하기&amp;gt;&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;도구 세팅하기 (Tool)
+&lt;ol&gt;
+&lt;li&gt;git 설치 (+github 또는 gitlab 계정 만들기)&lt;/li&gt;
+&lt;li&gt;hugo 설치&lt;/li&gt;
+&lt;li&gt;vs code 설치&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;웹사이트 만들기 (Repo)
+&lt;ol&gt;
+&lt;li&gt;Gitlab에 저장소 만들기(Github도 가능)&lt;/li&gt;
+&lt;li&gt;저장소에 휴고(hugo)로 만든 사이트 올리기&lt;/li&gt;
+&lt;li&gt;빌드하고 배포하기(Gitlab pages 또는 Netlify)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;웹사이트 세팅하기 (Web)
+&lt;ol&gt;
+&lt;li&gt;도메인 네임 구매하기&lt;/li&gt;
+&lt;li&gt;도메인 네임 세팅하기&lt;/li&gt;
+&lt;li&gt;https 세팅하기&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;컨텐츠 만들기 (Production)
+&lt;ol&gt;
+&lt;li&gt;메뉴 구성하기&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://gunn.kim/post/2020-01-30-vscode-markdown-writing/&#34;&gt;컨텐츠 제작 환경 만들기(feat. vs code 또는 RStudio)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;git으로 커밋하고 푸쉬하기&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Digital Economy Research Tech Tree</title>
+      <link>https://gunn.kim/project/digital-economy-research-project/</link>
+      <pubDate>Tue, 11 Feb 2020 11:22:12 +0900</pubDate>
+      <guid>https://gunn.kim/project/digital-economy-research-project/</guid>
+      <description>&lt;h3 id=&#34;my-own-digital-research-techtree-ver-02draft-feb-2020&#34;&gt;My own Digital Research Tech-tree ver 0.2(Draft, Feb, 2020)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;References : &lt;a href=&#34;https://academic.naver.com/search.naver?query=%EA%B9%80%EA%B1%B4%EC%9A%B0+LG%EA%B2%BD%EC%A0%9C%EC%97%B0%EA%B5%AC%EC%9B%90&amp;amp;field=0&amp;amp;sort=2&amp;amp;searchType=1&amp;amp;refineType=exist&amp;amp;docType=&amp;amp;thesisLv=&amp;amp;journalLv=&amp;amp;access=&amp;amp;year=&amp;amp;category=&amp;amp;journal=&amp;amp;source=&#34;&gt;과거 보고서&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mermaid&#34;&gt;graph TD;
+  Gunn--&amp;gt;경제;
+  Gunn--&amp;gt;금융;
+  Gunn--&amp;gt;기술--&amp;gt;디지털기술--&amp;gt;비트코인;
+  경제--&amp;gt;경제통합_EU,남북경제--&amp;gt;제도;
+  경제--&amp;gt;일자리정책--&amp;gt;제도;
+  경제--&amp;gt;서비스산업--&amp;gt;제도;
+  제도--&amp;gt;혁신--&amp;gt;디지털경제;
+  디지털기술--&amp;gt;제도;
+  디지털기술--&amp;gt;플랫폼_네트워크--&amp;gt;디지털경제;
+  디지털기술--&amp;gt;인공지능_SW--&amp;gt;디지털경제;
+  디지털기술--&amp;gt;데이터--&amp;gt;디지털경제;
+  금융--&amp;gt;화폐--&amp;gt;비트코인;
+  금융--&amp;gt;금융시장;
+  비트코인--&amp;gt;핀테크;
+  금융시장--&amp;gt;은행--&amp;gt;핀테크;
+  핀테크--&amp;gt;디지털경제;
+  디지털경제--&amp;gt;디지털무역--&amp;gt;BEPS;
+  디지털무역--&amp;gt;테크기업_독과점;
+  디지털경제--&amp;gt;경쟁/반독점--&amp;gt;테크기업_독과점;
+  경쟁/반독점--&amp;gt;디지털카르텔;
+  디지털경제--&amp;gt;노동/자동화--&amp;gt;인공지능_자동화;
+  노동/자동화--&amp;gt;공유경제;
+  디지털경제--&amp;gt;산업;
+  산업--&amp;gt;아마존효과;
+  산업--&amp;gt;공유경제;
+  공유경제--&amp;gt;플랫폼노동;
+  공유경제--&amp;gt;모빌리티;
+  아마존효과--&amp;gt;모빌리티;
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Mobility Project</title>
+      <link>https://gunn.kim/project/mobility-project/</link>
+      <pubDate>Mon, 01 Jul 2019 00:00:00 +0000</pubDate>
+      <guid>https://gunn.kim/project/mobility-project/</guid>
+      <description>&lt;h1 id=&#34;list-of-mobility-projects&#34;&gt;List of Mobility Projects&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://brunch.co.kr/@kakaomobility/36&#34;&gt;카카오모빌리티 리포트 2019&lt;/a&gt;
+&lt;ol&gt;
+&lt;li&gt;한글판, 영문판&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;모빌리티의 현재와 미래&lt;/li&gt;
+&lt;li&gt;모빌리티 빅데이터와 이동 혁신&lt;/li&gt;
+&lt;li&gt;모빌리티 경제학&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Projects</title>
+      <link>https://gunn.kim/projects/</link>
+      <pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate>
+      <guid>https://gunn.kim/projects/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>sql | Exobrain</title>
+    <link>https://gunn.kim/tags/sql/</link>
+      <atom:link href="https://gunn.kim/tags/sql/index.xml" rel="self" type="application/rss+xml" />
+    <description>sql</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Gunn Kim, 2021</copyright><lastBuildDate>Thu, 04 Jun 2020 03:07:40 +0000</lastBuildDate>
+    <image>
+      <url>https://gunn.kim/images/icon_hud1e4a02091c0cd7dd9ce20cf2020f12f_133591_512x512_fill_lanczos_center_2.png</url>
+      <title>sql</title>
+      <link>https://gunn.kim/tags/sql/</link>
+    </image>
+    
+    <item>
+      <title>[SQL/파이썬] WGS84좌표의 위도 경도 값으로 거리 구하기</title>
+      <link>https://gunn.kim/post/2020-06-04-wgs84-distance-sql/</link>
+      <pubDate>Thu, 04 Jun 2020 03:07:40 +0000</pubDate>
+      <guid>https://gunn.kim/post/2020-06-04-wgs84-distance-sql/</guid>
+      <description>&lt;p&gt;모빌리티 데이터를 분석하다보니 좌표데이터 계산할 일이 생기고 있다.&lt;/p&gt;
+&lt;p&gt;위치 데이터는 특정 행정동(Hcode)이나 H3 코드를 기준으로 집계해 볼 수도 있고,
+개별 지점의 좌표를 가지고 계산해 볼 수도 있는데, 지점과 지점간 거리를 계산할 경우에는 좌표간 거리를 구하는 것이 필요하다.&lt;/p&gt;
+&lt;p&gt;좌표데이터는 WGS84 좌표나 WTM 좌표로 기록하고 있는데, 둘간에 상호 전환이 가능하다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;WGS84는 세계 지구 좌표 시스템(World Geodetic System, WGS)으로 1984년에 제정되었다. 지구를 타원체로 가정하고 위치를 특정한다. &amp;gt; 주로 GPS 좌표에서 이용하는 것으로 구글맵에서 사용한다. 타원상의 좌표간 거리를 계산하는 것이라 거리를 잴 때 조금 계산식이 복잡하다.
+WTM 좌표는 WGS84처럼 타원체를 사용하되, 이를 평면 좌표계로 투영한 좌표이다. 일반적인 종이책 지도처럼 실제 위치를 평면에 투영한 좌표라고 &amp;gt; 보면 된다. 평면으로 투영된 좌표이기 때문에 지점간 거리를 구할 때 단순한 피타고라스 정리(a^2+b^2=c^2)으로 구하면 된다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;좌표간의 거리는 로컬의 파이썬에서도 구현해되지만, 데이터가 많을 경우 로컬 머신으로는 시간이 많이 걸린다. 그럴땐 서버에서 계산하는 것이 빠르므로 SQL로 바로 거리를 계산하는 것이 좋다. SQL에서 이를 구현하면 아래와 같다. 파이썬에서 SQL 코드를 실행하는 것을 가정한다.&lt;/p&gt;
+&lt;p&gt;변수는 기준점이 x, y, 테이블의 각 지점 좌표가 P_wgs84x, P_wgs84y이다.
+SQL 코드를 실행시키면, distance라는 칼럼에서 기준점과의 거리를 계산해서 보여준다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;여기서 종종 실수하는 것이, x,y와 위도,경도를 잘못 넣는 것.
+x는 가로 상의 지점이니 경도(Longitude)를 넣어야 하고, y는 세로 상의 지점이니 위도(Latitude)를 넣어야 한다.
+순서가 엇갈려 있어서 휴먼 에러가 발생하기 쉬우니 x,y대신에 위도는 lon, 경도는 lat으로 변수명을 바꾸어 놓는 것이 편할 수 있다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;wgs84----&#34;&gt;WGS84 좌표 거리 구하기 코드&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; WGW84 &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;좌&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;표&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;의&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;거&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;리&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;구&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;하&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;기&lt;/span&gt;
+
+x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;126&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;964321&lt;/span&gt;
+y &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;37&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;529523&lt;/span&gt;
+
+query&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;SELECT _,
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;(6371_acos(cos(radians({center_y}))*cos(radians(P_wgs84y))*cos(radians(P_wgs84x)
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;\-radians({center_x}))+sin(radians({center_y}))*sin(radians(P_wgs84y))))
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;AS distance
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;FROM MAB_WGS84&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;wtm----&#34;&gt;WTM 좌표 거리 구하기 코드&lt;/h3&gt;
+&lt;p&gt;좌표가 WTM일 경우엔,
+변수는 기준점이 x, y, 테이블의 각 지점 좌표가 coord_x_wtm, coord_y_wtm이다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; WTM &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;좌&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;표&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;의&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;거&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;리&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;구&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;하&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;기&lt;/span&gt;
+
+x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;126&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;964321&lt;/span&gt;
+y &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;37&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;529523&lt;/span&gt;
+
+query&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;SELECT *,
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;sqrt(({center_x} - coord_x_wtm) * ({center_x} - coord_x_wtm)
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;\+ ({center_y} - coord_y_wtm) * ({center_y} - coord_y_wtm))
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;AS distance
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;FROM MAP_WTM&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;참고 :&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.acronym.co.kr/283&#34;&gt;https://blog.acronym.co.kr/283&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://pnot.tistory.com/8&#34;&gt;https://pnot.tistory.com/8&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
