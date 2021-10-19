@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.7.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Gunn Kim">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="본 블로그는 휴고(Hugo)를 기반으로 만들어졌습니다. 휴고는 깃헙 페이지(Github page)에서 지원하는 지킬과 같은 정적 페이지 생성기입니다. 이">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://gunn.kim/post/2018-12-21-hugo-vs-blogdown/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nanum+Gothic%7CNoto+Serif+KR%7CNoto+Sans+KR&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-161857308-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           document.location = url;
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target);  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'UA-161857308-1', {});
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hud1e4a02091c0cd7dd9ce20cf2020f12f_133591_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hud1e4a02091c0cd7dd9ce20cf2020f12f_133591_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="https://gunn.kim/post/2018-12-21-hugo-vs-blogdown/">
+
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@adalgu">
+  <meta property="twitter:creator" content="@adalgu">
+  
+  <meta property="og:site_name" content="Exobrain">
+  <meta property="og:url" content="https://gunn.kim/post/2018-12-21-hugo-vs-blogdown/">
+  <meta property="og:title" content="웹페이지 생성 속도 : Hugo vs. Blogdown | Exobrain">
+  <meta property="og:description" content="본 블로그는 휴고(Hugo)를 기반으로 만들어졌습니다. 휴고는 깃헙 페이지(Github page)에서 지원하는 지킬과 같은 정적 페이지 생성기입니다. 이"><meta property="og:image" content="https://gunn.kim/post/2018-12-21-hugo-vs-blogdown/featured.jpg">
+  <meta property="twitter:image" content="https://gunn.kim/post/2018-12-21-hugo-vs-blogdown/featured.jpg"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2018-12-21T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2018-12-21T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://gunn.kim/post/2018-12-21-hugo-vs-blogdown/"
+  },
+  "headline": "웹페이지 생성 속도 : Hugo vs. Blogdown",
+  
+  "image": [
+    "https://gunn.kim/post/2018-12-21-hugo-vs-blogdown/featured.jpg"
+  ],
+  
+  "datePublished": "2018-12-21T00:00:00Z",
+  "dateModified": "2018-12-21T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Gunn Kim"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Exobrain",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "img/https://gunn.kim/"
+    }
+  },
+  "description": "본 블로그는 휴고(Hugo)를 기반으로 만들어졌습니다. 휴고는 깃헙 페이지(Github page)에서 지원하는 지킬과 같은 정적 페이지 생성기입니다. 이"
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>웹페이지 생성 속도 : Hugo vs. Blogdown | Exobrain</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">Exobrain</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">Exobrain</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-end" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/post"><span>Blog</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+            
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="https://notion.gunn.kim/" target="_blank" rel="noopener"><span>Notion Pages</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/talks"><span>Talks</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/about"><span>About</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      <li class="nav-item">
+        <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+<div class="article-container pt-3">
+  <h1>웹페이지 생성 속도 : Hugo vs. Blogdown</h1>
+
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    2018년 12월 21일
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    5 min read
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 439px; max-height: 115px;">
+  <div style="position: relative">
+    <img src="/post/2018-12-21-hugo-vs-blogdown/featured.jpg" alt="" class="featured-image">
+    
+  </div>
+</div>
+
+
+<script data-ad-client="ca-pub-3695098602071408" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+  <div class="article-container">
+
+    <div class="article-style">
+
+      <p>본 블로그는 휴고(Hugo)를 기반으로 만들어졌습니다. 휴고는 깃헙 페이지(Github page)에서 지원하는 지킬과 같은 정적 페이지 생성기입니다. 이 블로그가 처음 만들어 졌을 때는 블로그다운(Blogdown)을 이용해서 블로그가 빌드되고 배포되었는데, 오늘부터 휴고를 이용해서 블로그가 빌드되고, 배포되고 있습니다.</p>
+<p>조금 자세히 말해보면, 본 블로그는 로컬에서 만들어져서 깃랩(gitlab) 저장소에 푸쉬됩니다.
+깃랩에서는 <code>.gitlab-ci.yml</code> 파일을 기반으로 푸쉬된 블로그 파일을 빌드합니다.</p>
+<p>보통 깃헙 페이지를 이용해서 정적 페이지를 만들기 위해서는 깃헙에서 자체적으로 지원하는 지킬을 이용하는 경우가 많습니다. 그런데 지킬은 빌드 속도가 상대적으로 느린 단점이 있어서 지킬의 대안으로 휴고를 많이 쓰고 있습니다. 깃헙에서 휴고를 이용하려면 저장소에 블로그 파일을 푸쉬하고, <a href="https://netlify.com">netlify</a>와 같은 외부 서비스를 이용해서 github page와 같은 정적 웹페이지를 운영하는 것이 보통입니다.</p>
+<p>그러나 깃랩을 이용하면 휴고도 사실상 자체족으로 빌드가 가능합니다. 깃랩에서는 <a href="https://docs.gitlab.com/ee/ci/">Gitlab CI/CD</a> 기능을 지원하기 때문입니다. 코드를 올리면, 이를 자동으로 빌드해서 배포해주는 서비스입니다.</p>
+<p><code>.gitlab-ci.yml</code> 파일은 이러한 CI/CD을 어떤 방식으로 할지를 결정하는 파일입니다.
+도커를 이용해서 가벼운 가상머신을 로딩해서 깃랩 저장소에 올린 코드를 실행해주는 개념입니다.</p>
+<p>바로 이 방식을 이용해서 휴고 기반의 정적 페이지를 만들 수 있습니다.</p>
+<p>앞서 블로그다운 방식에서 휴고를 이용한 방식으로 바꿨다고 언급을 했는데요.</p>
+<p>조금 구체적으로 말하자면, 블로그다운 방식에서는 웹페이지를 빌드할 때, 리눅스 이미지를 로딩해서 R을 깔고, 블로그다운과 같은 R 라이브러리를 설치해서 웹페이지를 빌드하였습니다. 마치 로컬에서 블로그다운을 이용하는 방식을 그대로 깃랩으로 옮겨간 것이라고 할 수 있습니다.</p>
+<p>그런데 문제는 이 방식이 너무 시간 낭비가 많이 발생했다는 것입니다.
+간단한 포스팅 하나만 푸쉬를 해도 웹페이지를 업데이트를 위해서 너무 과도한 <code>오버헤드</code>가 소요되었다는 것입니다. 마크다운 파일을 하나만 올려도 리눅스 이미지를 로딩해서 R과 라이브러리를 깔고 페이지를 빌드하는데 너무나 시간이 많이 걸렸습니다. 최근 30회 커밋 통계를 보니 짧게는 8분에서 평균 15분이 넘게 소요되었습니다.(우측에 막대가 낮아진 부분은 휴고를 이용한 것입니다.)</p>
+<p><img src="2018-12-21-%EC%9D%B4%EB%AF%B8%EC%A7%801.png" alt="그림1"></p>
+<p>로컬에서 페이지가 잘 나오는지 확인하고 그냥 올리고 기다려도 될 문제지만, 테스트를 해보고, 글을 올려서 결과물을 확인해보고 하는 과정들이 생각보다 자주 발생하는데 너무 비효율적인 상황이 되는 것을 알게 되었습니다.</p>
+<p>그래서 블로그다운 방식을 버리고, 휴고 방식으로 바꾸게 되었습니다.
+휴고의 장점이 빠른 속도에 있는데, 바로 그 휴고의 맛을 살리기에도 좋았습니다.</p>
+<p>깃랩 휴고 샘플 페이지에 올라와 있는 <code>.gitlab-ci.yml</code>파일을 활용해서 쉽게 빌드 방식을 바꿀 수 있었습니다.(저의 IT스승 추장님의 조언이 결정적이었습니다.)</p>
+<p>이 방식은 아래 <code>.gitlab-ci.yml</code>코드에서 볼 수 있듯이,
+휴고 도커이미지를 바로 불러와서 페이지를 빌드하는 방식입니다.</p>
+<p><img src="2018-12-21-%EC%9D%B4%EB%AF%B8%EC%A7%802.png" alt=""></p>
+<p>얼마나 걸렸을까요? 짧아도 5분이상 걸리는 것이 불과 40~50초만에 완료되었습니다.
+실은 더 빨리 끝나는 것인데, 현재 gitlab 페이지를 깃허브 페이지에도 자동으로 동기화를 하도록 해놓았기때문에 10~20초 정도 더 소요되는 것 같았습니다.</p>
+<p>체감 속도에서 소요시간 10분과 45초는 말도 안되는 차이입니다. 블로그다운 방식도 휴고를 기반으로 하는 R 라이브러리이지만, 그냥 휴고만 쓰는 것은 정말 빨라서 좋습니다.</p>
+<p>일단은 블로그다운 방식에서 휴고 방식으로 전환해서 블로그를 운영할 생각입니다만,
+한가지 해결해야 할 점이 있습니다.</p>
+<p>바로 R코드가 포함된 rmarkdown을 블로그에 올릴 때입니다.
+rmarkdown는 R을 이용해서 빌드를 해야하기 때문입니다. 일반 markdown에 r의 특수한 기능이 더 덧붙여진 개념입니다.</p>
+<p>기존 블로그다운 방식에서는 rmarkdown파일도 잘 빌드가 되었는데,
+휴고 방식에서는 다른 방법을 동원해야 합니다.</p>
+<p>이에 대한 해결 방법에는 3가지가 가능할 것이라 잠정 결론을 내렸습니다.
+자세한 내용은 추가적으로 포스팅하도록 하겠습니다.</p>
+<p>간단하게 설명하자면, 첫번째 방식은 저장소 이원화 방식입니다. markdown용(휴고 기반) 기본 저장소와 rmarkdown용(블로그다운 기반) 세컨 저장소를 운영하는 것입니다. rmarkdown용 저장소를 따로 만들고 rmarkdown 파일만 블로그다운 방식으로 올리고, 기본 웹페이지와 연결하는 것입니다. 예컨대, gitlab.com/adalgu/rmarkdown.git을 만들어서 여기에는 블로그 다운 방식으로 빌드를 하는 것입니다. 그리고 여기서 만들어지 페이지를 기본 웹페이지인 <a href="https://adalgu.gitlab.com"><a href="https://adalgu.gitlab.com">https://adalgu.gitlab.com</a></a>과 연결하는 것입니다. 앞서 만든 저장소의 rmarkdown 파일이 빌드가 되면, <a href="https://adalgu.gitlab.com/rmarkdown/"><a href="https://adalgu.gitlab.com/rmarkdown/">https://adalgu.gitlab.com/rmarkdown/</a></a>으로 접속할 수 있기 때문입니다.</p>
+<p>두번째 방식은 로컬에서 미리 빌드해서 올리는 방식입니다. 로컬 컴퓨터에서 rmarkdown 문서를 작성하고 이를 rstudio에서 바로 빌드해서 <code>.markdown</code>이나 <code>.html</code> 파일로 만들어서 올리는 방식입니다. rmarkdown파일을 로컬에서 빌드하게 되면 부속파일을 위한 폴더가 하나 더 생성되게 되어서 컨텐츠 폴더가 조금 지저분 해지는 단점이 있지만, 휴고기반의 빠른 속도의 장점을 누릴 수 있으면서도 rmarkdown으로 생성되는 각종 문서포맷을 이용할 수 있게 되는 장점이 있습니다.</p>
+<p>세번째 방식은 도커이미지를 만들어서 블로그다운 방식을 이용하는 것입니다. 깃랩에서는 도커이미지를 등록하고 이를 불러와서 실행할 수 있는 기능까지 지원합니다. 아직 시도해 보지는 않았지만, 블로그다운 방식의 문제점이었던 <code>오버헤드</code>문제를 일정수준 해소할 수 있지 않을까 예상하고 있습니다. 아직은 도커에 익숙한 상황이 아니라 테스트 수준으로 진행해 본 정도이고, 일단 첫번째 방식과 두번째 방식을 혼용해서 블로그를 운영해 볼 예정이지만, 여유가 좀 생기면 이 방식으로도 블로그를 빌드해 보려고 합니다.</p>
+
+    </div>
+
+    
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/hugo/">Hugo</a>
+  
+  <a class="badge badge-light" href="/tags/blogdown/">Blogdown</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://gunn.kim/post/2018-12-21-hugo-vs-blogdown/&amp;text=%ec%9b%b9%ed%8e%98%ec%9d%b4%ec%a7%80%20%ec%83%9d%ec%84%b1%20%ec%86%8d%eb%8f%84%20:%20Hugo%20vs.%20Blogdown" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://gunn.kim/post/2018-12-21-hugo-vs-blogdown/&amp;t=%ec%9b%b9%ed%8e%98%ec%9d%b4%ec%a7%80%20%ec%83%9d%ec%84%b1%20%ec%86%8d%eb%8f%84%20:%20Hugo%20vs.%20Blogdown" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=%ec%9b%b9%ed%8e%98%ec%9d%b4%ec%a7%80%20%ec%83%9d%ec%84%b1%20%ec%86%8d%eb%8f%84%20:%20Hugo%20vs.%20Blogdown&amp;body=https://gunn.kim/post/2018-12-21-hugo-vs-blogdown/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://gunn.kim/post/2018-12-21-hugo-vs-blogdown/&amp;title=%ec%9b%b9%ed%8e%98%ec%9d%b4%ec%a7%80%20%ec%83%9d%ec%84%b1%20%ec%86%8d%eb%8f%84%20:%20Hugo%20vs.%20Blogdown" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=%ec%9b%b9%ed%8e%98%ec%9d%b4%ec%a7%80%20%ec%83%9d%ec%84%b1%20%ec%86%8d%eb%8f%84%20:%20Hugo%20vs.%20Blogdown%20https://gunn.kim/post/2018-12-21-hugo-vs-blogdown/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=https://gunn.kim/post/2018-12-21-hugo-vs-blogdown/&amp;title=%ec%9b%b9%ed%8e%98%ec%9d%b4%ec%a7%80%20%ec%83%9d%ec%84%b1%20%ec%86%8d%eb%8f%84%20:%20Hugo%20vs.%20Blogdown" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      <img class="portrait mr-3" src="https://s.gravatar.com/avatar/84693a0d2bb41f2e8db251e38ee69454?s=200')" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://gunn.kim/">Gunn Kim</a></h5>
+      <h6 class="card-subtitle">Data Economist</h6>
+      <p class="card-text">Work at tech company as an economist.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    <li>
+      <a href="mailto:adalgu@gmail.com" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://facebook.com/adalgu" target="_blank" rel="noopener">
+        <i class="fab fa-facebook"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://gitlab.com/adalgu" target="_blank" rel="noopener">
+        <i class="fab fa-gitlab"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/adalgu" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://linkedin.com/in/digitaleconomy" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+<section id="comments">
+  
+    
+<div id="disqus_thread"></div>
+<script>
+  let disqus_config = function () {
+    
+    
+    
+  };
+  (function() {
+    if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+      document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+      return;
+    }
+    var d = document, s = d.createElement('script'); s.async = true;
+    s.src = 'https://' + "adalgu" + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+</section>
+
+
+
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha256-1zu+3BnLYV9LdiY85uXMzii3bdrkelyp37e0ZyTAQh0=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r,%20python,%20sql.min.js"></script>
+        
+      
+
+    
+
+    
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.a0d331bcd05dbe8b31e244f796710f08.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    © Gunn Kim, 2021 &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

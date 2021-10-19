@@ -1,0 +1,3158 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.7.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Gunn Kim">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Projects on Mobility">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://gunn.kim/project/mobility-project/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nanum+Gothic%7CNoto+Serif+KR%7CNoto+Sans+KR&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-161857308-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           document.location = url;
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target);  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'UA-161857308-1', {});
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hud1e4a02091c0cd7dd9ce20cf2020f12f_133591_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hud1e4a02091c0cd7dd9ce20cf2020f12f_133591_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="https://gunn.kim/project/mobility-project/">
+
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@adalgu">
+  <meta property="twitter:creator" content="@adalgu">
+  
+  <meta property="og:site_name" content="Exobrain">
+  <meta property="og:url" content="https://gunn.kim/project/mobility-project/">
+  <meta property="og:title" content="Mobility Project | Exobrain">
+  <meta property="og:description" content="Projects on Mobility"><meta property="og:image" content="https://gunn.kim/project/mobility-project/featured.jpg">
+  <meta property="twitter:image" content="https://gunn.kim/project/mobility-project/featured.jpg"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2019-07-01T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2019-07-01T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://gunn.kim/project/mobility-project/"
+  },
+  "headline": "Mobility Project",
+  
+  "image": [
+    "https://gunn.kim/project/mobility-project/featured.jpg"
+  ],
+  
+  "datePublished": "2019-07-01T00:00:00Z",
+  "dateModified": "2019-07-01T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Gunn Kim"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Exobrain",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "img/https://gunn.kim/"
+    }
+  },
+  "description": "Projects on Mobility"
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Mobility Project | Exobrain</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">Exobrain</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">Exobrain</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-end" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/post"><span>Blog</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+            
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="https://notion.gunn.kim/" target="_blank" rel="noopener"><span>Notion Pages</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/talks"><span>Talks</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/about"><span>About</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      <li class="nav-item">
+        <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  <article class="article article-project">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>Mobility Project</h1>
+
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    2019년 7월 1일
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+
+  
+  
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="btn-links mb-3">
+  
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  
+  
+    
+  
+  <a class="btn btn-outline-primary my-1 mr-1" href="https://twitter.com/adalgu" target="_blank" rel="noopener">
+    <i class="fab fa-twitter mr-1"></i>
+    Follow
+  </a>
+
+
+</div>
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 408px;">
+  <div style="position: relative">
+    <img src="/project/mobility-project/featured_hua0440f01af4df02e914b9fbaa73c9696_37045_720x0_resize_q90_lanczos.jpg" alt="" class="featured-image">
+    <span class="article-header-caption">Photo by EBS</span>
+  </div>
+</div>
+
+
+<script data-ad-client="ca-pub-3695098602071408" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <h1 id="list-of-mobility-projects">List of Mobility Projects</h1>
+<ol>
+<li><a href="https://brunch.co.kr/@kakaomobility/36">카카오모빌리티 리포트 2019</a>
+<ol>
+<li>한글판, 영문판</li>
+</ol>
+</li>
+<li>모빌리티의 현재와 미래</li>
+<li>모빌리티 빅데이터와 이동 혁신</li>
+<li>모빌리티 경제학</li>
+</ol>
+
+    </div>
+
+    
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/mobility/">mobility</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://gunn.kim/project/mobility-project/&amp;text=Mobility%20Project" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://gunn.kim/project/mobility-project/&amp;t=Mobility%20Project" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Mobility%20Project&amp;body=https://gunn.kim/project/mobility-project/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://gunn.kim/project/mobility-project/&amp;title=Mobility%20Project" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=Mobility%20Project%20https://gunn.kim/project/mobility-project/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=https://gunn.kim/project/mobility-project/&amp;title=Mobility%20Project" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      <img class="portrait mr-3" src="https://s.gravatar.com/avatar/84693a0d2bb41f2e8db251e38ee69454?s=200')" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://gunn.kim/">Gunn Kim</a></h5>
+      <h6 class="card-subtitle">Data Economist</h6>
+      <p class="card-text">Work at tech company as an economist.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    <li>
+      <a href="mailto:adalgu@gmail.com" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://facebook.com/adalgu" target="_blank" rel="noopener">
+        <i class="fab fa-facebook"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://gitlab.com/adalgu" target="_blank" rel="noopener">
+        <i class="fab fa-gitlab"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/adalgu" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://linkedin.com/in/digitaleconomy" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+    <div class="project-related-pages content-widget-hr">
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+        <h2>Talks</h2>
+        
+          
+            
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+
+
+<div class="media stream-item">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0">
+      <a href="/talk/2021-05-lawfirm-hwawoo/" >[강연] AI가 만들어가는 모빌리티의 미래</a>
+    </h3>
+
+    
+    <div class="article-style">
+      법무법인 화우 강연
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+
+      
+      <div>
+        <span>
+          2021년 5월 14일
+        </span>
+        
+        <span class="middot-divider"></span>
+        <span>Seoul</span>
+        
+      </div>
+      
+
+      
+    </div>
+
+    
+    <div class="btn-links">
+      
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/mobility-project/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+    
+
+  </div>
+  <div class="ml-3">
+    
+    
+    
+    <a href="/talk/2021-05-lawfirm-hwawoo/" >
+      <img src="/talk/2021-05-lawfirm-hwawoo/featured53-04_hu9f9165283be2cfd87e720e59ced3c293_109187_150x0_resize_lanczos_2.png" alt="">
+    </a>
+    
+  </div>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+
+
+<div class="media stream-item">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0">
+      <a href="/talk/2021-05-kst-mobility-talk-concert/" >[발표] 데이터가 만들어 가는 모빌리티의 미래</a>
+    </h3>
+
+    
+    <div class="article-style">
+      대한교통학회 Mobility 기업체 Talk Concert
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+
+      
+      <div>
+        <span>
+          2021년 5월 13일
+        </span>
+        
+        <span class="middot-divider"></span>
+        <span>Seoul</span>
+        
+      </div>
+      
+
+      
+    </div>
+
+    
+    <div class="btn-links">
+      
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/mobility-project/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  
+  
+    
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://youtu.be/rpqwCZms88E?t=2240" target="_blank" rel="noopener">
+    <i class="fab fa-youtube mr-1"></i>
+    교통학회TV
+  </a>
+
+  
+  
+  
+    
+  
+  
+  
+  
+  
+    
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://fb.watch/5z3R_za8k4/" target="_blank" rel="noopener">
+    <i class="fab fa-facebook mr-1"></i>
+    대한교통학회 페이스북
+  </a>
+
+
+    </div>
+    
+
+  </div>
+  <div class="ml-3">
+    
+    
+    
+    <a href="/talk/2021-05-kst-mobility-talk-concert/" >
+      <img src="/talk/2021-05-kst-mobility-talk-concert/featured44-47_hu05660b7890144ecebfda0109562933db_217443_150x0_resize_lanczos_2.png" alt="">
+    </a>
+    
+  </div>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+
+
+<div class="media stream-item">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0">
+      <a href="/talk/2021-04-kotra-lecture/" >[강연] 모빌리티 빅데이터를 이용한 이동혁신과 사회적 가치 창출</a>
+    </h3>
+
+    
+    <div class="article-style">
+      KOTRA 중소기업 글로벌경영 연구회
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+
+      
+      <div>
+        <span>
+          2021년 4월 22일
+        </span>
+        
+        <span class="middot-divider"></span>
+        <span>Seoul</span>
+        
+      </div>
+      
+
+      
+    </div>
+
+    
+    <div class="btn-links">
+      
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/mobility-project/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+    
+
+  </div>
+  <div class="ml-3">
+    
+    
+    
+    <a href="/talk/2021-04-kotra-lecture/" >
+      <img src="/talk/2021-04-kotra-lecture/featured39-57_hu21a8e3cd3d52572a5398eebcff21a926_181584_150x0_resize_lanczos_2.png" alt="">
+    </a>
+    
+  </div>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+
+
+<div class="media stream-item">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0">
+      <a href="/talk/2021-04-4th-industry-revolution-committee/" >[강연] 데이터 기반 모빌리티 혁신</a>
+    </h3>
+
+    
+    <div class="article-style">
+      4차산업혁명위원회 지원단 강연
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+
+      
+      <div>
+        <span>
+          2021년 4월 9일
+        </span>
+        
+        <span class="middot-divider"></span>
+        <span>Seoul</span>
+        
+      </div>
+      
+
+      
+    </div>
+
+    
+    <div class="btn-links">
+      
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/mobility-project/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+    
+
+  </div>
+  <div class="ml-3">
+    
+    
+    
+    <a href="/talk/2021-04-4th-industry-revolution-committee/" >
+      <img src="/talk/2021-04-4th-industry-revolution-committee/featured56-47_hu694c38f45f32e295a80ca845cbee759b_102474_150x0_resize_lanczos_2.png" alt="">
+    </a>
+    
+  </div>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+
+
+<div class="media stream-item">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0">
+      <a href="/talk/2021-03-ai-tech-business-conference/" >[강연] AI가 만들어가는 모빌리티의 미래</a>
+    </h3>
+
+    
+    <div class="article-style">
+      AI Tech 2021 AI 융합 비즈니스 개발 컨퍼런스 2021
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+
+      
+      <div>
+        <span>
+          2021년 3월 24일
+        </span>
+        
+        <span class="middot-divider"></span>
+        <span>Seoul</span>
+        
+      </div>
+      
+
+      
+    </div>
+
+    
+    <div class="btn-links">
+      
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/mobility-project/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  
+  
+    
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="http://www.aitimes.com/news/articleView.html?idxno=137508" target="_blank" rel="noopener">
+    <i class="fas fa-newspaper mr-1"></i>
+    Media
+  </a>
+
+
+    </div>
+    
+
+  </div>
+  <div class="ml-3">
+    
+    
+    
+    <a href="/talk/2021-03-ai-tech-business-conference/" >
+      <img src="/talk/2021-03-ai-tech-business-conference/featured47-40_hu63ccf2d3b9a9d73e3c6a8d663b0de4d9_417497_150x0_resize_lanczos_2.png" alt="">
+    </a>
+    
+  </div>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+
+
+<div class="media stream-item">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0">
+      <a href="/talk/2021-01-nara-interview/" >[인터뷰] 모빌리티 혁명, 사람과 공간의 관계가 달라진다</a>
+    </h3>
+
+    
+    <div class="article-style">
+      중소벤처기업공단 기업나라 인터뷰
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+
+      
+      <div>
+        <span>
+          2021년 3월 5일
+        </span>
+        
+      </div>
+      
+
+      
+    </div>
+
+    
+    <div class="btn-links">
+      
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/mobility-project/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  
+  
+    
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="http://nara.kosmes.or.kr/enewspaper/articleview.php?master=&amp;aid=6454&amp;sid=204&amp;mvid=264" target="_blank" rel="noopener">
+    <i class="fas fa-newspaper mr-1"></i>
+    Media
+  </a>
+
+
+    </div>
+    
+
+  </div>
+  <div class="ml-3">
+    
+    
+    
+    <a href="/talk/2021-01-nara-interview/" >
+      <img src="/talk/2021-01-nara-interview/featured46-57_hu006fede5f37175f885ff158a1088d43c_498022_150x0_resize_lanczos_2.png" alt="">
+    </a>
+    
+  </div>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+
+
+<div class="media stream-item">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0">
+      <a href="/talk/2020-11-its-autumn-conference/" >[강연] 모빌리티 빅데이터를 이용한 이동 혁신</a>
+    </h3>
+
+    
+    <div class="article-style">
+      2020년 한국ITS학회 추계학술대회
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+
+      
+      <div>
+        <span>
+          2020년 11월 19일 &mdash; 2020년 11월 20일
+        </span>
+        
+        <span class="middot-divider"></span>
+        <span>Jeju</span>
+        
+      </div>
+      
+
+      
+    </div>
+
+    
+    <div class="btn-links">
+      
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/mobility-project/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+    
+
+  </div>
+  <div class="ml-3">
+    
+    
+    
+    <a href="/talk/2020-11-its-autumn-conference/" >
+      <img src="/talk/2020-11-its-autumn-conference/featured04-09_hu723395343b69c198ed904c765f042161_273216_150x0_resize_lanczos_2.png" alt="">
+    </a>
+    
+  </div>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+
+
+<div class="media stream-item">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0">
+      <a href="/talk/2020-11-kaist-aeg-lecture/" >[강연] 포스트 코로나와 이동의 미래</a>
+    </h3>
+
+    
+    <div class="article-style">
+      카이스트 공공혁신·E-Governance 고위과정
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+
+      
+      <div>
+        <span>
+          2020년 11월 4일
+        </span>
+        
+        <span class="middot-divider"></span>
+        <span>Seoul</span>
+        
+      </div>
+      
+
+      
+    </div>
+
+    
+    <div class="btn-links">
+      
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/mobility-project/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+    
+
+  </div>
+  <div class="ml-3">
+    
+    
+    
+    <a href="/talk/2020-11-kaist-aeg-lecture/" >
+      <img src="/talk/2020-11-kaist-aeg-lecture/featured_hu53370932078b6eb461b643af6225612b_169209_150x0_resize_lanczos_2.png" alt="">
+    </a>
+    
+  </div>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+
+
+<div class="media stream-item">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0">
+      <a href="/talk/2020-10-byline-network-podcast/" >[인터뷰] 카카오택시는 데이터를 품고 달린다</a>
+    </h3>
+
+    
+    <div class="article-style">
+      바이라인네트워크 팟캐스트 IT TMI 인터뷰
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+
+      
+      <div>
+        <span>
+          2020년 10월 23일
+        </span>
+        
+      </div>
+      
+
+      
+    </div>
+
+    
+    <div class="btn-links">
+      
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/mobility-project/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  
+  
+    
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://audioclip.naver.com/channels/1177/clips/85" target="_blank" rel="noopener">
+    <i class="fas fa-podcast mr-1"></i>
+    podcast
+  </a>
+
+
+    </div>
+    
+
+  </div>
+  <div class="ml-3">
+    
+    
+    
+    <a href="/talk/2020-10-byline-network-podcast/" >
+      <img src="/talk/2020-10-byline-network-podcast/featured26-49_hue40a9b28cb9dc7bddd4814a4136ee2a2_46753_150x0_resize_lanczos_2.png" alt="">
+    </a>
+    
+  </div>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+
+
+<div class="media stream-item">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0">
+      <a href="/talk/2020-09-smartcar-tech-future-mobility-summit/" >[강연] 모빌리티 빅데이터를 이용한 이동의 혁신</a>
+    </h3>
+
+    
+    <div class="article-style">
+      2020 SmartCar Tech+Future Mobility Summit
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+
+      
+      <div>
+        <span>
+          2020년 9월 24일
+        </span>
+        
+        <span class="middot-divider"></span>
+        <span>Seoul</span>
+        
+      </div>
+      
+
+      
+    </div>
+
+    
+    <div class="btn-links">
+      
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/mobility-project/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  
+  
+    
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://search.naver.com/search.naver?where=news&amp;query=%EC%B9%B4%EC%B9%B4%EC%98%A4%EB%AA%A8%EB%B9%8C%EB%A6%AC%ED%8B%B0%20%EA%B9%80%EA%B1%B4%EC%9A%B0%20%EC%8A%A4%EB%A7%88%ED%8A%B8%EC%B9%B4&amp;sm=tab_opt&amp;sort=0&amp;photo=0&amp;field=0&amp;reporter_article=&amp;pd=3&amp;ds=2020.09.01&amp;de=2020.09.30&amp;docid=&amp;nso=so%3Ar%2Cp%3Afrom20200901to20200930%2Ca%3Aall&amp;mynews=0&amp;refresh_start=0&amp;related=0" target="_blank" rel="noopener">
+    <i class="fas fa-newspaper mr-1"></i>
+    Media
+  </a>
+
+
+    </div>
+    
+
+  </div>
+  <div class="ml-3">
+    
+    
+    
+    <a href="/talk/2020-09-smartcar-tech-future-mobility-summit/" >
+      <img src="/talk/2020-09-smartcar-tech-future-mobility-summit/featured27-26_hu5338dae993d19f7556cda2aef75e81f1_2173191_150x0_resize_lanczos_2.png" alt="">
+    </a>
+    
+  </div>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+
+
+<div class="media stream-item">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0">
+      <a href="/talk/2020-09-5030-study/" >[연구] 안전속도 5030 시행 효과 분석</a>
+    </h3>
+
+    
+    <div class="article-style">
+      한국교통안전공단&amp;카카오모빌리티 공동연구
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+
+      
+      <div>
+        <span>
+          2020년 9월 18일
+        </span>
+        
+      </div>
+      
+
+      
+    </div>
+
+    
+    <div class="btn-links">
+      
+
+
+
+
+
+
+
+
+  
+    
+  
+
+
+
+<a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="http://t1.daumcdn.net/brunch/service/user/4FwP/file/1DeiBjcwIBDzQwRG-ylBf1EgMSE.pdf" target="_blank" rel="noopener">
+  PDF
+</a>
+
+
+
+
+
+
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/mobility-project/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  
+  
+    
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://search.naver.com/search.naver?where=news&amp;query=%EC%B9%B4%EC%B9%B4%EC%98%A4%EB%AA%A8%EB%B9%8C%EB%A6%AC%ED%8B%B0%20%ED%95%9C%EA%B5%AD%EA%B5%90%ED%86%B5%EC%95%88%EC%A0%84%EA%B3%B5%EB%8B%A8%20%EC%95%88%EC%A0%84%EC%86%8D%EB%8F%84&amp;sm=tab_opt&amp;sort=0&amp;photo=0&amp;field=0&amp;reporter_article=&amp;pd=3&amp;ds=2020.09.01&amp;de=2020.09.30&amp;docid=&amp;nso=so%3Ar%2Cp%3Afrom20200901to20200930%2Ca%3Aall&amp;mynews=0&amp;refresh_start=0&amp;related=0" target="_blank" rel="noopener">
+    <i class="fas fa-newspaper mr-1"></i>
+    Media
+  </a>
+
+
+    </div>
+    
+
+  </div>
+  <div class="ml-3">
+    
+    
+    
+    <a href="/talk/2020-09-5030-study/" >
+      <img src="/talk/2020-09-5030-study/featured02-01_huec37459d6f6abaac080b712313d7a058_170003_150x0_resize_lanczos_2.png" alt="">
+    </a>
+    
+  </div>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+
+
+<div class="media stream-item">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0">
+      <a href="/talk/2020-09-kakaomobility-report-2020/" >[발간] 2020 kakaomobility Report</a>
+    </h3>
+
+    
+    <div class="article-style">
+      ‘데이터 중심 이동 혁신&rsquo; 성과 소개
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+
+      
+      <div>
+        <span>
+          2020년 9월 14일
+        </span>
+        
+      </div>
+      
+
+      
+    </div>
+
+    
+    <div class="btn-links">
+      
+
+
+
+
+
+
+
+
+  
+    
+  
+
+
+
+<a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="http://t1.daumcdn.net/brunch/service/user/4FwP/file/1DeiBjcwIBDzQwRG-ylBf1EgMSE.pdf" target="_blank" rel="noopener">
+  PDF
+</a>
+
+
+
+
+
+
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/mobility-project/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  
+  
+    
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://search.naver.com/search.naver?where=news&amp;query=2020%20%EC%B9%B4%EC%B9%B4%EC%98%A4%EB%AA%A8%EB%B9%8C%EB%A6%AC%ED%8B%B0%20%EB%A6%AC%ED%8F%AC%ED%8A%B8&amp;sm=tab_opt&amp;sort=0&amp;photo=0&amp;field=0&amp;reporter_article=&amp;pd=3&amp;ds=2020.09.01&amp;de=2020.09.30&amp;docid=&amp;nso=so%3Ar%2Cp%3Afrom20200901to20200930%2Ca%3Aall&amp;mynews=0&amp;refresh_start=0&amp;related=0" target="_blank" rel="noopener">
+    <i class="fas fa-newspaper mr-1"></i>
+    Media
+  </a>
+
+  
+  
+  
+    
+  
+  
+  
+  
+  
+    
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://youtu.be/RXZAVHLO_L8" target="_blank" rel="noopener">
+    <i class="fab fa-youtube mr-1"></i>
+    SBS8시뉴스
+  </a>
+
+
+    </div>
+    
+
+  </div>
+  <div class="ml-3">
+    
+    
+    
+    <a href="/talk/2020-09-kakaomobility-report-2020/" >
+      <img src="/talk/2020-09-kakaomobility-report-2020/featured_hu0d1d8ee9884cb69a4dddd3191063fdd5_1369768_150x0_resize_lanczos_2.png" alt="">
+    </a>
+    
+  </div>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+
+
+<div class="media stream-item">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0">
+      <a href="/talk/2020-08-seoul-parking-study/" >[연구] 서울시 주차문제 해결을 위한 주차장 이용 효율 향상 방안 연구</a>
+    </h3>
+
+    
+    <div class="article-style">
+      카카오모빌리티 &amp; 서울디지털재단 공동연구
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+
+      
+      <div>
+        <span>
+          2020년 9월 9일
+        </span>
+        
+      </div>
+      
+
+      
+    </div>
+
+    
+    <div class="btn-links">
+      
+
+
+
+
+
+
+
+
+  
+    
+  
+
+
+
+<a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://sdf.seoul.kr/web/bbs/FileDown.do?atchFileId=FILE_000000000004838&amp;fileSn=0&amp;mnuId=gc4491b" target="_blank" rel="noopener">
+  PDF
+</a>
+
+
+
+
+
+
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/mobility-project/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  
+  
+    
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://search.naver.com/search.naver?where=news&amp;query=%EC%B9%B4%EC%B9%B4%EC%98%A4%EB%AA%A8%EB%B9%8C%EB%A6%AC%ED%8B%B0%20%EC%84%9C%EC%9A%B8%EB%94%94%EC%A7%80%ED%84%B8%EC%9E%AC%EB%8B%A8%20%EC%A3%BC%EC%B0%A8&amp;sm=tab_opt&amp;sort=0&amp;photo=0&amp;field=0&amp;reporter_article=&amp;pd=0&amp;ds=&amp;de=&amp;docid=0010011886662&amp;nso=&amp;mynews=0&amp;refresh_start=0&amp;related=1" target="_blank" rel="noopener">
+    <i class="fas fa-newspaper mr-1"></i>
+    Media
+  </a>
+
+
+    </div>
+    
+
+  </div>
+  <div class="ml-3">
+    
+    
+    
+    <a href="/talk/2020-08-seoul-parking-study/" >
+      <img src="/talk/2020-08-seoul-parking-study/featured_hucc1ba29d5b433be5406e2167f25e5d65_104787_150x0_resize_lanczos_2.png" alt="">
+    </a>
+    
+  </div>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+
+
+<div class="media stream-item">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0">
+      <a href="/talk/2020-09-corona-book-publish/" >[발간] 코로나 0년 초회복의 시작(공저)</a>
+    </h3>
+
+    
+    <div class="article-style">
+      코로나 0년 초회복의 시작(부제: 파국을 뛰어넘는 새로운 시대의 상상력)
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+
+      
+      <div>
+        <span>
+          2020년 9월 5일
+        </span>
+        
+      </div>
+      
+
+      
+    </div>
+
+    
+    <div class="btn-links">
+      
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/mobility-project/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  
+  
+    
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://search.naver.com/search.naver?where=news&amp;query=%EC%BD%94%EB%A1%9C%EB%82%98%200%EB%85%84%20%EC%B4%88%ED%9A%8C%EB%B3%B5%EC%9D%98%20%EC%8B%9C%EC%9E%91&amp;sm=tab_opt&amp;sort=0&amp;photo=0&amp;field=0&amp;reporter_article=&amp;pd=3&amp;ds=2020.09.01&amp;de=2020.09.30&amp;docid=&amp;nso=so%3Ar%2Cp%3Afrom20200901to20200930%2Ca%3Aall&amp;mynews=0&amp;refresh_start=0&amp;related=0" target="_blank" rel="noopener">
+    <i class="fas fa-newspaper mr-1"></i>
+    Media
+  </a>
+
+  
+  
+  
+    
+  
+  
+  
+  
+  
+    
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://www.youtube.com/watch?v=_tPUuUGQWrM&amp;t=2655s&amp;ab_channel=LAB2050" target="_blank" rel="noopener">
+    <i class="fab fa-youtube mr-1"></i>
+    북토크
+  </a>
+
+
+    </div>
+    
+
+  </div>
+  <div class="ml-3">
+    
+    
+    
+    <a href="/talk/2020-09-corona-book-publish/" >
+      <img src="/talk/2020-09-corona-book-publish/featured02-07_hu6e54e6ea43b9c98334c8542bce5efc33_68858_150x0_resize_lanczos_2.png" alt="">
+    </a>
+    
+  </div>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+
+
+<div class="media stream-item">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0">
+      <a href="/talk/2020-07-mobility-lecture/" >[강연] 모빌리티 빅데이터와 이동의 미래</a>
+    </h3>
+
+    
+    <div class="article-style">
+      통일 정책 지도자 과정
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+
+      
+      <div>
+        <span>
+          2020년 7월 13일 2:00 PM &mdash; 5:00 PM
+        </span>
+        
+        <span class="middot-divider"></span>
+        <span>통일교육원, Seoul</span>
+        
+      </div>
+      
+
+      
+    </div>
+
+    
+    <div class="btn-links">
+      
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/mobility-project/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+    
+
+  </div>
+  <div class="ml-3">
+    
+    
+    
+    <a href="/talk/2020-07-mobility-lecture/" >
+      <img src="/talk/2020-07-mobility-lecture/featured12-11_hu83a6750f82871c960dd2774e1d9a3c43_295749_150x0_resize_lanczos_2.png" alt="">
+    </a>
+    
+  </div>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+
+
+<div class="media stream-item">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0">
+      <a href="/talk/2019-12-4th-ir-festivel/" >[강연] 모빌리티 빅데이터와 이동의 미래</a>
+    </h3>
+
+    
+    <div class="article-style">
+      대한민국 4차 산업혁명 페스티벌 2020
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+
+      
+      <div>
+        <span>
+          2019년 12월 19일 4:20 PM &mdash; 4:55 PM
+        </span>
+        
+        <span class="middot-divider"></span>
+        <span>코엑스 A홀</span>
+        
+      </div>
+      
+
+      
+    </div>
+
+    
+    <div class="btn-links">
+      
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/mobility-project/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  
+  
+    
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://facebook.com/adalgu" target="_blank" rel="noopener">
+    <i class="fab fa-facebook mr-1"></i>
+    Facebook
+  </a>
+
+  
+  
+  
+    
+  
+  
+  
+  
+  
+    
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="http://www.zdnet.co.kr/view/?no=20191216113112" target="_blank" rel="noopener">
+    <i class="fas fa-newspaper mr-1"></i>
+    Media#1
+  </a>
+
+  
+  
+  
+    
+  
+  
+  
+  
+  
+    
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="http://www.zdnet.co.kr/view/?no=20191219175735&amp;from=Mobile" target="_blank" rel="noopener">
+    <i class="fas fa-newspaper mr-1"></i>
+    Media#2
+  </a>
+
+
+    </div>
+    
+
+  </div>
+  <div class="ml-3">
+    
+    
+    
+    <a href="/talk/2019-12-4th-ir-festivel/" >
+      <img src="/talk/2019-12-4th-ir-festivel/featured_huf3e4725a462d81aca33519a506ed2f02_318617_150x0_resize_lanczos_2.png" alt="">
+    </a>
+    
+  </div>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+
+
+<div class="media stream-item">
+  <div class="media-body">
+
+    <h3 class="article-title mb-0 mt-0">
+      <a href="/talk/2019-12-11-tour-bigdata-forum/" >[강연] 모빌리티 빅데이터를 활용한 이동의 혁신</a>
+    </h3>
+
+    
+    <div class="article-style">
+      2019 관광 빅데이터 포럼
+    </div>
+    
+
+    <div class="stream-meta article-metadata">
+
+      
+      <div>
+        <span>
+          2019년 12월 11일 10:30 AM &mdash; 4:00 PM
+        </span>
+        
+        <span class="middot-divider"></span>
+        <span>코엑스 컨퍼런스룸 E홀</span>
+        
+      </div>
+      
+
+      
+    </div>
+
+    
+    <div class="btn-links">
+      
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="/project/mobility-project/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  
+  
+    
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://facebook.com/adalgu" target="_blank" rel="noopener">
+    <i class="fab fa-facebook mr-1"></i>
+    Facebook
+  </a>
+
+  
+  
+  
+    
+  
+  
+  
+  
+  
+    
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="http://news1.kr/articles/?3778062" target="_blank" rel="noopener">
+    <i class="fas fa-newspaper mr-1"></i>
+    Media#1
+  </a>
+
+  
+  
+  
+    
+  
+  
+  
+  
+  
+    
+  
+  <a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="http://www.ttlnews.com/article/travel_report/7155" target="_blank" rel="noopener">
+    <i class="fas fa-newspaper mr-1"></i>
+    Media#2
+  </a>
+
+
+    </div>
+    
+
+  </div>
+  <div class="ml-3">
+    
+    
+    
+    <a href="/talk/2019-12-11-tour-bigdata-forum/" >
+      <img src="/talk/2019-12-11-tour-bigdata-forum/featured_hu63d62f2fc0b178dece6ee6ed528b2b9f_956970_150x0_resize_lanczos_2.png" alt="">
+    </a>
+    
+  </div>
+</div>
+
+          
+        
+      
+    </div>
+  </div>
+</article>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha256-1zu+3BnLYV9LdiY85uXMzii3bdrkelyp37e0ZyTAQh0=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r,%20python,%20sql.min.js"></script>
+        
+      
+
+    
+
+    
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.a0d331bcd05dbe8b31e244f796710f08.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    © Gunn Kim, 2021 &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

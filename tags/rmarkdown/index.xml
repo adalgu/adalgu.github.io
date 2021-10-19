@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>RMARKDOWN | Exobrain</title>
+    <link>https://gunn.kim/tags/rmarkdown/</link>
+      <atom:link href="https://gunn.kim/tags/rmarkdown/index.xml" rel="self" type="application/rss+xml" />
+    <description>RMARKDOWN</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Gunn Kim, 2021</copyright><lastBuildDate>Sun, 25 Nov 2018 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://gunn.kim/images/icon_hud1e4a02091c0cd7dd9ce20cf2020f12f_133591_512x512_fill_lanczos_center_2.png</url>
+      <title>RMARKDOWN</title>
+      <link>https://gunn.kim/tags/rmarkdown/</link>
+    </image>
+    
+    <item>
+      <title>Rstudio에서 작성하는 Rmarkdown(not .md) 파일</title>
+      <link>https://gunn.kim/post/rstudio%EC%97%90%EC%84%9C-%EC%9E%91%EC%84%B1%ED%95%98%EB%8A%94-rmarkdown-not-md-%ED%8C%8C%EC%9D%BC/</link>
+      <pubDate>Sun, 25 Nov 2018 00:00:00 +0000</pubDate>
+      <guid>https://gunn.kim/post/rstudio%EC%97%90%EC%84%9C-%EC%9E%91%EC%84%B1%ED%95%98%EB%8A%94-rmarkdown-not-md-%ED%8C%8C%EC%9D%BC/</guid>
+      <description>
+
+
+&lt;div id=&#34;----&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;여기서 작성하는 내용은 떻게 나타날까?&lt;/h4&gt;
+&lt;p&gt;md파일로 보이나?&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Rstudio로 포스팅 2탄 - R마크다운</title>
+      <link>https://gunn.kim/post/rstudio%EB%A1%9C-%ED%8F%AC%EC%8A%A4%ED%8C%85-2%ED%83%84-r%EB%A7%88%ED%81%AC%EB%8B%A4%EC%9A%B4/</link>
+      <pubDate>Wed, 14 Nov 2018 00:00:00 +0000</pubDate>
+      <guid>https://gunn.kim/post/rstudio%EB%A1%9C-%ED%8F%AC%EC%8A%A4%ED%8C%85-2%ED%83%84-r%EB%A7%88%ED%81%AC%EB%8B%A4%EC%9A%B4/</guid>
+      <description>
+
+
+&lt;div id=&#34;r--&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;R마크다운으로 작성하는 포스팅&lt;/h2&gt;
+&lt;div id=&#34;--&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;어떻게 구현되는 것인가?&lt;/h3&gt;
+&lt;p&gt;마크다운과는 어떻게 다르게 나타날까?&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

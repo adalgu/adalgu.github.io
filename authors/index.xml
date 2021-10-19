@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Authors | Exobrain</title>
+    <link>https://gunn.kim/authors/</link>
+      <atom:link href="https://gunn.kim/authors/index.xml" rel="self" type="application/rss+xml" />
+    <description>Authors</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Gunn Kim, 2021</copyright>
+    <image>
+      <url>https://gunn.kim/images/icon_hud1e4a02091c0cd7dd9ce20cf2020f12f_133591_512x512_fill_lanczos_center_2.png</url>
+      <title>Authors</title>
+      <link>https://gunn.kim/authors/</link>
+    </image>
+    
+    <item>
+      <title></title>
+      <link>https://gunn.kim/authors/admin/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://gunn.kim/authors/admin/</guid>
+      <description>&lt;!--
+Gunn (a.k.a Kunwoo Kim) is a chief economist of digital economy research institute at the Kakaomobility. His research interests include digital economy, mobility industry and data science. He performed LG Group’s business economist for digital strategy including fintech and blockchain. His work has been featured in many media and has been communicated through government policy and startup advice, conference presentations and discussions, and public speaking.
+--&gt;&lt;blockquote&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

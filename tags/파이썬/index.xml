@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>파이썬 | Exobrain</title>
+    <link>https://gunn.kim/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/</link>
+      <atom:link href="https://gunn.kim/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/index.xml" rel="self" type="application/rss+xml" />
+    <description>파이썬</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Gunn Kim, 2021</copyright><lastBuildDate>Mon, 10 Feb 2020 17:20:38 +0900</lastBuildDate>
+    <image>
+      <url>https://gunn.kim/images/icon_hud1e4a02091c0cd7dd9ce20cf2020f12f_133591_512x512_fill_lanczos_center_2.png</url>
+      <title>파이썬</title>
+      <link>https://gunn.kim/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/</link>
+    </image>
+    
+    <item>
+      <title>[파이썬] 머신러닝 시각화 도구 Yellowbrick 설치</title>
+      <link>https://gunn.kim/post/2020-02-10-yellowbrick-install-anaconda/</link>
+      <pubDate>Mon, 10 Feb 2020 17:20:38 +0900</pubDate>
+      <guid>https://gunn.kim/post/2020-02-10-yellowbrick-install-anaconda/</guid>
+      <description>&lt;p&gt;아나콘다 환경에서 패키지를 설치하기 위해서는 아나콘다 내비게이터의 Environments에서 설치하는 경우가 많다.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;pip install&lt;/code&gt; 또는 &lt;code&gt;conda install&lt;/code&gt; 명령어를 이용하여 터미널에서 설치하기도 하지만, 아나콘다로 가상환경이 구축되어 있는 상황에서는 아나콘다 내비게이터를 이용하는 것이 마음이 편하다. (구글링을 해보면 가상환경별로 패키지를 설치하는 방법을 찾을 수 있다.)&lt;/p&gt;
+&lt;h3 id=&#34;heading&#34;&gt;문제&lt;/h3&gt;
+&lt;p&gt;아나콘다 내비게이터의 Environments에 가면 패키지 리스트를 보유하고 있는 채널을 등록해야 한다. 기본적으로 &lt;code&gt;conda-forge&lt;/code&gt;를 등록하는 경우가 많다. 왠만한 패키지는 콘다 포지를 통해서 설치할 수가 있는데, 간혹 콘다 포지에 없는 경우가 있다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;&amp;lt;참고&amp;gt;&lt;/code&gt; &lt;br&gt; &lt;a href=&#34;https://conda-forge.org/feedstocks/&#34;&gt;이곳&lt;/a&gt;을 방문하면 콘다 포지 채널에서 설치할 수 있는 패키지 리스트를 검색해 볼 수 있다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;k-means clustring을 해보기 위해서 머신러닝 시각화 도구로 사용하는 &lt;code&gt;Yellowbrick&lt;/code&gt;을 설치하려다 보니 딱 위 문제에 직면했다. 옐로우브릭은 머신러닝 패키지로 유명한 scikit learn처럼 유명한 것으로 보이는데, 설치가 쉽지 않으니 문제가 된다. 처음부터 설치가 어려워 보이면 오히려 문제 해결은 더 쉬울 수도 있다. &lt;code&gt;구글링의 늪&lt;/code&gt;에 빠지기 전에 바로 알만한 사람에 도움을 청해볼 수도 있기 때문이다. &lt;del&gt;무한 loop 탈출&lt;/del&gt;&lt;/p&gt;
+&lt;h3 id=&#34;-&#34;&gt;구글링 시도&lt;/h3&gt;
+&lt;p&gt;언제나 그렇듯 문제해결의 시작은 &lt;code&gt;구글링&lt;/code&gt;이다.
+첫 검색어가 &lt;code&gt;anaconda channel list&lt;/code&gt;였다. Yellowbrick 패키지를 보유하고 있는 채널명이 무엇인지 몰랐기 때문이다.
+가장 먼저 나온 &lt;a href=&#34;https://docs.conda.io/projects/conda/en/latest/user-guide/concepts/channels.html&#34;&gt;검색결과 사이트&lt;/a&gt;에 들어가 봤더니, &lt;code&gt;conda-forge&lt;/code&gt; 링크 정도만 유의미해 보인다. 거기로 갔더니 콘다 포지 채널의 패키지 리스트를 보는 &lt;a href=&#34;https://conda-forge.org/feedstocks/&#34;&gt;사이트&lt;/a&gt;를 방문해서 리스트를 웹으로 검색하는 정도만 습득하고 끝.&lt;/p&gt;
+&lt;p&gt;두번째 검색어가 &lt;code&gt;anaconda channel for yellowbrick&lt;/code&gt;이다. 아나콘다 채널에 대해서 대충 감을 잡은 상황에서 이제 바로 옐로우브릭을 담고 있는 채널을 찾아보기로 한 것이다. 그랬더니 옐로우브릭에 대한 소개 페이지가 검색결과 가장 상단에 떴다. 그래서 방문하게된 &lt;a href=&#34;https://anaconda.org/DistrictDataLabs/yellowbrick&#34;&gt;아나콘다의 패키지 소개 페이지&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;-1&#34;&gt;해결책 확인&lt;/h3&gt;
+&lt;p&gt;그곳에서 채널에 대한 핵심 단서인 설치 명령어를 마주하게 되었다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;conda install -c districtdatalabs yellowbrick&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;위 명령어를 풀이해 보면, &amp;ldquo;&lt;code&gt;-c districtdatalabs&lt;/code&gt;는 디스트릭트데이터랩스라는 채널에서라는 의미이고, 그 채널에서 &lt;code&gt;yellowbrick&lt;/code&gt;이라는 패키지를 설치하라&amp;quot;이다. 결국, 찾고자 했던 채널명은 &lt;code&gt;districtdatalabs&lt;/code&gt;!&lt;/p&gt;
+&lt;p&gt;이렇게 찾은 채널명을 아래 방법으로 입력하면 옐로우브릭 패키지 검색이 가능하다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;아니콘다 내비게이터&amp;gt;Environments&amp;gt;Channels&amp;gt;add&amp;gt;&lt;code&gt;districtdatalabs&lt;/code&gt;&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;image2020-02-10-18-02-26.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;--i&#34;&gt;해보고 나니 I&lt;/h3&gt;
+&lt;p&gt;애초에 구글링 시작부터 &lt;code&gt;yellowbrick&lt;/code&gt;으로 시작했으면, 바로 &lt;a href=&#34;https://www.scikit-yb.org/en/latest/&#34;&gt;옐로우브릭&lt;/a&gt; 웹사이트에 접속할 수 있었다. 그리고 거기서 Quick Start에 가면, 원했던 명령어를 검색할 수 있었던 것으로 나온다. &lt;del&gt;구글링도 실력이다&lt;/del&gt;&lt;/p&gt;
+&lt;h3 id=&#34;--ii&#34;&gt;해보고 나니 II&lt;/h3&gt;
+&lt;p&gt;가장 쉬운 방법을 찾았다.(&lt;a href=&#34;https://jakevdp.github.io/blog/2017/12/05/installing-python-packages-from-jupyter/&#34;&gt;참고링크&lt;/a&gt;) 주피터 노트북에서 패키지를 설치하면 모든 것이 해결된다. 애초에 직면했던 문제점이 어떤 가상환경에 패키지를 설치하는 것인가였다. 주피터 노트북이 실행되는 상황이면, 이미 특정 가상환경에서 작동하는 것이다. 돌리려는 코드에 맞는 가상환경인지 확인하고, 패키지를 현재 주피터 노트북이 작동 중인 가상환경에 설치하면 상황이 종료된다. 명령어는 아래와 같다.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import sys
+!conda install pip     # pip 미설치일 경우
+!{sys.executable} -m pip install yellowbrick   # 채널 입력이 필요없다(?)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;아래는 주피터 노트북에서 패키지를 설치하는 화면&lt;br&gt;
+(&lt;code&gt;yellowbrick&lt;/code&gt; 패키지 예시)
+&lt;img src=&#34;featured24-44.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://gunn.kim/img/endpic.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;더 자세한 설명이 필요하거나 더 좋은 방법이 있으면, 댓글로 알려주세요.&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

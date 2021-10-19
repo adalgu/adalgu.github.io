@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>colab | Exobrain</title>
+    <link>https://gunn.kim/tags/colab/</link>
+      <atom:link href="https://gunn.kim/tags/colab/index.xml" rel="self" type="application/rss+xml" />
+    <description>colab</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Gunn Kim, 2021</copyright><lastBuildDate>Thu, 24 Dec 2020 17:21:56 +0900</lastBuildDate>
+    <image>
+      <url>https://gunn.kim/images/icon_hud1e4a02091c0cd7dd9ce20cf2020f12f_133591_512x512_fill_lanczos_center_2.png</url>
+      <title>colab</title>
+      <link>https://gunn.kim/tags/colab/</link>
+    </image>
+    
+    <item>
+      <title>[파이썬] 파이썬 코드를 블로그에 쉽고, 예쁘게 공유하기</title>
+      <link>https://gunn.kim/post/2020-12-24-colab-gist-hugo/</link>
+      <pubDate>Thu, 24 Dec 2020 17:21:56 +0900</pubDate>
+      <guid>https://gunn.kim/post/2020-12-24-colab-gist-hugo/</guid>
+      <description>&lt;h3 id=&#34;--&#34;&gt;언제? 왜? 필요한가?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;데이터 분석을 하고 만든 코드를 휴고 블로그로 포스팅할 때,&lt;/li&gt;
+&lt;li&gt;파이썬 코드를 쉬우면서도, 예쁘게 공유하고 싶을 때,&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ins class=&#34;kakao_ad_area&#34; style=&#34;display:none;&#34; 
+ data-ad-unit    = &#34;DAN-o7BuX6VcavPlDqZQ&#34; 
+ data-ad-width   = &#34;320&#34; 
+ data-ad-height  = &#34;100&#34;&gt;&lt;/ins&gt; 
+&lt;script type=&#34;text/javascript&#34; src=&#34;//t1.daumcdn.net/kas/static/ba.min.js&#34; async&gt;&lt;/script&gt;
+&lt;h3 id=&#34;heading&#34;&gt;어떻게?&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Colab(코랩)으로 파이썬 코드를 만든다.&lt;/li&gt;
+&lt;li&gt;만든 코드를 Gist에 저장한다.&lt;/li&gt;
+&lt;li&gt;Hugo shortcode를 이용하여 코드를 보여준다.
+&lt;ul&gt;
+&lt;li&gt;휴고 숏코드는 숏코드를 넣는 기호 사이 : &lt;code&gt;{{ &amp;lt; &amp;gt; }}&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;기스트 속성을 넣는다 : &lt;code&gt;gist USERNAME gist-ID &lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;예시 형태(괄호 공백 제거) :  &lt;code&gt;{ { &amp;lt; gist myname ad8807jlasdlslasdjl22 &amp;gt; } }&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;자세한 설명은 &lt;a href=&#34;https://gohugo.io/content-management/shortcodes/#gist&#34;&gt;휴고 공식홈&lt;/a&gt; 참고.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;-&#34;&gt;일단 보자!&lt;/h3&gt;
+&lt;script type=&#34;application/javascript&#34; src=&#34;https://gist.github.com/adalgu/6819a0e82b09b1a7c0743190a01346b6.js&#34;&gt;&lt;/script&gt;
+
+&lt;h3 id=&#34;-1&#34;&gt;무엇이 장점인가?&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;온라인으로 코드를 바로 작성할 수 있고(Colab),&lt;/li&gt;
+&lt;li&gt;Colab에서 Gist도 원클릭으로 저장이 가능하고(Gist),&lt;/li&gt;
+&lt;li&gt;휴고 블로그에 숏코드로 쉽게 불러올 수 있으며(Hugo),&lt;/li&gt;
+&lt;li&gt;온라인으로 코드를 바로 실행해 볼 수 있다. (&lt;code&gt;Open in Colab&lt;/code&gt;로 바로 이동)&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>[파이썬/colab] 공공데이터 Open API를 이용한 지하철 승차인원 구하기 예제코드</title>
+      <link>https://gunn.kim/post/2020-11-04-colab-code-open-data-seoul-metro/</link>
+      <pubDate>Wed, 04 Nov 2020 16:57:43 +0900</pubDate>
+      <guid>https://gunn.kim/post/2020-11-04-colab-code-open-data-seoul-metro/</guid>
+      <description>&lt;p&gt;공공데이터포털, OPENAPI, 파이썬, R 등 데이터를 활용할 수 있는 환경, 특히, 모두가 오픈 소스이거나 무료로 이용할 수 있는 상황이라 데이터를 이용해보기 너무 좋은 상황이다.&lt;/p&gt;
+&lt;p&gt;그래서 그런지 일전에 포스팅한 &lt;a href=&#34;https://gunn.kim/post/2020-06-13-seoul-metro-data-openapi/&#34;&gt;[파이썬] 서울 공공데이터 포털 Open API를 이용해서 지하철 승차인원수 구하기&lt;/a&gt;에 대한 방문수가 비교적 많다.&lt;/p&gt;
+&lt;!--adsense--&gt;
+&lt;p&gt;비슷한 예제들은 코로나19, 버스승하차인원 등등 할 수 있는 것들이 많다. 코로나19로 인한 서울 지하철 승하차 인원 변화를 보기위해서 만들어뒀던 코드를 코랩에 올렸다. 아래 링크를 접속하면 코드 전체를 볼 수 있고, 서울시 데이터포털에서 인증키만 발급 받아서 입력하여 실행해 보면 된다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;코랩 예제 링크 : &lt;a href=&#34;https://colab.research.google.com/gist/adalgu/6819a0e82b09b1a7c0743190a01346b6/-gunn-kim-seoul-metro-opendata.ipynb&#34;&gt;[gunn.kim]seoul-metro-opendata&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;script type=&#34;application/javascript&#34; src=&#34;https://gist.github.com/adalgu/6819a0e82b09b1a7c0743190a01346b6.js&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;코드 예제에서는 아래와 같이 인증키와 데이터 기간만 설정하면 된다. 즉, 인증키와 기간 값을 넣지 않으면 코드가 제대로 실행되지 않는다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.imgur.com/pvHEanO.png&#34; alt=&#34;Image&#34;&gt;&lt;/p&gt;
+&lt;p&gt;위 예제는 코랩을 통해서 실행해 보는 것인데, 데이터를 엑셀 등으로 다운받기 위한 코드도 포함하고 있다. 구글드라이브를 마운트하여 결과 파일을 저장하고, 구글드라이브에 접속하여 저장한 엑셀파일을 다운 받으면 로컬 컴퓨터에서 데이터를 받아볼 수 있다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.imgur.com/FHHm44N.png&#34; alt=&#34;Image&#34;&gt;&lt;/p&gt;
+&lt;p&gt;간단히 전체 절차를 요약하면 아래와 같다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;코랩 예제 접속&lt;/li&gt;
+&lt;li&gt;코드에 서울시 데이터포털에서 받은 인증키 입력&lt;/li&gt;
+&lt;li&gt;코드 실행&lt;/li&gt;
+&lt;li&gt;구글드라이브 마운트 후 결과 파일 저장&lt;/li&gt;
+&lt;li&gt;구글드라이브에 해당 폴더에서 결과 파일 다운로드&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;끝!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>[R] Colab에서 R 사용하기</title>
+      <link>https://gunn.kim/post/2020-09-24-colab-support-r/</link>
+      <pubDate>Thu, 24 Sep 2020 10:16:37 +0900</pubDate>
+      <guid>https://gunn.kim/post/2020-09-24-colab-support-r/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;featured33-23.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;구글 Colab(코랩)에서는 그동안 파이썬만 지원되었는데, 최근에 R도 사용이 가능하다고 한다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;참고링크 : &lt;a href=&#34;https://www.roelpeters.be/running-an-r-kernel-in-google-colab/&#34;&gt;https://www.roelpeters.be/running-an-r-kernel-in-google-colab/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;아직 공식적으로 공지가 된 것 같지는 않고, 아는 사람들 사이에서 알음알음 사용되고 있는 상황인 것으로 보인다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;참고링크 : &lt;a href=&#34;https://www.facebook.com/groups/KoreaRUsers/permalink/2080094785456546/&#34;&gt;https://www.facebook.com/groups/KoreaRUsers/permalink/2080094785456546/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;colab---&#34;&gt;Colab은 기본적으로 파이썬으로 세팅&lt;/h3&gt;
+&lt;p&gt;코랩에서 R을 사용하기 위해서는 약간의 트릭이 필요하다. 특정 주소로 접속해야 한다.&lt;/p&gt;
+&lt;p&gt;코랩에 접속해서 메뉴 [파일]-[새노트]로 노트를 열면 아직 R지원이 안되니 조심하자.
+[새노트]를 열게 되면 아래 링크가 호출되는데, 그러면 아래 사진과 같이 노트 설정 메뉴에서 런타임 유형을 파이썬에서 R로 바꿀 수 없다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;https://colab.research.google.com/#create=true
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;featured30-47.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[노트 설정] 방법은
+코랩의 메뉴 중 [수정]-&amp;gt;[노트설정]으로 접속 가능하다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;colab-r-&#34;&gt;Colab에서 R 사용하기&lt;/h3&gt;
+&lt;p&gt;코랩에서 R을 사용하기 위해서는 아래 주소로 접속해야 한다. 위 주소에서 끝에 &lt;code&gt;&amp;amp;language=r&lt;/code&gt;을 추가하면 된다. 그러면 아래 사진과 같이 노트 설정에서 런타임 유형 설정이 보이고, R과 파이썬 중 하나를 고를 수 있다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;https://colab.research.google.com/notebook#create=true&amp;amp;language=r
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;featured42-23.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;주소로 접속하게 되므로, 기존에 코랩에 로그인이 된 계정이 있어야 한다. 계정을 만들고, 코랩에 한번 접속한 후에 위 주소로 접속해 보자.&lt;/p&gt;
+&lt;p&gt;접속을 하게되면, 파일명이 &lt;code&gt;Untitled.ipynb&lt;/code&gt;로 뜰텐데, 걱정말고 R 코드를 입력하고 실행해 보자. 아래 예시처럼 바로 실행이 가능하다. 2020년 9월 현재 3.6.3 버전의 R이 설치된 것으로 보인다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;featured21-00.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;전반적인 구현 방식을 보니, 주피터 노트북에서 R을 사용하는 방식이 코랩에서 사용된 것이 아닌가 한다. 주피터노트북+코랩+R의 형태가 되는 것 같다.&lt;/p&gt;
+&lt;h3 id=&#34;heading&#34;&gt;나가며&lt;/h3&gt;
+&lt;p&gt;R은 &lt;a href=&#34;https://rstudio.cloud/&#34;&gt;r studio cloud&lt;/a&gt;{:target=&amp;rdquo;_blank&amp;rdquo;}로 온라인 사용이 가능하긴 하지만, 코랩에 익숙한 사용자의 경우에는 위 방식을 사용하는 것도 방법이 될 수 있을 것 같다. 해당 내용에 대해서는 과거에 포스팅한 것을 참고하자.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;참고링크 : &lt;a href=&#34;https://gunn.kim/post/2020-03-04-python-r-online/&#34;&gt;파이썬과 R을 온라인에서 바로 코딩하는 꿀팁&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;암튼 데이터 분석이나 개발이나 점점 더 Serverless(서버리스) 형태로 바뀌고 있는 것으로 보인다. 코드만 있으면 바로 구현이 가능한 형태다. 아마존 람다, 깃헙 액션, 깃랩 CI/CD, Cloudflare Workers 등등 사용할 수 있는 서비스들이 작년 올해 들어서 엄청나게 많아지고 있다. 그만큼 진입장벽이 낮아지고, 학습커브도 완만해진다고 할 수 있을까나? 조금만 마음만 먹으면 시도해 볼 수 있는 환경이 마련되고 있는 것은 확실해 보인다.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

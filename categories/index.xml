@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories | Exobrain</title>
+    <link>https://gunn.kim/categories/</link>
+      <atom:link href="https://gunn.kim/categories/index.xml" rel="self" type="application/rss+xml" />
+    <description>Categories</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Gunn Kim, 2021</copyright><lastBuildDate>Tue, 18 May 2021 14:57:53 +0900</lastBuildDate>
+    <image>
+      <url>https://gunn.kim/images/icon_hud1e4a02091c0cd7dd9ce20cf2020f12f_133591_512x512_fill_lanczos_center_2.png</url>
+      <title>Categories</title>
+      <link>https://gunn.kim/categories/</link>
+    </image>
+    
+    <item>
+      <title>essay</title>
+      <link>https://gunn.kim/categories/essay/</link>
+      <pubDate>Tue, 18 May 2021 14:57:53 +0900</pubDate>
+      <guid>https://gunn.kim/categories/essay/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>https://gunn.kim/categories/python/</link>
+      <pubDate>Sun, 03 Jan 2021 23:38:43 +0900</pubDate>
+      <guid>https://gunn.kim/categories/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>life</title>
+      <link>https://gunn.kim/categories/life/</link>
+      <pubDate>Mon, 05 Oct 2020 12:17:36 +0900</pubDate>
+      <guid>https://gunn.kim/categories/life/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>R</title>
+      <link>https://gunn.kim/categories/r/</link>
+      <pubDate>Thu, 24 Sep 2020 10:16:37 +0900</pubDate>
+      <guid>https://gunn.kim/categories/r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>economy</title>
+      <link>https://gunn.kim/categories/economy/</link>
+      <pubDate>Mon, 31 Aug 2020 20:04:52 +0900</pubDate>
+      <guid>https://gunn.kim/categories/economy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>exobrain</title>
+      <link>https://gunn.kim/categories/exobrain/</link>
+      <pubDate>Thu, 12 Mar 2020 01:03:39 +0900</pubDate>
+      <guid>https://gunn.kim/categories/exobrain/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>writing</title>
+      <link>https://gunn.kim/categories/writing/</link>
+      <pubDate>Tue, 25 Feb 2020 10:07:27 +0900</pubDate>
+      <guid>https://gunn.kim/categories/writing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mobility</title>
+      <link>https://gunn.kim/categories/mobility/</link>
+      <pubDate>Mon, 24 Feb 2020 14:56:03 +0900</pubDate>
+      <guid>https://gunn.kim/categories/mobility/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ppt</title>
+      <link>https://gunn.kim/categories/ppt/</link>
+      <pubDate>Mon, 17 Feb 2020 10:55:53 +0900</pubDate>
+      <guid>https://gunn.kim/categories/ppt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>talks</title>
+      <link>https://gunn.kim/categories/talks/</link>
+      <pubDate>Wed, 16 Jan 2019 00:00:00 +0000</pubDate>
+      <guid>https://gunn.kim/categories/talks/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>data recipe</title>
+      <link>https://gunn.kim/categories/data-recipe/</link>
+      <pubDate>Sun, 25 Nov 2018 00:00:00 +0000</pubDate>
+      <guid>https://gunn.kim/categories/data-recipe/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

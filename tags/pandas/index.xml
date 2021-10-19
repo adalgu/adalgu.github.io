@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>pandas | Exobrain</title>
+    <link>https://gunn.kim/tags/pandas/</link>
+      <atom:link href="https://gunn.kim/tags/pandas/index.xml" rel="self" type="application/rss+xml" />
+    <description>pandas</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Gunn Kim, 2021</copyright><lastBuildDate>Wed, 04 Nov 2020 16:57:43 +0900</lastBuildDate>
+    <image>
+      <url>https://gunn.kim/images/icon_hud1e4a02091c0cd7dd9ce20cf2020f12f_133591_512x512_fill_lanczos_center_2.png</url>
+      <title>pandas</title>
+      <link>https://gunn.kim/tags/pandas/</link>
+    </image>
+    
+    <item>
+      <title>[파이썬/colab] 공공데이터 Open API를 이용한 지하철 승차인원 구하기 예제코드</title>
+      <link>https://gunn.kim/post/2020-11-04-colab-code-open-data-seoul-metro/</link>
+      <pubDate>Wed, 04 Nov 2020 16:57:43 +0900</pubDate>
+      <guid>https://gunn.kim/post/2020-11-04-colab-code-open-data-seoul-metro/</guid>
+      <description>&lt;p&gt;공공데이터포털, OPENAPI, 파이썬, R 등 데이터를 활용할 수 있는 환경, 특히, 모두가 오픈 소스이거나 무료로 이용할 수 있는 상황이라 데이터를 이용해보기 너무 좋은 상황이다.&lt;/p&gt;
+&lt;p&gt;그래서 그런지 일전에 포스팅한 &lt;a href=&#34;https://gunn.kim/post/2020-06-13-seoul-metro-data-openapi/&#34;&gt;[파이썬] 서울 공공데이터 포털 Open API를 이용해서 지하철 승차인원수 구하기&lt;/a&gt;에 대한 방문수가 비교적 많다.&lt;/p&gt;
+&lt;!--adsense--&gt;
+&lt;p&gt;비슷한 예제들은 코로나19, 버스승하차인원 등등 할 수 있는 것들이 많다. 코로나19로 인한 서울 지하철 승하차 인원 변화를 보기위해서 만들어뒀던 코드를 코랩에 올렸다. 아래 링크를 접속하면 코드 전체를 볼 수 있고, 서울시 데이터포털에서 인증키만 발급 받아서 입력하여 실행해 보면 된다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;코랩 예제 링크 : &lt;a href=&#34;https://colab.research.google.com/gist/adalgu/6819a0e82b09b1a7c0743190a01346b6/-gunn-kim-seoul-metro-opendata.ipynb&#34;&gt;[gunn.kim]seoul-metro-opendata&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;script type=&#34;application/javascript&#34; src=&#34;https://gist.github.com/adalgu/6819a0e82b09b1a7c0743190a01346b6.js&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;코드 예제에서는 아래와 같이 인증키와 데이터 기간만 설정하면 된다. 즉, 인증키와 기간 값을 넣지 않으면 코드가 제대로 실행되지 않는다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.imgur.com/pvHEanO.png&#34; alt=&#34;Image&#34;&gt;&lt;/p&gt;
+&lt;p&gt;위 예제는 코랩을 통해서 실행해 보는 것인데, 데이터를 엑셀 등으로 다운받기 위한 코드도 포함하고 있다. 구글드라이브를 마운트하여 결과 파일을 저장하고, 구글드라이브에 접속하여 저장한 엑셀파일을 다운 받으면 로컬 컴퓨터에서 데이터를 받아볼 수 있다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.imgur.com/FHHm44N.png&#34; alt=&#34;Image&#34;&gt;&lt;/p&gt;
+&lt;p&gt;간단히 전체 절차를 요약하면 아래와 같다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;코랩 예제 접속&lt;/li&gt;
+&lt;li&gt;코드에 서울시 데이터포털에서 받은 인증키 입력&lt;/li&gt;
+&lt;li&gt;코드 실행&lt;/li&gt;
+&lt;li&gt;구글드라이브 마운트 후 결과 파일 저장&lt;/li&gt;
+&lt;li&gt;구글드라이브에 해당 폴더에서 결과 파일 다운로드&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;끝!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

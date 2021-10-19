@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>exobrain | Exobrain</title>
+    <link>https://gunn.kim/tags/exobrain/</link>
+      <atom:link href="https://gunn.kim/tags/exobrain/index.xml" rel="self" type="application/rss+xml" />
+    <description>exobrain</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© Gunn Kim, 2021</copyright><lastBuildDate>Thu, 12 Mar 2020 01:03:39 +0900</lastBuildDate>
+    <image>
+      <url>https://gunn.kim/images/icon_hud1e4a02091c0cd7dd9ce20cf2020f12f_133591_512x512_fill_lanczos_center_2.png</url>
+      <title>exobrain</title>
+      <link>https://gunn.kim/tags/exobrain/</link>
+    </image>
+    
+    <item>
+      <title>교육에 대한 새로운 시각 : 프로젝트 학습(PBL)</title>
+      <link>https://gunn.kim/post/2020-03-12-project-based-learning/</link>
+      <pubDate>Thu, 12 Mar 2020 01:03:39 +0900</pubDate>
+      <guid>https://gunn.kim/post/2020-03-12-project-based-learning/</guid>
+      <description>&lt;p&gt;데이터사이언스 공부를 하면서도 그렇고, 점점 커가는 딸에게 어떻게 배움을 줘야 할까에 대해서도 고민하던 차에 비슷한 고민을 담은 보고서를 보게 되었다. 프로젝트 학습(Project-based learning)에 대해서 다룬 보고서였다. KDI에서 2016년에 이주호 전 교육부 장관 등이 참여해서 연구한 결과물이었다. 비슷한 시기에 유행하기 시작한 &lt;a href=&#34;https://brunch.co.kr/@choihs0228/50&#34;&gt;플립러닝&lt;/a&gt;과도 일맥상통하는 개념으로 보였다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;참고로 OECD에 따르면, 우리나라가 PBL 교육 수준이 제일 낮다고 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;개인적으로 코딩을 공부하면서 조금 느낀 것은 단순히 언어나 테크닉을 배우려고 하기보다 왜? 무엇을 위해서 배우는 것이 중요하다는 것이었다. 단순히 사회 분위기가 그러니 나도 해봐야지하면서 시작하는 것보다는 나에게 어떤 문제가 있는데 이것을 코딩으로 해결해 보고 싶다라는 관점으로 접근하는 것이 학습에 효과적일 수 있다는 생각이 들었다. 실제로 코딩을 공부하면서 잘 참고했던, &lt;a href=&#34;https://www.youtube.com/watch?v=M6kQTpIqpLs&#34;&gt;실리콘밸리 엔지니어의 영상&lt;/a&gt;에서도 같은 이야기를 해주었었다.&lt;/p&gt;
+&lt;p&gt;학습만을 위한 학습은 그 자체로 관념의 세상에 빠지기 쉽다. 학습을 위한 학습은 무엇을 배우고, 어디까지 배워고, 얼마나 깊이 배워야 할지에 대한 학습으로 귀결된다. 그런데, So what? 그렇게 배워서 무엇을 하고자 했던 것인가를 생각해 보면, 배움의 방향도 달라야 한다는 생각에 이른다. 우리 모두가 교육학자가 될 필요는 없다. 결국은 누군가가 내준 문제를 해결하기 위해서 공부하는 것보다 내가 해결하고픈 문제를 상정해 보고, 이를 스스로 해결해 나가는 과정에서 공부해 보는 것이 필요하다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;현재의 머신러닝과 같이 데이터 기반 인공지능 패러다임의 등장이 주는 함의도 유사하다고 생각된다.&lt;/li&gt;
+&lt;li&gt;계획보다 실행이 더 중요하다. 해보면서 배워야 한다.&lt;/li&gt;
+&lt;li&gt;다양한 분야를 overall(두루두루) 하게 아는 것보다 특정 분야를 outstanding(두드러지게) 하게 아는 것이 더 중요한 시대다.&lt;/li&gt;
+&lt;li&gt;결국 사람들이 찾는 사람은 특정 분야의 문제를 궁극적으로 해결해 줄 수 있는 사람이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;이러한 관점이 학습에 효과적이라면 마찬가지로 딸에게도 효과적일 수 있다는 생각이 들었다. 교과서라는 지식들의 표준화된 나열을 참조는 하되, 끊임없이 스스로 학습 동기를 얻을 수 있으려면, 스스로 문제를 정의하고 그 해결책을 스스로 찾아보는 것이 도움이 될 수 있을 것이란 판단이다. 그리고 필요한 경우 자신이 직접 해결하기보다는 자기보다 더 잘 아는 친구나 선생님에게 필요한 부분에 대해서는 협력과 조언을 구할 수 있는 자세를 가르쳐주는 것이 좋을 것 같다는 생각이 들었다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;과거에 독서모임을 하면서 읽었던 책들 중에 초등학교 고학년이나 중학교 수학 공부를 하기 전에 읽었다면 좋았을 것 같던 책들이 있었는데, 다시 회상해 보면 바로 그러한 것들이 왜 이것을 배워야 하는지에 대한 동기부여를 해줄 수 있었기 때문이라고 생각된다.&lt;/li&gt;
+&lt;li&gt;단순히 좋은 점수를 얻어서, 좋은 학교에 진학하기 위해서가 아니라 어떤 문제를 해결하기 위해서 이 지식이 필요하다고 인식하게 해주는 것이 중요하다고 생각된다. 주변 시선이나 부모, 선생의 인정이나 칭찬이 아니라 본인 스스로가 궁금한 것이나 문제점을 인식하고 스스로 지식들을 찾아서 해결해 나갈 수 있도록 해주고 싶다. 지금처럼 소위 유튜브에서 어떤 지식이든 시각적으로 쉽게 이해할 수 있는 세상에서는 과거보다 더 쉽게 달성할 수 있을 것이라 생각된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;지금까지도 그랬지만, 앞으로도 특정 분야에 특화된 지식을 기반으로 여타 분야나 사람들과 소통하여 엮는 것이 중요해질 것이라고 생각된다. 즉, 한 분야에서 흥미를 가지고 꾸준히 더 학습하여 스페셜리스트가 되는 것이 우선 필요하고, 그러한 자산을 바탕으로 다른 사람들과 소통과 협력을 통해서 큰 프로젝트를 이끌어 나갈 수 있는 것이 필요하다는 것이다.&lt;/p&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/CSdGDLIXRcs&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;p&gt;아래는 나중에 참고해 보려고 프로젝트 학습에 대해서 간략히 정리해 본 것이다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;프로젝트 학습?&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;학생이 스스로 프로젝트를 제안하고, 그것을 해결하는 과정에서 다른 친구들과 협력하며 학습이 이뤄지는 교육 방법
+&lt;ul&gt;
+&lt;li&gt;기존 교육 방식과 비교(아래 참고, 출처: &lt;a href=&#34;http://blog.naver.com/PostView.nhn?blogId=uto0404&amp;amp;logNo=221475497088&amp;amp;parentCategoryNo=&amp;amp;categoryNo=6&amp;amp;viewDate=&amp;amp;isShowPopularPosts=false&amp;amp;from=postView&#34;&gt;박차용의 청소년활동&lt;/a&gt;)
+&lt;img src=&#34;featured32-57.png&#34; alt=&#34;&#34;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;프로젝트 학습은 4C 능력을 제고&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;소통(communication)&lt;/li&gt;
+&lt;li&gt;협업(collaboration)&lt;/li&gt;
+&lt;li&gt;비판적 사고(critical thinking)&lt;/li&gt;
+&lt;li&gt;창의성(creativity)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;참고 문서&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;프로젝트 학습을 통한 교육개혁(1) - &lt;a href=&#34;https://www.kdi.re.kr/research/subjects_view.jsp?pub_no=14768&#34;&gt;&lt;a href=&#34;https://www.kdi.re.kr/research/subjects_view.jsp?pub_no=14768&#34;&gt;https://www.kdi.re.kr/research/subjects_view.jsp?pub_no=14768&lt;/a&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;프로젝트 학습을 통한 교육개혁(2) - &lt;a href=&#34;https://www.kdi.re.kr/research/subjects_view.jsp?pub_no=15602&#34;&gt;&lt;a href=&#34;https://www.kdi.re.kr/research/subjects_view.jsp?pub_no=15602&#34;&gt;https://www.kdi.re.kr/research/subjects_view.jsp?pub_no=15602&lt;/a&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;PBL 경제교육 시리즈(KDI에서 만든 교사대상 교육교재) - &lt;a href=&#34;https://eiec.kdi.re.kr/material/pblView.do?idx=1146&#34;&gt;&lt;a href=&#34;https://eiec.kdi.re.kr/material/pblView.do?idx=1146&#34;&gt;https://eiec.kdi.re.kr/material/pblView.do?idx=1146&lt;/a&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Making Learning Meaningful through Project-Based Learning - &lt;a href=&#34;https://www.oecd.org/education/research/2740151.pdf&#34;&gt;&lt;a href=&#34;https://www.oecd.org/education/research/2740151.pdf&#34;&gt;https://www.oecd.org/education/research/2740151.pdf&lt;/a&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>외장두뇌 프로젝트</title>
+      <link>https://gunn.kim/project/exobrain-project/</link>
+      <pubDate>Tue, 18 Feb 2020 01:00:55 +0900</pubDate>
+      <guid>https://gunn.kim/project/exobrain-project/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;The web as a second brain.&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;외장두뇌는 한마디로 나의 두번째 두뇌로써 웹을 활용하는 프로젝트이다.
+정보 저장이 될 수도 있고, 정보 정리가 될 수도 있으며, 정보 출력이 될 수도 있다.&lt;/p&gt;
+&lt;h2 id=&#34;-&#34;&gt;외장두뇌 프로젝트&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;외장두뇌 프로젝트는 퍼블릭(공개)과 프라이빗(비공개) 2가지 채널로 운영하고 있습니다. 본 웹사이트 &lt;a href=&#34;https://gunn.kim&#34;&gt;gunn.kim&lt;/a&gt;은 public 외장두뇌 프로젝트이며, private 외장두뇌 프로젝트는 디지털 기록도구인 &lt;a href=&#34;https://dynalist.io&#34;&gt;Dynalist&lt;/a&gt;를 이용하여 가동 중에 있습니다. 2020년 3월 현재 Dynalist에서 &lt;a href=&#34;https://notion.so&#34;&gt;Notion&lt;/a&gt;으로의 이동을 준비 중입니다.&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;외장두뇌 프로젝트
+&lt;ul&gt;
+&lt;li&gt;Public : &lt;a href=&#34;https://gunn.kim&#34;&gt;https://gunn.kim&lt;/a&gt;으로 접속, 현재는 gitlab 기반의 정적 웹 페이지(static web page)로 운영. 추후에 블로그 기능을 넘어 동적 정보처리 기능을 붙일 예정.&lt;/li&gt;
+&lt;li&gt;Private : &lt;a href=&#34;https://dynalist.io&#34;&gt;Dynalist&lt;/a&gt;로 진행. Feedly와 Pocket, IFTTT, 구글캘린더로 보조. 궁극적으로 웹과 통합하여 운영할 예정. 기성 서비스 중에 &lt;strong&gt;Notion&lt;/strong&gt; 이 가장 유사한 형태.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;heading&#34;&gt;&amp;lt;입력하기&amp;gt;&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Feedly로 RSS 구독&lt;/li&gt;
+&lt;li&gt;Pocket으로 아티클 수집&lt;/li&gt;
+&lt;li&gt;IFTTT로 컨텐츠 자동 처리&lt;/li&gt;
+&lt;li&gt;Notion으로 컨텐츠를 1차 가공&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;heading1&#34;&gt;&amp;lt;출력하기&amp;gt;&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;도구 세팅하기 (Tool)
+&lt;ol&gt;
+&lt;li&gt;git 설치 (+github 또는 gitlab 계정 만들기)&lt;/li&gt;
+&lt;li&gt;hugo 설치&lt;/li&gt;
+&lt;li&gt;vs code 설치&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;웹사이트 만들기 (Repo)
+&lt;ol&gt;
+&lt;li&gt;Gitlab에 저장소 만들기(Github도 가능)&lt;/li&gt;
+&lt;li&gt;저장소에 휴고(hugo)로 만든 사이트 올리기&lt;/li&gt;
+&lt;li&gt;빌드하고 배포하기(Gitlab pages 또는 Netlify)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;웹사이트 세팅하기 (Web)
+&lt;ol&gt;
+&lt;li&gt;도메인 네임 구매하기&lt;/li&gt;
+&lt;li&gt;도메인 네임 세팅하기&lt;/li&gt;
+&lt;li&gt;https 세팅하기&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;컨텐츠 만들기 (Production)
+&lt;ol&gt;
+&lt;li&gt;메뉴 구성하기&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://gunn.kim/post/2020-01-30-vscode-markdown-writing/&#34;&gt;컨텐츠 제작 환경 만들기(feat. vs code 또는 RStudio)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;git으로 커밋하고 푸쉬하기&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
