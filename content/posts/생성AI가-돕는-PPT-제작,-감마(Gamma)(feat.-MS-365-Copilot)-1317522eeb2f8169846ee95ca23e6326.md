@@ -183,8 +183,8 @@ NOTION_METADATA:
     6ee95ca23e6326"
   public_url: "https://datarecipe.notion.site/AI-PPT-Gamma-feat-MS-365-Copilot-13\
     17522eeb2f8169846ee95ca23e6326"
-UPDATE_TIME: "2024-11-02T00:21:38.444Z"
-EXPIRY_TIME: "2024-11-02T01:21:28.842Z"
+UPDATE_TIME: "2024-12-20T06:37:21.349Z"
+EXPIRY_TIME: "2024-12-20T07:37:08.174Z"
 
 ---
 
@@ -201,7 +201,7 @@ EXPIRY_TIME: "2024-11-02T01:21:28.842Z"
 감마는 생성AI를 활용해 이용자가 원하는 디자인과 레이아웃을 생성합니다. 세일즈 피칭에서 비즈니스 제안, 회사 개요까지 다양한 분야의 프리젠테이션을 간편하게, 아름답게 구성할 수 있습니다. 감마와 함께라면, 단순히 내용을 입력하는 것만으로도 완성도 높은 프리젠테이션 제작이 가능합니다.
 
 
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/5c3f3c34-377b-477c-b05a-cb68818313ab/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241102T002128Z&X-Amz-Expires=3600&X-Amz-Signature=7900ff0576ba152ebc770f73dcec7ac05d18c4cc6a17385e960a1a8ffd382f16&X-Amz-SignedHeaders=host&x-id=GetObject)
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/5c3f3c34-377b-477c-b05a-cb68818313ab/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241220T063708Z&X-Amz-Expires=3600&X-Amz-Signature=b38e2a8024904a0b9181ccb10fce3cefd2c6ce4488d93757e5068964f9faeda2&X-Amz-SignedHeaders=host&x-id=GetObject)
 
 
 > 💡 똥손도 금손으로 만들어 주는 생성 AI 기반 PPT툴, 감마

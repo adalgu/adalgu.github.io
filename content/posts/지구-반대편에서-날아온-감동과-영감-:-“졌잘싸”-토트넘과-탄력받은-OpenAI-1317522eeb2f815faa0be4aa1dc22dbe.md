@@ -6,9 +6,9 @@ draft: false
 featuredImage: "https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-2\
   73a-443d-bf89-42827b5b6876/4ca34730-08f5-4435-a49d-9c94f132ed34/7aa72b21-d546\
   -4c96-86f3-c626ea9a8b4a.webp?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-S\
-  ha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102%2Fus-\
-  west-2%2Fs3%2Faws4_request&X-Amz-Date=20241102T001624Z&X-Amz-Expires=3600&X-A\
-  mz-Signature=15014d57a73d5c1f15d856ad24ad6606b10c5b02463a4649ec4559fe909798f1\
+  ha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220%2Fus-\
+  west-2%2Fs3%2Faws4_request&X-Amz-Date=20241220T062846Z&X-Amz-Expires=3600&X-A\
+  mz-Signature=727b785dcef3bb803e6911e438111362259ecc3a69a30ee2b09ed5e3aeb89fbe\
   &X-Amz-SignedHeaders=host&x-id=GetObject"
 series: []
 Subtitle: "토트넘 무패 행진이 대패로 끝난 날, 그리고 OpenAI의 첫번째 개발자 컨퍼런스가 열린 날"
@@ -39,11 +39,11 @@ NOTION_METADATA:
       url: "https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-b\
         f89-42827b5b6876/4ca34730-08f5-4435-a49d-9c94f132ed34/7aa72b21-d546-4c9\
         6-86f3-c626ea9a8b4a.webp?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content\
-        -Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F202411\
-        02%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241102T001521Z&X-Amz-Ex\
-        pires=3600&X-Amz-Signature=33c2517a8faeec2afa05984edd6efb3a90c387108e09\
-        b97577492e97dbb4a482&X-Amz-SignedHeaders=host&x-id=GetObject"
-      expiry_time: "2024-11-02T01:15:21.504Z"
+        -Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F202412\
+        20%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241220T062708Z&X-Amz-Ex\
+        pires=3600&X-Amz-Signature=b5af03c0ea164759bd2b5607ef67e338b1a593c7d3f7\
+        342d58860a3ab6300848&X-Amz-SignedHeaders=host&x-id=GetObject"
+      expiry_time: "2024-12-20T07:27:08.290Z"
   icon: null
   parent:
     type: "database_id"
@@ -193,8 +193,8 @@ NOTION_METADATA:
       rich_text: []
   url: "https://www.notion.so/OpenAI-1317522eeb2f815faa0be4aa1dc22dbe"
   public_url: "https://datarecipe.notion.site/OpenAI-1317522eeb2f815faa0be4aa1dc22dbe"
-UPDATE_TIME: "2024-11-02T00:16:32.892Z"
-EXPIRY_TIME: "2024-11-02T01:16:19.525Z"
+UPDATE_TIME: "2024-12-20T06:29:04.696Z"
+EXPIRY_TIME: "2024-12-20T07:28:43.974Z"
 
 ---
 
@@ -202,7 +202,7 @@ EXPIRY_TIME: "2024-11-02T01:16:19.525Z"
 인생은 때때로 예기치 않은 순간에 큰 영감을 주곤 한다. 2023년 11월 7일 한국시간 새벽에 멀리 미국과 영국에서 벌어진 두 가지 전혀 다른 사건을 통해서 바로 그 경험을 하였다. 첫 번째 영감은 멀리 영국 런던의 축구장에서 열린 런던 더비에서 나왔다. 포스테코글루 감독이 이끄는 토트넘의 이례적인 경기 모습은 하나의 경기를 넘어 인생에서도 중요한 전략과 실행의 교훈을 주었다. 두 번째 영감은 테크의 세계에서 왔다. OpenAI의 첫번째 개발자 컨퍼런스였던 DevDay에서 발표된 혁신적인 AI 기술들은 현실을 바라보는 새로운 창을 열어주었고, 나의 사고를 확장시키는 계기가 되었다. 이 두 경험은 평범한 일상에 새로운 생기를 불어넣고, 나에게 새로운 도전을 시작할 용기를 주었다. 이 글은 바로 그 날, 내 삶에 새로운 방향을 제시한 두 가지 영감의 순간들로부터 시작되는 이야기이다.
 
 
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/0e853364-4ae9-4f27-9ec0-30fb92322b55/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241102T001619Z&X-Amz-Expires=3600&X-Amz-Signature=68498d0f09da019d3b94548a21dea2d8929238c3c47a808a3ee6db0a78cca132&X-Amz-SignedHeaders=host&x-id=GetObject)
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/0e853364-4ae9-4f27-9ec0-30fb92322b55/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241220T062843Z&X-Amz-Expires=3600&X-Amz-Signature=a5fdd0f616957e445246538a9d35456457f52b7523e14547f3ae57ec8d756a30&X-Amz-SignedHeaders=host&x-id=GetObject)
 
 
 ## 관중과 팬들의 마음에 불을 지핀 포스테코글루 감독
@@ -211,9 +211,9 @@ EXPIRY_TIME: "2024-11-02T01:16:19.525Z"
 토트넘과 첼시의 경기에서 부상과 퇴장이라는 악조건 속에서 포스테코글루 감독이 보여준 과감한 선택은 자칫 단조로운 프로스포츠를 보는 사람들에게 엄청난 여운을 남겼다. 2002년 한일 월드컵에서 히딩크 감독이 이탈리아를 상대로 보여준 공격적인 선수 기용이 겹친다. 2002년 당시는 한경기만 지면 떨어지는 토너먼트였지만, 토트넘의 포스테코글루 감독은 한창 진행 중인 리그 무패행진 중에 예상을 깨고 공격적 전략을 선택하며, 팀이 단순히 승점을 얻기 위해 수비에 치중하기보다는 경기를 주도하고 리스크를 감수하며 팀 스피릿을 발휘할 기회를 만들었다. 이러한 전술적 리스크 테이킹은 경기를 넘어서 우리에게 한 가지 중요한 메시지를 전달한다. 어떠한 상황에서도 자신의 믿음과 철학을 지키며 나아갈 때 진정한 성과가 나타난다는 것이다.
 
 
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/c56116e1-a9e5-43b7-b589-f6c1e9b1d0fd/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241102T001623Z&X-Amz-Expires=3600&X-Amz-Signature=cfa06018da5b262e03768fe9bdf37688387452eb12be9950d7b75d6d0b8cab35&X-Amz-SignedHeaders=host&x-id=GetObject)
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/c56116e1-a9e5-43b7-b589-f6c1e9b1d0fd/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241220T062844Z&X-Amz-Expires=3600&X-Amz-Signature=c7aa384449baa5863ab805421187b4a9c4f41f97e3f79cbe03efa34ae6df5708&X-Amz-SignedHeaders=host&x-id=GetObject)
 
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/18bf9feb-675b-46c8-b42f-4d534aaa474d/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241102T001623Z&X-Amz-Expires=3600&X-Amz-Signature=3a84b68501dea78b689d2990ce639c734736891e997b394581165d00185a2c19&X-Amz-SignedHeaders=host&x-id=GetObject)
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/18bf9feb-675b-46c8-b42f-4d534aaa474d/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241220T062845Z&X-Amz-Expires=3600&X-Amz-Signature=7746cdac136270ee634f4cd8f2cbfe9876383d49ff208c785d58d70d25f0bf66&X-Amz-SignedHeaders=host&x-id=GetObject)
 
 
 토트넘의 앞날은 냉정하게 보면 더 어둡다. 레드카드 2장과 경기 중에 나온 핵심선수의 부상으로 인해 최대 4명의 주전선수가 향후 여러 경기에 빠지게 된다는 악재가 동시에 터진 것이다. 일단 레드카드를 받은 로메로와 우도지는 각각 다음 3경기와 1경기에 나오지 못하게 된다. 또한 이번 시즌 빼어난 수비력으로 후방을 지켜오던 센터백 미키 판 더 펜과 EPL 최고의 평가를 받고 있는 제임스 메디슨이 다쳤다. 판 더 펜은 전반 종료 직전 오른쪽 햄스트링에 극심한 통증을 호소하며 교체됐는데, 황소 황희찬도 쓰러지게 만들었던 바로 그 부상이다. 메디슨 또한 상대적으로 경미해 보이기는 하나 왼쪽 발목 부상을 입고 교체되었다. 결국 토트넘은 시즌 첫 패와 함께 주전 선수 4명의 결장이 우려되는 최악의 상황을 맞이한 것이다.
@@ -228,7 +228,7 @@ EXPIRY_TIME: "2024-11-02T01:16:19.525Z"
 토트넘의 최근 경기는 단순한 축구 경기를 넘어서는 교훈을 우리에게 선사한다. 무리뇨, 콘테 등 그동안 토트넘을 거쳤던 명장 감독들이 보여주지 못했던 새로운 스타일을 호주 출신의 포스테코글루 감독이 보여주고 결과로 만들어준 것이다. 포스테코글루 감독의 결정은 용기와 철학을 고수하는 것이 어떤 상황에서도 변함없이 중요하다는 것을 상기시켜준다. 비록 단기적으로는 큰 패배했지만, 그 결과보다는 팀이 보여준 정신력과 신념이 팬들에게 더 큰 감동을 준 것이 중요하다. 무리뇨와 콘테가 단기적인 성적을 위해서 팀의 스피릿과 비전을 희생한 것과 대조되는 것이다. 이는 인생의 어떤 영역에도 적용할 수 있는 교훈이다. 현실에 안주하지 않고, 때로는 큰 리스크를 감수하며 자신의 신념을 유지하는 것이 장기적으로는 더 큰 성공으로 이어질 수 있다는 것을, 이번 경기는 명확히 보여주었다.
 
 
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/8f5aa6bd-c545-4603-addd-c4f7a04ebeb4/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241102T001619Z&X-Amz-Expires=3600&X-Amz-Signature=f34aa9a0a5c2df1f2d40c3bdde8155a93f025cccfb96392292bd62dec8f3abf0&X-Amz-SignedHeaders=host&x-id=GetObject)
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/8f5aa6bd-c545-4603-addd-c4f7a04ebeb4/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241220T062844Z&X-Amz-Expires=3600&X-Amz-Signature=fda4553f1a89d660eff67e98c385f767f79e1f868d8a945f3c04873c56761a89&X-Amz-SignedHeaders=host&x-id=GetObject)
 
 
 ## 더 빠르게 다가오는 새로운 세상, OpenAI DevDay

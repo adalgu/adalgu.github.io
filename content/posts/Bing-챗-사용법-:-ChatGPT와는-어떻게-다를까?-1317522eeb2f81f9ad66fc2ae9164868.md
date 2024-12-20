@@ -6,9 +6,9 @@ draft: false
 featuredImage: "https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-2\
   73a-443d-bf89-42827b5b6876/ab331a7c-4ee8-4b5b-8557-a1ec483b98e4/Untitled2323.\
   png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-\
-  Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102%2Fus-west-2%2Fs3%2Faws4_reques\
-  t&X-Amz-Date=20241102T001535Z&X-Amz-Expires=3600&X-Amz-Signature=dd50f2f07051\
-  8dc7eab4281982b90adeafcb5eac8a5e76167b4392a64f8d9029&X-Amz-SignedHeaders=host\
+  Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220%2Fus-west-2%2Fs3%2Faws4_reques\
+  t&X-Amz-Date=20241220T062740Z&X-Amz-Expires=3600&X-Amz-Signature=62589c7d7005\
+  1e15e51ba4c8cd8d8726ccaee9b3255613ae390384f6f1f116a4&X-Amz-SignedHeaders=host\
   &x-id=GetObject"
 series: []
 Published: "2023-07-24T02:53:00.000+00:00"
@@ -37,11 +37,11 @@ NOTION_METADATA:
       url: "https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-b\
         f89-42827b5b6876/ab331a7c-4ee8-4b5b-8557-a1ec483b98e4/Untitled2323.png?\
         X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&\
-        X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102%2Fus-west-2%2Fs3%2Faws\
-        4_request&X-Amz-Date=20241102T001521Z&X-Amz-Expires=3600&X-Amz-Signatur\
-        e=8602a17060faa7c4d7749b9386047a129b1ec523236eea5f9f96d14f53405cec&X-Am\
+        X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220%2Fus-west-2%2Fs3%2Faws\
+        4_request&X-Amz-Date=20241220T062708Z&X-Amz-Expires=3600&X-Amz-Signatur\
+        e=64541bbd80d0d69ced94aae151f7b142ca84edda6cd7b69613932a61ba81d49e&X-Am\
         z-SignedHeaders=host&x-id=GetObject"
-      expiry_time: "2024-11-02T01:15:21.502Z"
+      expiry_time: "2024-12-20T07:27:08.283Z"
   icon: null
   parent:
     type: "database_id"
@@ -166,13 +166,13 @@ NOTION_METADATA:
   url: "https://www.notion.so/Bing-ChatGPT-1317522eeb2f81f9ad66fc2ae9164868"
   public_url: "https://datarecipe.notion.site/Bing-ChatGPT-1317522eeb2f81f9ad66fc\
     2ae9164868"
-UPDATE_TIME: "2024-11-02T00:15:44.325Z"
-EXPIRY_TIME: "2024-11-02T01:15:35.049Z"
+UPDATE_TIME: "2024-12-20T06:27:56.806Z"
+EXPIRY_TIME: "2024-12-20T07:27:40.441Z"
 
 ---
 
 
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/6311954f-e79f-4391-8757-c5d632163401/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241102T001535Z&X-Amz-Expires=3600&X-Amz-Signature=6032726fb066576dbe7917f94f5b091c9a198ef71abf1de6b6138143d6473985&X-Amz-SignedHeaders=host&x-id=GetObject)
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/6311954f-e79f-4391-8757-c5d632163401/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241220T062740Z&X-Amz-Expires=3600&X-Amz-Signature=a69973fca00364c87a7900062b2f3b8baf05edb245cf4943ab063738761e9247&X-Amz-SignedHeaders=host&x-id=GetObject)
 
 
 ### 새로운 Bing에 대해 알아야 할 모든 것
@@ -193,7 +193,7 @@ Bing은 또한 'Bing Visual Search'라는 기능을 제공합니다. 이 기능�
 Bing의 이러한 새로운 기능들은 모두 인공지능(AI) 기술을 기반으로 하고 있습니다. 이는 Bing이 단순히 정보를 검색하는 도구에서 더 나아가, 사용자에게 더욱 풍부하고 개인화된 검색 경험을 제공하는 도구로 변화하고 있다는 것을 의미합니다. 이러한 변화는 Bing이 사용자의 검색 경험을 향상시키기 위해 계속해서 새로운 기술을 도입하고 있음을 보여줍니다.
 
 
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/d784d3d1-fd85-4bb1-8a69-0a065cb114ef/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241102T001535Z&X-Amz-Expires=3600&X-Amz-Signature=6f23ae91a1fb3150075d3e0e85d8e209cebc3a6fee4ead847fd84dee1c7a5f84&X-Amz-SignedHeaders=host&x-id=GetObject)
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/d784d3d1-fd85-4bb1-8a69-0a065cb114ef/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241220T062740Z&X-Amz-Expires=3600&X-Amz-Signature=28e51686334306a293d17bbda15da1b9a9d19b772e266e68efd1d1a84f56a944&X-Amz-SignedHeaders=host&x-id=GetObject)
 
 
 ### 새로운 Bing 사용법과 ChatGPT와의 차이점

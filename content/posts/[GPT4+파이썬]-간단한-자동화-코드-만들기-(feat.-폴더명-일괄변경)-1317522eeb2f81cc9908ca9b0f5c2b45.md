@@ -6,9 +6,9 @@ draft: false
 featuredImage: "https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-2\
   73a-443d-bf89-42827b5b6876/f61feeb0-588b-41e3-801e-d7cc83ddf1ce/photo-1531747\
   118685-ca8fa6e08806-min.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-S\
-  ha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102%2Fus-\
-  west-2%2Fs3%2Faws4_request&X-Amz-Date=20241102T002044Z&X-Amz-Expires=3600&X-A\
-  mz-Signature=484fedb7d4e1778afe7cdaabf146abeabc554874e39e2d1dd4d0a20a9c411c7a\
+  ha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220%2Fus-\
+  west-2%2Fs3%2Faws4_request&X-Amz-Date=20241220T063558Z&X-Amz-Expires=3600&X-A\
+  mz-Signature=1172fecaa86cd8444d02712fea5195e2bbf70e5e87bd8a9c8cff34a73adbb99e\
   &X-Amz-SignedHeaders=host&x-id=GetObject"
 series: []
 Slug: "chatgpt-python-automation"
@@ -38,11 +38,11 @@ NOTION_METADATA:
       url: "https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-b\
         f89-42827b5b6876/f61feeb0-588b-41e3-801e-d7cc83ddf1ce/photo-15317471186\
         85-ca8fa6e08806-min.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content\
-        -Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F202411\
-        02%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241102T001521Z&X-Amz-Ex\
-        pires=3600&X-Amz-Signature=6d15090a50229c3349b73ec3a7fca3cec54de035b8bd\
-        47ab5873d788811d9c8d&X-Amz-SignedHeaders=host&x-id=GetObject"
-      expiry_time: "2024-11-02T01:15:21.685Z"
+        -Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F202412\
+        20%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241220T062708Z&X-Amz-Ex\
+        pires=3600&X-Amz-Signature=983ddc6b8b90dcb732dda0cfa080df45a17bce8536d0\
+        754eef29924b4eeebdc5&X-Amz-SignedHeaders=host&x-id=GetObject"
+      expiry_time: "2024-12-20T07:27:08.595Z"
   icon: null
   parent:
     type: "database_id"
@@ -179,8 +179,8 @@ NOTION_METADATA:
       rich_text: []
   url: "https://www.notion.so/GPT4-feat-1317522eeb2f81cc9908ca9b0f5c2b45"
   public_url: "https://datarecipe.notion.site/GPT4-feat-1317522eeb2f81cc9908ca9b0f5c2b45"
-UPDATE_TIME: "2024-11-02T00:20:53.633Z"
-EXPIRY_TIME: "2024-11-02T01:20:44.098Z"
+UPDATE_TIME: "2024-12-20T06:36:11.667Z"
+EXPIRY_TIME: "2024-12-20T07:35:57.778Z"
 
 ---
 
@@ -188,7 +188,7 @@ EXPIRY_TIME: "2024-11-02T01:20:44.098Z"
 당신은 어디까지 AI를 활용해보셨나요? 특히, OpenAI의 ChatGPT를 사용해 보신 적이 있나요? 이 무료 도구로도 놀라운 결과를 얻을 수 있지만, 아주 작은 비용을 지불하면 GPT-4와 같은 최신 AI를 사용하여 더욱 향상된 결과를 얻을 수 있습니다. 그런데, 이런 AI 도구 중에서 가장 눈에 띄는 것이 바로 코딩입니다. 코드를 작성하는 것은 때때로 복잡하고 시간이 많이 소요되는 작업이지만, GPT-4를 이용하면 이를 매우 간단하게 해결할 수 있습니다. 수많은 수작업과 시간을 잡아먹는 일들이 순식간에 해결되는 것을 상상해 보세요. 이번 글에서는 ChatGPT와 파이썬을 이용하여 자동화 코드를 어떻게 만들 수 있는지에 대한 대표적인 사례를 살펴보겠습니다. 여기서 제시된 방법을 통해 여러분의 일상 업무에 어떻게 AI를 활용할 수 있는지에 대한 아이디어를 얻어가시기를 바랍니다.
 
 
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/3bf3cbec-4d0b-492c-a4ea-89d706ff0f71/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241102T002044Z&X-Amz-Expires=3600&X-Amz-Signature=612c2797bdc8987b2860d54c9ffbceda126a80088af19377e98d17bc4b5d51dc&X-Amz-SignedHeaders=host&x-id=GetObject)
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/3bf3cbec-4d0b-492c-a4ea-89d706ff0f71/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241220T063557Z&X-Amz-Expires=3600&X-Amz-Signature=7184f0ac721f2f4a2637a6c818975c0214c40f10ad063c6a46eb387d728f91be&X-Amz-SignedHeaders=host&x-id=GetObject)
 
 
 ## **사무실 일상에서 마주치는 문제**
@@ -200,7 +200,7 @@ EXPIRY_TIME: "2024-11-02T01:20:44.098Z"
 	- 원래 폴더명 : 202210 글로벌전략 프로젝트
 	- 바꾸고 싶은 폴더명 : 2022-10-글로벌전략 프로젝트
 
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/a9d50d5c-3627-4de1-8960-332bc057aead/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241102T002044Z&X-Amz-Expires=3600&X-Amz-Signature=131b5a3767ff832898b4deb678837bd8fb70840f8a92853ae711c3079c3c9507&X-Amz-SignedHeaders=host&x-id=GetObject)
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/a9d50d5c-3627-4de1-8960-332bc057aead/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241220T063557Z&X-Amz-Expires=3600&X-Amz-Signature=e8a44414ea93a4c470d82578ad82c840f582c63e0b362ef9bdee9df3e6e3f152&X-Amz-SignedHeaders=host&x-id=GetObject)
 
 
 ## **AI를 이용한 해결 방법 : ChatGPT+파이썬**
@@ -209,7 +209,7 @@ EXPIRY_TIME: "2024-11-02T01:20:44.098Z"
 파이썬은 강력한 프로그래밍 언어이며, 여기에 GPT-4의 능력을 결합하면 놀라운 결과를 얻을 수 있습니다. 파이썬의 `os` 모듈은 우리가 파일 시스템을 손쉽게 다룰 수 있게 도와주며, `re` 모듈은 복잡한 패턴을 손쉽게 찾아내는 데 사용됩니다. 이 두 가지 모듈을 활용하여, 우리는 폴더명을 일괄적으로 변경하는 코드를 쉽게 작성할 수 있습니다.
 
 
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/1cc4b2ab-9ea1-4a3f-9337-5d3e9b3180a2/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241102T002044Z&X-Amz-Expires=3600&X-Amz-Signature=283cb3f8fd0d88c173e9e5d0aad64ef4c1086028719f354b345698be709a353a&X-Amz-SignedHeaders=host&x-id=GetObject)
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/1cc4b2ab-9ea1-4a3f-9337-5d3e9b3180a2/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241220T063557Z&X-Amz-Expires=3600&X-Amz-Signature=a603ae9f8fbd81b31f00e893f349ea6bb4a32e432611ce099d2c6b1d12003df4&X-Amz-SignedHeaders=host&x-id=GetObject)
 
 
 ## **코드에 대한 설명**
@@ -251,7 +251,7 @@ rename_subfolders(path_to_rename)
 이 코드를 통해, 폴더 구조를 관리하는 데 있어서 효율적이고 일관된 명명 규칙을 적용할 수 있게 됩니다. 이런 식으로 파이썬을 이용하면 복잡하고 반복적인 작업을 간단하게 자동화할 수 있습니다. 이제 이런 유형의 문제를 해결할 때 이 코드를 참고하거나, 필요에 따라 수정해서 사용하실 수 있습니다.
 
 
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/6c382ce2-0e7c-4422-a3f1-837ab9f1c2b5/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241102T002044Z&X-Amz-Expires=3600&X-Amz-Signature=800223fa1d176fd5c401fedfd2521953a602de2f69ae6df24c629549169b724e&X-Amz-SignedHeaders=host&x-id=GetObject)
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/6c382ce2-0e7c-4422-a3f1-837ab9f1c2b5/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241220T063557Z&X-Amz-Expires=3600&X-Amz-Signature=b249e0215721fe4da8eb705aaad13638aa6413f92e512dcd915c9e23b418458d&X-Amz-SignedHeaders=host&x-id=GetObject)
 
 
 ## **결론과 추가 팁**

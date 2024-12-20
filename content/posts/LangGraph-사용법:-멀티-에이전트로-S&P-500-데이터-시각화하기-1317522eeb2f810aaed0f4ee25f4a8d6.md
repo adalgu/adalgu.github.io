@@ -8,9 +8,9 @@ featuredImage: "https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-2\
   -03_15.51.16_-_A_graphical_illustration_of_multiple_agents_collaborating_in_a\
   _workflow_cycle_showing_various_agents_like_a_search_agent_a_chart_generation\
   _agent_a.webp?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-\
-  PAYLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102%2Fus-west-2%2Fs3%2Fa\
-  ws4_request&X-Amz-Date=20241102T001711Z&X-Amz-Expires=3600&X-Amz-Signature=49\
-  f86730a4516836a3346e0fd91edc82d06d4b497a7ad940a246fd7d78f56201&X-Amz-SignedHe\
+  PAYLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220%2Fus-west-2%2Fs3%2Fa\
+  ws4_request&X-Amz-Date=20241220T062949Z&X-Amz-Expires=3600&X-Amz-Signature=cb\
+  60312fc740632c3509b1dad9121c3eef6a958ec79485a54f9296b2fc2fdbf3&X-Amz-SignedHe\
   aders=host&x-id=GetObject"
 series: []
 Subtitle: "LangGraph: 멀티 에이전트 콜라보레이션의 새로운 표준"
@@ -47,11 +47,11 @@ NOTION_METADATA:
         15.51.16_-_A_graphical_illustration_of_multiple_agents_collaborating_in\
         _a_workflow_cycle_showing_various_agents_like_a_search_agent_a_chart_ge\
         neration_agent_a.webp?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sh\
-        a256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102%\
-        2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241102T001521Z&X-Amz-Expir\
-        es=3600&X-Amz-Signature=12c4e629de4580cbab45440d738e21138094373a2c28c1c\
-        20d7c346d0b0b6efe&X-Amz-SignedHeaders=host&x-id=GetObject"
-      expiry_time: "2024-11-02T01:15:21.508Z"
+        a256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220%\
+        2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241220T062708Z&X-Amz-Expir\
+        es=3600&X-Amz-Signature=9da4b6dddf05c122bbc0e4e1a2324490ab43fe061ac1dce\
+        8f9e7976a55fca691&X-Amz-SignedHeaders=host&x-id=GetObject"
+      expiry_time: "2024-12-20T07:27:08.291Z"
   icon: null
   parent:
     type: "database_id"
@@ -232,8 +232,8 @@ NOTION_METADATA:
   url: "https://www.notion.so/LangGraph-S-P-500-1317522eeb2f810aaed0f4ee25f4a8d6"
   public_url: "https://datarecipe.notion.site/LangGraph-S-P-500-1317522eeb2f810aa\
     ed0f4ee25f4a8d6"
-UPDATE_TIME: "2024-11-02T00:17:21.852Z"
-EXPIRY_TIME: "2024-11-02T01:17:09.327Z"
+UPDATE_TIME: "2024-12-20T06:30:04.946Z"
+EXPIRY_TIME: "2024-12-20T07:29:48.242Z"
 
 ---
 
@@ -244,7 +244,7 @@ EXPIRY_TIME: "2024-11-02T01:17:09.327Z"
 안녕하세요! 오늘은 최근에 출시된 LangChain의 새로운 라이브러리인 LangGraph에 대해 알아보겠습니다. 이 글에서는 LangGraph의 멀티 에이전트 콜라보레이션 기능을 살펴보고, 실제 예제를 통해 어떻게 동작하는지 알아보겠습니다. 이 글을 통해 LangGraph의 기본 개념부터 활용법까지 쉽게 따라할 수 있도록 설명드리겠습니다.
 
 
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/fed4ecbe-e2cc-4b1a-8639-2644d21b4c37/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241102T001709Z&X-Amz-Expires=3600&X-Amz-Signature=a6c3ed42319342898f48bb464acbb334ccefbfe778e014ca24842211b22ff674&X-Amz-SignedHeaders=host&x-id=GetObject)
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/fed4ecbe-e2cc-4b1a-8639-2644d21b4c37/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241220T062948Z&X-Amz-Expires=3600&X-Amz-Signature=f6802c091e5dc9a4659fb0773b7b1d1489184d2f56d18036db9d3ced6583fa33&X-Amz-SignedHeaders=host&x-id=GetObject)
 
 
 ## LangGraph란 무엇인가?
@@ -259,7 +259,7 @@ LangGraph는 LangChain에서 만든 새로운 라이브러리로, 여러 에이�
 1. **글로벌 스테이트 관리**: 모든 에이전트가 현재 상태를 공유하여, 전체 시스템의 상태를 파악하고 작업을 진행합니다.
 1. **다양한 도구와의 연동**: 검색, 차트 생성, 코드 실행 등 다양한 도구와 연동하여 작업을 수행할 수 있습니다.
 
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/d3ebb614-4ce4-4676-b5eb-de8883f890c6/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241102T001709Z&X-Amz-Expires=3600&X-Amz-Signature=5fab51cc5f2c3770e8947f4505076d87c3a3c272868692bc1d6a206b5538242f&X-Amz-SignedHeaders=host&x-id=GetObject)
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/d3ebb614-4ce4-4676-b5eb-de8883f890c6/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241220T062948Z&X-Amz-Expires=3600&X-Amz-Signature=550306d09d345a6346331e3b1d489847371739251e8589b76919d010c3428551&X-Amz-SignedHeaders=host&x-id=GetObject)
 
 
 ### LangGraph의 혁신적인 점

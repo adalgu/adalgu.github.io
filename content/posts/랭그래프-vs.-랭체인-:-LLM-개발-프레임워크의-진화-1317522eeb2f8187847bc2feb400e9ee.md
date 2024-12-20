@@ -1,16 +1,16 @@
 ---
 title: "랭그래프 vs. 랭체인 : LLM 개발 프레임워크의 진화"
 date: "2024-11-01T18:07:00.000Z"
-lastmod: "2024-11-01T18:17:00.000Z"
+lastmod: "2024-11-05T05:09:00.000Z"
 draft: false
 featuredImage: "https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-2\
   73a-443d-bf89-42827b5b6876/bfb58d84-2a6a-44ea-a495-21c7be584838/DALLE_2024-07\
   -03_17.45.10_-_A_futuristic_sleek_design_cover_image_for_a_blog_post_titled_A\
   I_Development__The_New_Horizon_featuring_abstract_representations_of_AI_model\
   s_neur.webp?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PA\
-  YLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102%2Fus-west-2%2Fs3%2Faws\
-  4_request&X-Amz-Date=20241102T001736Z&X-Amz-Expires=3600&X-Amz-Signature=9cf4\
-  7462ca2d33e4ed7341d73a09e0eb6dc1b97e061974226a606892c2ed3c73&X-Amz-SignedHead\
+  YLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220%2Fus-west-2%2Fs3%2Faws\
+  4_request&X-Amz-Date=20241220T063031Z&X-Amz-Expires=3600&X-Amz-Signature=5249\
+  79217406e57a6fa6dde4be7f7ee791f568ba7f823211698ed3927f5a17ab&X-Amz-SignedHead\
   ers=host&x-id=GetObject"
 series: []
 Subtitle: "AI 애플리케이션 개발을 위한 최신 도구, LangGraph와 LangChain의 특징과 차이점 탐구"
@@ -35,7 +35,7 @@ NOTION_METADATA:
   object: "page"
   id: "1317522e-eb2f-8187-847b-c2feb400e9ee"
   created_time: "2024-11-01T18:07:00.000Z"
-  last_edited_time: "2024-11-01T18:17:00.000Z"
+  last_edited_time: "2024-11-05T05:09:00.000Z"
   created_by:
     object: "user"
     id: "04ade8dc-857d-40ba-9484-61bf41015314"
@@ -50,11 +50,11 @@ NOTION_METADATA:
         17.45.10_-_A_futuristic_sleek_design_cover_image_for_a_blog_post_titled\
         _AI_Development__The_New_Horizon_featuring_abstract_representations_of_\
         AI_models_neur.webp?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha2\
-        56=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102%2F\
-        us-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241102T001521Z&X-Amz-Expires\
-        =3600&X-Amz-Signature=824e02d7b5cf100654bcb3a93de1dd4dcb0408d87b21bd799\
-        fb8dfc6aa201f3b&X-Amz-SignedHeaders=host&x-id=GetObject"
-      expiry_time: "2024-11-02T01:15:21.505Z"
+        56=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220%2F\
+        us-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241220T062708Z&X-Amz-Expires\
+        =3600&X-Amz-Signature=9017c0ce3812759719232dea0b19eee68bcd7d794ad35ee64\
+        e6e69a28f3c2117&X-Amz-SignedHeaders=host&x-id=GetObject"
+      expiry_time: "2024-12-20T07:27:08.286Z"
   icon: null
   parent:
     type: "database_id"
@@ -100,7 +100,7 @@ NOTION_METADATA:
     Last Updated:
       id: "%5C%5BBm"
       type: "last_edited_time"
-      last_edited_time: "2024-11-01T18:17:00.000Z"
+      last_edited_time: "2024-11-05T05:09:00.000Z"
     Tweet:
       id: "%60SwQ"
       type: "rich_text"
@@ -242,8 +242,8 @@ NOTION_METADATA:
           href: null
   url: "https://www.notion.so/vs-LLM-1317522eeb2f8187847bc2feb400e9ee"
   public_url: "https://datarecipe.notion.site/vs-LLM-1317522eeb2f8187847bc2feb400e9ee"
-UPDATE_TIME: "2024-11-02T00:17:51.865Z"
-EXPIRY_TIME: "2024-11-02T01:17:22.650Z"
+UPDATE_TIME: "2024-12-20T06:30:59.417Z"
+EXPIRY_TIME: "2024-12-20T07:30:23.553Z"
 
 ---
 
@@ -254,9 +254,9 @@ EXPIRY_TIME: "2024-11-02T01:17:22.650Z"
 인공지능 기술의 급속한 발전으로 대규모 언어 모델(LLM)을 활용한 애플리케이션 개발이 폭발적으로 증가하고 있습니다. 이러한 흐름 속에서 LLM 개발을 위한 프레임워크도 빠르게 진화하고 있는데, 오늘은 그 중 가장 주목받고 있는 랭체인(LangChain)과 랭그래프(LangGraph)에 대해 알아보겠습니다.
 
 
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/a7818b90-aed3-4bac-bfe2-f6dd54d4b94b/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241102T001724Z&X-Amz-Expires=3600&X-Amz-Signature=2420e59fd73046cb285815fcbfa9cb7d9562dcbffcc3459f04d5e155308f81e4&X-Amz-SignedHeaders=host&x-id=GetObject)
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/a7818b90-aed3-4bac-bfe2-f6dd54d4b94b/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241220T063024Z&X-Amz-Expires=3600&X-Amz-Signature=6353e0de58b175083f6e731f519f83b162be1400886dd257ede1e3bfc71763fe&X-Amz-SignedHeaders=host&x-id=GetObject)
 
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/bc41caab-fb96-4302-b0f8-9c591c1444f2/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241102T001723Z&X-Amz-Expires=3600&X-Amz-Signature=dc9aa284fc712b9d8dd2279f23694e487490a791e96fa53a91af08bd1c999bb9&X-Amz-SignedHeaders=host&x-id=GetObject)
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/bc41caab-fb96-4302-b0f8-9c591c1444f2/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241220T063024Z&X-Amz-Expires=3600&X-Amz-Signature=f2b8f2b9966737735425deb59428403a4c0c8a3c0800bd3c03510c87b78a28e4&X-Amz-SignedHeaders=host&x-id=GetObject)
 
 
 랭그래프(LangGraph)는 대규모 언어 모델(LLM)을 사용하여 복잡한 시스템을 구축하기 위한 Python 라이브러리입니다. 이는 랭체인(LangChain) 프레임워크의 일부로, 다음과 같은 특징을 가지고 있습니다:
@@ -328,7 +328,7 @@ LangGraph는 주로 다음과 같은 상황에서 사용됩니다:
 이러한 모듈식 구조 덕분에 개발자는 필요한 기능만을 선택적으로 사용하거나 조합할 수 있어 매우 유연한 개발이 가능합니다.
 
 
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/523e3f34-0c33-4912-97e9-9fc80ef6199b/DALLE_2024-07-03_17.45.13_-_A_visual_representation_of_LangChain_framework_with_interconnected_modules_labeled__Model_I_O_Data_Connection_Chain_Agent_Memory_Callback_depict.webp?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241102T001722Z&X-Amz-Expires=3600&X-Amz-Signature=1a223fca8a859102df401653c704d7b5e3054c7f3cf606dd385121bb93cf0977&X-Amz-SignedHeaders=host&x-id=GetObject)
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/523e3f34-0c33-4912-97e9-9fc80ef6199b/DALLE_2024-07-03_17.45.13_-_A_visual_representation_of_LangChain_framework_with_interconnected_modules_labeled__Model_I_O_Data_Connection_Chain_Agent_Memory_Callback_depict.webp?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241220T063023Z&X-Amz-Expires=3600&X-Amz-Signature=086d8a50a012adbe554e011eff4aba01d76db8c1602be7fde885320650306124&X-Amz-SignedHeaders=host&x-id=GetObject)
 
 
 ## 랭그래프(LangGraph): LLM 개발의 진화
@@ -354,7 +354,7 @@ LangGraph는 주로 다음과 같은 상황에서 사용됩니다:
 1. **시각화**:
 	- 랭그래프는 복잡한 워크플로우를 그래프 형태로 시각화할 수 있어, 전체 프로세스를 쉽게 이해하고 관리할 수 있습니다.
 
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/f505dde8-35df-451f-9e76-a06117ee2ec3/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241102T001722Z&X-Amz-Expires=3600&X-Amz-Signature=6675835de60cfc1e121f5d068177e46c88cbc4d5a78dd00f5ecdf75090930c69&X-Amz-SignedHeaders=host&x-id=GetObject)
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/f505dde8-35df-451f-9e76-a06117ee2ec3/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241220T063023Z&X-Amz-Expires=3600&X-Amz-Signature=d3b75ed64aeba3b39edb4e79d67a471b000d0cab6009c730ec2e00cb4f9d03b5&X-Amz-SignedHeaders=host&x-id=GetObject)
 
 
 ## AutoGPT를 통한 랭체인과 랭그래프의 이해

@@ -1,5 +1,5 @@
 baseURL = "https://adalgu.github.io/"
-title = "My New Hugo Site"
+title = "Exobrain"
 theme = "DoIt"
 
 # 오류 발생 시에도 계속 빌드하도록 설정

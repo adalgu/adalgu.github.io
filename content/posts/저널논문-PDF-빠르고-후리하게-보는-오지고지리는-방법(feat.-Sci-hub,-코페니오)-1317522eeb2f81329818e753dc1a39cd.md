@@ -6,9 +6,9 @@ draft: false
 featuredImage: "https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-2\
   73a-443d-bf89-42827b5b6876/748d8932-6467-428f-a412-b5c35dd462a0/_2020-03-17__\
   12.21.22.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-P\
-  AYLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102%2Fus-west-2%2Fs3%2Faw\
-  s4_request&X-Amz-Date=20241102T001548Z&X-Amz-Expires=3600&X-Amz-Signature=c1f\
-  68984eaad31918b159bf64d51dab4d717941ac1b25915d21c09f2e2495d77&X-Amz-SignedHea\
+  AYLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220%2Fus-west-2%2Fs3%2Faw\
+  s4_request&X-Amz-Date=20241220T062801Z&X-Amz-Expires=3600&X-Amz-Signature=453\
+  49540f4e4067854a7216a99c56715d3310d510e5639204dcccd411637c6ca&X-Amz-SignedHea\
   ders=host&x-id=GetObject"
 series: []
 Slug: "paper-pdf-scihub-kopernio"
@@ -38,11 +38,11 @@ NOTION_METADATA:
       url: "https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-b\
         f89-42827b5b6876/748d8932-6467-428f-a412-b5c35dd462a0/_2020-03-17__12.2\
         1.22.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED\
-        -PAYLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102%2Fus-west-2%2\
-        Fs3%2Faws4_request&X-Amz-Date=20241102T001521Z&X-Amz-Expires=3600&X-Amz\
-        -Signature=0f725b163ead709e5e28d998c0bebdffe7bf9bbfc6ec3f9c098f5cda74a0\
-        46be&X-Amz-SignedHeaders=host&x-id=GetObject"
-      expiry_time: "2024-11-02T01:15:21.503Z"
+        -PAYLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220%2Fus-west-2%2\
+        Fs3%2Faws4_request&X-Amz-Date=20241220T062708Z&X-Amz-Expires=3600&X-Amz\
+        -Signature=835eae4bdbe4c7e378cf69ce581060af75bf711517dd5114b631f03466ea\
+        391c&X-Amz-SignedHeaders=host&x-id=GetObject"
+      expiry_time: "2024-12-20T07:27:08.284Z"
   icon:
     type: "emoji"
     emoji: "📄"
@@ -182,13 +182,13 @@ NOTION_METADATA:
   url: "https://www.notion.so/PDF-feat-Sci-hub-1317522eeb2f81329818e753dc1a39cd"
   public_url: "https://datarecipe.notion.site/PDF-feat-Sci-hub-1317522eeb2f813298\
     18e753dc1a39cd"
-UPDATE_TIME: "2024-11-02T00:15:57.095Z"
-EXPIRY_TIME: "2024-11-02T01:15:44.890Z"
+UPDATE_TIME: "2024-12-20T06:28:17.331Z"
+EXPIRY_TIME: "2024-12-20T07:27:57.383Z"
 
 ---
 
 
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/ce2e2ad6-7132-4ec7-b83c-4724b884077b/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241102T001544Z&X-Amz-Expires=3600&X-Amz-Signature=2d1f27e54a575f6460afa230f4db5cffd2c43a9cc6898444b2cc510fb1d8f960&X-Amz-SignedHeaders=host&x-id=GetObject)
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/ce2e2ad6-7132-4ec7-b83c-4724b884077b/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241220T062757Z&X-Amz-Expires=3600&X-Amz-Signature=c95813123861c5d6ec518d410a624701ada88b280436f1ea2ae9105aae3a707e&X-Amz-SignedHeaders=host&x-id=GetObject)
 
 
 <details>
@@ -217,7 +217,7 @@ EXPIRY_TIME: "2024-11-02T01:15:44.890Z"
 - 저자의 홈페이지에서도 [공개]([https://www.hbs.edu/faculty/Publication Files/Cavallo_Alberto_J2_More Amazon Effects-Online Competition and Pricing Behaviors_61ab3273-d446-4dd5-9e71-469c54c46662.pdf](https://www.hbs.edu/faculty/Publication%20Files/Cavallo_Alberto_J2_More%20Amazon%20Effects-Online%20Competition%20and%20Pricing%20Behaviors_61ab3273-d446-4dd5-9e71-469c54c46662.pdf))하고 있다.
 - 그런데 NBER에서는 아래와 같이 개도국 접속자만 무료(아래 그림 빨간색 강조)라고 뜬다. 그쪽 정책이야 어쩔 수 없는 노릇이지만, 구글링으로 한번 더 하면 워킹페이퍼보다 더 최종 버전의 논문을 볼 수 있는 상황이라 다소 실효성 없는 정책이다.
 
-	![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/0d58c6aa-5d31-414c-865a-1761b6b5172b/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241102T001545Z&X-Amz-Expires=3600&X-Amz-Signature=d0434e2fbcf88d2796b13b42c30a0666971dedb4e727862b7bb97a52b444a776&X-Amz-SignedHeaders=host&x-id=GetObject)
+	![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/0d58c6aa-5d31-414c-865a-1761b6b5172b/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241220T062757Z&X-Amz-Expires=3600&X-Amz-Signature=7a641cb5964dd7ad2844488e502bf637f2a3d40faabeb0ab4380ace829d7f8b9&X-Amz-SignedHeaders=host&x-id=GetObject)
 
 - 팁 하나, VPN으로 우회 접속
 	- NBER과 같은 상황인 경우에는 VPN으로 개도국 프록시 서버로 우회하여 접속하면 바로 논문을 볼 수 있다. 학교에 적을 두고 있는 사람의 경우 학교 프로시 서버를 거쳐서 저널 웹사이트에 접속하기도 한다. 도서관에서 저널을 구독하는 경우 교내 IP에 대해서만 열람을 허용하는 정책때문이다.
@@ -306,5 +306,5 @@ _위 꿀팁은 대구경북과기원 사서 웹페이지에서 퍼왔다. 사서
 위 방법보다 더 오지고 지린 방법이 있으면 댓글로 남겨주길 바란다.
 
 
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/c4bbd7ff-719c-4a7d-b246-e4c765b69d30/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241102T001544Z&X-Amz-Expires=3600&X-Amz-Signature=dd4408544cae29ca85784d97f54569a23a911eab43868b2e24428da278227997&X-Amz-SignedHeaders=host&x-id=GetObject)
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/c4bbd7ff-719c-4a7d-b246-e4c765b69d30/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241220T062757Z&X-Amz-Expires=3600&X-Amz-Signature=1b72a282991f8d5a473c4a08a0edc35dd690e33d5b8424f58d9dd69679d2c316&X-Amz-SignedHeaders=host&x-id=GetObject)
 

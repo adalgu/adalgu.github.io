@@ -167,13 +167,13 @@ NOTION_METADATA:
   url: "https://www.notion.so/Passion-Economy-1317522eeb2f8142adb8cc377339cfad"
   public_url: "https://datarecipe.notion.site/Passion-Economy-1317522eeb2f8142adb\
     8cc377339cfad"
-UPDATE_TIME: "2024-11-02T00:21:48.175Z"
-EXPIRY_TIME: "2024-11-02T01:21:38.965Z"
+UPDATE_TIME: "2024-12-20T06:38:10.952Z"
+EXPIRY_TIME: "2024-12-20T07:37:53.258Z"
 
 ---
 
 
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/55b5d5d1-8c16-41db-a2ea-3d1b7295a78c/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241102T002138Z&X-Amz-Expires=3600&X-Amz-Signature=cc5740a275a54510cc17f6e0d54f10749ec6ba5bd0efc62a2c1928ab9850c9dc&X-Amz-SignedHeaders=host&x-id=GetObject)
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/55b5d5d1-8c16-41db-a2ea-3d1b7295a78c/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241220T063753Z&X-Amz-Expires=3600&X-Amz-Signature=0a4e1ab67fc90c92cb7e823d835a8a5b7b061a880543ddd9815bb0fa2159ad69&X-Amz-SignedHeaders=host&x-id=GetObject)
 
 
 [https://a16z.com/2019/10/08/the-passion-economy-and-the-future-of-work/](https://a16z.com/2019/10/08/the-passion-economy-and-the-future-of-work/)

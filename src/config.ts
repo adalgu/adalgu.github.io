@@ -1,4 +1,5 @@
 import { Client, isFullBlock, iteratePaginatedAPI } from "@notionhq/client";
+import "dotenv/config";
 
 import userDefinedConfig from "../notion-hugo.config";
 
@@ -43,6 +44,12 @@ export async function loadConfig(): Promise<Config> {
     const len = url.pathname.length;
     if (len < 32) throw Error(`[Error] The page_url ${url.href} is invalid`);
     const pageId = url.pathname.slice(len - 32, len);
+
+    // Add error handling for missing NOTION_TOKEN
+    if (!process.env.NOTION_TOKEN) {
+      throw new Error("NOTION_TOKEN environment variable is not set");
+    }
+
     const notion = new Client({
       auth: process.env.NOTION_TOKEN,
     });

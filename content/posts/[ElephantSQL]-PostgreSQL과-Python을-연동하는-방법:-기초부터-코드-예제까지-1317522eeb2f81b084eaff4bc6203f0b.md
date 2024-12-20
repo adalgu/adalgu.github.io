@@ -8,9 +8,9 @@ featuredImage: "https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-2\
   -22_17.53.06_-_A_visually_striking_cover_image_for_a_blog_post_about_integrat\
   ing_databases_with_AI_applications_featuring_symbolic_representations_of_AI_P\
   ostgreSQL.webp?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED\
-  -PAYLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102%2Fus-west-2%2Fs3%2F\
-  aws4_request&X-Amz-Date=20241102T001649Z&X-Amz-Expires=3600&X-Amz-Signature=b\
-  c513eb0275e77a25500e3e5621390c2072c9c9552a8dc31394778b94f8cf025&X-Amz-SignedH\
+  -PAYLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220%2Fus-west-2%2Fs3%2F\
+  aws4_request&X-Amz-Date=20241220T062932Z&X-Amz-Expires=3600&X-Amz-Signature=2\
+  7f4a7ab778a1a441709e83af9077f7d92f50ad46299e9e6c7b076d3f6df80d1&X-Amz-SignedH\
   eaders=host&x-id=GetObject"
 series: []
 Subtitle: "AI 기반 애플리케이션에서 데이터베이스 통합하기: PostgreSQL과 파이썬 사례 연구"
@@ -53,11 +53,11 @@ NOTION_METADATA:
         17.53.06_-_A_visually_striking_cover_image_for_a_blog_post_about_integr\
         ating_databases_with_AI_applications_featuring_symbolic_representations\
         _of_AI_PostgreSQL.webp?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-S\
-        ha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102\
-        %2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241102T001521Z&X-Amz-Expi\
-        res=3600&X-Amz-Signature=ab102910402bb6fc34b774330291b917c9a11884e4d44d\
-        323ec598823685c843&X-Amz-SignedHeaders=host&x-id=GetObject"
-      expiry_time: "2024-11-02T01:15:21.507Z"
+        ha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220\
+        %2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241220T062708Z&X-Amz-Expi\
+        res=3600&X-Amz-Signature=ed33361b177b94cde744f0963e0151de53f8302ca62885\
+        d033817b8c59c7e354&X-Amz-SignedHeaders=host&x-id=GetObject"
+      expiry_time: "2024-12-20T07:27:08.285Z"
   icon: null
   parent:
     type: "database_id"
@@ -255,8 +255,8 @@ NOTION_METADATA:
     f4bc6203f0b"
   public_url: "https://datarecipe.notion.site/ElephantSQL-PostgreSQL-Python-13175\
     22eeb2f81b084eaff4bc6203f0b"
-UPDATE_TIME: "2024-11-02T00:17:08.613Z"
-EXPIRY_TIME: "2024-11-02T01:16:48.920Z"
+UPDATE_TIME: "2024-12-20T06:29:47.606Z"
+EXPIRY_TIME: "2024-12-20T07:29:31.321Z"
 
 ---
 
@@ -279,7 +279,7 @@ EXPIRY_TIME: "2024-11-02T01:16:48.920Z"
 [https://www.bytebase.com/blog/postgres-vs-mongodb/](https://www.bytebase.com/blog/postgres-vs-mongodb/)
 
 
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/274558e5-f703-4399-8bca-f810e510ec31/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241102T001649Z&X-Amz-Expires=3600&X-Amz-Signature=7ecb2bcb466ff784634c43b5f8e73c067c07f333e268c2c4efb86f16d3b092c6&X-Amz-SignedHeaders=host&x-id=GetObject)
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/274558e5-f703-4399-8bca-f810e510ec31/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241220T062931Z&X-Amz-Expires=3600&X-Amz-Signature=46637f6095ad5cd7ec7cac4c6d1b48356caf3b742862af7f19f24a40fdd2e3a9&X-Amz-SignedHeaders=host&x-id=GetObject)
 
 
 비록 MongoDB를 사용하여 로그 데이터를 관리하고, 필요에 따라 SQL 데이터베이스로 이전하는 방안도 고려 가능했지만, 프로젝트의 현재 요구 사항과 앱이 생성할 로그 데이터의 양을 고려했을 때, 어느 쪽을 선택해도 큰 문제가 없어 보였다. 그러나 최종적으로는 강화학습에 활용될 로그 데이터의 구조화와 축적의 중요성을 고려하여 PostgreSQL을 선택하기로 결정했다.
@@ -298,7 +298,7 @@ EXPIRY_TIME: "2024-11-02T01:16:48.920Z"
 >   
 > - **강력한 보안:** PostgreSQL은 다양한 보안 기능을 제공하여 데이터를 안전하게 보호합니다. 암호화, 접근 제어, 감사 추적 등의 기능을 통해 데이터 유출 및 침해를 방지할 수 있습니다.  
 >   
-> ![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/0714b38d-01fa-4c94-9c56-ca80167fa498/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241102T001649Z&X-Amz-Expires=3600&X-Amz-Signature=ed9cb097160d8d4354edce33fcf29861be5efd07727e5f280b69806a74adca8c&X-Amz-SignedHeaders=host&x-id=GetObject)
+> ![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/0714b38d-01fa-4c94-9c56-ca80167fa498/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241220T062931Z&X-Amz-Expires=3600&X-Amz-Signature=3de173e436648b9bf227bf0101c56a3182d34b24f3b7f291917b9f4dd9584ab2&X-Amz-SignedHeaders=host&x-id=GetObject)
 
 
 [https://www.tutorialspoint.com/postgresql/postgresql_environment.htm](https://www.tutorialspoint.com/postgresql/postgresql_environment.htm)
@@ -313,7 +313,7 @@ PostgreSQL은 일반적으로 로컬 환경에서 설치하여 사용되지만, 
 [https://www.elephantsql.com/](https://www.elephantsql.com/)
 
 
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/cbf1c15e-91a6-4778-965c-386750619ba1/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241102T001649Z&X-Amz-Expires=3600&X-Amz-Signature=c9b30e6a7b5f3fdbe5a7f9efb59dbd56efd7fe27fc17267215d076615d4a29a0&X-Amz-SignedHeaders=host&x-id=GetObject)
+![](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/cbf1c15e-91a6-4778-965c-386750619ba1/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241220T062931Z&X-Amz-Expires=3600&X-Amz-Signature=81b39343b6cb35adcc5cfa9ff50a9f3ab5d9e1bf1fc1c6a72f2fd3d99888e410&X-Amz-SignedHeaders=host&x-id=GetObject)
 
 
 # **2. 파이썬에서 PostgreSQL 사용 코드 설명**
@@ -350,7 +350,7 @@ conn_string = f"dbname={dbname} user={user} host={host} password={password}"
 데이터베이스 이름, 사용자 이름, 호스트, 비밀번호를 변수에 저장하고, `f-string`을 사용하여 연결 문자열을 생성한다. 해당 정보들은 ElephantSQL에서 Instance를 생성한 이후에 확인할 수 있다.
 
 
-![ElephantSQL에서 확인할 수 있는 DB세팅 정보](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/4c1c7fdd-c1db-48e0-8f05-e77688bac196/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45GO43JXI4%2F20241102%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241102T001649Z&X-Amz-Expires=3600&X-Amz-Signature=8ceb062eed316c997d18cbd4af75e335c7c2859dd2f758d74de8eaef3bed038d&X-Amz-SignedHeaders=host&x-id=GetObject)
+![ElephantSQL에서 확인할 수 있는 DB세팅 정보](https://prod-files-secure.s3.us-west-2.amazonaws.com/94f51666-273a-443d-bf89-42827b5b6876/4c1c7fdd-c1db-48e0-8f05-e77688bac196/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45FSPPWI6X%2F20241220%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20241220T062931Z&X-Amz-Expires=3600&X-Amz-Signature=bf0f4a6a7d05852789f04b7ec89d2297b101160e79d6eb29669acd4f81337423&X-Amz-SignedHeaders=host&x-id=GetObject)
 
 
 **3. 데이터베이스 연결**
