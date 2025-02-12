@@ -48,12 +48,28 @@ export async function renderPage(page: PageObjectResponse, notion: Client) {
   const mdString = n2m.toMarkdownString(mdblocks);
   page.properties.Name;
   const title = getPageTitle(page);
+
+  // --- 변경된 부분: Published 속성 사용 --- //
+  // Published 속성이 존재하고 올바른 날짜가 있다면 이를 date로 사용하고,
+  // 그렇지 않으면 last_edited_time을 date로 사용합니다.
+  let publishedDate: string;
+  if (
+    page.properties["Published"] &&
+    page.properties["Published"].type === "date" &&
+    page.properties["Published"].date &&
+    page.properties["Published"].date.start
+  ) {
+    publishedDate = page.properties["Published"].date.start;
+  } else {
+    publishedDate = page.last_edited_time;
+  }
+
   const frontMatter: Record<
     string,
     string | string[] | number | boolean | PageObjectResponse
   > = {
     title,
-    date: page.created_time,
+    date: publishedDate,
     lastmod: page.last_edited_time,
     draft: false,
   };
