@@ -185,9 +185,36 @@ export async function renderPage(page: PageObjectResponse, notion: Client) {
     }
   }
 
+  // 추가: 만약 Slug 속성이 존재하고 값이 있다면, frontMatter의 slug로 설정합니다.
+  if (page.properties["Slug"] && page.properties["Slug"].type === "rich_text") {
+    const slugProp = page.properties["Slug"];
+    const slugValue = slugProp.rich_text.map(item => item.plain_text).join("").trim();
+    if (slugValue) {
+      frontMatter.slug = slugValue;
+    }
+  }
+
+  // Subtitle 속성이 존재하면 subtitle 필드에 설정
+  if (page.properties["Subtitle"] && page.properties["Subtitle"].type === "rich_text") {
+    const subtitleProp = page.properties["Subtitle"];
+    const subtitleValue = subtitleProp.rich_text.map(item => item.plain_text).join("").trim();
+    if (subtitleValue) {
+      frontMatter.subtitle = subtitleValue;
+    }
+  }
+  
+  // Description 속성이 존재하면 summary 필드에 설정
+  if (page.properties["Description"] && page.properties["Description"].type === "rich_text") {
+    const descriptionProp = page.properties["Description"];
+    const descriptionValue = descriptionProp.rich_text.map(item => item.plain_text).join("").trim();
+    if (descriptionValue) {
+      frontMatter.summary = descriptionValue;
+    }
+  }
+  
   // 작성자 정보가 없는 경우에만 기본값 설정
   if (!hasAuthor) {
-    frontMatter.authors = ["Notion"];
+    frontMatter.authors = ["Gunn Kim"];
   }
 
   // save metadata
