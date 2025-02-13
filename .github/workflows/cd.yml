@@ -65,7 +65,7 @@ jobs:
         run: |
           npm install
           npm start
-          hugo
+          npm run build
 
       # - name: Commit updated content
       #   uses: stefanzweifel/git-auto-commit-action@v4
