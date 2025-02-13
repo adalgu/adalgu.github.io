@@ -17,50 +17,61 @@ function isMarkdownFile(filename: string): boolean {
 }
 
 export function getContentFile(filepath: string): ContentFile | undefined {
-  if (!fs.existsSync(filepath)) return undefined
-  const filedata = fm(fs.readFileSync(filepath, 'utf-8'))
-  const metadata = (filedata.attributes as any).NOTION_METADATA
+  if (!fs.existsSync(filepath)) return undefined;
+  const filedata = fm(fs.readFileSync(filepath, "utf-8"));
+  const metadata = (filedata.attributes as any).NOTION_METADATA;
   if (metadata) {
+    // Extract the page ID from the metadata
+    const id = metadata.id;
     return {
       filename: path.basename(filepath),
       filepath,
-      metadata,
-      expiry_time: (filedata.attributes as any).EXPIRY_TIME
-    }
+      metadata: {
+        ...metadata,
+        id, // Ensure ID is at the top level for comparison
+      },
+      expiry_time: (filedata.attributes as any).EXPIRY_TIME,
+    };
   } else {
-    console.warn(`[Warn] ${filepath} does not have NOTION_METADATA in its front matter`)
-    return undefined
+    console.warn(
+      `[Warn] ${filepath} does not have NOTION_METADATA in its front matter`,
+    );
+    return undefined;
   }
 }
 
-export function getAllContentFiles(
-  dirPath: string,
-): ContentFile[] {
-  const fileArray: ContentFile[] = []
-  const queue: string[] = [dirPath]
+export function getAllContentFiles(dirPath: string): ContentFile[] {
+  const fileArray: ContentFile[] = [];
+  const queue: string[] = [dirPath];
   while (queue.length !== 0) {
-    const filepath = queue.shift()
-    if (filepath === undefined) continue
+    const filepath = queue.shift();
+    if (filepath === undefined) continue;
     if (fs.statSync(filepath).isDirectory()) {
-      const files = fs.readdirSync(filepath)
+      const files = fs.readdirSync(filepath);
       for (const file of files) {
-        queue.push(path.join(filepath, file))
+        queue.push(path.join(filepath, file));
       }
-      continue
+      continue;
     }
-    if (!isMarkdownFile(filepath)) continue
-    const filedata = fm(fs.readFileSync(filepath, 'utf-8'))
-    const metadata = (filedata.attributes as any).NOTION_METADATA
+    if (!isMarkdownFile(filepath)) continue;
+    const filedata = fm(fs.readFileSync(filepath, "utf-8"));
+    const metadata = (filedata.attributes as any).NOTION_METADATA;
     if (metadata) {
+      const id = metadata.id;
       fileArray.push({
         filename: path.basename(filepath),
         filepath,
-        metadata,
-        expiry_time: (filedata.attributes as any).expiry_time
-      })
+        metadata: {
+          ...metadata,
+          id,
+        },
+        expiry_time: (filedata.attributes as any).expiry_time,
+      });
     } else {
-      console.warn(`[Warn] ${filepath} does not have NOTION_METADATA in its front matter, it will not be managed.`)
+      console.warn(
+        `[Warn] ${filepath} does not have NOTION_METADATA in its front matter, it will not be managed.`,
+      );
     }
   }
-  return fileArray
+  return fileArray;
 }

@@ -11,6 +11,7 @@ typographer = true
 [goldmark.parser]
 autoHeadingID = true
 autoHeadingIDType = 'github'
+wrapStandAloneImageWithinParagraph = false
 [goldmark.parser.attribute]
 block = true
 title = true
@@ -18,6 +19,10 @@ title = true
 hardWraps = false
 unsafe = true
 xhtml = false
+[goldmark.parser.delimiter]
+skipHTML = true
+[goldmark.parser.shortcode]
+strict = false
 [highlight]
 anchorLineNos = false
 codeFences = true

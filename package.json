@@ -17,8 +17,13 @@
     "start": "ts-node src/index.ts",
     "server": "hugo server -D --disableFastRender --noHTTPCache",
     "typecheck": "tsc --noEmit",
-    "build": "tsc",
-    "format": "prettier --write src/**/*.ts"
+    "build": "node preprocess.js && hugo",
+    "build:ts": "tsc",
+    "format": "prettier --write src/**/*.ts",
+    "test-conversion": "ts-node src/test-conversion.ts",
+    "test": "npm run build && npm run test-conversion",
+    "setup-database": "ts-node src/setup-database.ts",
+    "migrate-database": "ts-node src/migrate-database.ts"
   },
   "keywords": [
     "Notion",
