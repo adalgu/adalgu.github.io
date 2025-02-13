@@ -4,6 +4,8 @@ paginate.pagerSize: 5
 theme: PaperMod
 ignoreFiles:
   - "problematic/.*"
+  - "problematic/ref_errors/.*"
+  - "problematic/shortcode_errors/.*"
 
 enableRobotsTXT: true
 buildDrafts: false

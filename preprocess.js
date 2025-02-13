@@ -20,11 +20,61 @@ async function findMarkdownFiles(dir) {
   return markdownFiles;
 }
 
-async function hasProblematicShortcode(content) {
-  // 문제가 되는 shortcode 패턴 검사
-  const problematicPattern =
-    /\[([^\]]+)\]\({{% relref "[^"]*"[^"]*" %}}(?:\))?/;
-  return problematicPattern.test(content);
+async function hasProblematicContent(content, filePath) {
+  // 문제가 되는 패턴들
+  const patterns = [
+    // 1. problematic shortcode 패턴
+    {
+      regex: /\[([^\]]+)\]\({{% relref "[^"]*"[^"]*" %}}(?:\))?/,
+      type: "shortcode",
+    },
+    // 2. 잘못된 ref 링크 패턴
+    {
+      regex: /\[.*?\]\((.*?)\)/g,
+      type: "ref",
+      check: async (match) => {
+        const refPath = match[1];
+        if (!refPath.startsWith("http") && !refPath.startsWith("#")) {
+          const targetPath = path.join(
+            path.dirname(filePath),
+            refPath.replace(/^\//, ""),
+          );
+          try {
+            await fs.access(targetPath);
+            return false; // 파일이 존재하면 문제 없음
+          } catch {
+            return true; // 파일이 없으면 문제 있음
+          }
+        }
+        return false;
+      },
+    },
+  ];
+
+  for (const pattern of patterns) {
+    if (pattern.type === "shortcode") {
+      if (pattern.regex.test(content)) {
+        return {
+          isProblematic: true,
+          reason: "problematic_shortcode",
+        };
+      }
+    } else if (pattern.type === "ref") {
+      const matches = [...content.matchAll(pattern.regex)];
+      for (const match of matches) {
+        if (await pattern.check(match)) {
+          return {
+            isProblematic: true,
+            reason: "ref_not_found",
+          };
+        }
+      }
+    }
+  }
+
+  return {
+    isProblematic: false,
+  };
 }
 
 async function processFile(filePath) {
@@ -32,11 +82,17 @@ async function processFile(filePath) {
     const content = await fs.readFile(filePath, "utf8");
 
     // 문제가 있는 파일인지 검사
-    const isProblematic = await hasProblematicShortcode(content);
+    const { isProblematic, reason } = await hasProblematicContent(
+      content,
+      filePath,
+    );
 
     if (isProblematic) {
       // problematic 디렉토리 생성 (프로젝트 루트에)
-      const problematicDir = "problematic";
+      const problematicDir = path.join(
+        "problematic",
+        reason === "ref_not_found" ? "ref_errors" : "shortcode_errors",
+      );
       await fs.mkdir(problematicDir, { recursive: true });
 
       // 파일을 problematic 디렉토리로 이동
@@ -47,14 +103,23 @@ async function processFile(filePath) {
       // 원본 파일 삭제
       await fs.unlink(filePath);
 
-      console.log(`Problematic file moved: ${filePath} -> ${newPath}`);
-      return true;
+      console.log(
+        `Problematic file moved (${reason}): ${filePath} -> ${newPath}`,
+      );
+      return {
+        processed: true,
+        reason,
+      };
     }
 
-    return false;
+    return {
+      processed: false,
+    };
   } catch (error) {
     console.error(`Error processing ${filePath}:`, error);
-    return false;
+    return {
+      processed: false,
+    };
   }
 }
 
@@ -79,21 +144,31 @@ async function main() {
       }
     }
 
-    let problematicCount = 0;
+    let shortcodeErrors = 0;
+    let refErrors = 0;
     let processedCount = 0;
 
     for (const file of allFiles) {
-      const isProblematic = await processFile(file);
-      if (isProblematic) {
-        problematicCount++;
+      const { processed, reason } = await processFile(file);
+      if (processed) {
+        if (reason === "ref_not_found") {
+          refErrors++;
+        } else {
+          shortcodeErrors++;
+        }
       }
       processedCount++;
     }
 
     console.log("\nProcessing Summary:");
     console.log(`Total files processed: ${processedCount}`);
-    console.log(`Problematic files moved: ${problematicCount}`);
-    console.log(`Normal files remaining: ${processedCount - problematicCount}`);
+    console.log(`Files with shortcode errors: ${shortcodeErrors}`);
+    console.log(`Files with ref errors: ${refErrors}`);
+    console.log(
+      `Normal files remaining: ${
+        processedCount - (shortcodeErrors + refErrors)
+      }`,
+    );
   } catch (error) {
     console.error("Error during preprocessing:", error);
     process.exit(1);
