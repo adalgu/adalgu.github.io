@@ -1,4 +1,4 @@
-baseURL: "https://gunn.kim"
+baseURL: "https://adalgu.github.io/"
 title: Exobrain
 paginate.pagerSize: 5
 theme: PaperMod
@@ -13,7 +13,7 @@ buildFuture: false
 buildExpired: false
 
 minify:
-  disableXML: true
+  disableXML: false
   minifyOutput: true
 
 params:
@@ -46,8 +46,12 @@ params:
 
   assets:
     # disableHLJS: true # to disable highlight.js
-    # disableFingerprinting: true
+    disableFingerprinting: true
     favicon: "<link / abs url>"
+  sitemap:
+    changefreq: weekly
+    priority: 0.5
+    filename: sitemap.xml
     favicon16x16: "<link / abs url>"
     favicon32x32: "<link / abs url>"
     apple_touch_icon: "<link / abs url>"
