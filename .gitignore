@@ -5,7 +5,7 @@ resources
 .hugo_build.lock
 public
 python_script
-
+.DS_Store
 # Ignore all Markdown files in content/posts/ that might be build-generated
 content/posts/*.md
 # content/posts/*-*-*-*.md
