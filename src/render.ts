@@ -130,12 +130,12 @@ export async function renderPage(
     // Get published date
     let publishedDate: string;
     if (
-      page.properties["Published"] &&
-      page.properties["Published"].type === "date" &&
-      page.properties["Published"].date &&
-      page.properties["Published"].date.start
+      page.properties["Created time"] &&
+      page.properties["Created time"].type === "date" &&
+      page.properties["Created time"].date &&
+      page.properties["Created time"].date.start
     ) {
-      publishedDate = page.properties["Published"].date.start;
+      publishedDate = page.properties["Created time"].date.start;
     } else {
       publishedDate = page.last_edited_time;
     }
