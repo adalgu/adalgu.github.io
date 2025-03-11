@@ -49,15 +49,47 @@ async function hasProblematicContent(content, filePath) {
         return false;
       },
     },
+    // 3. {{< shortcode >}} 패턴 감지
+    {
+      regex: /{{<\s*([a-zA-Z0-9_-]+)\s*>}}/g,
+      type: "shortcode",
+      check: async (match, filePath) => {
+        const shortcodeName = match[1];
+        // 허용된 단축코드 목록
+        const allowedShortcodes = [
+          "youtube", "tweet", "video", "math", "notion-unsupported-block",
+          // 테마에서 제공하는 단축코드들
+          "collapse", "figure", "inTextImg", "ltr", "rawhtml", "rtl",
+          // 추가한 단축코드
+          "adsense2", "adfit"
+        ];
+        
+        return !allowedShortcodes.includes(shortcodeName);
+      }
+    },
   ];
 
   for (const pattern of patterns) {
     if (pattern.type === "shortcode") {
       if (pattern.regex.test(content)) {
-        return {
-          isProblematic: true,
-          reason: "problematic_shortcode",
-        };
+        // 기본 shortcode 패턴 (check 함수가 없는 경우)
+        if (!pattern.check) {
+          return {
+            isProblematic: true,
+            reason: "problematic_shortcode",
+          };
+        } else {
+          // check 함수가 있는 경우 ({{< shortcode >}} 패턴)
+          const matches = [...content.matchAll(pattern.regex)];
+          for (const match of matches) {
+            if (await pattern.check(match, filePath)) {
+              return {
+                isProblematic: true,
+                reason: "problematic_shortcode",
+              };
+            }
+          }
+        }
       }
     } else if (pattern.type === "ref") {
       const matches = [...content.matchAll(pattern.regex)];

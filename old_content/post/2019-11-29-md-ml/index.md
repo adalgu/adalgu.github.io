@@ -1,0 +1,29 @@
+---
+title: 마켓 디자인과 머신러닝
+subtitle: ''
+author: ''
+date: 2019-11-29T00:00:00+09:00
+slug: ''
+categories: []
+tags:
+- 인공지능
+- 경제
+- 경제학
+uploads: ''
+multi_uploads: []
+images: 
+- /uploads/2019-08-12-KakaoTalk_Photo_2019-08-12-15-42-16.png
+draft: true
+
+
+---
+![](/uploads/2019-08-12-KakaoTalk_Photo_2019-08-12-15-42-16.png) 
+
+
+오늘 한국경제학회 뉴스레터에서 우연히 인공지능(AI)과 한국 경제 영향에 대한 세미나 소식을 보게 되었다. 지난해 이전 직장에서 썼던 [마지막 보고서](http://www.lgeri.com/report/view.do?idx=19620)가 위 세미나와 비슷한 주제였고, 회사를 옮긴 최근에도 여전히 작년 보고서를 보고 강연과 인터뷰 요청이 오고 있는지라 어떤 주제로 세미나를 하는지 궁금증에 메일을 열어 보았다.
+
+<details markdown="1">
+<summary>자세한 내용 접기/펼치기</summary>
+ㅇㅇㅇ
+</details>
+
