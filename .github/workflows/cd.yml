@@ -52,7 +52,7 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: "latest"
+          hugo-version: "0.136.5"
           extended: true
 
       - name: Setup Pages
@@ -79,10 +79,17 @@ jobs:
             fi
           }
 
-      # - name: Commit updated content
-      #   uses: stefanzweifel/git-auto-commit-action@v4
-      #   with:
-      #     commit_message: Sync content with Notion
+      - name: Commit updated content
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Sync content with Notion
+
+      - name: Ensure CNAME is in public directory
+        run: |
+          if [ -f "CNAME" ] && [ ! -f "public/CNAME" ]; then
+            cp CNAME public/
+            echo "Copied CNAME to public directory"
+          fi
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
