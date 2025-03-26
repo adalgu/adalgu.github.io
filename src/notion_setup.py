@@ -783,7 +783,7 @@ class NotionMigration(NotionSetup):
             "Name": "title",  # 제목은 필수
             "Description": "rich_text",  # 설명은 필수
             "Tags": "multi_select",  # 태그는 필수
-            "Created time": "date",  # 생성 시간은 필수
+            "Date": "date",  # 생성 시간은 필수
             "Last Updated": "last_edited_time"  # 마지막 수정 시간은 필수
         }
         
@@ -793,7 +793,7 @@ class NotionMigration(NotionSetup):
                 result["missingRequired"].append(prop_name)
             elif database["properties"][prop_name]["type"] != expected_type:
                 # 시간 관련 속성 특별 처리
-                if (prop_name == "Created time" and database["properties"][prop_name]["type"] in ["date", "created_time"]) or \
+                if (prop_name == "Date" and database["properties"][prop_name]["type"] in ["date", "created_time"]) or \
                    (prop_name == "Last Updated" and database["properties"][prop_name]["type"] in ["last_edited_time", "date"]):
                     # 이러한 유형은 허용
                     continue
