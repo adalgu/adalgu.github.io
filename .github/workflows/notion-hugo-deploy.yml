@@ -4,6 +4,8 @@ on:
   schedule:
     - cron: '0 */1 * * *'  # 매시간 실행
   workflow_dispatch:
+  repository_dispatch:  # ← 이거 추가
+    types: [trigger-hugo-build]  # 이벤트명은 자유롭게 정해도 됨
 
 permissions:
   contents: read

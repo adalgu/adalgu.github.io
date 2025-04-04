@@ -2,6 +2,117 @@
 
 노션 데이터베이스/페이지를 마크다운으로 변환하고, Hugo 빌드 전 오류 파일을 처리하여 완전한 빌드 파이프라인을 제공하는 Python 애플리케이션입니다.
 
+## ✅ 주요 특징 업데이트
+
+### 🔄 증분 렌더링
+- Notion 페이지의 `last_edited_time`과 content hash를 기반으로 변경된 콘텐츠만 재처리
+- `.notion-hugo-state.json` 파일에 증분 정보를 저장하고, GitHub Actions 캐시를 통해 유지함
+
+### 🧼 저장소 구조
+- Markdown, 상태파일 등은 `.gitignore` 처리 → GitHub 저장소는 항상 깨끗하게 유지됨
+- 오직 최종 Hugo 빌드 결과물(`./public/`)만 GitHub Pages로 배포됨
+
+### 🚀 자동화 배포 (GitHub Actions)
+- 완전한 워크플로우 하나로 통합: Notion → Hugo 빌드 → GitHub Pages 배포
+- 워크플로우 실행 시 `.notion-hugo-state.json`을 캐시에서 복원해 증분 유지
+
+### 📄 GitHub Actions 워크플로우 예시
+
+`.github/workflows/notion-hugo-deploy.yml`
+
+```yaml
+name: Notion → Hugo → GitHub Pages
+
+on:
+  schedule:
+    - cron: '0 */1 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "deploy"
+  cancel-in-progress: false
+
+env:
+  HUGO_VERSION: 0.128.0
+  PYTHON_VERSION: "3.10"
+  STATE_FILE: .notion-hugo-state.json
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Install Hugo
+        run: |
+          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${{ env.HUGO_VERSION }}/hugo_extended_${{ env.HUGO_VERSION }}_linux-amd64.deb
+          sudo dpkg -i ${{ runner.temp }}/hugo.deb
+
+      - name: Install Dart Sass
+        run: sudo snap install dart-sass
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install notion-client python-dotenv pyyaml fs tabulate
+
+      - name: Restore Notion sync state
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STATE_FILE }}
+          key: notion-state-${{ github.ref_name }}
+          restore-keys: |
+            notion-state-
+
+      - name: Generate Markdown from Notion (incremental)
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+        run: |
+          python notion_hugo_app.py --incremental --state-file $STATE_FILE
+
+      - name: Setup GitHub Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Install Node.js dependencies
+        run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
+
+      - name: Build with Hugo
+        env:
+          HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
+          HUGO_ENVIRONMENT: production
+        run: |
+          hugo --minify --buildDrafts --baseURL "${{ steps.pages.outputs.base_url }}/"
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./public
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+```
+
+### 🧪 테스트
+```bash
+python notion_hugo_app.py --dry-run
+```
+
 ## 전체 흐름도
 
 ```mermaid
