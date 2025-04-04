@@ -26,8 +26,8 @@ ENV/
 .env
 
 # Hugo
-/content/posts/
-/public/
+content/posts/
+public/
 /resources/
 .hugo_build.lock
 
@@ -51,3 +51,4 @@ Thumbs.db
 .notion-hugo-state.json.bak
 data/error_temp/
 .vercel
+*.bak
