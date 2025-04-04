@@ -209,13 +209,13 @@ class PropertyMapper:
         """
         result = {}
 
-        # isPublished 속성이 있으면 draft 속성 결정 (역의 관계)
-        if "isPublished" in notion_properties:
-            # isPublished=true → draft=false, isPublished=false → draft=true
-            result["draft"] = not notion_properties["isPublished"]
-        else:
-            # 기본값: draft = true (초안 상태)
-            result["draft"] = True
+        is_published = notion_properties.get("ispublished", False)
+
+        # 문자열로 들어올 경우 대비
+        if isinstance(is_published, str):
+            is_published = is_published.lower() == "true"
+
+        result["draft"] = not is_published
 
         return result
 
@@ -277,7 +277,8 @@ class PropertyMapper:
 
             hugo_key = config["hugo_key"]
             # 이미 처리된 속성은 건너뛰기
-            if hugo_key in hugo_properties:
+            # draft는 process_publication_status()에서만 처리되므로 여기선 무시
+            if hugo_key in hugo_properties or hugo_key == "draft":
                 continue
 
             if key not in notion_properties or not notion_properties[key]:
@@ -303,17 +304,17 @@ class PropertyMapper:
                 continue
 
             hugo_key = config["hugo_key"]
+
             # 이미 처리된 속성은 건너뛰기
-            if hugo_key in hugo_properties:
+            # draft는 process_publication_status()에서만 처리되므로 여기선 무시
+            if hugo_key in hugo_properties or hugo_key == "draft":
                 continue
 
             if key in notion_properties and notion_properties[key]:
                 if config.get("inverse", False):
-                    # 역의 관계 (예: isPublished와 draft)
                     hugo_properties[hugo_key] = not notion_properties[key]
                 else:
                     hugo_properties[hugo_key] = notion_properties[key]
-
         return hugo_properties
 
     def create_hugo_frontmatter(self, notion_properties, page):
