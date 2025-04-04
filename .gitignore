@@ -26,6 +26,7 @@ ENV/
 .env
 
 # Hugo
+/content/posts/
 /public/
 /resources/
 .hugo_build.lock
