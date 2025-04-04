@@ -46,4 +46,4 @@ jobs:
           git config --local user.name "GitHub Action"
           git add -A
           git commit -m "Auto-update from Notion [skip ci]"
-          git push
+          git push --force
