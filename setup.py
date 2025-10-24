@@ -30,7 +30,7 @@ from typing import Dict, Any, Optional, List, Tuple
 # 의존성 자동 설치
 def install_dependencies():
     """필요한 의존성 자동 설치"""
-    dependencies = ["notion-client", "python-dotenv", "pyyaml", "fs", "tabulate"]
+    dependencies = ["notion-client>=2.0.0,<2.5.0", "python-dotenv", "pyyaml", "fs", "tabulate"]
 
     for dep in dependencies:
         try:
@@ -850,7 +850,7 @@ jobs:
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install notion-client python-dotenv pyyaml fs tabulate
+          pip install "notion-client>=2.0.0,<2.5.0" python-dotenv pyyaml fs tabulate
       
       - name: Sync from Notion
         env:
