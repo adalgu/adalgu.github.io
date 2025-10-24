@@ -62,7 +62,7 @@ jobs:
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install notion-client python-dotenv pyyaml fs tabulate
+          pip install "notion-client>=2.0.0,<2.5.0" python-dotenv pyyaml fs tabulate
 
       - name: Restore Notion sync state
         uses: actions/cache@v4

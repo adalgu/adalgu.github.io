@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 def install_dependencies():
     """Install necessary dependencies if they are not already installed."""
-    dependencies = ["notion-client", "python-dotenv", "pyyaml", "fs", "tabulate"]
+    dependencies = ["notion-client>=2.0.0,<2.5.0", "python-dotenv", "pyyaml", "fs", "tabulate"]
     for dep in dependencies:
         try:
             module_name = dep.replace("-", "_")
