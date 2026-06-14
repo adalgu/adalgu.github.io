@@ -64,9 +64,12 @@ jobs:
       - name: Restore Notion sync state
         uses: actions/cache@v4
         with:
-          path: ${{ env.STATE_FILE }}
-          key: notion-state-${{ github.ref_name }}
+          path: |
+            ${{ env.STATE_FILE }}
+            content/posts/
+          key: notion-state-${{ github.ref_name }}-${{ github.run_id }}
           restore-keys: |
+            notion-state-${{ github.ref_name }}-
             notion-state-
 
       - name: Determine sync mode
