@@ -25,6 +25,8 @@ from datetime import datetime
 from dotenv import load_dotenv
 from notion_client import Client
 
+from .notion_retry import RetryingClient
+
 from .config import (
     Config,
     load_config,
@@ -165,7 +167,7 @@ def run_notion_pipeline(
             print("[Info] 테스트 모드: 실제 변환 없이 변경사항만 확인합니다")
 
         # Notion 클라이언트 생성
-        notion = Client(auth=os.environ.get("NOTION_TOKEN"))
+        notion = RetryingClient(auth=os.environ.get("NOTION_TOKEN"))
 
         # Hugo 구조 확인
         processor = HugoProcessor()
