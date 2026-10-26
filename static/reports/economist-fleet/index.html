@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Economist's Fleet</title>
+<meta name="description" content="A special case for How Korea Uses Claude: one Korean economist running a fleet of Claude agents, measured with the Economic Index categories.">
+<meta property="og:title" content="The Economist's Fleet">
+<meta property="og:description" content="A special case for How Korea Uses Claude: one Korean economist running a fleet of Claude agents, measured with the Economic Index categories.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://gunn.kim/reports/economist-fleet/">
+<link rel="canonical" href="https://gunn.kim/reports/economist-fleet/">
+<style>html{-webkit-text-size-adjust:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!important}.backlink{display:block;max-width:820px;margin:0 auto;padding:14px 20px 0;font:14px/1.4 system-ui,sans-serif}</style>
+</head>
+<body>
+<a class="backlink" href="/">← gunn.kim</a>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+KR:wght@600;700&display=swap">
+<style>
+/* Layout: companion to "How Korea Uses Claude". Same reading column and palette; here red marks "me" (the case), blue the world average, grey Korea's average or other series. */
+:root {
+  --bg: #f5f6f8;
+  --surface: #ffffff;
+  --ink: #17202c;
+  --muted: #586273;
+  --rule: #d8dde5;
+  --me: #c42a3f;
+  --world: #24539c;
+  --peer: #a3abb8;
+  --auto: #c9a227;
+  --me-soft: #f6dde1;
+  --display: "Noto Serif KR", "Nanum Myeongjo", Georgia, serif;
+  --body: "IBM Plex Sans", "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #10151c; --surface: #171e27; --ink: #e6eaf0; --muted: #9aa5b4; --rule: #2b3442;
+    --me: #f0647a; --world: #7aa3ea; --peer: #5f6a7a; --auto: #d9b648; --me-soft: #3d2229;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #10151c; --surface: #171e27; --ink: #e6eaf0; --muted: #9aa5b4; --rule: #2b3442;
+  --me: #f0647a; --world: #7aa3ea; --peer: #5f6a7a; --auto: #d9b648; --me-soft: #3d2229;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.62; }
+.page { max-width: 820px; margin: 0 auto; padding-inline: 20px; padding-block: 40px 72px; }
+.col { max-width: 66ch; }
+header.mast { display: grid; gap: 14px; padding-block-end: 28px; border-bottom: 1px solid var(--rule); }
+.eyebrow { font-family: var(--mono); font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.eyebrow b { color: var(--me); font-weight: 500; }
+h1 { font-family: var(--display); font-weight: 700; font-size: clamp(32px, 5.6vw, 48px); line-height: 1.14; margin: 0; text-wrap: balance; }
+.dek { font-size: 20px; line-height: 1.5; margin: 0; max-width: 34em; text-wrap: pretty; }
+.byline { font-size: 14.5px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 4px 14px; }
+.notice { font-size: 14px; color: var(--muted); border-left: 3px solid var(--rule); padding-left: 12px; margin: 0; }
+h2 { font-family: var(--display); font-weight: 700; font-size: 27px; line-height: 1.25; margin: 56px 0 10px; text-wrap: balance; }
+h2 .num { font-family: var(--mono); font-size: 14px; font-weight: 500; color: var(--me); display: block; letter-spacing: .06em; margin-bottom: 6px; }
+h3 { font-size: 17px; font-weight: 600; margin: 28px 0 6px; }
+p { margin: 0 0 14px; }
+a { color: var(--world); text-underline-offset: 2px; }
+a:focus-visible { outline: 2px solid var(--world); outline-offset: 2px; }
+.k { color: var(--me); font-weight: 600; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin: 28px 0 8px; }
+.tile { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 14px 16px; display: grid; gap: 4px; align-content: start; }
+.tile .v { font-family: var(--mono); font-size: 28px; font-weight: 500; color: var(--me); font-variant-numeric: tabular-nums; line-height: 1.1; }
+.tile .l { font-size: 14px; line-height: 1.4; }
+.tile .s { font-size: 12.5px; color: var(--muted); }
+.answer { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 18px 20px; margin: 22px 0; }
+.answer p:last-child { margin-bottom: 0; }
+figure { margin: 26px 0 30px; }
+.chart { width: 100%; min-width: 0; }
+.chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+figcaption { font-size: 14px; color: var(--muted); margin-top: 8px; max-width: 66ch; }
+figcaption b { color: var(--ink); font-weight: 600; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13.5px; color: var(--muted); margin-bottom: 6px; }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+.tablewrap { overflow-x: auto; margin: 18px 0 26px; }
+table { border-collapse: collapse; font-size: 14.5px; min-width: 480px; width: 100%; }
+th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-weight: 600; font-size: 13px; color: var(--muted); }
+td.n, th.n { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+ul.plain { padding-left: 1.1em; margin: 0 0 14px; }
+ul.plain li { margin-bottom: 6px; }
+.roles { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0; margin: 18px 0 24px; border-top: 1px solid var(--rule); }
+.roles div { padding: 10px 12px 10px 0; border-bottom: 1px solid var(--rule); font-size: 15px; }
+.roles b { display: block; font-weight: 600; }
+.roles span { display: block; color: var(--muted); font-size: 13px; font-family: var(--mono); margin-top: 2px; }
+.quote { font-size: 15.5px; border-left: 2px solid var(--me); padding-left: 12px; margin: 10px 0; }
+.quote small { display: block; color: var(--muted); font-family: var(--mono); font-size: 12px; margin-top: 2px; }
+.ko { font-family: "IBM Plex Sans KR", var(--body); }
+footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--rule); font-size: 13.5px; color: var(--muted); }
+svg text { font-family: var(--body); fill: var(--ink); }
+svg .mono { font-family: var(--mono); }
+svg .mut { fill: var(--muted); }
+svg .grid { stroke: var(--rule); stroke-width: 1; }
+svg .axis { stroke: var(--muted); stroke-width: 1; }
+@media (max-width: 520px) {
+  body { font-size: 16px; }
+  .page { padding-inline: 16px; }
+  .dek { font-size: 18px; }
+  h2 { font-size: 23px; }
+}
+</style>
+
+<div class="page">
+<header class="mast">
+  <div class="eyebrow"><b>How Korea Uses Claude</b> · Special case</div>
+  <h1>An economist at a Korean tech company, running a fleet of Claudes</h1>
+  <p class="dek">The Economic Index sees one conversation at a time. This case follows one Korean economist for six weeks across a fleet of Claude agents, and measures that work with the Index's own categories. Most of the work is no longer prompted by a person.</p>
+  <div class="byline"><span>Kunwoo Kim (김건우)</span><span>Seoul</span><span>October 2026</span><span>Detailed logs 13 Sep – 25 Oct 2026</span></div>
+  <p class="notice">A companion to <a href="/reports/how-korea-uses-claude/">How Korea Uses Claude</a>. Independent; not an Anthropic publication. The figures come from the author's own personal machine (aggregate counts only, no conversation text). Work practices are described in general terms, without employer data or figures.</p>
+</header>
+
+<section class="col">
+  <div class="tiles" role="list">
+    <div class="tile" role="listitem"><span class="v">68%</span><span class="l">of Claude's responses were started by another agent, not by me</span><span class="s">15% by me, 16% by schedules (Sep–Oct 2026)</span></div>
+    <div class="tile" role="listitem"><span class="v">35,785</span><span class="l">Claude responses and 33,652 tool calls in 43 days</span><span class="s">225 sessions; up to 13 running in one hour</span></div>
+    <div class="tile" role="listitem"><span class="v">289</span><span class="l">decisions put to me by the agents, with a recommendation</span><span class="s">The final answer matched the recommendation 83% of the time (212 of 255 comparable); median reply 15 min</span></div>
+    <div class="tile" role="listitem"><span class="v">10×</span><span class="l">growth in monthly Claude Code messages</span><span class="s">14,726 in May → 144,810 in 1–24 October 2026</span></div>
+  </div>
+</section>
+
+<section class="col" id="setup">
+  <h2><span class="num">01 · The setup</span>One person, seven agent roles, one decision ledger</h2>
+  <p>I lead a small economic research institute at a Korean mobility platform. Outside work, on a personal machine, I run a set of my own projects (a live-captioning service, a legislative-monitoring tool, a family app and a blog) through what I call Peter Gregory OS. It is a fleet of Claude Code agents, each in its own long-running terminal session, with written roles:</p>
+  <div class="roles">
+    <div><b>Planner</b>my bridge; turns requests into briefs and decisions<span>Opus 5.5 · extra-high effort</span></div>
+    <div><b>Lead</b>splits briefs into tasks, verifies, merges<span>Opus 5.5 · high</span></div>
+    <div><b>Backend / SRE worker</b><span>Opus 5.5 · medium</span></div>
+    <div><b>Frontend worker</b><span>Opus 5.5 · medium</span></div>
+    <div><b>Accuracy-analysis worker</b><span>Opus 5.5 · extra-high</span></div>
+    <div><b>Research and planning worker</b><span>Sonnet 5.5 · high</span></div>
+    <div><b>Decision-model learner</b>learns which decisions I would make<span>non-interactive</span></div>
+  </div>
+  <p>The agents talk to each other through about 50 small command-line tools; a quarter of all shell commands in the logs name one of them. Work moves as files: 45 briefs, 399 task documents and 44 research reports since mid-September. By design, the lead verifies worker branches before they merge. The repository has 2,198 commits since 13 September, 90% of them co-written with Claude. Codex (1,002 sessions since July 2025, 620 of them headless CI runs) and Google's Antigravity (255 conversation files since June 2026) sit beside Claude for cross-checks and second opinions.</p>
+  <pre class="mermaid">
+flowchart LR
+  Me([Me]) -- requests, answers --> P[Planner]
+  P -- questions + recommendation --> L[(Decision ledger)]
+  L -- my answer --> P
+  P -- briefs --> R[Lead]
+  R -- tasks --> W1[Backend] & W2[Frontend] & W3[Analysis] & W4[Research]
+  W1 & W2 & W3 & W4 -- reports --> R
+  R -- verified merge --> P
+  S[[Schedules]] -. checks .-> P
+  </pre>
+  <p>Work for my employer happens on a separate work laptop with its own assistant. The two assistants exchange status lines through a shared board, never company content.</p>
+</section>
+
+<section class="col" id="shift">
+  <h2><span class="num">02 · From typing to directing</span>Since September, agents type most of the prompts</h2>
+  <p>Claude Code keeps a log of every prompt submitted in the terminal. Until August 2026 the log shows no prompts typed by agents (one scheduled prompt in May). In September agents began typing into each other's sessions, and in October they submitted 2,133 prompts against my 730.</p>
+  <figure>
+    <div class="legend"><span><i style="background:var(--me)"></i>Typed by me</span><span><i style="background:var(--peer)"></i>Typed by another agent</span><span><i style="background:var(--auto)"></i>Schedules and relays</span></div>
+    <div class="chart" id="fig1" role="img" aria-label="Monthly prompts by who typed them, October 2025 to October 2026. No agent-typed prompts until August 2026; agents typed 277 in September and 2,133 in October."></div>
+    <figcaption><b>Figure 1.</b> Prompts submitted to Claude Code in the terminal, by month and by who typed them. Slash commands excluded. Classification uses the persona tags, task identifiers and session roles the fleet writes into each prompt; untagged agent prompts count as mine, so my share is if anything overstated.</figcaption>
+  </figure>
+  <p>The volume of work grew with it. Claude Code's own daily statistics count 14,726 messages in May 2026 and 144,810 in October (through the 24th). In the detailed logs, the share of Claude's responses that followed a prompt of mine fell from 44% in September (from the 13th) to about 11% in October (to the 25th), while responses per day grew about 4.4 times.</p>
+  <figure>
+    <div class="chart" id="fig2" role="img" aria-label="Monthly Claude Code messages, December 2025 to October 2026, rising from about 15,000 a month in May to 144,810 in October."></div>
+    <figcaption><b>Figure 2.</b> Claude Code messages per month from the tool's built-in statistics (all sessions on this machine, including ones whose detailed logs were later deleted). March 2026 has no record.</figcaption>
+  </figure>
+</section>
+
+<section class="col" id="index">
+  <h2><span class="num">03 · An Economic Index of one</span>My prompts against Korea and the world</h2>
+  <p>To compare like with like, I took a random sample of 400 prompts I typed myself (seed 20261026) and classified each with the Index's own definitions: use case, collaboration pattern, autonomy given to Claude, and occupation group. Claude did the classification, as it does for the Index.</p>
+  <figure>
+    <div class="legend"><span><i style="background:var(--me)"></i>Me (400 prompts)</span><span><i style="background:var(--peer)"></i>Korea</span><span><i style="background:var(--world)"></i>World</span></div>
+    <div class="chart" id="fig3" role="img" aria-label="Collaboration patterns: me versus Korea and world. Task iteration 44 vs 34 vs 30 percent; learning 8 vs 17 vs 17 percent."></div>
+    <figcaption><b>Figure 3.</b> Share by collaboration pattern. Korea and world: Claude.ai conversations, May 2026, from the Index's June 2026 release. Me: Claude Code prompts, 13 Sep – 25 Oct 2026.</figcaption>
+  </figure>
+  <ul class="plain">
+    <li><b>Almost all work.</b> 99.8% of my prompts are work (counting my own projects as work), against 47% in Korea and 43% worldwide.</li>
+    <li><b>More iteration, less learning.</b> 44% of my prompts are task iteration (Korea 34%, world 30%), a count that includes status checks and approvals; only 8% ask to learn something (Korea 17%).</li>
+    <li><b>A quarter of my prompts direct a fleet.</b> 26% give instructions meant for several agents at once. Over half of those are directive.</li>
+    <li><b>Mostly computer and maths.</b> 93% fall in that occupation group, and 99% are in Korean.</li>
+  </ul>
+  <div class="answer">
+    <p><b>The autonomy paradox.</b> The Index rates how much autonomy each conversation gives Claude. Korea ranks near the bottom (2.64 on the 2026 scale; world 2.74). My prompts score even lower, 2.26, although the fleet runs for hours without me. The reason is where the autonomy sits. About a quarter of my prompts (103 of 400) are status checks, approvals, picks among options the agents prepared, or similar short replies; the delegation is in the structure, not in the prompt. All twelve prompts that score 5 out of 5 are directive hand-offs, such as the overnight one: "keep working while I sleep and report in the morning".</p>
+  </div>
+  <p>Sensitivity: dropping status checks, approvals, greetings and decision-board requests (leaving n = 297) brings task iteration down to 31%, the world level, but raises directive prompts to 41%, about 10 points above Korea and the world. The comparison is indicative only: the unit is a prompt rather than a conversation, the product is Claude Code rather than Claude.ai, and one classifier labelled one person's prompts.</p>
+</section>
+
+<section class="col" id="judgment">
+  <h2><span class="num">04 · Delegated judgment</span>The bottleneck is my decisions, so they are measured</h2>
+  <p>When an agent needs me, the planner writes the question into a ledger with options, a recommendation and a confidence level, and I answer from my phone or a web board. The ledger has 745 records since September.</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Decision ledger, 13 Sep – 25 Oct 2026</th><th class="n">Value</th></tr></thead>
+      <tbody>
+        <tr><td>Questions put to me</td><td class="n">289</td></tr>
+        <tr><td>Answered by me (13 resolved by the planner under standing rules, 1 still open)</td><td class="n">275 (95.5% of 288)</td></tr>
+        <tr><td>Final answers matching the recommendation (212 of 255 comparable)</td><td class="n">83%</td></tr>
+        <tr><td>Time from question to my answer, median</td><td class="n">15 min</td></tr>
+        <tr><td>Time from question to my answer, 90th percentile</td><td class="n">9.8 h</td></tr>
+        <tr><td>Rules in the learned decision model</td><td class="n">220</td></tr>
+        <tr><td>…of which tagged "decide without asking"</td><td class="n">187 (85%)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Each answer feeds a written model of how I decide. When a rule is stable, the agents stop asking and report afterwards; questions about production releases, spending, secrets, direction and anything new still come to me. This is the part of the work the Economic Index cannot see: the economics of AI here is less about minutes saved per task than about how much judgment a person can delegate, and how fast the remaining decisions come back.</p>
+</section>
+
+<section class="col" id="work">
+  <h2><span class="num">05 · At work</span>The same structure, with tighter gates</h2>
+  <p>At work the same structure runs on a separate laptop: a planner that writes briefs, a lead that splits and verifies, workers that execute, and a small model for read-only collection. Anything that leaves the company needs my approval. Four practices carried over from economics into how the agents work there.</p>
+  <ul class="plain">
+    <li><b>Lock the decision rule before the result.</b> Hypotheses, comparisons and the sentence that would state each verdict are fixed in a pre-registration document before estimates are read, and an estimate whose comparison group fails a pre-trend test is not promoted to a finding. That call stays with a person.</li>
+    <li><b>Separate the doer from the checker.</b> One agent runs an analysis; another re-runs it independently and the numbers are compared by machine. A report that only says "it matched" does not count. A workflow review found the biggest weakness was a confident conclusion drawn from a narrow check.</li>
+    <li><b>Turn a report series into a kit.</b> Outline, draft, automated checks, charts and preview each became one command, so a small team could keep a series of research reports to the same standard. The kit's own manual says that passing the checks does not prove a fact is true.</li>
+    <li><b>Share the tools with the team.</b> The research team works to a written protocol (one owner per project, early sharing of drafts), a shared skill library and a hands-on pull-request manual, so team members with different tool skills can work with agents in the same way.</li>
+  </ul>
+  <p>I do not publish work-side figures; they belong to my employer. The pattern is the point. The economist's job is moving toward writing the rules the agents follow and judging what they bring back.</p>
+</section>
+
+<section class="col" id="measure">
+  <h2><span class="num">06 · What this means for measurement</span>Three things the Index could add</h2>
+  <ul class="plain">
+    <li><b>An orchestration pattern.</b> Two-thirds of Claude's responses here were started by another agent. A conversation-level sample of Claude.ai, which is where the country data come from, does not see agent-to-agent work, and the API data carry no geography. A sixth collaboration pattern, "orchestration", and an initiator field (human, agent, schedule) would make this visible.</li>
+    <li><b>Decision latency as a productivity measure.</b> When a person directs rather than does, output is limited by how quickly decisions are made. Median and tail answer times, and the share of decisions delegated by standing rule, are measurable and comparable across users.</li>
+    <li><b>Multi-tool use.</b> The same work runs through Claude, Codex and Antigravity. Single-vendor indices undercount it, which matters for a country like Korea where ChatGPT is the dominant tool.</li>
+  </ul>
+</section>
+
+<section class="col" id="limits">
+  <h2><span class="num">07 · Limits</span>One person, six weeks</h2>
+  <ul class="plain">
+    <li>One self-selected heavy user; nothing here generalises to Korea.</li>
+    <li>Detailed logs cover only 13 September – 25 October 2026; older logs were deleted by the tool's retention setting. Longer trends rely on the prompt log (from September 2025) and built-in statistics (from December 2025).</li>
+    <li>Telling my prompts from agents' relies on tags the fleet writes; untagged agent prompts count as mine.</li>
+    <li>The classifier is Claude, labelling text Claude helped produce, with no second rater.</li>
+    <li>By design there are no time-of-day or weekday breakdowns, and no work-laptop logs.</li>
+  </ul>
+</section>
+
+<section class="col" id="methods">
+  <h2><span class="num">08 · Methods and how this was made</span>Aggregates from local logs</h2>
+  <p><b>Data.</b> Claude Code session logs, its prompt history and its built-in daily statistics on my personal machine; Codex session and Antigravity conversation counts; the Peter Gregory OS repository (roles, tools, task files, commit history) and its decision ledger. Scripts count events and never export text. Korea and world benchmarks: Anthropic Economic Index, June 2026 release (<a href="https://huggingface.co/datasets/Anthropic/EconomicIndex">huggingface.co/datasets/Anthropic/EconomicIndex</a>).</p>
+  <p><b>Classification.</b> A stratified random sample of 400 of my own prompts (from 705 eligible), labelled with the Index's definitions for use case, collaboration pattern, autonomy (1–5, mapped to the 2026 scale) and occupation group.</p>
+  <p><b>How this was made.</b> I set the questions. Claude wrote the counting and sampling scripts, classified the sample and drafted the text and charts under my direction; I reviewed the results.</p>
+</section>
+
+<section class="col ko" id="ko" lang="ko">
+  <h2><span class="num">한국어 요약</span>한국 테크 기업 경제학자의 Claude 선단</h2>
+  <ul class="plain">
+    <li><b>규모</b>: 43일 동안 Claude 응답 35,785건, 도구 호출 33,652건, 세션 225개. Claude Code 월 메시지는 5월 1.5만에서 10월(24일까지) 14.5만으로 10배가 됐다.</li>
+    <li><b>누가 시키나</b>: Claude 응답의 68%는 다른 에이전트가, 15%만 내가 시작했다. 10월에는 에이전트가 친 프롬프트(2,133건)가 내가 친 것(730건)의 약 3배다.</li>
+    <li><b>AEI로 잰 나</b>: 업무 99.8%, 과업 반복 44%(진행 확인·승인 포함; 한국 34%, 세계 30%), 배우기 8%(한국 17%). 프롬프트 한 건의 자율성은 2.26으로 한국(2.64)보다 낮다. 자율성이 프롬프트가 아니라 선단 구조에 들어가 있기 때문이다.</li>
+    <li><b>판단 위임</b>: 에이전트가 물은 결정 289건 중 275건(답이 난 288건의 95.5%)을 내가 직접 답했고, 최종 답이 권고와 같은 비율은 83%(비교 가능한 255건 중 212건), 답까지 중앙값 15분이었다. 학습된 결정 규칙 220개 중 187개(85%)에 '묻지 않고 처리' 표시가 붙어 있다.</li>
+    <li><b>회사에서</b>: 같은 구조를 더 엄격한 문턱과 함께 쓴다. 결과를 보기 전에 판정 규칙을 잠그고(사전 등록), 실행하는 에이전트와 검증하는 에이전트를 나누며, 연작 리포트를 명령 하나씩의 제작 킷으로 만들고, 팀 공용 스킬과 실습 매뉴얼을 공유한다. 회사 수치는 싣지 않는다.</li>
+    <li><b>측정 제안</b>: '오케스트레이션' 협업 유형과 시작 주체 칸, 결정 지연 시간, 여러 도구를 함께 쓰는 사용의 측정.</li>
+  </ul>
+</section>
+
+<footer>
+  Kunwoo Kim (김건우) leads an economic research institute at a Korean mobility platform and was an economist at LG Economic Research Institute (2011–2019), where he wrote the 2018 study of AI and job risk in Korea. Views are his own. All personal figures come from his personal machine; Korea and world benchmarks come from the public Anthropic Economic Index.
+</footer>
+</div>
+
+<script id="data" type="application/json">{"prompts":[["2025-10",203,0,0],["2025-11",156,0,0],["2025-12",61,0,0],["2026-01",8,0,0],["2026-02",60,0,0],["2026-03",33,0,0],["2026-04",8,0,0],["2026-05",150,0,1],["2026-06",232,0,0],["2026-07",124,0,0],["2026-08",661,0,0],["2026-09",535,277,9],["2026-10",730,2133,69]],"messages":[["2025-12",7998,364,2542],["2026-01",675,115,148],["2026-02",931,60,209],["2026-04",86,17,16],["2026-05",14726,328,4737],["2026-06",15310,202,4591],["2026-07",15174,215,4461],["2026-08",25458,39,9187],["2026-09",46462,207,10111],["2026-10",144810,143,31940]],"init":{"2026-09":{"human":2178,"agent":1599,"auto":1214},"2026-10":{"human":3397,"agent":22833,"auto":4564}},"collab":{"me":{"directive":33.0,"feedback_loop":9.75,"task_iteration":44.25,"learning":7.75,"validation":3.75},"kor":{"directive":29.63,"feedback_loop":13.16,"task_iteration":33.69,"learning":17.49,"validation":3.83},"world":{"directive":31.38,"feedback_loop":15.97,"task_iteration":30.41,"learning":16.55,"validation":3.08}},"autonomy":{"1":{"count":136,"pct":34.0,"ci95_wilson":[29.5,38.8]},"2":{"count":85,"pct":21.25,"ci95_wilson":[17.5,25.5]},"3":{"count":129,"pct":32.25,"ci95_wilson":[27.9,37.0]},"4":{"count":38,"pct":9.5,"ci95_wilson":[7.0,12.8]},"5":{"count":12,"pct":3.0,"ci95_wilson":[1.7,5.2]}}}</script>
+<script>
+(function () {
+  "use strict";
+  var D = JSON.parse(document.getElementById("data").textContent);
+  var NS = "http://www.w3.org/2000/svg";
+  function el(tag, attrs, text) {
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (text != null) e.textContent = text;
+    return e;
+  }
+  function svgFor(box, h) {
+    var w = Math.max(280, Math.round(box.clientWidth || 600));
+    var s = el("svg", {viewBox: "0 0 " + w + " " + h, width: w, height: h});
+    box.innerHTML = "";
+    box.appendChild(s);
+    return {s: s, w: w};
+  }
+  function css(n) { return "var(" + n + ")"; }
+  function small(w) { return w < 480; }
+  var MON = {"01":"Jan","02":"Feb","03":"Mar","04":"Apr","05":"May","06":"Jun","07":"Jul","08":"Aug","09":"Sep","10":"Oct","11":"Nov","12":"Dec"};
+  function mlab(m, w) { var mm = m.slice(5); return small(w) ? MON[mm].charAt(0) : MON[mm] + (mm === "01" || m === "2025-10" ? " '" + m.slice(2, 4) : ""); }
+  function fmtK(v) { return v >= 1000 ? (v / 1000).toFixed(v >= 10000 ? 0 : 1) + "k" : String(v); }
+
+  function fig1() {
+    var box = document.getElementById("fig1"), rows = D.prompts;
+    var h = 260, o = svgFor(box, h), s = o.s, w = o.w;
+    var L = 44, R = 8, T = 14, B = 34, max = 3000;
+    var bw = (w - L - R) / rows.length;
+    var Y = function (v) { return h - B - v / max * (h - T - B); };
+    [0, 1000, 2000, 3000].forEach(function (t) {
+      s.appendChild(el("line", {x1: L, x2: w - R, y1: Y(t), y2: Y(t), "class": "grid"}));
+      s.appendChild(el("text", {x: L - 6, y: Y(t) + 4, "text-anchor": "end", "font-size": 12, "class": "mono mut"}, fmtK(t)));
+    });
+    rows.forEach(function (r, i) {
+      var x = L + i * bw + bw * 0.15, bwi = bw * 0.7, y0 = h - B;
+      [[r[1], css("--me")], [r[2], css("--peer")], [r[3], css("--auto")]].forEach(function (seg) {
+        if (!seg[0]) return;
+        var hh = seg[0] / max * (h - T - B);
+        s.appendChild(el("rect", {x: x, y: y0 - hh, width: bwi, height: hh, fill: seg[1]}));
+        y0 -= hh;
+      });
+      var tot = r[1] + r[2] + r[3];
+      if (tot > 500) s.appendChild(el("text", {x: x + bwi / 2, y: y0 - 5, "text-anchor": "middle", "font-size": 11.5, "class": "mono"}, fmtK(tot)));
+      s.appendChild(el("text", {x: x + bwi / 2, y: h - B + 16, "text-anchor": "middle", "font-size": 11.5, "class": "mut"}, mlab(r[0], w)));
+    });
+  }
+
+  function fig2() {
+    var box = document.getElementById("fig2"), rows = D.messages;
+    var months = ["2025-12","2026-01","2026-02","2026-03","2026-04","2026-05","2026-06","2026-07","2026-08","2026-09","2026-10"];
+    var map = {}; rows.forEach(function (r) { map[r[0]] = r[1]; });
+    var h = 230, o = svgFor(box, h), s = o.s, w = o.w;
+    var L = 44, R = 8, T = 14, B = 34, max = 150000;
+    var bw = (w - L - R) / months.length;
+    var Y = function (v) { return h - B - v / max * (h - T - B); };
+    [0, 50000, 100000, 150000].forEach(function (t) {
+      s.appendChild(el("line", {x1: L, x2: w - R, y1: Y(t), y2: Y(t), "class": "grid"}));
+      s.appendChild(el("text", {x: L - 6, y: Y(t) + 4, "text-anchor": "end", "font-size": 12, "class": "mono mut"}, fmtK(t)));
+    });
+    months.forEach(function (m, i) {
+      var x = L + i * bw + bw * 0.15, bwi = bw * 0.7, v = map[m];
+      if (v == null) {
+        s.appendChild(el("text", {x: x + bwi / 2, y: h - B - 6, "text-anchor": "middle", "font-size": 11, "class": "mut"}, "–"));
+      } else {
+        s.appendChild(el("rect", {x: x, y: Y(v), width: bwi, height: h - B - Y(v), fill: m === "2026-10" ? css("--me") : css("--peer")}));
+        if (v > 10000) s.appendChild(el("text", {x: x + bwi / 2, y: Y(v) - 5, "text-anchor": "middle", "font-size": 11.5, "class": "mono"}, fmtK(v)));
+      }
+      s.appendChild(el("text", {x: x + bwi / 2, y: h - B + 16, "text-anchor": "middle", "font-size": 11.5, "class": "mut"}, mlab(m, w)));
+    });
+  }
+
+  function fig3() {
+    var box = document.getElementById("fig3"), c = D.collab;
+    var keys = [["task_iteration","Task iteration"],["directive","Directive"],["learning","Learning"],["feedback_loop","Feedback loop"],["validation","Validation"]];
+    var rowH = 58, h = keys.length * rowH + 6, o = svgFor(box, h), s = o.s, w = o.w;
+    var R = 52, X = function (v) { return (w - R) * v / 48; };
+    keys.forEach(function (k, i) {
+      var y = i * rowH;
+      s.appendChild(el("text", {x: 0, y: y + 13, "font-size": 13.5}, k[1]));
+      [[c.me[k[0]], css("--me"), ""], [c.kor[k[0]], css("--peer"), "mut"], [c.world[k[0]], css("--world"), "mut"]].forEach(function (b, j) {
+        var yy = y + 18 + j * 12;
+        s.appendChild(el("rect", {x: 0, y: yy, width: Math.max(1, X(b[0])), height: 9, rx: 2, fill: b[1]}));
+        s.appendChild(el("text", {x: X(b[0]) + 6, y: yy + 8.5, "font-size": 11.5, "class": "mono " + b[2]}, b[0].toFixed(1) + "%"));
+      });
+    });
+  }
+
+  function drawAll() { [fig1, fig2, fig3].forEach(function (f) { try { f(); } catch (e) { if (window.console) console.error(e); } }); }
+  drawAll();
+  var t, lastW = window.innerWidth;
+  window.addEventListener("resize", function () { clearTimeout(t); t = setTimeout(function () { if (window.innerWidth !== lastW) { lastW = window.innerWidth; drawAll(); } }, 150); });
+})();
+</script>
+
+<script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs"; mermaid.initialize({ startOnLoad: true, theme: "neutral" });</script>
+</body>
+</html>
