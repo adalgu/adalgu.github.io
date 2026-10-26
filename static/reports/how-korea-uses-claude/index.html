@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>How Korea Uses Claude</title>
+<meta name="description" content="An independent reading of the Anthropic Economic Index for Korea: intensity, collaboration style, distinctive niches, and a revisit of the 2018 study of AI and job risk.">
+<meta property="og:title" content="How Korea Uses Claude">
+<meta property="og:description" content="An independent reading of the Anthropic Economic Index for Korea: intensity, collaboration style, distinctive niches, and a revisit of the 2018 study of AI and job risk.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://gunn.kim/reports/how-korea-uses-claude/">
+<link rel="canonical" href="https://gunn.kim/reports/how-korea-uses-claude/">
+<style>html{-webkit-text-size-adjust:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!important}.backlink{display:block;max-width:820px;margin:0 auto;padding:14px 20px 0;font:14px/1.4 system-ui,sans-serif}</style>
+</head>
+<body>
+<a class="backlink" href="/">← gunn.kim</a>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+KR:wght@600;700&display=swap">
+<style>
+/* Layout: a research brief. One reading column (~66ch); figures run a little wider. Korea is always the red mark, the world average is always blue, every other country is grey (Taegeuk red and blue). */
+:root {
+  --bg: #f5f6f8;
+  --surface: #ffffff;
+  --ink: #17202c;
+  --muted: #586273;
+  --rule: #d8dde5;
+  --korea: #c42a3f;
+  --world: #24539c;
+  --peer: #a3abb8;
+  --peer-soft: #e4e8ee;
+  --korea-soft: #f6dde1;
+  --world-soft: #dce5f3;
+  --display: "Noto Serif KR", "Nanum Myeongjo", Georgia, serif;
+  --body: "IBM Plex Sans", "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #10151c; --surface: #171e27; --ink: #e6eaf0; --muted: #9aa5b4; --rule: #2b3442;
+    --korea: #f0647a; --world: #7aa3ea; --peer: #5f6a7a; --peer-soft: #262e3a; --korea-soft: #3d2229; --world-soft: #1f2c42;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #10151c; --surface: #171e27; --ink: #e6eaf0; --muted: #9aa5b4; --rule: #2b3442;
+  --korea: #f0647a; --world: #7aa3ea; --peer: #5f6a7a; --peer-soft: #262e3a; --korea-soft: #3d2229; --world-soft: #1f2c42;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.62; }
+.page { max-width: 820px; margin: 0 auto; padding-inline: 20px; padding-block: 40px 72px; }
+.col { max-width: 66ch; }
+header.mast { display: grid; gap: 14px; padding-block-end: 28px; border-bottom: 1px solid var(--rule); }
+.eyebrow { font-family: var(--mono); font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.eyebrow b { color: var(--korea); font-weight: 500; }
+h1 { font-family: var(--display); font-weight: 700; font-size: clamp(34px, 6vw, 52px); line-height: 1.12; margin: 0; text-wrap: balance; }
+.dek { font-size: 20px; line-height: 1.5; margin: 0; max-width: 34em; text-wrap: pretty; }
+.byline { font-size: 14.5px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 4px 14px; }
+.notice { font-size: 14px; color: var(--muted); border-left: 3px solid var(--rule); padding-left: 12px; margin: 0; }
+.origin { padding-block: 22px 4px; display: grid; gap: 8px; }
+.origin p { margin: 0; }
+h2 { font-family: var(--display); font-weight: 700; font-size: 27px; line-height: 1.25; margin: 56px 0 10px; text-wrap: balance; }
+h2 .num { font-family: var(--mono); font-size: 14px; font-weight: 500; color: var(--korea); display: block; letter-spacing: .06em; margin-bottom: 6px; }
+h3 { font-size: 17px; font-weight: 600; margin: 28px 0 6px; }
+p { margin: 0 0 14px; }
+a { color: var(--world); text-underline-offset: 2px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--world); outline-offset: 2px; }
+.k { color: var(--korea); font-weight: 600; }
+.w { color: var(--world); font-weight: 600; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin: 28px 0 8px; }
+.tile { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 14px 16px; display: grid; gap: 4px; align-content: start; }
+.tile .v { font-family: var(--mono); font-size: 28px; font-weight: 500; color: var(--korea); font-variant-numeric: tabular-nums; line-height: 1.1; }
+.tile .l { font-size: 14px; line-height: 1.4; }
+.tile .s { font-size: 12.5px; color: var(--muted); }
+.answer { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 18px 20px; margin: 22px 0; }
+.answer p:last-child { margin-bottom: 0; }
+figure { margin: 26px 0 30px; }
+.chart { width: 100%; min-width: 0; }
+.chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+figcaption { font-size: 14px; color: var(--muted); margin-top: 8px; max-width: 66ch; }
+figcaption b { color: var(--ink); font-weight: 600; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13.5px; color: var(--muted); margin-bottom: 6px; }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+.tablewrap { overflow-x: auto; margin: 18px 0 26px; }
+table { border-collapse: collapse; font-size: 14.5px; min-width: 520px; width: 100%; }
+th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-weight: 600; font-size: 13px; color: var(--muted); }
+td.n, th.n { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+tr.kr td { background: var(--korea-soft); }
+.note { font-size: 14.5px; color: var(--muted); }
+ul.plain { padding-left: 1.1em; margin: 0 0 14px; }
+ul.plain li { margin-bottom: 6px; }
+.agenda { display: grid; gap: 14px; margin: 18px 0; }
+.agenda article { border-top: 2px solid var(--ink); padding-top: 10px; }
+.agenda h3 { margin: 0 0 4px; }
+.agenda p { margin: 0; font-size: 16px; }
+.ko { font-family: "IBM Plex Sans KR", var(--body); }
+.ko h2 { font-family: var(--display); }
+footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--rule); font-size: 13.5px; color: var(--muted); }
+svg text { font-family: var(--body); fill: var(--ink); }
+svg .mono { font-family: var(--mono); }
+svg .mut { fill: var(--muted); }
+svg .grid { stroke: var(--rule); stroke-width: 1; }
+svg .axis { stroke: var(--muted); stroke-width: 1; }
+@media (max-width: 520px) {
+  body { font-size: 16px; }
+  .page { padding-inline: 16px; }
+  .dek { font-size: 18px; }
+  h2 { font-size: 23px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .chart svg rect.bar { transition: opacity .2s; }
+}
+</style>
+
+<div class="page">
+<header class="mast">
+  <div class="eyebrow"><b>K-Claude</b> · An independent reading of the Anthropic Economic Index</div>
+  <h1>How Korea Uses Claude</h1>
+  <p class="dek">Is Korea's Claude use as distinctive as K-pop? Not overall. Korea's overall mix is closest to Japan's, and where it departs from the world average it resembles Taiwan and Singapore. What stands out is how intensely Koreans use it for their income level, how they work with it, and a handful of very Korean niches.</p>
+  <div class="byline"><span>Kunwoo Kim (김건우)</span><span>Seoul</span><span>October 2026</span><span>Data through May 2026</span></div>
+  <p class="notice">Independent analysis of public data. Not an Anthropic publication and not affiliated with or reviewed by Anthropic. Uses only the public Anthropic Economic Index files (CC-BY) and Korean public statistics. No employer data.</p>
+</header>
+
+<section class="col origin">
+  <div class="eyebrow">Why this report</div>
+  <p>In May 2018 I published <a href="https://www.lgbr.co.kr/report/view.do?idx=19620"><em>Diagnosing job risks from artificial intelligence</em></a> (인공지능에 의한 일자리 위험 진단) for LG Economic Research Institute. It mapped Frey and Osborne's automation probabilities onto 423 Korean occupations and the Regional Employment Survey, and estimated that <span class="k">43% of Korean workers (11.36 million)</span> held jobs at high risk of automation. The estimate was reported in at least 112 articles across 61 Korean news outlets and is cited in at least 11 reports by public research institutes and agencies and at least 6 journal articles.</p>
+  <p>That study measured what AI <em>could</em> do. The Anthropic Economic Index shows what people <em>actually</em> use it for. This report reads the Index for Korea, and <a href="#revisit">section 09</a> puts the 2018 estimates next to observed use.</p>
+</section>
+
+<section class="col">
+  <div class="tiles" role="list">
+    <div class="tile" role="listitem"><span class="v">2.3×</span><span class="l">Claude use relative to what Korea's income predicts</span><span class="s">6th of 114 countries; 2nd of the 45 with GDP per working-age person above $30,000 (Aug 2025)</span></div>
+    <div class="tile" role="listitem"><span class="v">56%</span><span class="l">of conversations are collaborative (augmentation)</span><span class="s">World 51% · 4th of 121 (May 2026)</span></div>
+    <div class="tile" role="listitem"><span class="v">119<small style="font-size:16px">/121</small></span><span class="l">rank on how much autonomy users give Claude</span><span class="s">Bottom five in every period measured</span></div>
+    <div class="tile" role="listitem"><span class="v">3.4×</span><span class="l">the world share of investment research</span><span class="s">3.50% vs 1.03% of conversations (May 2026)</span></div>
+  </div>
+</section>
+
+<section class="col" id="standing">
+  <h2><span class="num">01 · Where Korea stands</span>A top-seven user by volume, slipping per head</h2>
+  <p>Korea accounted for <span class="k">3.24%</span> of Claude.ai conversations in May 2026, 7th of 121 countries with published data. It has held 5th to 7th place in every release since August 2025. Per working-age person, the picture has softened. The Anthropic AI Usage Index (AUI) compares a country's share of usage with its share of the world's working-age population. Korea's AUI rank moved from 5th (August 2025) to 14th (May 2026). Singapore, Australia and New Zealand were already ahead in August 2025; since then the United States, Canada, France and several smaller European economies have also moved ahead.</p>
+  <figure>
+    <div class="legend"><span><i style="background:var(--korea)"></i>Share of global conversations, rank</span><span><i style="background:var(--world)"></i>Usage per working-age person (AUI), rank</span></div>
+    <div class="chart" id="fig1" role="img" aria-label="Korea's rank by share of conversations: 5, 5, 7, 6, 7. Rank by AUI: 5, 7, 12, 9, 14, across five periods from August 2025 to May 2026."></div>
+    <figcaption><b>Figure 1.</b> Korea's rank across five data releases (1 = highest). The dashed line marks a method change: from the June 2026 release the data cover calendar months and add Cowork traffic (Max accounts were already added in the March 2026 release), so compare ranks rather than levels across it. AUI for Nov 2025 and Feb 2026 is recomputed with the August 2025 definition, because those releases do not publish it.</figcaption>
+  </figure>
+</section>
+
+<section class="col" id="income">
+  <h2><span class="num">02 · Above the income line</span>Koreans use Claude about twice as much as their income predicts</h2>
+  <p>Richer countries use Claude more: across 114 countries in August 2025, a 1% higher GDP per working-age person goes with about 0.69% more conversations per person (R² 0.71). This matches the elasticity of about 0.7 in Anthropic's September 2025 report. Korea sits well above that line. Its usage was <span class="k">2.32 times</span> the level its income predicts, the 6th-largest gap of 114 countries. Among the 45 countries with GDP per working-age person above $30,000, only Israel was further above the line. Japan, at a similar income, sits almost exactly on it (1.10×).</p>
+  <figure>
+    <div class="legend"><span><i style="background:var(--korea)"></i>Korea</span><span><i style="background:var(--world)"></i>Fitted line, all countries</span><span><i style="background:var(--peer)"></i>Other countries</span></div>
+    <div class="chart" id="fig2" role="img" aria-label="Scatter plot of 114 countries: log usage per working-age person against log GDP per working-age person. Korea lies well above the fitted line."></div>
+    <figcaption><b>Figure 2.</b> Claude.ai conversations per 100,000 working-age people in the sample week of 4–11 August 2025 (log scale) against GDP per working-age person (log scale). Countries with at least 200 conversations. With later releases and the same 2024 income data, Korea's gap stays between 1.8× and 2.0×.</figcaption>
+  </figure>
+</section>
+
+<section class="col" id="how">
+  <h2><span class="num">03 · How Koreans work with Claude</span>More back-and-forth, less handing over</h2>
+  <p>Anthropic sorts each conversation into collaboration patterns. In <em>directive</em> and <em>feedback-loop</em> conversations the user mostly delegates; in <em>task iteration</em>, <em>learning</em> and <em>validation</em> the user works alongside Claude. In May 2026, <span class="k">56.2%</span> of Korean conversations with a clear pattern were collaborative against <span class="w">51.4%</span> worldwide, 4th of 121 countries. The gap comes mainly from task iteration (33.7% vs 30.4%) and fewer feedback loops (13.2% vs 16.0%).</p>
+  <figure>
+    <div class="legend"><span><i style="background:var(--korea)"></i>Korea</span><span><i style="background:var(--world)"></i>World</span></div>
+    <div class="chart" id="fig3" role="img" aria-label="Collaboration patterns, May 2026. Korea vs world: directive 29.6 vs 31.4, feedback loop 13.2 vs 16.0, task iteration 33.7 vs 30.4, learning 17.5 vs 16.6, validation 3.8 vs 3.1 percent."></div>
+    <figcaption><b>Figure 3.</b> Share of conversations by collaboration pattern, May 2026. Conversations with no clear pattern (2.2% in Korea) are not shown; the collaborative shares in the text exclude them.</figcaption>
+  </figure>
+  <p>A second, steadier signal points the same way. Anthropic also estimates how much autonomy each conversation gives Claude, on a 1–5 scale. Korea ranks in the bottom five on that measure in every period that publishes it: 115th of 118 (Nov 2025), 114th of 118 (Feb 2026), 114th of 114 (Apr 2026) and 119th of 121 (May 2026). The classifier changed in the June 2026 release (the world average fell from about 3.4 to 2.7), but Korea's position did not.</p>
+  <p>Two caveats keep this modest. Before June 2026 Korea's collaboration share was close to Japan's and the UK's (61.3%, 61.4% and 60.5% in November 2025), so much of it looks like a rich-country pattern. And the world average is pulled down by India, the second-largest user, where delegation is more common.</p>
+  <h3>Work, personal and study use</h3>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Period</th><th class="n">Korea work</th><th class="n">personal</th><th class="n">study</th><th class="n">World work</th><th class="n">personal</th><th class="n">study</th></tr></thead>
+      <tbody>
+        <tr><td>Nov 2025 (1 week)</td><td class="n">51.1</td><td class="n">33.3</td><td class="n">15.6</td><td class="n">46.0</td><td class="n">34.7</td><td class="n">19.3</td></tr>
+        <tr><td>Feb 2026 (1 week)</td><td class="n">50.2</td><td class="n">43.2</td><td class="n">6.5</td><td class="n">45.2</td><td class="n">42.3</td><td class="n">12.4</td></tr>
+        <tr><td>Apr 2026 (month)</td><td class="n">49.8</td><td class="n">34.9</td><td class="n">15.3</td><td class="n">45.5</td><td class="n">38.5</td><td class="n">16.0</td></tr>
+        <tr><td>May 2026 (month)</td><td class="n">47.2</td><td class="n">37.9</td><td class="n">14.9</td><td class="n">43.4</td><td class="n">40.2</td><td class="n">16.5</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Korea leans toward work (47.2% vs 43.4% in May 2026), but so do Japan (47.0%), Taiwan (47.1%) and Singapore (46.8%). Korea's study use also dips sharply in the February sample week: it fell 58% between the November and February weeks (world: −35%; Japan: −47%, to the same 6.5%). The February week falls in Korea's winter break, before the March start of the school year, but since Japan shows a similar dip, that reading is an interpretation, not something the data can prove.</p>
+</section>
+
+<section class="col" id="niches">
+  <h2><span class="num">04 · What Koreans ask for</span>Sermons, scripts, stock research and slide decks</h2>
+  <p>To find what is distinctive, I compare each request category's share in Korea with its share worldwide in the February 2026 sample. Over-used categories need at least 50 Korean and 500 global conversations; under-used ones need a published Korean cell and at least 50 Korean conversations expected at the world share. Categories are rebuilt in every release, so I only call something a Korean pattern when the theme recurs across releases.</p>
+  <figure>
+    <div class="legend"><span><i style="background:var(--korea)"></i>Korea uses more</span><span><i style="background:var(--world)"></i>Korea uses less</span></div>
+    <div class="chart" id="fig4" role="img" aria-label="Request categories Korea over-uses and under-uses relative to the world, February 2026, as ratios on a log scale."></div>
+    <figcaption><b>Figure 4.</b> Korea's share of conversations divided by the world's share, by request category, 5–12 February 2026 (log scale; 1× = same as the world). Ten largest over-uses and ten largest under-uses after the count filter.</figcaption>
+  </figure>
+  <p>Four themes recur across releases:</p>
+  <ul class="plain">
+    <li><b>Content for an audience.</b> News articles, video scripts, screenplays and subtitles. The O*NET task "write material for dramas and narration" ran at 3.4× the world share in February and 3.6× in November.</li>
+    <li><b>Sermons and religious content.</b> "Prepare and deliver sermons or other talks" is the single most over-used task: 10.4× the world share in February 2026 and 10.9× in November 2025. It is a small slice of Korean use (0.6%), but the most consistent outlier.</li>
+    <li><b>Individual investing.</b> In May 2026, investment research was 3.50% of Korean conversations against 1.03% worldwide, the largest gap in percentage points. Trading-signal analysis (2.9×) and finance content (2.6×) sit nearby.</li>
+    <li><b>Presentations.</b> Slide decks were 3.49% of Korean conversations against 2.04% worldwide in May 2026.</li>
+  </ul>
+  <p>Astrology, tarot and numerology recur too, at about 2.6–3.6×; saju-style fortune-telling may sit inside them, but the categories do not name it. On the other side, Koreans rarely ask Claude for Western-style résumés (0.27×), job-application correspondence (0.38× in February, 0.24× in May) or business email. Yet the broader "job applications" category ran at 2.2× the world share in May 2026 (1.27% vs 0.58%), so the gap looks like one of format and language rather than of job-seeking.</p>
+  <h3>Occupations behind the tasks</h3>
+  <figure>
+    <div class="chart" id="fig5" role="img" aria-label="Difference between Korea and the world in share of conversations by occupation group, May 2026, in percentage points."></div>
+    <figcaption><b>Figure 5.</b> Korea minus world, percentage points of conversations, by US SOC major occupation group, May 2026. Eight groups with the largest gaps. Korea's arts, design and media share (16.8%) is the highest among the 12 comparison countries (Korea, Japan, the US, the UK, Australia, Canada, India, Singapore, Taiwan, Germany, France and Israel).</figcaption>
+  </figure>
+</section>
+
+<section class="col" id="unique">
+  <h2><span class="num">05 · Is K-Claude unique?</span>Distinctive niches, typical overall</h2>
+  <p>K-pop is globally recognisable. Is Korea's Claude use? To test it, I measure how far each country's mix of request categories is from the rest of the world, using the Jensen–Shannon divergence, for the 28 countries with at least 5,000 conversations in February 2026.</p>
+  <figure>
+    <div class="legend"><span><i style="background:var(--korea)"></i>Korea</span><span><i style="background:var(--world)"></i>Closest overall mixes (Japan, Spain, France)</span><span><i style="background:var(--peer)"></i>Other countries</span></div>
+    <div class="chart" id="fig6" role="img" aria-label="Divergence of each country's request mix from the rest of the world, February 2026. Korea ranks 18th of 28."></div>
+    <figcaption><b>Figure 6.</b> Jensen–Shannon divergence (base 2) between each country's distribution over 103 request categories and the rest of the world's, 5–12 February 2026. Higher means more distinctive. The dashed line is the median.</figcaption>
+  </figure>
+  <div class="answer">
+    <p><b>Answer: no.</b> Korea ranks 18th of 28, below the median, and between 13th and 26th in every release and level of detail I tested. The most distinctive countries are lower-income ones such as Pakistan, Nigeria and Vietnam. Korea's closest overall match in February 2026 is Japan (then Spain and France); in May 2026 the countries whose departures from the world average most resemble Korea's are Taiwan, Singapore and Japan. K-Claude is a typical advanced-economy mix with a few sharp niches, each under 5% of Korean use.</p>
+  </div>
+</section>
+
+<section class="col" id="regions">
+  <h2><span class="num">06 · Inside Korea</span>Seoul's 64% likely overstates the capital</h2>
+  <p>Since the January 2026 release the data have split Korea into its 17 regions. Seoul accounts for <span class="k">63.7%</span> of Korean conversations against 18.2% of the population. The capital area (Seoul, Gyeonggi, Incheon) has 82.8% of use and 51.1% of residents.</p>
+  <figure>
+    <div class="legend"><span><i style="background:var(--korea)"></i>Share of Korea's Claude conversations</span><span><i style="background:var(--peer)"></i>Share of population</span></div>
+    <div class="chart" id="fig7" role="img" aria-label="Share of Korean Claude conversations and of population by region, May 2026. Seoul 63.7 versus 18.2 percent."></div>
+    <figcaption><b>Figure 7.</b> May 2026. Population is the resident registration count at the end of May 2026 (Ministry of the Interior and Safety), all ages.</figcaption>
+  </figure>
+  <p>I would not read this as a 3.5-fold Seoul advantage. Location comes from IP addresses, and Korean telecom and mobile address blocks are often registered in Seoul. The Incheon share also swings from 4.8% (Nov 2025) to 10.6% (Feb 2026) to 6.9% (Apr 2026). At most the data say that use is concentrated in the capital region. A regional AUI, which Anthropic publishes only for US states, would need a location method validated for Korea.</p>
+</section>
+
+<section class="col" id="official">
+  <h2><span class="num">07 · Next to Korea's official statistics</span>Claude is a small, self-selected window</h2>
+  <p>Australia's and Canada's country briefs read the Economic Index next to national statistics. For Korea, the official sources say three things.</p>
+  <ul class="plain">
+    <li><b>Claude is a minority tool in Korea.</b> In the 2025 Internet Usage Survey (Ministry of Science and ICT; 50,750 respondents), 44.5% had used generative AI, up from 17.6% in 2023. 41.8% had used ChatGPT and 9.8% Gemini; Claude is not listed. A private survey of 8,000 adults (Consumer Insight and ZDNet Korea, February–April 2026) put past-month Claude use at 3% on average, rising from 1% to 6% over the ten weeks. So the patterns above describe Korea's Claude users, who are likely more technical and more educated than Korean workers overall.</li>
+    <li><b>The labour-market questions are already live.</b> The Bank of Korea (Issue Note 2026-19, August 2026) found that youth employment fell by 285,000 between June 2022 and June 2026, and 94% of the fall was in industries highly exposed to AI. It mapped the Economic Index's automation shares onto Korean industries and found weaker youth employment where automation shares were high, while saying this does not establish cause.</li>
+    <li><b>Korea is building its own measures.</b> The Korea Employment Information Service counts 2.92 million insured workers (19.1%) in highly exposed occupations, and the Ministry of Employment and Labor plans a Korean AI exposure index and early-warning dashboard by 2027.</li>
+  </ul>
+  <p>What Korea lacks is a measure of actual use by occupation and task. Exposure indices describe what AI could do; the Economic Index observes what people ask it to do. In Japan, the University of Tokyo's Matsuo–Iwasawa Lab, PKSHA and Anthropic announced a Japan AI Index in June 2026. Australia (March 2026) and Singapore (October 2026) included Economic Index data sharing in their agreements with Anthropic. Korea's June 2026 agreement with the Ministry of Science and ICT covers safety and security, not economic data.</p>
+</section>
+
+<section class="col" id="limits">
+  <h2><span class="num">08 · What this cannot tell us</span>Limits to keep in view</h2>
+  <ul class="plain">
+    <li><b>Conversations, not people.</b> The data count sampled conversations. They say nothing about how many Koreans use Claude.</li>
+    <li><b>Location is approximate.</b> Countries come from IP addresses; 15–18% of conversations had no country at all.</li>
+    <li><b>Every release changes the method.</b> Sampling moved from single weeks to calendar months, Max and Cowork traffic were added, categories were rebuilt and classifiers replaced. Rank moves of one or two places are noise.</li>
+    <li><b>Labels come from a model.</b> Categories are assigned by Claude-based classifiers. How accurately they read Korean-language conversations cannot be checked with public data.</li>
+    <li><b>Causes are guesses.</b> Church culture, saju or retail investing are hypotheses that fit the patterns. None is tested here.</li>
+    <li><b>Small cells are hidden.</b> Cells under 15 conversations are suppressed, so a missing Korean category means "not published", not zero.</li>
+  </ul>
+</section>
+
+<section class="col" id="revisit">
+  <h2><span class="num">09 · Revisiting 2018</span>The 2018 high-risk list was really two lists</h2>
+  <p>The 2018 report ranked the 20 Korean occupations with the highest automation probability and the 20 with the lowest. I mapped all 40 to US occupations and attached two measures Anthropic has since published. <em>Observed exposure</em> (March 2026) is the time-weighted share of an occupation's tasks that LLMs could speed up and that show up in work-related Claude use (augmentative use counts half), from 0 to 1. <em>Robot exposure</em> (September 2026) rates, from 0 to 3, the kind of setting in which demonstrated or deployed robots can already do an occupation's tasks (1 = a purpose-built robot cell, 3 = unstructured places such as homes), averaged over its tasks by time share. It measures capability, not cost or adoption.</p>
+  <figure>
+    <div class="legend"><span><i style="background:var(--korea)"></i>High risk in 2018 (probability ≥ 0.957)</span><span><i style="background:var(--world)"></i>Low risk in 2018 (≤ 0.018)</span></div>
+    <div class="chart" id="fig8" role="img" aria-label="Forty Korean occupations from the 2018 report, plotted by robot exposure and observed Claude exposure. High-risk desk jobs sit high on Claude exposure; high-risk machine jobs sit high on robot exposure; some low-risk teaching and IT jobs sit high on Claude exposure."></div>
+    <figcaption><b>Figure 8.</b> The 40 occupations in the 2018 table (KSCO 6th edition), mapped through Statistics Korea's KSCO→ISCO-08 crosswalks and then to US SOC 2018 occupations by title in every row (in 10 rows the SOC choice departs from or adds to the ISCO link). One occupation has no observed-exposure value. Observed exposure: Anthropic, <a href="https://www.anthropic.com/research/labor-market-impacts">Labor market impacts</a>. Robot exposure: Anthropic, <a href="https://www.anthropic.com/research/what-work-can-robots-do">What work can robots do?</a></figcaption>
+  </figure>
+  <ul class="plain">
+    <li><b>The 2018 ranking does not predict Claude use.</b> Mean observed exposure is 0.144 for the high-risk group and 0.122 for the low-risk group, and the rank correlation with the 2018 probability is −0.09 (not significant). Both groups sit above the unweighted average of US occupations (0.077).</li>
+    <li><b>It lines up with robots instead.</b> The 2018 probability correlates with robot exposure (ρ = +0.41, p ≈ 0.009).</li>
+    <li><b>Split the high-risk list and both stories appear.</b> Its 12 desk jobs (clerks, salespeople, accountants) have observed exposure of 0.219, about 2.8 times the average US occupation. Its 8 machine and manual jobs have almost none (0.017) but robot exposure of 0.96.</li>
+    <li><b>Some of the "safest" jobs of 2018 are now among the most exposed.</b> Visiting tutors (0.41, 96th percentile of US occupations), education research officials (0.30, 91st) and computer systems analysts (0.28, 90th) were all in the 2018 low-risk twenty.</li>
+  </ul>
+  <p>The 2013-era probabilities behind the 2018 report described routine work that machines could take over. Language models reach a different set of tasks, including the teaching and analysis work that framework treated as safe. Exposure is not job loss: Anthropic's own measure finds no systematic rise in unemployment in highly exposed occupations so far. And this is a first pass: 40 extreme occupations, a cross-country mapping and US-based exposure measures.</p>
+</section>
+
+<section class="col" id="agenda">
+  <h2><span class="num">10 · What to study next</span>A research agenda for Korea</h2>
+  <div class="agenda">
+    <article><h3>Extend the revisit to every Korean occupation</h3><p>Section 09 covers only the 40 extremes. The full version would map all 423 occupations, weight them by employment from the Regional Employment Survey, and use Korean task data (KNOW) in place of US O*NET, so the result describes the Korean labour market rather than US job definitions.</p></article>
+    <article><h3>Youth hiring and actual use</h3><p>The Bank of Korea result rests on US-derived exposure measures. Korean-language usage by task, joined with employment-insurance data on hiring by occupation and age, would show whether the youth slowdown tracks what AI is actually used for in Korea.</p></article>
+    <article><h3>A Korea AI Index with Korean institutions</h3><p>The Japan AI Index and the Australian and Singaporean data-sharing agreements show the model: anonymised Economic Index aggregates joined with national statistics by local researchers. Natural Korean partners include Statistics Korea, the Korea Employment Information Service, the Bank of Korea and university labour economists.</p></article>
+    <article><h3>Validating the measurement for Korea</h3><p>Two checks would make every number above more trustworthy: a Korean-language audit of the classifiers on a labelled sample, and a location method that does not concentrate Korean traffic in Seoul.</p></article>
+  </div>
+</section>
+
+<section class="col" id="methods">
+  <h2><span class="num">11 · Methods and how this was made</span>Reproducible from public files</h2>
+  <p><b>Data.</b> Anthropic Economic Index, Claude.ai files from four releases: 4–11 Aug 2025 (release of 15 Sep 2025), 13–20 Nov 2025 (15 Jan 2026), 5–12 Feb 2026 (24 Mar 2026) and the April and May 2026 months (26 Jun 2026). <a href="https://huggingface.co/datasets/Anthropic/EconomicIndex">huggingface.co/datasets/Anthropic/EconomicIndex</a>, CC-BY. API data are excluded because they carry no geography.</p>
+  <p><b>Measures.</b> AUI is a country's share of conversations divided by its share of the world's working-age (15–64) population. For Nov 2025 and Feb 2026 I recompute it with the August 2025 definition and 2024 population, which reproduces every published August value exactly. Augmentation is task iteration + learning + validation; automation is directive + feedback loop. Over-use ratios require Korea ≥ 50 and world ≥ 500 conversations; under-use ratios require an expected Korean count (world share × Korean total) ≥ 50 and a published Korean cell. Divergence is Jensen–Shannon (base 2) against the rest of the world, at the middle level of the request hierarchy. Seychelles is excluded from the November 2025 rankings as a likely geolocation or automation artefact. For section 09, the 40 occupations come from the table on page 8 of the 2018 report; the KSCO 6th → 8th edition and KSCO 8th → ISCO-08 links use Statistics Korea's official crosswalks, the ISCO → SOC step is matched by title, and correlations are Spearman with permutation p-values (20,000 draws).</p>
+  <p><b>Other sources.</b> Ministry of Science and ICT and NIA, <a href="https://eiec.kdi.re.kr/policy/materialView.do?num=278744">2025 Internet Usage Survey</a> (31 Mar 2026). Bank of Korea, Issue Note 2026-19 (August 2026), summarised in the <a href="https://www.bok.or.kr/portal/bbs/B0000347/view.do?menuNo=201106&amp;nttId=11064157">BOK blog post of 28 August 2026</a>. Korea Employment Information Service, Employment Issue (Summer 2026), as reported by Youth Daily (31 Aug 2026). Anthropic, <a href="https://www.anthropic.com/news/australia-MOU">Australia MOU</a> (31 Mar 2026), <a href="https://www.anthropic.com/news/singapore-office-opening">Singapore office</a> (14 Oct 2026) and <a href="https://www.anthropic.com/news/seoul-office-partnerships-korean-ai-ecosystem">Seoul partnerships</a> (17 Jun 2026); PKSHA, <a href="https://www.pkshatech.com/en/news/20260604en/">Japan AI Index</a> (4 Jun 2026); ZDNet Korea, <a href="https://zdnet.co.kr/view/?no=20260518163351">AI service survey</a> (21 May 2026). Ministry of the Interior and Safety, <a href="https://jumin.mois.go.kr/statMonth.do">resident registration statistics</a>. Anthropic, <a href="https://www.anthropic.com/research/anthropic-economic-index-september-2025-report">September 2025</a>, <a href="https://www.anthropic.com/research/anthropic-economic-index-january-2026-report">January 2026</a> and <a href="https://www.anthropic.com/research/economic-index-june-2026-report">June 2026</a> reports; <a href="https://www.anthropic.com/research/how-australia-uses-claude">How Australia uses Claude</a>; <a href="https://www.anthropic.com/research/how-canada-uses-claude">How Canada uses Claude</a>. LG Economic Research Institute, <a href="https://www.lgbr.co.kr/report/view.do?idx=19620">Diagnosing job risks from artificial intelligence</a> (인공지능에 의한 일자리 위험 진단, 15 May 2018).</p>
+  <p><b>How this was made.</b> I set the questions and the framing. Claude (Anthropic) wrote the data-processing code, computed the tables and drafted the text and charts under my direction, and I reviewed the results. All figures recompute from the public files above.</p>
+</section>
+
+<section class="col ko" id="ko" lang="ko">
+  <h2><span class="num">한국어 요약</span>한국은 Claude를 어떻게 쓰나</h2>
+  <p><b>왜 이 리포트인가.</b> 2018년 필자가 LG경제연구원에서 낸 「인공지능에 의한 일자리 위험 진단」은 한국 취업자의 43%(1,136만 명)가 자동화 고위험 직업에 있다고 추정했다. 이 추정은 61개 매체 112건 이상에 보도됐고, 공공 연구기관·기관 보고서 최소 11건과 학술지 논문 최소 6편이 인용했다. 그때는 AI가 할 수 <em>있는</em> 일을 쟀다면, Anthropic Economic Index는 사람들이 AI를 실제로 쓰는 일을 보여 준다. 이 리포트는 그 비교의 출발점이다.</p>
+  <p><b>K-Claude는 K-POP처럼 독특한가? 전체로는 아니다.</b> 한국의 요청 구성은 일본과 가장 가깝고(2026년 2월), 세계 평균에서 벗어나는 방향은 대만·싱가포르·일본과 닮았다(2026년 5월). 국가별 요청 분포가 나머지 세계와 얼마나 다른지 재 보면, 한국은 28개국 중 18위로 중간보다 아래다.</p>
+  <ul class="plain">
+    <li><b>사용 강도</b>: 세계 대화의 3.24%로 7위(2026년 5월). 소득으로 예상되는 수준의 2.3배를 써, 114개국 중 6위, 생산가능인구 1인당 GDP 3만 달러 이상 45개국 중에서는 이스라엘 다음이다(2025년 8월).</li>
+    <li><b>쓰는 방식</b>: Claude와 협업하는(증강형) 대화가 56%(세계 51%)이고, Claude에게 맡기는 자율성은 매번 최하위 5개국 안에 든다.</li>
+    <li><b>한국다운 틈새</b>: 설교 원고(세계 대비 10배), 기사·영상 대본, 투자 리서치(3.4배), 발표자료, 점성술·타로. 반대로 서구식 이력서·구직 서신·업무 이메일 요청은 세계의 0.3~0.5배로 적다(넓은 '구직 지원' 범주는 2026년 5월 2.2배).</li>
+    <li><b>지역</b>: 서울 64%는 IP 위치 판정 탓에 부풀었을 가능성이 커서 그대로 읽으면 안 된다.</li>
+    <li><b>한계</b>: 한국에서 Claude는 소수 도구다(민간 조사의 최근 한 달 이용률 평균 3%, 10주 사이 1%→6%). 이 결과는 한국 전체가 아니라 Claude를 쓰는 한국 이용자의 모습이다.</li>
+    <li><b>2018년 다시 보기</b>: 2018년 고위험·저위험 40개 직업에 Anthropic의 관측 노출도를 붙이면, 2018년 순위는 Claude 사용과는 상관이 없고(ρ=−0.09) 로봇 노출과 맞는다(ρ=+0.41). 고위험 목록 속 사무·판매 직업은 Claude 노출이 높고, 기계조작 직업은 로봇 노출이 높다. 2018년에 가장 안전하다던 방문교사(상위 5% 안)와 시스템 분석가(상위 약 10%)는 지금 노출 최상위권이다.</li>
+    <li><b>다음 연구</b>: 423개 직업 전체를 고용 가중치와 한국 직무 자료(KNOW)로 다시 보기. 한국 기관과 함께 한국판 AI 지수 만들기.</li>
+  </ul>
+</section>
+
+<footer>
+  Kunwoo Kim (김건우) leads the Future Platform Economy Research Institute at Kakao Mobility and was an economist at LG Economic Research Institute (2011–2019). Views are his own. This analysis uses only public data and no Kakao Mobility data.
+</footer>
+</div>
+
+<script id="data" type="application/json">{"ts":[{"period":"2025-08","usage_pct":3.658,"share_rank":5,"share_rank_n":200,"aui_rank":5,"aui_rank_n":115,"aui_renorm_2026_06_convention":4.42,"aui":3.725,"aui_source":"published"},{"period":"2025-11","usage_pct":3.062,"share_rank":5,"share_rank_n":173,"aui_rank":8,"aui_rank_n":117,"aui_renorm_2026_06_convention":3.819,"aui":3.123,"aui_source":"computed (not published): R1 definition, R1 2024 working-age population"},{"period":"2026-02","usage_pct":2.908,"share_rank":7,"share_rank_n":176,"aui_rank":12,"aui_rank_n":116,"aui_renorm_2026_06_convention":3.692,"aui":3.001,"aui_source":"computed (not published): R1 definition, R1 2024 working-age population"},{"period":"2026-04","usage_pct":3.19,"share_rank":6,"share_rank_n":114,"aui_rank":9,"aui_rank_n":114,"aui_renorm_2026_06_convention":null,"aui":3.92,"aui_source":"published"},{"period":"2026-05","usage_pct":3.24,"share_rank":7,"share_rank_n":121,"aui_rank":14,"aui_rank_n":121,"aui_renorm_2026_06_convention":null,"aui":3.78,"aui_source":"published"}],"scatter":{"slope":0.6895,"intercept":-15.2589,"r2":0.7088,"n":114,"pts":[["AGO","Angola",8.665,-11.339,-2.055],["ALB","Albania",9.626,-8.489,0.133],["ARE","United Arab Emirates",11.004,-7.995,-0.324],["ARG","Argentina",9.951,-8.495,-0.097],["ARM","Armenia",9.438,-7.819,0.933],["AUS","Australia",11.538,-6.84,0.464],["AUT","Austria",11.375,-7.741,-0.325],["AZE","Azerbaijan",9.255,-9.594,-0.717],["BEL","Belgium",11.388,-7.63,-0.223],["BEN","Benin",7.884,-9.628,0.195],["BFA","Burkina Faso",7.514,-10.777,-0.699],["BGD","Bangladesh",8.286,-10.442,-0.896],["BGR","Bulgaria",10.219,-7.873,0.339],["BHR","Bahrain",10.55,-8.593,-0.608],["BIH","Bosnia and Herzegovina",9.551,-8.646,0.027],["BOL","Bolivia",8.706,-8.977,0.279],["BRA","Brazil",9.601,-8.328,0.31],["CAN","Canada",11.331,-7.182,0.264],["CHE","Switzerland",11.979,-7.217,-0.218],["CHL","Chile",10.096,-8.104,0.193],["CIV","Ivory Coast",8.482,-9.864,-0.453],["CMR","Cameroon",8.086,-9.76,-0.077],["COL","Colombia",9.334,-8.446,0.378],["CRI","Costa Rica",10.202,-7.98,0.245],["CYP","Cyprus",10.556,-7.38,0.6],["CZE","Czechia",10.814,-7.714,0.088],["DEU","Germany",11.393,-7.644,-0.241],["DNK","Denmark",11.637,-7.415,-0.181],["DOM","Dominican Republic",9.719,-8.798,-0.241],["DZA","Algeria",9.102,-9.621,-0.638],["ECU","Ecuador",9.209,-8.296,0.614],["EGY","Egypt",8.562,-9.52,-0.165],["ESP","Spain",10.888,-8.02,-0.268],["EST","Estonia",10.808,-7.118,0.689],["FIN","Finland",11.365,-7.615,-0.192],["FRA","France",11.228,-7.587,-0.07],["GBR","United Kingdom",11.328,-7.271,0.177],["GEO","Georgia",9.579,-7.467,1.187],["GHA","Ghana",8.289,-9.306,0.238],["GRC","Greece",10.581,-8.001,-0.038],["GTM","Guatemala",9.172,-9.258,-0.323],["HND","Honduras",8.567,-9.695,-0.344],["HRV","Croatia",10.546,-7.902,0.086],["HUN","Hungary",10.494,-8.307,-0.284],["IDN","Indonesia",8.886,-9.279,-0.147],["IND","India",8.281,-9.572,-0.023],["IRL","Ireland",12.006,-7.437,-0.456],["IRQ","Iraq",9.215,-9.183,-0.277],["ISR","Israel",11.41,-6.305,1.087],["ITA","Italy",11.056,-7.865,-0.229],["JAM","Jamaica",9.177,-8.809,0.122],["JOR","Jordan",8.873,-9.034,0.107],["JPN","Japan",10.92,-7.633,0.097],["KAZ","Kazakhstan",10.013,-9.139,-0.784],["KEN","Kenya",8.177,-9.031,0.59],["KGZ","Kyrgyzstan",8.27,-9.694,-0.138],["KHM","Cambodia",8.34,-9.643,-0.135],["KOR","South Korea",10.849,-6.936,0.842],["KWT","Kuwait",10.61,-9.339,-1.396],["LAO","Laos",8.051,-9.494,0.213],["LBN","Lebanon",8.942,-8.575,0.518],["LKA","Sri Lanka",8.833,-8.244,0.925],["LTU","Lithuania",10.717,-7.495,0.374],["LUX","Luxembourg",12.206,-7.244,-0.401],["LVA","Latvia",10.523,-7.504,0.499],["MAR","Morocco",8.726,-8.557,0.685],["MDA","Moldova",9.38,-8.04,0.751],["MDG","Madagascar",6.857,-10.356,0.175],["MEX","Mexico",9.955,-9.169,-0.774],["MKD","North Macedonia",9.567,-8.171,0.491],["MLT","Malta",11.057,-7.211,0.423],["MNE","Montenegro",9.908,-7.495,0.932],["MOZ","Mozambique",7.091,-10.605,-0.235],["MUS","Mauritius",9.715,-7.97,0.59],["MYS","Malaysia",9.726,-8.544,0.009],["NGA","Nigeria",7.274,-9.851,0.392],["NLD","The Netherlands",11.569,-7.311,-0.029],["NOR","Norway",11.802,-7.436,-0.315],["NPL","Nepal",7.719,-9.115,0.822],["NZL","New Zealand",11.22,-6.853,0.669],["OMN","Oman",10.236,-9.466,-1.265],["PAK","Pakistan",7.83,-9.681,0.179],["PAN","Panama",10.293,-8.348,-0.187],["PER","Peru",9.445,-8.416,0.331],["PHL","Philippines",8.696,-9.049,0.214],["POL","Poland",10.551,-7.777,0.207],["PRI","Puerto Rico",10.991,-8.432,-0.751],["PRT","Portugal",10.737,-7.552,0.304],["PRY","Paraguay",9.189,-8.801,0.122],["QAT","Qatar",11.441,-8.517,-1.147],["ROU","Romania",10.352,-8.212,-0.091],["RWA","Rwanda",7.44,-9.459,0.67],["SAU","Saudi Arabia",10.645,-9.133,-1.214],["SEN","Senegal",8.024,-9.473,0.253],["SGP","Singapore",11.707,-6.732,0.455],["SLV","El Salvador",9.026,-9.169,-0.133],["SRB","Serbia",9.974,-7.9,0.482],["SVK","Slovakia",10.584,-8.28,-0.319],["SVN","Slovenia",10.89,-7.748,0.002],["SWE","Sweden",11.437,-7.464,-0.091],["THA","Thailand",9.26,-8.319,0.556],["TUN","Tunisia",8.78,-8.372,0.833],["TUR","Turkey",10.028,-8.633,-0.288],["TWN","Taiwan",10.787,-7.421,0.4],["TZA","Tanzania",7.673,-11.431,-1.462],["UGA","Uganda",7.64,-10.706,-0.715],["UKR","Ukraine",8.921,-8.332,0.776],["URY","Uruguay",10.503,-7.979,0.039],["USA","United States",11.795,-6.964,0.163],["UZB","Uzbekistan",8.52,-10.776,-1.392],["VNM","Vietnam",8.812,-8.767,0.415],["ZAF","South Africa",9.135,-9.033,-0.073],["ZMB","Zambia",7.688,-10.422,-0.464],["ZWE","Zimbabwe",8.246,-10.125,-0.552]]},"collab":{"GLOBAL":{"directive":31.38,"feedback loop":15.97,"task iteration":30.41,"learning":16.55,"validation":3.08,"automation_pct":48.62,"augmentation_pct":51.38},"KOR":{"directive":29.63,"feedback loop":13.16,"task iteration":33.69,"learning":17.49,"validation":3.83,"automation_pct":43.76,"augmentation_pct":56.24},"JPN":{"directive":28.81,"feedback loop":17.1,"task iteration":28.07,"learning":18.56,"validation":4.22,"automation_pct":47.45,"augmentation_pct":52.55},"USA":{"directive":31.64,"feedback loop":16.55,"task iteration":28.81,"learning":16.86,"validation":3.32,"automation_pct":49.59,"augmentation_pct":50.41},"TWN":{"directive":31.42,"feedback loop":16.75,"task iteration":26.71,"learning":18.78,"validation":3.34,"automation_pct":49.66,"augmentation_pct":50.34},"SGP":{"directive":31.08,"feedback loop":14.08,"task iteration":30.53,"learning":18.89,"validation":2.95,"automation_pct":46.3,"augmentation_pct":53.7}},"collab_ts":{"2025-08":{"GLOBAL":48.93,"KOR":55.47,"JPN":56.65},"2025-11":{"GLOBAL":53.26,"KOR":61.25,"JPN":61.44},"2026-02":{"GLOBAL":54.45,"KOR":59.75,"JPN":63.07},"2026-04":{"GLOBAL":51.02,"KOR":56.29,"JPN":51.77},"2026-05":{"GLOBAL":51.38,"KOR":56.24,"JPN":52.55}},"usecase":{"2025-11":{"GLOBAL":{"work":46.03,"personal":34.68,"coursework":19.27,"not_classified":0.02},"KOR":{"work":51.09,"personal":33.34,"coursework":15.56,"not_classified":0.01},"JPN":{"work":44.57,"personal":43.09,"coursework":12.34,"not_classified":null}},"2026-02":{"GLOBAL":{"work":45.23,"personal":42.29,"coursework":12.44,"not_classified":null},"KOR":{"work":50.23,"personal":43.24,"coursework":6.53,"not_classified":null},"JPN":{"work":43.94,"personal":49.53,"coursework":6.53,"not_classified":0.0}},"2026-04":{"GLOBAL":{"work":45.53,"personal":38.48,"coursework":15.99},"KOR":{"work":49.78,"personal":34.9,"coursework":15.32},"JPN":{"work":49.44,"personal":46.01,"coursework":4.55}},"2026-05":{"GLOBAL":{"work":43.36,"personal":40.2,"coursework":16.45},"KOR":{"work":47.24,"personal":37.86,"coursework":14.9},"JPN":{"work":47.0,"personal":47.15,"coursework":5.85}}},"soc":[["Computer and Mathematical",22.56,23.8,23.03],["Arts, Design, Entertainment, Sports, and Media",16.76,13.55,14.7],["Educational Instruction and Library",12.76,12.79,10.64],["Office and Administrative Support",8.15,7.89,8.46],["Business and Financial Operations",7.05,5.77,6.33],["Sales and Related",7.0,9.14,8.97],["Life, Physical, and Social Science",5.34,4.51,5.26],["Management",5.14,5.9,5.99],["Architecture and Engineering",3.72,3.56,3.18],["Community and Social Service",2.55,2.57,3.28],["Healthcare Practitioners and Technical",2.46,3.31,2.74],["Personal Care and Service",1.16,1.23,1.17],["Legal",0.98,1.02,0.61],["Production",0.89,1.04,1.04],["Healthcare Support",0.59,0.62,0.73],["Installation, Maintenance, and Repair",0.57,0.62,0.81],["Food Preparation and Serving Related",0.38,0.48,0.58],["Transportation and Material Moving",0.36,0.34,0.43],["Protective Service",0.32,0.33,0.5],["Building and Grounds Cleaning and Maintenance",0.09,0.13,0.15],["Construction and Extraction",0.08,0.1,0.11],["Farming, Fishing, and Forestry",0.03,0.04,0.06]],"jsd":{"ranking":[["PAK",0.08115],["NGA",0.07071],["VNM",0.06672],["UKR",0.06113],["IDN",0.05652],["TWN",0.05438],["BRA",0.04847],["THA",0.04598],["TUR",0.04358],["PHL",0.04316],["COL",0.04202],["SGP",0.03948],["CHE",0.03891],["MEX",0.03423],["ISR",0.03375],["IND",0.03091],["POL",0.02968],["KOR",0.02557],["USA",0.02232],["NLD",0.02158],["JPN",0.02049],["AUS",0.01917],["ITA",0.01546],["ESP",0.01397],["GBR",0.01315],["FRA",0.01167],["DEU",0.01085],["CAN",0.00952]],"median":0.03399,"n":28,"kor_rank":18},"regions":[{"code":"KR-11","name":"Seoul","name_ko":"서울특별시","usage_pct_of_korea":63.65,"pop_pct":18.19,"ratio":3.5},{"code":"KR-41","name":"Gyeonggi","name_ko":"경기도","usage_pct_of_korea":12.38,"pop_pct":26.92,"ratio":0.46},{"code":"KR-28","name":"Incheon","name_ko":"인천광역시","usage_pct_of_korea":6.75,"pop_pct":5.99,"ratio":1.13},{"code":"KR-26","name":"Busan","name_ko":"부산광역시","usage_pct_of_korea":3.05,"pop_pct":6.33,"ratio":0.48},{"code":"KR-30","name":"Daejeon","name_ko":"대전광역시","usage_pct_of_korea":2.19,"pop_pct":2.82,"ratio":0.78},{"code":"KR-27","name":"Daegu","name_ko":"대구광역시","usage_pct_of_korea":2.15,"pop_pct":4.6,"ratio":0.47},{"code":"KR-48","name":"Gyeongnam","name_ko":"경상남도","usage_pct_of_korea":1.33,"pop_pct":6.26,"ratio":0.21},{"code":"KR-44","name":"Chungnam","name_ko":"충청남도","usage_pct_of_korea":1.25,"pop_pct":4.19,"ratio":0.3},{"code":"KR-29","name":"Gwangju","name_ko":"광주광역시","usage_pct_of_korea":1.2,"pop_pct":2.71,"ratio":0.44},{"code":"KR-47","name":"Gyeongbuk","name_ko":"경상북도","usage_pct_of_korea":1.05,"pop_pct":4.89,"ratio":0.21},{"code":"KR-43","name":"Chungbuk","name_ko":"충청북도","usage_pct_of_korea":0.95,"pop_pct":3.13,"ratio":0.3},{"code":"KR-42","name":"Gangwon","name_ko":"강원특별자치도","usage_pct_of_korea":0.94,"pop_pct":2.95,"ratio":0.32},{"code":"KR-45","name":"Jeonbuk","name_ko":"전북특별자치도","usage_pct_of_korea":0.93,"pop_pct":3.37,"ratio":0.28},{"code":"KR-31","name":"Ulsan","name_ko":"울산광역시","usage_pct_of_korea":0.58,"pop_pct":2.13,"ratio":0.27},{"code":"KR-50","name":"Sejong","name_ko":"세종특별자치시","usage_pct_of_korea":0.56,"pop_pct":0.77,"ratio":0.73},{"code":"KR-49","name":"Jeju","name_ko":"제주특별자치도","usage_pct_of_korea":0.55,"pop_pct":1.3,"ratio":0.42},{"code":"KR-46","name":"Jeonnam","name_ko":"전라남도","usage_pct_of_korea":0.5,"pop_pct":3.47,"ratio":0.14}],"regions_capital":{"capital_area_usage_pct":82.78,"capital_area_pop_pct":51.1},"revisit":[["Service Salespersons via Telecommunications","high",0.3037,0.3629,"5302"],["Telemarketer","high",0.2852,0.0,"5303"],["Online Salespersons","high",0.18,0.0,"5304"],["Photoprint and Development Machine Operators","high",0.0108,0.9429,"8922"],["Customs Brokers","high",0.1211,0.0,"2714"],["Trading Clerks","high",0.0165,0.1375,"3125"],["Computer Data Entry Clerks and Assistant Clerks","high",0.5605,0.3128,"3142"],["Book-keeping Clerks","high",0.1796,0.0408,"3132"],["Products Lending Representatives","high",0.2048,0.1719,"5220"],["Textile Bleaching and Dyeing Related Machine Operators","high",0.0211,0.9136,"8212"],["Shoemaking Machine Operators and Assemblers","high",0.0,1.0519,"8222"],["Rubber and Plastic Products Assemblers","high",null,0.8718,"8324"],["Furniture Assemblers","high",0.0,0.8609,"8912"],["Other Wood and Paper Related Machine Operators","high",0.0,0.9683,"8919"],["Shoe Cleaners","high",0.0879,0.8331,"9991"],["Bank Tellers","high",0.0231,1.1212,"3201"],["Transport Clerks","high",0.163,0.1318,"3126"],["Textile Processing Machine Operators","high",0.0,1.2762,"8211"],["Accountants","high",0.3478,0.0241,"2712"],["Taxation Accountants","high",0.238,0.012,"2713"],["Nutritionists","low",0.1328,0.0779,"2440"],["Medical Specialists","low",0.0415,0.02,"2411"],["School Supervisor, Educational Research Officials and Teaching Related Professionals","low",0.3043,0.0,"2591"],["Education Managers","low",0.0521,0.0,"1312"],["Health and Medical Services Managers","low",0.0659,0.0,"1331"],["High and Middle School Teachers","low",0.1958,0.0542,"2521"],["Visiting Teachers","low",0.4077,0.0392,"2545"],["Computer System Designers and Analyst","low",0.2763,0.0,"2221"],["Special Education Teachers","low",0.0661,0.0445,"2523"],["Pharmacists and Oriental Pharmacists","low",0.0896,0.3125,"2420"],["Other Professional Services Managers","low",0.1616,0.0444,"1390"],["Computer Instructors","low",0.2178,0.0128,"2542"],["Other Religion Related Workers","low",0.153,0.0,"2489"],["Clergymen","low",0.1116,0.0,"2481"],["Chemical Engineers and Researchers","low",0.0,0.0658,"2321"],["Fiber and Textile Engineers and Researchers","low",0.0,0.0,"2392"],["Gas and Energy Engineers and Researchers","low",0.033,0.0329,"2393"],["Research Manager","low",0.0459,0.0758,"1311"],["Architects and Construction Engineers","low",0.0432,0.0482,"2311"],["Environment Engineers and Researchers","low",0.0453,0.0262,"2341"]]}</script>
+<script>
+(function () {
+  "use strict";
+  var D = JSON.parse(document.getElementById("data").textContent);
+  var NS = "http://www.w3.org/2000/svg";
+  var NAMES = {PAK:"Pakistan",NGA:"Nigeria",VNM:"Vietnam",UKR:"Ukraine",IDN:"Indonesia",TWN:"Taiwan",BRA:"Brazil",THA:"Thailand",TUR:"Türkiye",PHL:"Philippines",COL:"Colombia",SGP:"Singapore",CHE:"Switzerland",MEX:"Mexico",ISR:"Israel",IND:"India",POL:"Poland",KOR:"Korea",USA:"United States",NLD:"Netherlands",JPN:"Japan",AUS:"Australia",ITA:"Italy",ESP:"Spain",GBR:"United Kingdom",FRA:"France",DEU:"Germany",CAN:"Canada",GEO:"Georgia"};
+
+  function el(tag, attrs, text) {
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (text != null) e.textContent = text;
+    return e;
+  }
+  function svgFor(box, h) {
+    var w = Math.max(280, Math.round(box.clientWidth || 600));
+    var s = el("svg", {viewBox: "0 0 " + w + " " + h, width: w, height: h});
+    box.innerHTML = "";
+    box.appendChild(s);
+    return {s: s, w: w};
+  }
+  function css(name) { return "var(" + name + ")"; }
+  function small(w) { return w < 480; }
+
+  // Figure 1: rank ladder
+  function fig1() {
+    var box = document.getElementById("fig1");
+    var ts = D.ts.map(function (r) { return {p: r.period, share: r.share_rank, aui: r.period === "2025-11" ? 7 : r.aui_rank}; });
+    var h = 250, o = svgFor(box, h), s = o.s, w = o.w;
+    var L = 44, R = 28, T = 18, B = 40;
+    var xs = function (i) { return L + i * (w - L - R) / (ts.length - 1); };
+    var ys = function (r) { return T + (r - 1) * (h - T - B) / 14; };
+    [1, 5, 10, 15].forEach(function (r) {
+      s.appendChild(el("line", {x1: L, x2: w - R, y1: ys(r), y2: ys(r), "class": "grid"}));
+      s.appendChild(el("text", {x: L - 8, y: ys(r) + 4, "text-anchor": "end", "font-size": 12, "class": "mono mut"}, r === 1 ? "1st" : r + "th"));
+    });
+    var bx = (xs(2) + xs(3)) / 2;
+    s.appendChild(el("line", {x1: bx, x2: bx, y1: T - 6, y2: h - B + 4, stroke: css("--muted"), "stroke-dasharray": "4 4"}));
+    s.appendChild(el("text", {x: bx + 5, y: T + 2, "font-size": 11.5, "class": "mut"}, "method change"));
+    ts.forEach(function (r, i) {
+      var lab = small(w) ? r.p.slice(2).replace("-", "/") : ["Aug 2025","Nov 2025","Feb 2026","Apr 2026","May 2026"][i];
+      s.appendChild(el("text", {x: xs(i), y: h - 14, "text-anchor": "middle", "font-size": 12, "class": "mut"}, lab));
+    });
+    [["share", css("--korea")], ["aui", css("--world")]].forEach(function (sr) {
+      var d = ts.map(function (r, i) { return (i ? "L" : "M") + xs(i) + " " + ys(r[sr[0]]); }).join(" ");
+      s.appendChild(el("path", {d: d, fill: "none", stroke: sr[1], "stroke-width": 2.5}));
+      ts.forEach(function (r, i) {
+        s.appendChild(el("circle", {cx: xs(i), cy: ys(r[sr[0]]), r: 5, fill: sr[1]}));
+        var dy = sr[0] === "share" ? -10 : 18;
+        if (r.share === r.aui && sr[0] === "aui") return;
+        s.appendChild(el("text", {x: xs(i), y: ys(r[sr[0]]) + dy, "text-anchor": "middle", "font-size": 12.5, "class": "mono"}, r[sr[0]]));
+      });
+    });
+  }
+
+  // Figure 2: income scatter
+  function fig2() {
+    var box = document.getElementById("fig2");
+    var sc = D.scatter, pts = sc.pts;
+    var h = small(box.clientWidth) ? 330 : 400, o = svgFor(box, h), s = o.s, w = o.w;
+    var L = 52, R = 16, T = 14, B = 44;
+    var x0 = 6.8, x1 = 12.3, y0 = Math.log(0.8e-5), y1 = Math.log(220e-5);
+    var X = function (v) { return L + (v - x0) / (x1 - x0) * (w - L - R); };
+    var Y = function (v) { return h - B - (v - y0) / (y1 - y0) * (h - T - B); };
+    [1000, 3000, 10000, 30000, 100000].forEach(function (g) {
+      var v = Math.log(g); if (v < x0 || v > x1) return;
+      s.appendChild(el("line", {x1: X(v), x2: X(v), y1: T, y2: h - B, "class": "grid"}));
+      s.appendChild(el("text", {x: X(v), y: h - B + 16, "text-anchor": "middle", "font-size": 12, "class": "mono mut"}, "$" + (g >= 1000 ? g / 1000 + "k" : g)));
+    });
+    [1, 3, 10, 30, 100].forEach(function (u) {
+      var v = Math.log(u * 1e-5);
+      s.appendChild(el("line", {x1: L, x2: w - R, y1: Y(v), y2: Y(v), "class": "grid"}));
+      s.appendChild(el("text", {x: L - 6, y: Y(v) + 4, "text-anchor": "end", "font-size": 12, "class": "mono mut"}, u));
+    });
+    s.appendChild(el("text", {x: L, y: h - 6, "font-size": 12, "class": "mut"}, "GDP per working-age person →"));
+    s.appendChild(el("text", {x: L + 4, y: T + 12, "font-size": 12, "class": "mut"}, "conversations per 100k ↑"));
+    s.appendChild(el("line", {x1: X(x0), y1: Y(sc.intercept + sc.slope * x0), x2: X(x1), y2: Y(sc.intercept + sc.slope * x1), stroke: css("--world"), "stroke-width": 2}));
+    var labels = small(w) ? {KOR:1, JPN:1, ISR:1, IND:1} : {KOR:1, JPN:1, ISR:1, IND:1, USA:1, DEU:1, SGP:1, TWN:1, GEO:1};
+    pts.forEach(function (p) {
+      if (p[0] === "KOR") return;
+      s.appendChild(el("circle", {cx: X(p[2]), cy: Y(p[3]), r: 3.6, fill: css("--peer"), "fill-opacity": 0.75}));
+    });
+    pts.forEach(function (p) {
+      if (!labels[p[0]] || p[0] === "KOR") return;
+      var anchor = p[0] === "USA" || p[0] === "SGP" ? "end" : "start";
+      var dx = anchor === "end" ? -7 : 7;
+      var dy = {TWN: 14, DEU: 12, JPN: 13}[p[0]] || 4;
+      s.appendChild(el("text", {x: X(p[2]) + dx, y: Y(p[3]) + dy, "text-anchor": anchor, "font-size": 12, "class": "mut"}, NAMES[p[0]] || p[1]));
+    });
+    var k = pts.filter(function (p) { return p[0] === "KOR"; })[0];
+    if (k) {
+      var yhat = sc.intercept + sc.slope * k[2];
+      s.appendChild(el("line", {x1: X(k[2]), x2: X(k[2]), y1: Y(yhat), y2: Y(k[3]), stroke: css("--korea"), "stroke-width": 1.5, "stroke-dasharray": "3 3"}));
+      s.appendChild(el("circle", {cx: X(k[2]), cy: Y(k[3]), r: 6.5, fill: css("--korea"), stroke: css("--bg"), "stroke-width": 2}));
+      s.appendChild(el("text", {x: X(k[2]) - 12, y: Y(k[3]) + 4, "text-anchor": "end", "font-size": 13.5, "font-weight": 600, fill: css("--korea")}, "Korea, 2.3× predicted"));
+    }
+  }
+
+  // generic paired horizontal bars
+  function pairedBars(id, rows, max, fmt) {
+    var box = document.getElementById(id);
+    var rowH = 46, h = rows.length * rowH + 8, o = svgFor(box, h), s = o.s, w = o.w;
+    var L = 0, R = 52;
+    var X = function (v) { return (w - L - R) * v / max; };
+    rows.forEach(function (r, i) {
+      var y = i * rowH;
+      s.appendChild(el("text", {x: 0, y: y + 13, "font-size": 13.5}, r[0]));
+      s.appendChild(el("rect", {x: L, y: y + 18, width: Math.max(1, X(r[1])), height: 10, rx: 2, fill: css("--korea"), "class": "bar"}));
+      s.appendChild(el("text", {x: L + X(r[1]) + 6, y: y + 27, "font-size": 12, "class": "mono"}, fmt(r[1])));
+      s.appendChild(el("rect", {x: L, y: y + 30, width: Math.max(1, X(r[2])), height: 10, rx: 2, fill: css("--world"), "class": "bar"}));
+      s.appendChild(el("text", {x: L + X(r[2]) + 6, y: y + 39, "font-size": 12, "class": "mono mut"}, fmt(r[2])));
+    });
+  }
+
+  function fig3() {
+    var c = D.collab, k = c.KOR, g = c.GLOBAL;
+    var rows = [["Task iteration · collaborative", k["task iteration"], g["task iteration"]],
+      ["Learning · collaborative", k.learning, g.learning],
+      ["Validation · collaborative", k.validation, g.validation],
+      ["Directive · delegating", k.directive, g.directive],
+      ["Feedback loop · delegating", k["feedback loop"], g["feedback loop"]]];
+    pairedBars("fig3", rows, 36, function (v) { return v.toFixed(1) + "%"; });
+  }
+
+  // Figure 4: diverging log-ratio bars
+  var OVER = [["News articles and journalistic content", 5.94], ["Narrative scripts and screenplays", 4.78], ["Sermons and religious content", 4.58], ["Health and self-improvement video scripts", 4.04], ["Video subtitle translation", 3.64], ["Astrology, tarot and divination", 3.64], ["Video scripts", 3.50], ["Individual-stock investment help", 3.42], ["Translation and translation review", 3.00], ["Productivity software setup", 2.84]];
+  var UNDER = [["Business websites", 0.46], ["Professional and personal emails", 0.45], ["Operational business emails", 0.44], ["Professional social media posts", 0.43], ["B2B sales automation", 0.43], ["Spelling fixes in short messages", 0.39], ["Job-application correspondence", 0.38], ["Email system setup", 0.36], ["HTML email and marketing templates", 0.29], ["Résumés and CVs", 0.27]];
+  function fig4() {
+    var box = document.getElementById("fig4");
+    var rows = OVER.concat(UNDER);
+    var rowH = 34, h = rows.length * rowH + 30, o = svgFor(box, h), s = o.s, w = o.w;
+    var lo = Math.log(0.25), hi = Math.log(6.5);
+    var X = function (r) { return 8 + (Math.log(r) - lo) / (hi - lo) * (w - 60); };
+    [0.25, 0.5, 1, 2, 4].forEach(function (t) {
+      s.appendChild(el("line", {x1: X(t), x2: X(t), y1: 0, y2: h - 24, "class": t === 1 ? "axis" : "grid"}));
+      s.appendChild(el("text", {x: X(t), y: h - 8, "text-anchor": "middle", "font-size": 12, "class": "mono mut"}, t + "×"));
+    });
+    rows.forEach(function (r, i) {
+      var y = i * rowH + (i >= OVER.length ? 6 : 0);
+      var over = r[1] >= 1, x1 = X(1), x2 = X(r[1]);
+      s.appendChild(el("rect", {x: Math.min(x1, x2), y: y + 17, width: Math.abs(x2 - x1), height: 10, rx: 2, fill: over ? css("--korea") : css("--world"), "class": "bar"}));
+      var tx = over ? x1 + 6 : x1 - 6;
+      s.appendChild(el("text", {x: tx, y: y + 12, "text-anchor": over ? "start" : "end", "font-size": 13}, r[0]));
+      s.appendChild(el("text", {x: over ? x2 + 6 : x2 - 6, y: y + 26, "text-anchor": over ? "start" : "end", "font-size": 12, "class": "mono mut"}, r[1].toFixed(2) + "×"));
+    });
+  }
+
+  // Figure 5: SOC pp differences
+  function fig5() {
+    var box = document.getElementById("fig5");
+    var SHORT = {"Arts, Design, Entertainment, Sports, and Media": "Arts, design and media", "Business and Financial Operations": "Business and finance", "Life, Physical, and Social Science": "Science", "Sales and Related": "Sales", "Computer and Mathematical": "Computer and math", "Healthcare Practitioners and Technical": "Healthcare practitioners", "Management": "Management", "Office and Administrative Support": "Office and admin", "Educational Instruction and Library": "Education", "Architecture and Engineering": "Architecture and engineering"};
+    var rows = D.soc.map(function (r) { return [SHORT[r[0]] || r[0], r[1] - r[2], r[1], r[2]]; })
+      .sort(function (a, b) { return Math.abs(b[1]) - Math.abs(a[1]); }).slice(0, 8)
+      .sort(function (a, b) { return b[1] - a[1]; });
+    var rowH = 34, h = rows.length * rowH + 28, o = svgFor(box, h), s = o.s, w = o.w;
+    var m = 3.6, X = function (v) { return w / 2 + v / m * (w / 2 - 70); };
+    [-3, -2, -1, 0, 1, 2, 3].forEach(function (t) {
+      s.appendChild(el("line", {x1: X(t), x2: X(t), y1: 0, y2: h - 22, "class": t === 0 ? "axis" : "grid"}));
+      s.appendChild(el("text", {x: X(t), y: h - 6, "text-anchor": "middle", "font-size": 12, "class": "mono mut"}, (t > 0 ? "+" : "") + t));
+    });
+    rows.forEach(function (r, i) {
+      var y = i * rowH, pos = r[1] >= 0;
+      s.appendChild(el("rect", {x: Math.min(X(0), X(r[1])), y: y + 17, width: Math.abs(X(r[1]) - X(0)), height: 10, rx: 2, fill: pos ? css("--korea") : css("--world"), "class": "bar"}));
+      s.appendChild(el("text", {x: pos ? X(0) - 6 : X(0) + 6, y: y + 26, "text-anchor": pos ? "end" : "start", "font-size": 13}, r[0]));
+      s.appendChild(el("text", {x: pos ? X(r[1]) + 6 : X(r[1]) - 6, y: y + 26, "text-anchor": pos ? "start" : "end", "font-size": 12, "class": "mono mut"}, (pos ? "+" : "") + r[1].toFixed(2)));
+    });
+  }
+
+  // Figure 6: JSD ranking
+  function fig6() {
+    var box = document.getElementById("fig6");
+    var rk = D.jsd.ranking, near = {JPN: 1, ESP: 1, FRA: 1};
+    var rowH = 19, h = rk.length * rowH + 30, o = svgFor(box, h), s = o.s, w = o.w;
+    var L = small(w) ? 92 : 110, R = 56, max = 0.085;
+    var X = function (v) { return L + v / max * (w - L - R); };
+    [0, 0.02, 0.04, 0.06, 0.08].forEach(function (t) {
+      s.appendChild(el("line", {x1: X(t), x2: X(t), y1: 0, y2: h - 24, "class": "grid"}));
+      s.appendChild(el("text", {x: X(t), y: h - 8, "text-anchor": "middle", "font-size": 11.5, "class": "mono mut"}, t.toFixed(2)));
+    });
+    rk.forEach(function (r, i) {
+      var y = i * rowH, isK = r[0] === "KOR";
+      var fill = isK ? css("--korea") : near[r[0]] ? css("--world") : css("--peer");
+      s.appendChild(el("text", {x: L - 8, y: y + 13, "text-anchor": "end", "font-size": 12.5, "font-weight": isK ? 600 : 400, fill: isK ? css("--korea") : css("--ink")}, (i + 1) + ". " + (NAMES[r[0]] || r[0])));
+      s.appendChild(el("rect", {x: L, y: y + 4, width: X(r[1]) - L, height: 11, rx: 2, fill: fill, "class": "bar"}));
+      if (isK) s.appendChild(el("text", {x: X(r[1]) + 6, y: y + 13, "font-size": 12, "class": "mono", fill: css("--korea")}, r[1].toFixed(3)));
+    });
+    var med = D.jsd.median;
+    s.appendChild(el("line", {x1: X(med), x2: X(med), y1: 0, y2: h - 24, stroke: css("--ink"), "stroke-dasharray": "4 3"}));
+    s.appendChild(el("text", {x: X(med) + 5, y: h - 30, "font-size": 11.5, "class": "mut"}, "median"));
+  }
+
+  // Figure 7: regions
+  function fig7() {
+    var box = document.getElementById("fig7");
+    var rows = D.regions;
+    var rowH = 26, h = rows.length * rowH + 8, o = svgFor(box, h), s = o.s, w = o.w;
+    var L = small(w) ? 84 : 104, R = 48;
+    var X = function (v) { return (w - L - R) * v / 66; };
+    rows.forEach(function (r, i) {
+      var y = i * rowH;
+      s.appendChild(el("text", {x: L - 8, y: y + 15, "text-anchor": "end", "font-size": 12.5}, r.name));
+      s.appendChild(el("rect", {x: L, y: y + 4, width: Math.max(1, X(r.usage_pct_of_korea)), height: 8, rx: 2, fill: css("--korea"), "class": "bar"}));
+      s.appendChild(el("rect", {x: L, y: y + 13, width: Math.max(1, X(r.pop_pct)), height: 8, rx: 2, fill: css("--peer"), "class": "bar"}));
+      s.appendChild(el("text", {x: L + Math.max(X(r.usage_pct_of_korea), X(r.pop_pct)) + 6, y: y + 15, "font-size": 11.5, "class": "mono mut"}, r.usage_pct_of_korea.toFixed(1) + " / " + r.pop_pct.toFixed(1)));
+    });
+  }
+
+  // Figure 8: 2018 revisit
+  function fig8() {
+    var box = document.getElementById("fig8");
+    var rows = (D.revisit || []).filter(function (r) { return r[2] != null && r[3] != null; });
+    var h = small(box.clientWidth) ? 340 : 400, o = svgFor(box, h), s = o.s, w = o.w;
+    var L = 44, R = 18, T = 16, B = 44;
+    var X = function (v) { return L + v / 1.35 * (w - L - R); };
+    var Y = function (v) { return h - B - v / 0.6 * (h - T - B); };
+    [0, 0.5, 1].forEach(function (t) {
+      s.appendChild(el("line", {x1: X(t), x2: X(t), y1: T, y2: h - B, "class": "grid"}));
+      s.appendChild(el("text", {x: X(t), y: h - B + 16, "text-anchor": "middle", "font-size": 12, "class": "mono mut"}, t));
+    });
+    [0, 0.2, 0.4, 0.6].forEach(function (t) {
+      s.appendChild(el("line", {x1: L, x2: w - R, y1: Y(t), y2: Y(t), "class": "grid"}));
+      s.appendChild(el("text", {x: L - 6, y: Y(t) + 4, "text-anchor": "end", "font-size": 12, "class": "mono mut"}, t.toFixed(1)));
+    });
+    s.appendChild(el("text", {x: w - R, y: h - 6, "text-anchor": "end", "font-size": 12, "class": "mut"}, "robot exposure (0–3) →"));
+    s.appendChild(el("text", {x: L + 4, y: T + 10, "font-size": 12, "class": "mut"}, "observed Claude exposure ↑"));
+    rows.forEach(function (r) {
+      var hi = r[1] === "high";
+      s.appendChild(el("circle", {cx: X(r[3]), cy: Y(r[2]), r: 5, fill: hi ? css("--korea") : css("--world"), "fill-opacity": 0.8, stroke: css("--bg"), "stroke-width": 1}));
+    });
+    var LAB = small(w) ? {"3142": ["Data entry clerks", "start"], "2545": ["Visiting tutors", "start"], "8211": ["Textile machine operators", "end"]}
+      : {"3142": ["Data entry clerks", "start"], "2545": ["Visiting tutors", "start"], "2712": ["Accountants", "start"], "2221": ["Systems analysts", "start"], "8211": ["Textile machine operators", "end"], "3201": ["Bank tellers", "end"]};
+    rows.forEach(function (r) {
+      var lab = LAB[r[4]]; if (!lab) return;
+      var dx = lab[1] === "end" ? -8 : 8;
+      var dy = {"2221": 13, "3201": -12, "8211": -12}[r[4]] || 4;
+      s.appendChild(el("text", {x: X(r[3]) + dx, y: Y(r[2]) + dy, "text-anchor": lab[1], "font-size": 12, "class": "mut"}, lab[0]));
+    });
+  }
+
+  function drawAll() {
+    [fig1, fig2, fig3, fig4, fig5, fig6, fig7, fig8].forEach(function (f) {
+      try { f(); } catch (e) { if (window.console) console.error(e); }
+    });
+  }
+  drawAll();
+  var t, lastW = window.innerWidth;
+  window.addEventListener("resize", function () {
+    clearTimeout(t);
+    t = setTimeout(function () { if (window.innerWidth !== lastW) { lastW = window.innerWidth; drawAll(); } }, 150);
+  });
+})();
+</script>
+
+</body>
+</html>
