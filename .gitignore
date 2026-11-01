@@ -54,7 +54,9 @@ data/error_temp.md
 data/error_temp/
 .vercel
 /docs/logs_40495168461/
-/content/posts/
+# BL-003: Notion에서 가져온 평평한 글(content/posts/*.md)은 캐시로만 잇고, 손글 묶음(content/posts/<slug>/)만 추적
+/content/posts/*
+!/content/posts/*/
 # Development logs (internal only)
 docs/development_logs/
 dev_handoffs/

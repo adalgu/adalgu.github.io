@@ -176,7 +176,20 @@ class PropertyMapper:
         elif do_not_rendering_key:
             skip_rendering = notion_properties.get(do_not_rendering_key, False)
 
-        return skip_rendering == True
+        if skip_rendering == True:
+            return True
+
+        # Source = hugo 인 쪽은 저장소 Markdown이 원본인 글의 Notion 거울이다 (BL-003).
+        # 가져오면 손글을 덮거나 같은 글이 두 번 생기므로 skipRendering과 같은 길로 건너뛴다.
+        return self.is_hugo_source(notion_properties)
+
+    @staticmethod
+    def is_hugo_source(notion_properties):
+        """Source 속성(대소문자 무시, select·rich_text 값)이 hugo 이면 True"""
+        for key, value in notion_properties.items():
+            if key.lower() == "source":
+                return str(value or "").strip().lower() == "hugo"
+        return False
 
     def map_date_properties(self, notion_properties, page):
         """
