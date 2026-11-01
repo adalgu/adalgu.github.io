@@ -50,6 +50,7 @@ Thumbs.db
 # Project specific
 .notion-hugo-state.json
 .notion-hugo-state.json.bak
+.notion-hugo-flat-count
 data/error_temp.md
 data/error_temp/
 .vercel
