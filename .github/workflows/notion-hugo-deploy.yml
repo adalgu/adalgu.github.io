@@ -72,6 +72,11 @@ jobs:
             notion-state-${{ github.ref_name }}-
             notion-state-
 
+      # BL-003: 캐시가 content/posts/ 를 통째로 풀어 손글 묶음(content/posts/<slug>/)을 옛 판으로 덮을 수 있다.
+      # 추적 파일은 이번 커밋 판으로 다시 깔고, 저장소에서 지운 묶음은 지운다(Notion 평평한 글은 그대로).
+      - name: Restore hand-written posts from git
+        run: scripts/restore_hand_posts.sh
+
       - name: Determine sync mode
         id: sync-mode
         run: |
@@ -212,3 +217,29 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  # BL-003: 배포 뒤 손글(draft: false) → Notion 블로그 DB 거울(Slug upsert, Source = hugo).
+  # 스위치 = 저장소 변수 NOTION_MIRROR (on 일 때만). 켜기 전에 DB에 Source 칸과 키 쓰기 권한이 있어야 한다.
+  # 거울이 실패해도 사이트 배포에는 영향 없음.
+  mirror:
+    if: vars.NOTION_MIRROR == 'on' && github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+    needs: deploy
+    continue-on-error: true
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install Python dependencies
+        run: pip install "notion-client>=2.0.0,<2.5.0" pyyaml
+
+      - name: Mirror hand-written posts to Notion
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DATABASE_ID_POSTS: ${{ secrets.NOTION_DATABASE_ID_POSTS }}
+        run: python scripts/mirror_to_notion.py
