@@ -349,7 +349,7 @@ def save_page(
 
     except Exception as e:
         print(f"[Error] 페이지 저장 중 오류 발생: {str(e)}")
-        return ""
+        return None  # 실패 = None (건너뜀 ""과 구분 — 호출자가 errors로 센다)
 
 
 def batch_process_pages(
