@@ -405,31 +405,31 @@ def batch_process_pages_with_metadata(
             # 페이지 처리 (수정된 save_page 함수는 target_folder를 받음)
             content = save_page(page, notion, target_folder, config)
 
-            # 성공 정보 추가
-            result["success"].append(
-                {
-                    "pageId": page_id,
-                    "title": get_page_title(page),
-                    "path": f"content/{target_folder}/{page_id}.md",
-                }
-            )
-
-            # 메타데이터 업데이트
-            if content is not None:
+            if content is None:
+                # 콘텐츠 생성 실패: errors에 넣어야 종료 코드가 1이 된다 (success로 세면 exit 0으로 통과)
+                result["errors"].append(
+                    {"pageId": page_id, "error": "Content generation returned None."}
+                )
+                metadata.update_page_status(
+                    page_id,
+                    status="error",
+                    last_edited=last_edited,
+                    error="Content generation returned None.",
+                )
+            else:
+                result["success"].append(
+                    {
+                        "pageId": page_id,
+                        "title": get_page_title(page),
+                        "path": f"content/{target_folder}/{page_id}.md",
+                    }
+                )
                 metadata.update_page_status(
                     page_id,
                     status="success",
                     last_edited=last_edited,
                     target_path=f"content/{target_folder}/{page_id}.md",
                     hash=metadata.compute_content_hash(content),
-                )
-            else:
-                # 콘텐츠 생성 실패 시에도 상태 기록
-                metadata.update_page_status(
-                    page_id,
-                    status="error",
-                    last_edited=last_edited,
-                    error="Content generation returned None.",
                 )
 
         except Exception as e:
