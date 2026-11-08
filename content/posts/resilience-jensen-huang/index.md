@@ -33,7 +33,7 @@ title: '유퀴즈 젠슨 황 인터뷰로 깨달은 성공의 본질: 지능보�
 - **지식과 지능의 대중화 (Intelligence is a commodity)**
 > "Intelligence is a commodity. Intelligence is available everywhere. There are so many great universities, so many great students, millions and millions of them. ... And now, artificial intelligence is a commodity." 
 
-[youtube.com/watch?v=TwteDNIp61c&time_continue=127](http://youtube.com/watch?v=TwteDNIp61c&time_continue=127&source_ve_path=MjM4NTE&embeds_referring_euri=https%3A%2F%2Fapp.notion.com%2F)
+[youtube.com/watch?v=TwteDNIp61c&time_continue=127](https://youtube.com/watch?v=TwteDNIp61c&time_continue=127&source_ve_path=MjM4NTE&embeds_referring_euri=https%3A%2F%2Fapp.notion.com%2F)
 
 인공지능(AI)과 인터넷의 발전으로 고도의 지능, 지식, 정보는 이미 세상에 널려 있는 흔한 재화(Commodity)가 되었습니다. 누구나 쉽게 지식에 접근할 수 있는 시대에, 더 이상 지능의 양만으로는 차별화를 만들 수 없습니다.
 
