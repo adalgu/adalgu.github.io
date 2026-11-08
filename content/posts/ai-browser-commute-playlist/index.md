@@ -5,6 +5,12 @@ slug: ai-browser-commute-playlist
 description: "AI 브라우저에게 유튜브 뮤직 작업을 맡겨, 대화만으로 출퇴근 플레이리스트 216곡을 만든 과정과 배운 점."
 tags: ["AI", "음악", "자동화"]
 draft: false
+cover:
+  image: "cover.jpg"
+  alt: "가을 아침 고속도로를 달리는 차 안, 거치대의 휴대폰에 음악 재생목록이 떠 있는 일러스트"
+  relative: true
+  hiddenInSingle: false
+  hiddenInList: false
 ---
 
 40대 중반이 되니 출퇴근길 차 안에서 듣는 음악이 늘 비슷해졌다. 20~30대 노래방에서 부르던 고음 발라드와 힙합을 여전히 좋아하고, 필요하면 최신곡도 연습해 볼 생각은 있다. 문제는 무엇을 들을지 고르고, 찾아서, 재생목록에 하나씩 담는 일이 번거롭다는 점이었다.
