@@ -5,7 +5,7 @@ description: ''
 draft: false
 lastmod: '2026-05-15T04:41:00.000Z'
 notion_id: 3617522e-eb2f-805c-992e-e2619356e918
-slug: "스몰토크는-왜-중요한가"
+url: "/posts/스몰토크는-왜-중요한가/"
 subtitle: ''
 title: 스몰토크는 왜 중요한가
 ---
