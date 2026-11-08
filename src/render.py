@@ -1,6 +1,7 @@
 import os
 import re
 import yaml
+from pathlib import Path
 from typing import Dict, List, Any, Optional, TypedDict
 from notion_client import Client
 from tabulate import tabulate
@@ -272,6 +273,23 @@ def get_page_properties(page: Dict[str, Any]) -> Dict[str, Any]:
     return properties
 
 
+def repo_bundle_for(page_id, slug, posts_dir="content/posts"):
+    """저장소 묶음 중 notion_id(대시 무시) 또는 slug(폴더 이름·앞머리 slug)가 같은 것의 경로. 없으면 None"""
+    want_id = str(page_id or "").replace("-", "")
+    for index in sorted(Path(posts_dir).glob("*/index.md")):
+        raw = index.read_text(encoding="utf-8")
+        meta = {}
+        if raw.startswith("---"):
+            parts = raw.split("---", 2)
+            if len(parts) == 3:
+                meta = yaml.safe_load(parts[1]) or {}
+        if want_id and str(meta.get("notion_id") or "").replace("-", "") == want_id:
+            return str(index.parent)
+        if slug and str(slug) in (index.parent.name, str(meta.get("slug") or "")):
+            return str(index.parent)
+    return None
+
+
 def save_page(
     page: Dict[str, Any],
     notion: Client,
@@ -311,6 +329,12 @@ def save_page(
 
         # 프론트매터 생성 (여기서 두 번째 skipRendering 체크가 일어남)
         frontmatter = property_mapper.create_hugo_frontmatter(properties, page)
+
+        # BLOG-017 F1: 저장소에 같은 notion_id 또는 slug 묶음(content/posts/<slug>/index.md)이 있으면 그 글은 저장소가 원본 —
+        # 평평한 사본을 만들면 같은 주소가 두 개가 된다(앤톤 reproduce: flat 1 + bundle 1)
+        if frontmatter and repo_bundle_for(page_id, frontmatter.get("slug")):
+            print(f"[Info] 페이지 {page_id} 건너뜀: 저장소 묶음이 원본({repo_bundle_for(page_id, frontmatter.get('slug'))})")
+            return ""
 
         # 빈 프론트매터는 skipRendering으로 인한 것이므로 건너뜀
         if not frontmatter:
@@ -395,6 +419,13 @@ def batch_process_pages(
                     {"pageId": page["id"], "reason": "skipRendering is set"}
                 )
                 print(f"[Info] 페이지 {page.get('id')} 건너뜀: skipRendering 설정됨")
+                continue
+
+            # BLOG-017 F1: 저장소 묶음이 원본인 글은 평평한 사본을 만들지 않는다(같은 주소 2개 방지)
+            bundle = repo_bundle_for(page["id"], (property_mapper.create_hugo_frontmatter(properties, page) or {}).get("slug"))
+            if bundle:
+                result["skipped"].append({"pageId": page["id"], "reason": f"repo bundle {bundle} is the source"})
+                print(f"[Info] 페이지 {page.get('id')} 건너뜀: 저장소 묶음이 원본({bundle})")
                 continue
 
             # 페이지 저장

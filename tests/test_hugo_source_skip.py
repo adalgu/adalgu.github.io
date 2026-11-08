@@ -14,10 +14,10 @@ def text(value):
     return [{"type": "text", "plain_text": value, "text": {"content": value}, "annotations": {}}]
 
 
-def page(page_id, title, source=None, source_type="select"):
+def page(page_id, title, source=None, source_type="select", slug="same-slug"):
     props = {
         "Name": {"type": "title", "title": text(title)},
-        "Slug": {"type": "rich_text", "rich_text": text("same-slug")},
+        "Slug": {"type": "rich_text", "rich_text": text(slug)},
         "Date": {"type": "date", "date": {"start": "2026-11-01"}},
         "isPublished": {"type": "checkbox", "checkbox": True},
         "skipRendering": {"type": "checkbox", "checkbox": False},
@@ -70,10 +70,24 @@ class HugoSourceSkipTests(unittest.TestCase):
             self.assertEqual(f.read(), HAND_POST)
 
     def test_other_pages_still_import(self):
-        result = batch_process_pages([page("p-notion", "노션 글"), page("p-other", "다른 출처", "notion")],
+        result = batch_process_pages([page("p-notion", "노션 글", slug="notion-only"),
+                                      page("p-other", "다른 출처", "notion", slug="other-only")],
                                      FakeNotion(), {"target_folder": "posts"}, CONFIG)
         self.assertEqual(len(result["success"]), 2)
         self.assertEqual(len(self.files()), 3)
+
+    def test_repo_bundle_with_same_slug_or_notion_id_wins(self):
+        # BLOG-017 F1: an old Notion-original page (Source notion) whose post now lives in the repo as a bundle
+        # must not come back as a flat copy — that is the same URL twice
+        with open("content/posts/same-slug/index.md", "w", encoding="utf-8") as f:
+            f.write(HAND_POST.replace("draft: true", "draft: false\nnotion_id: 0000aaaa-1111-2222-3333-444455556666"))
+        notion = FakeNotion()
+        result = batch_process_pages([page("p-moved", "옮긴 글", "notion"),
+                                      page("0000aaaa111122223333444455556666", "옮긴 글", "notion", slug="renamed")],
+                                     notion, {"target_folder": "posts"}, CONFIG)
+        self.assertEqual(self.files(), ["same-slug/index.md"])
+        self.assertEqual(len(result["skipped"]), 2)
+        self.assertEqual(notion.blocks.children.calls, [])  # skipped before the body is read
 
     def test_source_match_ignores_case_and_type(self):
         mapper = PropertyMapper()
