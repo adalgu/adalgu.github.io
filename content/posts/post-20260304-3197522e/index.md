@@ -5,7 +5,7 @@ description: ''
 draft: false
 lastmod: '2026-03-04T14:47:00.000Z'
 notion_id: 3197522e-eb2f-80cd-8d46-f734c9fc956f
-slug: "야생마가-된-ai-누가-더-정교한-마구harness를-쥐는가"
+url: "/posts/야생마가-된-ai-누가-더-정교한-마구harness를-쥐는가/"
 subtitle: ''
 title: 야생마가 된 AI, 누가 더 정교한 '마구(Harness)'를 쥐는가
 ---

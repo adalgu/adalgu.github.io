@@ -9,7 +9,7 @@ import tempfile
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import quote, urlparse
 
 from .bundle import all_bundles, content_hash, file_hashes, read_bundle, render_index
 from .markdown import md_to_blocks, blocks_to_markdown, rich_text, text_of_plain
@@ -69,11 +69,21 @@ def human_edit_since_sync(page):
     return edited >= synced.replace(second=0)
 
 
-def bundle_url(site, slug, src):
-    """![](cover.jpg) inside a bundle -> https://<site>/posts/<slug>/cover.jpg; absolute URLs stay."""
+def bundle_url(site, slug, src, path=None):
+    """![](cover.jpg) inside a bundle -> https://<site>/posts/<slug>/cover.jpg; absolute URLs stay.
+    path = the page's public path when front matter `url:` sets it (BLOG-017 addendum 5: an ASCII folder keeping
+    a Korean URL) — bundle files are published under the page URL, not the folder. Non-ASCII is percent-encoded."""
     if re.match(r"^[a-z]+://", src):
         return src
-    return f"{site.rstrip('/')}/posts/{slug}/{src.lstrip('./')}"
+    base = path or f"/posts/{slug}/"
+    base = "/" + base.strip("/") + "/"
+    return f"{site.rstrip('/')}{quote(base)}{src.lstrip('./')}"
+
+
+def page_path(bundle):
+    """Public path of a bundle's page: front matter url if set, else /posts/<folder>/."""
+    url = bundle.meta.get("url") if isinstance(bundle.meta, dict) else None
+    return str(url) if url else f"/posts/{bundle.slug}/"
 
 
 def as_list(value):
@@ -115,7 +125,7 @@ def page_cover(bundle, site):
     image = ((bundle.meta.get("cover") or {}) if isinstance(bundle.meta.get("cover"), dict) else {}).get("image")
     if not image:
         return None
-    url = bundle_url(site, bundle.slug, str(image))
+    url = bundle_url(site, bundle.slug, str(image), page_path(bundle))
     return {"type": "external", "external": {"url": url}} if url.startswith("https://") else None
 
 
@@ -158,6 +168,19 @@ def check_schema(io, database_id, add_column=False, dry_run=False):
     return schema
 
 
+def git_paths(repo, *args):
+    """Paths git prints, NUL-separated and unquoted. Plain output quotes non-ASCII names ("content/posts/\\354…"),
+    which broke the first main push (BLOG-017 addendum 4: Korean bundle folder -> OSError Errno 36)."""
+    out = subprocess.run(["git", "-c", "core.quotepath=off", "-C", str(repo), *args], check=True, capture_output=True)
+    return [p for p in out.stdout.decode("utf-8").split("\0") if p]
+
+
+def say(command, result):
+    """One line per decision, printed the moment it is made — a run that dies half way still shows what it wrote."""
+    print(f"ssot {command}: {result.action} {result.slug} {result.detail}", flush=True)
+    return result
+
+
 def edit_marker(page):
     """Trailer every Notion -> repo commit carries; once it is in the bundle's history the edit is in the repo."""
     return f"Notion-Edit: {page['id']} {page.get('last_edited_time', '')}"
@@ -177,32 +200,33 @@ def push(io, database_id, repo, slugs, site, now=utcnow, only=(), dry_run=False,
     results = []
     for slug in slugs:
         if only and slug not in only:
-            results.append(Result(slug, "skip", "not in --only"))
+            results.append(say("push", Result(slug, "skip", "not in --only")))
             continue
         bundle = read_bundle(Path(repo) / POSTS / slug)
         if bundle is None:
-            results.append(Result(slug, "skip", "no bundle (deleted bundles never delete Notion pages)"))
+            results.append(say("push", Result(slug, "skip", "no bundle (deleted bundles never delete Notion pages)")))
             continue
         page = find_page(io, database_id, bundle)
         hash_ = bundle.hash
         if page is not None:
             synced_hash, _ = sync_state(page)
             if synced_hash == hash_:
-                results.append(Result(slug, "same", page["id"]))
+                results.append(say("push", Result(slug, "same", page["id"])))
                 continue
             pr = open_conflict(slug) if open_conflict else None
             if pr:
-                results.append(Result(slug, "skip", f"conflict PR open {pr} — Notion keeps its edit until it is merged"))
+                results.append(say("push", Result(slug, "skip", f"conflict PR open {pr} — Notion keeps its edit until it is merged")))
                 continue
             if human_edit_since_sync(page) and not notion_edit_merged(repo, slug, page):
                 # never overwrite a Notion edit that has not come back yet: pull turns it into a commit or a PR
-                results.append(Result(slug, "skip", "Notion edit not in the repo yet — pull brings it back first"))
+                results.append(say("push", Result(slug, "skip", "Notion edit not in the repo yet — pull brings it back first")))
                 continue
-        blocks = md_to_blocks(bundle.body, image_url=lambda src: bundle_url(site, slug, src))
+        blocks = md_to_blocks(bundle.body, image_url=lambda src: bundle_url(site, slug, src, page_path(bundle)))
         if dry_run:
-            results.append(Result(slug, "write" if page else "create", "dry-run"))
+            results.append(say("push", Result(slug, "write" if page else "create", "dry-run")))
             continue
         props, cover = page_properties(bundle, schema), page_cover(bundle, site)
+        print(f"ssot push: writing {slug} {page['id'] if page else '(new page)'}", flush=True)
         if page is None:
             page = io.create_page(database_id, props, cover)
             io.append(page["id"], blocks)
@@ -212,7 +236,7 @@ def push(io, database_id, repo, slugs, site, now=utcnow, only=(), dry_run=False,
             io.replace_children(page["id"], blocks)
             action = "write"
         io.update_page(page["id"], properties={SYNC_PROP: sync_value(hash_, now())})  # last: body is in place
-        results.append(Result(slug, action, page["id"]))
+        results.append(say("push", Result(slug, action, page["id"])))
     return results
 
 
@@ -220,8 +244,7 @@ def changed_slugs(repo, before, after):
     """Bundles touched between two commits. No usable 'before' (new branch, first push) = every bundle."""
     if not before or set(before) == {"0"}:
         return [b.slug for b in all_bundles(Path(repo) / POSTS)]
-    names = subprocess.run(["git", "-C", str(repo), "diff", "--name-only", before, after, "--", POSTS],
-                           check=True, capture_output=True, text=True).stdout.split()
+    names = git_paths(repo, "diff", "-z", "--name-only", before, after, "--", POSTS)
     return sorted({Path(n).parts[2] for n in names if len(Path(n).parts) > 3})
 
 
@@ -281,7 +304,7 @@ def render_page(io, page, bundle, site, fetch):
     """-> (meta, body, new files). Notion file images are downloaded into the bundle (their URLs expire in an
     hour); external images that point at this bundle on the site go back to bundle-relative paths."""
     files = {}
-    prefix = bundle_url(site, bundle.slug, "")
+    prefix = bundle_url(site, bundle.slug, "", page_path(bundle))
 
     def image_src(block):
         data = block["image"]
@@ -425,8 +448,10 @@ def synced_commit(repo, slug, synced_hash, limit=50):
     if out.returncode != 0:
         return None
     for sha in out.stdout.split():
-        names = subprocess.run(["git", "-C", str(repo), "ls-tree", "--name-only", f"{sha}:{folder}"],
-                               capture_output=True, text=True, check=False).stdout.split()
+        try:
+            names = git_paths(repo, "ls-tree", "-z", "--name-only", f"{sha}:{folder}")
+        except subprocess.CalledProcessError:
+            continue
         if "index.md" not in names:
             continue
         with tempfile.TemporaryDirectory() as tmp:
@@ -494,15 +519,15 @@ def apply_pull(io, repo, changes, base, now=utcnow, git=None, open_pr=gh_pr, pus
         git.run("push", git.remote, f"HEAD:{base}")
     for change in commits:
         io.update_page(change.page["id"], properties={SYNC_PROP: sync_value(change.new_hash, now())})
-        done.append(Result(change.slug, "commit", git.head()))
+        done.append(say("pull", Result(change.slug, "commit", git.head())))
     for change in [c for c in changes if c.mode == "pr"]:
         branch = pr_branch(change.slug, change.page)
         if push and git.remote_has_branch(branch):
             pr = (pr_lookup or (lambda b: gh_pr_for_branch(repo, b)))(branch)
             if pr:
-                done.append(Result(change.slug, "skip", f"{branch} has PR {pr}"))
+                done.append(say("pull", Result(change.slug, "skip", f"{branch} has PR {pr}")))
             else:  # F5': the branch went up but the PR call failed last time — open the PR now, no new commit
-                done.append(Result(change.slug, "pr", _open_conflict_pr(open_pr, repo, branch, base, change)))
+                done.append(say("pull", Result(change.slug, "pr", _open_conflict_pr(open_pr, repo, branch, base, change))))
             continue
         start = synced_commit(repo, change.slug, change.synced_hash)
         git.run("checkout", "-q", "-b", branch, *([start] if start else []))
@@ -518,7 +543,7 @@ def apply_pull(io, repo, changes, base, now=utcnow, git=None, open_pr=gh_pr, pus
             git.run("checkout", "-q", base)
         # SyncHash is NOT touched here: the page keeps its person edit, so push leaves Notion alone until the PR is
         # merged (its Notion-Edit trailer then reaches the repo history) and pull skips the open branch
-        done.append(Result(change.slug, "pr", url))
+        done.append(say("pull", Result(change.slug, "pr", url)))
     for change in [c for c in changes if c.mode == "none"]:
         io.update_page(change.page["id"], properties={SYNC_PROP: sync_value(change.new_hash, now())})
     return done

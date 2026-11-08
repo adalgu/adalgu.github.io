@@ -1,6 +1,8 @@
 """Repo-SSOT sync engine against a fake Notion (client.request level, 100 per page, minute-rounded
 last_edited_time, bot/person editors) and real git repos in a temp folder. Network 0."""
+import contextlib
 import copy
+import io
 import os
 import subprocess
 import tempfile
@@ -8,6 +10,7 @@ import unittest
 import unittest.mock
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from urllib.parse import quote
 
 from src.ssot import engine
 from src.ssot.__main__ import main as cli
@@ -115,8 +118,13 @@ class FakeClient:
             for key in ("rich_text", "caption"):
                 if key in data:
                     data[key] = read_form(data[key])
-            stored = {"object": "block", "id": self._id("b"), "type": kind, kind: data, "has_children": False}
+            if "cells" in data:  # table_row: each cell is a rich text array
+                data["cells"] = [read_form(cell) for cell in data["cells"]]
+            nested = data.pop("children", None)  # Notion stores nested children (a table's rows) under the block
+            stored = {"object": "block", "id": self._id("b"), "type": kind, kind: data, "has_children": bool(nested)}
             self.children.setdefault(parent, []).append(stored)
+            if nested:
+                self._store_blocks(stored["id"], nested)
 
     def human_edit(self, page_id, change, editor="person"):
         change(self.children[page_id])
@@ -377,6 +385,112 @@ class EngineTests(unittest.TestCase):
         self.assertEqual(len(git(self.repo.remote, "for-each-ref", "--format=%(refname)", "refs/heads/sync").splitlines()), 1)
         self.assertEqual([r.action for r in self.pull()], ["skip"])  # PR now exists: nothing more
         self.assertEqual(len(self.prs), 1)
+
+    TABLE_MD = ("앞 문단.\n\n| 이론 | 핵심 | 실전 | 연구 |\n| --- | --- | --- | --- |\n"
+                + "".join(f"| 행{n} | **굵게{n}** | `코드{n}` | 끝{n} |\n" for n in range(1, 8)) + "\n뒤 문단.\n")
+
+    def test_table_round_trip(self):
+        # BLOG-017 addendum 6 (Anton round 5 P1): an 8-row x 4-column table must reach Notion as a table, not a paragraph
+        blocks = md_to_blocks(self.TABLE_MD)
+        self.assertEqual([b["type"] for b in blocks], ["paragraph", "table", "paragraph"])
+        table = blocks[1]["table"]
+        self.assertEqual((table["table_width"], table["has_column_header"], len(table["children"])), (4, True, 8))
+        self.repo.write("tabled", POST.replace("slug: hello", "slug: tabled").split("---\n\n", 1)[0] + "---\n\n" + self.TABLE_MD)
+        self.repo.commit("table post")
+        self.push(["tabled"])
+        page_id = next(p["id"] for p in self.client.pages.values() if engine.plain(p["properties"]["Slug"]) == "tabled")
+        stored = self.client.children[page_id]
+        self.assertEqual([b["type"] for b in stored], ["paragraph", "table", "paragraph"])  # block kinds same
+        rows = self.client.children[stored[1]["id"]]
+        self.assertEqual([b["type"] for b in rows], ["table_row"] * 8)
+        self.assertEqual(sum(len(r["table_row"]["cells"]) for r in rows), 32)  # cell count same
+        # and back: Notion -> Markdown gives the same table text, so a pull of an untouched page changes nothing
+        self.assertEqual(blocks_to_markdown(stored, self.client.children.get), self.TABLE_MD)
+        self.assertEqual([r.action for r in self.pull()], ["bot"])
+
+    def test_table_cells_with_escaped_pipe_and_short_rows(self):
+        blocks = md_to_blocks("| a | b \\| c |\n|---|---|\n| 1 |\n")
+        rows = blocks[0]["table"]["children"]
+        self.assertEqual(blocks[0]["table"]["table_width"], 2)
+        self.assertEqual([[c[0]["text"]["content"] if c else "" for c in r["table_row"]["cells"]] for r in rows],
+                         [["a", "b | c"], ["1", ""]])
+
+    def test_korean_bundle_folder_in_push_range(self):
+        # BLOG-017 addendum 4: run 42507506203 died with Errno 36 on a Korean bundle folder (git quoted the path)
+        slug = "스몰토크는-왜-중요한가"
+        before = git(self.repo.path, "rev-parse", "HEAD")
+        self.repo.write(slug, POST.replace("slug: hello", f"slug: {slug}"), {"cover.jpg": b"jpeg"})
+        self.repo.write("hello", POST.replace("끝 문단.", "끝 문단 바꿈."))
+        after = self.repo.commit("korean bundle")
+        slugs = engine.changed_slugs(self.repo.path, before, after)
+        self.assertEqual(slugs, sorted(["hello", slug]))
+        results = self.push(slugs)
+        self.assertEqual(sorted(r.action for r in results), ["create", "create"])
+        page = next(p for p in self.client.pages.values() if engine.plain(p["properties"]["Slug"]) == slug)
+        self.assertEqual(page["cover"]["external"]["url"], f"{SITE}/posts/{quote(slug)}/cover.jpg")  # percent-encoded
+        # the conflict-branch start point reads the same folder through git ls-tree
+        self.assertEqual(engine.synced_commit(self.repo.path, slug, engine.read_bundle(self.repo.path / "content/posts" / slug).hash),
+                         after)
+
+    def test_ascii_folder_rule(self):
+        from src.ssot.bundle import ascii_folder
+        self.assertEqual(ascii_folder("github-actions-60day-inactivity-trap", "2025-09-06"), "github-actions-60day-inactivity-trap")
+        self.assertEqual(ascii_folder("스몰토크는-왜-중요한가", "2026-05-15", "3617522e-eb2f-805c-992e-e2619356e918"),
+                         "post-20260515-3617522e")
+        self.assertEqual(ascii_folder("Mixed 한글", "2026-11-01T10:00:00+09:00", ""), ascii_folder("Mixed 한글", "2026-11-01", ""))
+        self.assertTrue(ascii_folder("", None, "").startswith("post-00000000-"))
+
+    def test_renamed_bundle_folder_is_the_same_page(self):
+        # addendum 5: git mv of a Korean folder to an ASCII one must not look like a new post (no second page)
+        slug = "스몰토크는-왜-중요한가"
+        text = POST.replace("slug: hello", f"slug: {slug}").replace("draft: false", "draft: false\nnotion_id: PLACEHOLDER")
+        self.repo.write(slug, text)
+        self.repo.commit("korean")
+        self.push([slug])
+        page_id = next(p["id"] for p in self.client.pages.values() if engine.plain(p["properties"]["Slug"]) == slug)
+        folder = self.repo.path / "content/posts" / slug
+        (folder / "index.md").write_text(text.replace("PLACEHOLDER", page_id), encoding="utf-8")
+        self.repo.commit("notion_id")
+        self.push([slug])
+        pages_before = len(self.client.pages)
+        before = git(self.repo.path, "rev-parse", "HEAD")
+        git(self.repo.path, "mv", f"content/posts/{slug}", "content/posts/post-20260515-abcd1234")
+        moved = (self.repo.path / "content/posts/post-20260515-abcd1234/index.md")
+        moved.write_text(moved.read_text().replace(f"slug: {slug}\n", f"url: /posts/{slug}/\n"), encoding="utf-8")
+        after = self.repo.commit("ascii folder")
+        slugs = engine.changed_slugs(self.repo.path, before, after)
+        self.assertIn("post-20260515-abcd1234", slugs)
+        results = {r.slug: r for r in self.push(slugs)}
+        self.assertEqual(results["post-20260515-abcd1234"].action, "write")  # found by notion_id, rewritten once
+        self.assertEqual(results["post-20260515-abcd1234"].detail, page_id)
+        self.assertEqual(len(self.client.pages), pages_before)  # no duplicate page
+        self.assertEqual(engine.plain(self.client.pages[page_id]["properties"]["Slug"]), "post-20260515-abcd1234")
+        self.assertEqual([r.action for r in self.push(["post-20260515-abcd1234"])], ["same"])
+        # bundle files are published under the page URL (url:), not the folder: Notion shows them from there
+        page = self.client.pages[page_id]
+        self.assertEqual(page["cover"]["external"]["url"],
+                         f"{SITE}/posts/%EC%8A%A4%EB%AA%B0%ED%86%A0%ED%81%AC%EB%8A%94-%EC%99%9C-%EC%A4%91%EC%9A%94%ED%95%9C%EA%B0%80/cover.jpg")
+        # pulling that page back maps the image URL to the bundle file again (no churn)
+        self.assertEqual([r.action for r in self.pull()], ["bot"])
+
+    def test_every_write_is_logged_before_a_later_failure(self):
+        self.repo.write("second", POST.replace("slug: hello", "slug: second"))
+        self.repo.commit("second")
+        real_append, calls = self.io.append, []
+
+        def append(block_id, children):
+            calls.append(block_id)
+            if len(calls) == 2:
+                raise RuntimeError("Notion down")
+            return real_append(block_id, children)
+        self.io.append = append
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out), self.assertRaises(RuntimeError):
+            self.push(["hello", "second"])
+        lines = out.getvalue().splitlines()
+        self.assertTrue(lines[0].startswith("ssot push: writing hello"))
+        self.assertTrue(lines[1].startswith("ssot push: create hello p"))
+        self.assertTrue(lines[2].startswith("ssot push: writing second"))  # the page that failed is named too
 
     def test_notion_cover_change_comes_back(self):
         # BLOG-017 F4: only the page cover changed in Notion

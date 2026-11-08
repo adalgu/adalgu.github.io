@@ -52,7 +52,16 @@ class LeftoverTests(unittest.TestCase):
         self.assertEqual(self.run_main(["p-left"], notion), 0)
         self.assertEqual(notion.retrieved, ["p-left"])
         self.assertEqual(len(self.flat()), 1)
-        self.assertIn("slug: left-post", next(Path("content/posts").glob("*.md")).read_text())
+        flat = next(Path("content/posts").glob("*.md"))
+        self.assertIn("slug: left-post", flat.read_text())
+        self.assertEqual(flat.name, "left-post.md")  # ASCII name by the folder rule (slug is ASCII)
+
+    def test_korean_title_without_ascii_slug_still_gets_an_ascii_file_name(self):
+        notion = Notion({"p-kor": page("p-kor", "코랩에서 실행", slug="코랩-실행")})
+        self.assertEqual(self.run_main(["p-kor"], notion), 0)
+        (flat,) = self.flat()
+        self.assertTrue(flat.isascii(), flat)
+        self.assertTrue(flat.startswith("post-"))
 
     def test_moved_post_bundle_wins(self):
         os.makedirs("content/posts/left-post")

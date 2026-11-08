@@ -3,7 +3,8 @@
 md_to_blocks(blocks_to_markdown(x)) and blocks_to_markdown(md_to_blocks(md)) keep the text the engine itself
 wrote, so a pull of a page nobody touched gives back the same bundle (same hash, nothing to commit).
 Covered: paragraphs (line breaks kept), # / ## / ###, - and 1. lists, ``` code, > quotes, --- dividers,
-![alt](src) images, **bold** *italic* ~~strike~~ `code` [links](url). Anything else Notion holds (toggles,
+![alt](src) images, | pipe | tables | (Notion table + table_row, header row kept; BLOG-017 addendum 6),
+**bold** *italic* ~~strike~~ `code` [links](url). Anything else Notion holds (toggles,
 tables, callouts, nested children) is rendered the way src/render.py does, one way only.
 """
 import re
@@ -16,6 +17,7 @@ CODE_LANGUAGES = {
 INLINE = re.compile(r"\*\*(.+?)\*\*|~~(.+?)~~|`([^`]+)`|\[([^\]]+)\]\(([^)\s]+)\)|(?<![*\w])\*([^*\s][^*]*?)\*(?!\*)")
 IMAGE = re.compile(r'!\[([^\]]*)\]\(([^)\s]+)(?:\s+"[^"]*")?\)')
 LIST_TYPES = ("bulleted_list_item", "numbered_list_item")
+TABLE_SEP = re.compile(r"^\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)*\|?$")
 
 
 # ---------- Markdown -> blocks ----------
@@ -62,6 +64,29 @@ def _chunks(text):
     return [text[at:at + TEXT_LIMIT] for at in range(0, len(text), TEXT_LIMIT)] or [""]
 
 
+def table_cells(line):
+    """'| a | b \\| c |' -> ['a', 'b | c'] — split on pipes that are not escaped, outer pipes dropped."""
+    body = line.strip()
+    if body.startswith("|"):
+        body = body[1:]
+    if body.endswith("|") and not body.endswith("\\|"):
+        body = body[:-1]
+    return [cell.strip().replace("\\|", "|") for cell in re.split(r"(?<!\\)\|", body)]
+
+
+def table_block(lines):
+    """Pipe-table lines -> one Notion table block with its table_row children (cells rich text)."""
+    rows = [table_cells(line) for line in lines]
+    header = len(rows) > 1 and bool(TABLE_SEP.match(lines[1].strip()))
+    if header:
+        rows = [rows[0]] + rows[2:]
+    width = max(len(r) for r in rows)
+    children = [{"object": "block", "type": "table_row",
+                 "table_row": {"cells": [rich_text(c) for c in row + [""] * (width - len(row))]}} for row in rows]
+    return {"object": "block", "type": "table",
+            "table": {"table_width": width, "has_column_header": header, "has_row_header": False, "children": children}}
+
+
 def md_to_blocks(markdown, image_url=lambda src: src):
     """image_url(src) -> absolute https URL Notion can show (bundle files live on the site)."""
     blocks, para, lines = [], [], markdown.splitlines()
@@ -88,6 +113,13 @@ def md_to_blocks(markdown, image_url=lambda src: src):
                                     "language": language if language in CODE_LANGUAGES else "plain text"}})
         elif not stripped:
             flush()
+        elif stripped.startswith("|") and stripped.count("|") >= 2:
+            flush()
+            rows = [stripped]
+            while i + 1 < len(lines) and lines[i + 1].strip().startswith("|"):
+                i += 1
+                rows.append(lines[i].strip())
+            blocks.append(table_block(rows))
         elif m := re.match(r"(#{1,6})\s+(.*)", stripped):
             flush()
             blocks.append(_text_block(f"heading_{min(len(m.group(1)), 3)}", m.group(2)))
@@ -206,8 +238,8 @@ def text_of_plain(items):
 def _table(rows):
     lines = []
     for index, row in enumerate(rows):
-        cells = [text_of(cell) for cell in (row.get("table_row") or {}).get("cells", [])]
+        cells = [text_of(cell).replace("|", "\\|") for cell in (row.get("table_row") or {}).get("cells", [])]
         lines.append("| " + " | ".join(cells) + " |")
         if index == 0:
-            lines.append("|" + "|".join(" --- " for _ in cells) + "|")
+            lines.append("| " + " | ".join("---" for _ in cells) + " |")
     return "\n".join(lines)
