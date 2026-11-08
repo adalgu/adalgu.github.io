@@ -9,7 +9,7 @@ import tempfile
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import quote, urlparse
 
 from .bundle import all_bundles, content_hash, file_hashes, read_bundle, render_index
 from .markdown import md_to_blocks, blocks_to_markdown, rich_text, text_of_plain
@@ -69,11 +69,21 @@ def human_edit_since_sync(page):
     return edited >= synced.replace(second=0)
 
 
-def bundle_url(site, slug, src):
-    """![](cover.jpg) inside a bundle -> https://<site>/posts/<slug>/cover.jpg; absolute URLs stay."""
+def bundle_url(site, slug, src, path=None):
+    """![](cover.jpg) inside a bundle -> https://<site>/posts/<slug>/cover.jpg; absolute URLs stay.
+    path = the page's public path when front matter `url:` sets it (BLOG-017 addendum 5: an ASCII folder keeping
+    a Korean URL) — bundle files are published under the page URL, not the folder. Non-ASCII is percent-encoded."""
     if re.match(r"^[a-z]+://", src):
         return src
-    return f"{site.rstrip('/')}/posts/{slug}/{src.lstrip('./')}"
+    base = path or f"/posts/{slug}/"
+    base = "/" + base.strip("/") + "/"
+    return f"{site.rstrip('/')}{quote(base)}{src.lstrip('./')}"
+
+
+def page_path(bundle):
+    """Public path of a bundle's page: front matter url if set, else /posts/<folder>/."""
+    url = bundle.meta.get("url") if isinstance(bundle.meta, dict) else None
+    return str(url) if url else f"/posts/{bundle.slug}/"
 
 
 def as_list(value):
@@ -115,7 +125,7 @@ def page_cover(bundle, site):
     image = ((bundle.meta.get("cover") or {}) if isinstance(bundle.meta.get("cover"), dict) else {}).get("image")
     if not image:
         return None
-    url = bundle_url(site, bundle.slug, str(image))
+    url = bundle_url(site, bundle.slug, str(image), page_path(bundle))
     return {"type": "external", "external": {"url": url}} if url.startswith("https://") else None
 
 
@@ -211,7 +221,7 @@ def push(io, database_id, repo, slugs, site, now=utcnow, only=(), dry_run=False,
                 # never overwrite a Notion edit that has not come back yet: pull turns it into a commit or a PR
                 results.append(say("push", Result(slug, "skip", "Notion edit not in the repo yet — pull brings it back first")))
                 continue
-        blocks = md_to_blocks(bundle.body, image_url=lambda src: bundle_url(site, slug, src))
+        blocks = md_to_blocks(bundle.body, image_url=lambda src: bundle_url(site, slug, src, page_path(bundle)))
         if dry_run:
             results.append(say("push", Result(slug, "write" if page else "create", "dry-run")))
             continue
@@ -294,7 +304,7 @@ def render_page(io, page, bundle, site, fetch):
     """-> (meta, body, new files). Notion file images are downloaded into the bundle (their URLs expire in an
     hour); external images that point at this bundle on the site go back to bundle-relative paths."""
     files = {}
-    prefix = bundle_url(site, bundle.slug, "")
+    prefix = bundle_url(site, bundle.slug, "", page_path(bundle))
 
     def image_src(block):
         data = block["image"]

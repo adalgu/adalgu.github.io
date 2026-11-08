@@ -10,6 +10,7 @@ import unittest
 import unittest.mock
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from urllib.parse import quote
 
 from src.ssot import engine
 from src.ssot.__main__ import main as cli
@@ -392,10 +393,51 @@ class EngineTests(unittest.TestCase):
         results = self.push(slugs)
         self.assertEqual(sorted(r.action for r in results), ["create", "create"])
         page = next(p for p in self.client.pages.values() if engine.plain(p["properties"]["Slug"]) == slug)
-        self.assertEqual(page["cover"]["external"]["url"], f"{SITE}/posts/{slug}/cover.jpg")
+        self.assertEqual(page["cover"]["external"]["url"], f"{SITE}/posts/{quote(slug)}/cover.jpg")  # percent-encoded
         # the conflict-branch start point reads the same folder through git ls-tree
         self.assertEqual(engine.synced_commit(self.repo.path, slug, engine.read_bundle(self.repo.path / "content/posts" / slug).hash),
                          after)
+
+    def test_ascii_folder_rule(self):
+        from src.ssot.bundle import ascii_folder
+        self.assertEqual(ascii_folder("github-actions-60day-inactivity-trap", "2025-09-06"), "github-actions-60day-inactivity-trap")
+        self.assertEqual(ascii_folder("스몰토크는-왜-중요한가", "2026-05-15", "3617522e-eb2f-805c-992e-e2619356e918"),
+                         "post-20260515-3617522e")
+        self.assertEqual(ascii_folder("Mixed 한글", "2026-11-01T10:00:00+09:00", ""), ascii_folder("Mixed 한글", "2026-11-01", ""))
+        self.assertTrue(ascii_folder("", None, "").startswith("post-00000000-"))
+
+    def test_renamed_bundle_folder_is_the_same_page(self):
+        # addendum 5: git mv of a Korean folder to an ASCII one must not look like a new post (no second page)
+        slug = "스몰토크는-왜-중요한가"
+        text = POST.replace("slug: hello", f"slug: {slug}").replace("draft: false", "draft: false\nnotion_id: PLACEHOLDER")
+        self.repo.write(slug, text)
+        self.repo.commit("korean")
+        self.push([slug])
+        page_id = next(p["id"] for p in self.client.pages.values() if engine.plain(p["properties"]["Slug"]) == slug)
+        folder = self.repo.path / "content/posts" / slug
+        (folder / "index.md").write_text(text.replace("PLACEHOLDER", page_id), encoding="utf-8")
+        self.repo.commit("notion_id")
+        self.push([slug])
+        pages_before = len(self.client.pages)
+        before = git(self.repo.path, "rev-parse", "HEAD")
+        git(self.repo.path, "mv", f"content/posts/{slug}", "content/posts/post-20260515-abcd1234")
+        moved = (self.repo.path / "content/posts/post-20260515-abcd1234/index.md")
+        moved.write_text(moved.read_text().replace(f"slug: {slug}\n", f"url: /posts/{slug}/\n"), encoding="utf-8")
+        after = self.repo.commit("ascii folder")
+        slugs = engine.changed_slugs(self.repo.path, before, after)
+        self.assertIn("post-20260515-abcd1234", slugs)
+        results = {r.slug: r for r in self.push(slugs)}
+        self.assertEqual(results["post-20260515-abcd1234"].action, "write")  # found by notion_id, rewritten once
+        self.assertEqual(results["post-20260515-abcd1234"].detail, page_id)
+        self.assertEqual(len(self.client.pages), pages_before)  # no duplicate page
+        self.assertEqual(engine.plain(self.client.pages[page_id]["properties"]["Slug"]), "post-20260515-abcd1234")
+        self.assertEqual([r.action for r in self.push(["post-20260515-abcd1234"])], ["same"])
+        # bundle files are published under the page URL (url:), not the folder: Notion shows them from there
+        page = self.client.pages[page_id]
+        self.assertEqual(page["cover"]["external"]["url"],
+                         f"{SITE}/posts/%EC%8A%A4%EB%AA%B0%ED%86%A0%ED%81%AC%EB%8A%94-%EC%99%9C-%EC%A4%91%EC%9A%94%ED%95%9C%EA%B0%80/cover.jpg")
+        # pulling that page back maps the image URL to the bundle file again (no churn)
+        self.assertEqual([r.action for r in self.pull()], ["bot"])
 
     def test_every_write_is_logged_before_a_later_failure(self):
         self.repo.write("second", POST.replace("slug: hello", "slug: second"))

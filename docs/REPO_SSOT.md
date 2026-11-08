@@ -6,8 +6,11 @@ local ──git push──▶ GitHub repo (SSOT) ──push job──▶ Notion 
                          └── pull job (every 30 min · Notion webhook · by hand) ◀── a person edits in Notion
 ```
 
-- Every post is a bundle: `content/posts/<slug>/index.md` plus its images. The slug (folder name, or `slug:`
-  in front matter) is the URL and never changes.
+- Every post is a bundle: `content/posts/<folder>/index.md` plus its images. Folder names are ASCII only, by
+  the one rule in `bundle.ascii_folder`: an ASCII Notion Slug as it is, else `post-<YYYYMMDD>-<Notion id 8>`. A
+  post whose public URL is not ASCII keeps it with front matter `url:`. The engine never creates bundles from
+  Notion; anything that does must use this rule. The public URL (`url:`, else `slug:`, else the folder) never
+  changes.
 - **push** (`python -m src.ssot push`): for every bundle changed by a push, rewrite its Notion page —
   properties (Name, Slug, Date, Description, Tags, Category, isPublished = not draft, Source = hugo,
   skipRendering = on) and the whole body. Bundle images appear in Notion as `https://<site>/posts/<slug>/<file>`.

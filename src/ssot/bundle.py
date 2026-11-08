@@ -1,6 +1,7 @@
 """Post bundles (content/posts/<slug>/index.md + files) and the content hash both sides agree on."""
 import hashlib
 import json
+import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -21,6 +22,22 @@ class Bundle:
     @property
     def hash(self):
         return content_hash(self.meta, self.body, self.files)
+
+
+ASCII_FOLDER = re.compile(r"[a-z0-9][a-z0-9-]*")
+
+
+def ascii_folder(candidate, date, notion_id=""):
+    """The one naming rule for bundle folders (BLOG-017 addendum 5, commander D-20261109-27): folders are ASCII
+    only. A lowercase a-z/0-9/- candidate (an ASCII Notion Slug) is used as it is; anything else becomes
+    post-<YYYYMMDD>-<first 8 of the Notion id> (or of a hash of the candidate). The public URL is not the folder:
+    a front matter `url:` keeps it."""
+    candidate = str(candidate or "").strip().lower()
+    if ASCII_FOLDER.fullmatch(candidate) and not candidate.endswith("-"):
+        return candidate
+    day = re.sub(r"[^0-9]", "", str(date or ""))[:8] or "00000000"
+    tail = re.sub(r"[^0-9a-f]", "", str(notion_id or "").lower())[:8] or hashlib.sha256(candidate.encode()).hexdigest()[:8]
+    return f"post-{day}-{tail}"
 
 
 def normalize_body(body):
