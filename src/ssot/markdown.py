@@ -8,6 +8,7 @@ Covered: paragraphs (line breaks kept), # / ## / ###, - and 1. lists, ``` code, 
 tables, callouts, nested children) is rendered the way src/render.py does, one way only.
 """
 import re
+import textwrap
 
 TEXT_LIMIT = 2000  # characters per Notion rich_text item
 CODE_LANGUAGES = {
@@ -147,8 +148,8 @@ def md_to_blocks(markdown, image_url=lambda src: src):
                     break
             else:
                 break
-        if got:
-            kids = md_to_blocks("\n".join(got), image_url)
+        if got:  # deeper indent than two spaces is one level, not a staircase: strip what all child lines share
+            kids = md_to_blocks(textwrap.dedent("\n".join(got)), image_url)
             if kids:
                 block[block["type"]]["children"] = kids
         return j - 1
@@ -203,10 +204,10 @@ def md_to_blocks(markdown, image_url=lambda src: src):
         elif (link := LINK_NOTE.match(stripped)):
             flush()
             blocks.append({"object": "block", "type": "link_to_page", "link_to_page": {"type": link.group(1), link.group(1): _uuid(link.group(2))}})
-        elif (note := CALLOUT_NOTE.match(stripped)) and i + 1 < len(lines) and lines[i + 1].strip().startswith(">"):
+        elif (note := CALLOUT_NOTE.match(stripped)) and i + 1 < len(lines) and lines[i + 1].startswith(">"):
             flush()
             quote = []
-            while i + 1 < len(lines) and lines[i + 1].strip().startswith(">"):
+            while i + 1 < len(lines) and lines[i + 1].startswith(">"):
                 i += 1
                 quote.append(lines[i].strip()[1:].strip())
             fields = _note_fields(note.group(1))
@@ -255,7 +256,7 @@ def md_to_blocks(markdown, image_url=lambda src: src):
         elif stripped.startswith(">"):
             flush()
             quote = [stripped[1:].strip()]
-            while i + 1 < len(lines) and lines[i + 1].strip().startswith(">"):
+            while i + 1 < len(lines) and lines[i + 1].startswith(">"):
                 i += 1
                 quote.append(lines[i].strip()[1:].strip())
             blocks.append(_text_block("quote", "\n".join(quote)))
