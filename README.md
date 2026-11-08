@@ -8,6 +8,31 @@
 [![Python](https://img.shields.io/badge/Python-3.8%2B-3776AB?logo=python&logoColor=white)](https://www.python.org)
 [![License](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](LICENSE)
 
+## Writing posts (repo is the source of truth) — for AI agents and people
+
+This repo is the one source of every post; Notion is an editable mirror (BLOG-014, test branch `test/repo-ssot`).
+Full guide: [docs/REPO_SSOT.md](docs/REPO_SSOT.md).
+
+1. `git pull`. Notion edits arrive as commits from `github-actions[bot]`.
+2. Write `content/posts/<slug>/index.md` (front matter `title`, `date`, `slug`, `description`, `tags`, `draft`)
+   and put its images in the same folder.
+3. Before pushing:
+   - Run `hugo server -D` and check the post.
+   - Every image loads.
+   - No broken links.
+   - Every URL is https.
+4. `git push`. Deploy and the Notion page update follow.
+
+Never rename a bundle or change `slug:`; that is the URL.
+
+**Urgent fix in Notion**: within 30 minutes (or right away through the webhook), a commit
+`sync(notion): <slug> <- Notion edit …` lands and deploys. If the repo copy also changed, a PR
+`sync(notion): <slug> — Notion and repo both changed` opens instead. Resolve it like a merge conflict; nothing is
+overwritten.
+
+**Turn it off**: `git revert <commit that added .github/workflows/repo-ssot-sync.yml> && git push`.
+To go back to the old flow, restore the `schedule:` lines in `notion-hugo-deploy.yml`.
+
 ## Why Notion-Hugo?
 
 **Write in Notion. Publish with Hugo. Deploy anywhere.**
