@@ -121,6 +121,10 @@ class FakeClient:
 
     def _store_blocks(self, parent, blocks):
         stored_list = []
+        for held in self.children.values():  # Notion marks a block that gets children later
+            for holder in held:
+                if holder["id"] == parent and blocks:
+                    holder["has_children"] = True
         for block in blocks:
             kind = block["type"]
             data = dict(block.get(kind) or {})
@@ -603,6 +607,90 @@ class EngineTests(unittest.TestCase):
             self.push()
         self.assertEqual(self._tree(page_id), before)  # old body back, nesting and icons included
         self.assertEqual(engine.sync_state(self.client.pages[page_id])[0], synced_before[0])  # SyncHash untouched
+
+    # ---- BLOG-017 addendum 10 (Anton r9): restore and write guards ----
+    def _column_body(self, pid, inner):
+        """column_list with two columns; the left column holds `inner` (blocks with their children)."""
+        col = self.client._store_blocks(pid, [{"type": "column_list", "column_list": {"children": [
+            {"type": "column", "column": {"children": [{"type": "paragraph", "paragraph": {"rich_text": rich("좌")}}]}},
+            {"type": "column", "column": {"children": [{"type": "paragraph", "paragraph": {"rich_text": rich("우")}}]}}]}}])[0]
+        left = self.client.children[col["id"]][0]
+        self.client.children[left["id"]] = []
+        self.client._store_blocks(left["id"], inner)
+        return col
+
+    TABLE_BLOCK = {"type": "table", "table": {"table_width": 1, "has_column_header": True, "has_row_header": False, "children": [
+        {"type": "table_row", "table_row": {"cells": [rich("h")]}}, {"type": "table_row", "table_row": {"cells": [rich("v")]}}]}}
+
+    def test_e4_restore_of_a_table_inside_a_column_is_not_refused(self):
+        page_id = self._page_with(lambda pid: self._column_body(pid, [self.TABLE_BLOCK]))
+        before = self._tree(page_id)
+        self.client.fail_appends_after = 0
+        with self.assertRaises(RuntimeError):
+            self.io.replace_children(page_id, md_to_blocks("새 문단"))
+        self.assertEqual(self._tree(page_id), before)  # not an empty page
+        self.assertEqual(before, ["column_list", "  column", "    table", "      table_row", "      table_row", "  column", "    paragraph"])
+
+    def test_e5_a_failure_in_the_delete_loop_puts_the_old_body_back(self):
+        page_id = self._page_with(lambda pid: self.client._store_blocks(pid, md_to_blocks(self.NESTED_MD)))
+        before = self._tree(page_id)
+        real = self.io.delete_block
+
+        def delete(block_id):
+            real(block_id)
+            if not self.client.children[page_id]:
+                raise RuntimeError("503 on the last delete")
+        self.io.delete_block = delete
+        with self.assertRaises(RuntimeError):
+            self.io.replace_children(page_id, md_to_blocks("새 문단"))
+        self.io.delete_block = real
+        self.assertEqual(self._tree(page_id), before)
+
+    def test_e6_children_of_blocks_inside_a_column_come_back(self):
+        callout = md_to_blocks("<!-- notion-callout: icon=💡 color=default -->\n> 콜아웃\n  자식 문단\n")
+        page_id = self._page_with(lambda pid: self._column_body(pid, callout))
+        before = self._tree(page_id)
+        self.assertIn("      paragraph", before)  # column > callout > paragraph
+        self.client.fail_appends_after = 0
+        with self.assertRaises(RuntimeError):
+            self.io.replace_children(page_id, md_to_blocks("새 문단"))
+        self.assertEqual(self._tree(page_id), before)
+
+    def test_e4_a_body_that_cannot_be_put_back_is_not_deleted(self):
+        image = {"type": "image", "image": {"type": "external", "external": {"url": "https://img.example/a.png"},
+                                            "caption": [{"type": "text", "text": {"content": "c"}} for _ in range(101)]}}
+        page_id = self._page_with(lambda pid: self.client._store_blocks(pid, [image]))
+        writes = len(self.client.writes())
+        with self.assertRaises(RuntimeError) as caught:
+            self.io.replace_children(page_id, md_to_blocks("새 문단"))
+        self.assertIn("nothing deleted", str(caught.exception))
+        self.assertEqual(len(self.client.writes()), writes)
+        self.assertEqual(self._tree(page_id), ["image"])
+
+    def test_e7_table_cells_and_captions_over_the_notion_limit_are_invalid(self):
+        item = {"type": "text", "text": {"content": "x"}}
+        row = {"type": "table_row", "table_row": {"cells": [[item] * 101]}}
+        table = {"type": "table", "table": {"table_width": 1, "has_column_header": False, "has_row_header": False, "children": [row]}}
+        image = {"type": "image", "image": {"type": "external", "external": {"url": "https://x/a.png"}, "caption": [item] * 101}}
+        long = {"type": "paragraph", "paragraph": {"rich_text": [{"type": "text", "text": {"content": "y" * 2001}}]}}
+        self.assertEqual(engine.invalid_reasons([table]), ["table_row:cells>100"])
+        self.assertEqual(engine.invalid_reasons([image]), ["image:caption>100"])
+        self.assertEqual(engine.invalid_reasons([long]), ["paragraph:rich_text item>2000 chars"])
+        self.assertEqual(engine.invalid_reasons(md_to_blocks("| a | b |\n|---|---|\n| 1 | 2 |\n" + "z" * 5000)), [])  # real text is split
+
+    def test_boundary_2a_a_quote_inside_a_quote_or_callout_is_a_child(self):
+        quote = md_to_blocks("> 부모\n  > 자식\n")
+        self.assertEqual([(b["type"], [k["type"] for k in b["quote"].get("children", [])]) for b in quote], [("quote", ["quote"])])
+        note = md_to_blocks("<!-- notion-callout: icon=💡 color=default -->\n> 콜아웃\n  > 자식\n")
+        self.assertEqual([(b["type"], [k["type"] for k in b["callout"].get("children", [])]) for b in note], [("callout", ["quote"])])
+        flat = md_to_blocks("> 하나\n> 둘\n")  # two lines of one quote stay one quote
+        self.assertEqual([b["type"] for b in flat], ["quote"])
+
+    def test_boundary_2b_deeper_indent_is_one_level_not_a_staircase(self):
+        (parent,) = md_to_blocks("- 부모\n    - 자식1\n    - 자식2\n")
+        kids = parent["bulleted_list_item"]["children"]
+        self.assertEqual([k["type"] for k in kids], ["bulleted_list_item"] * 2)
+        self.assertTrue(all("children" not in k["bulleted_list_item"] for k in kids))
 
     def test_push_never_shrinks_a_notion_page(self):
         # the general guard: any kind fewer after the write = skip that page, Notion untouched, dry_run says so too
