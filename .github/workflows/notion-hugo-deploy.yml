@@ -179,7 +179,11 @@ jobs:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
           HUGO_ENVIRONMENT: production
         run: |
-          hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
+          # Pages reports http://gunn.kim while "Enforce HTTPS" is off; an http baseURL makes the theme's
+          # absolute srcset/og:image http, which https pages block as mixed content (covers broke 2026-11-09).
+          BASE_URL="${{ steps.pages.outputs.base_url }}"
+          BASE_URL="${BASE_URL/#http:\/\//https://}"
+          hugo --minify --baseURL "${BASE_URL}/"
           
           # Validate Hugo build output
           if [ ! -d "public" ] || [ -z "$(ls -A public)" ]; then
