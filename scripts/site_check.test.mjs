@@ -16,6 +16,9 @@ const SITES = {
   httpLink: { '/': page('<a href="http://example.test/x">x</a>') },
   deadLink: { '/': page('<a href="/nope/">dead</a>') },
   noIcon: { '/': page('<img src="/a.png">') },
+  // BLOG-017 known list: one listed broken picture + one listed dead link, and one unlisted broken picture
+  knownMix: { '/': page('<img src="/old/gone.png"><a href="/post/old/">old</a><img src="/a.png">') },
+  knownPlusNew: { '/': page('<img src="/old/gone.png"><img src="/new-broken.png">') },
 };
 const servers = {};
 const serve = (name, pages) => new Promise((ok) => {
@@ -43,6 +46,28 @@ test('404 image -> image failure', async () => { const r = await check('badImage
 test('http:// link -> http failure', async () => { const r = await check('httpLink'); assert.equal(r.ok, false); assert.ok(kinds(r).includes('http')); });
 test('dead internal link -> link failure', async () => { const r = await check('deadLink'); assert.equal(r.ok, false); assert.ok(kinds(r).includes('link')); });
 test('missing icons -> icon failure', async () => { const r = await check('noIcon'); assert.equal(r.ok, false); assert.ok(kinds(r).includes('icon')); });
+const KNOWN = [{ kind: 'image', path: '/old/gone.png', reason: 'r', since: '2026-11-09' },
+  { kind: 'link', path: '/post/old/', reason: 'r', since: '2026-11-09' },
+  { kind: 'image', path: '/a.png', reason: 'listed but works', since: '2026-11-09' }];
+test('known breakage is reported, not failed; a listed path that works warns', async () => {
+  const r = await check('knownMix', { known: KNOWN });
+  assert.deepEqual(r.failures, []);
+  assert.equal(r.ok, true);
+  assert.deepEqual(r.known.map((k) => k.kind).sort(), ['image', 'link']);
+  assert.deepEqual(r.warnings, ['fixed — remove from the known list: image /a.png']);
+});
+test('anything not on the known list still fails', async () => {
+  const r = await check('knownPlusNew', { known: KNOWN });
+  assert.equal(r.ok, false);
+  assert.deepEqual(r.failures.map((f) => new URL(f.detail).pathname), ['/new-broken.png']);
+  assert.equal(r.known.length, 1);
+});
+test('the real list file parses: 12 entries, each with kind, path, reason, since', async () => {
+  const { loadKnown } = await import('./site_check.mjs');
+  const list = loadKnown(new URL('./site_check_known.json', import.meta.url).pathname);
+  assert.equal(list.length, 12);
+  for (const k of list) assert.ok(['image', 'link'].includes(k.kind) && k.path.startsWith('/') && k.reason && k.since);
+});
 test('pickPages: sample spreads and keeps the newest', () => {
   const entries = Array.from({ length: 30 }, (_, i) => ({ loc: `https://x/${i}`, lastmod: `2026-01-${String(i + 1).padStart(2, '0')}` }));
   const got = pickPages(entries, { sample: 5, recent: 2 });

@@ -4,9 +4,12 @@
 // Pages: home + sitemap.xml entries (all when --sample is omitted; otherwise N evenly spread + the --recent newest).
 // Per page: every <img> naturalWidth > 0 · no http:// in any href/src (own-origin http is allowed only when the checked base itself is http, i.e. a local server) · internal links answer < 400 · icons answer 200.
 // Console errors are counted and reported; they fail the run only with --max-console-errors.
+// Known breakage (--known, default scripts/site_check_known.json): image/link failures whose URL path is listed
+// there are reported under `known` instead of failing; a listed path that answers 200 again gives a warning
+// "fixed — remove from the list" (BLOG-017). Anything not listed fails as before.
 // Prints JSON, exit 1 when there is any failure.
 import { createRequire } from 'node:module';
-import { writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 const require = createRequire(import.meta.url);
@@ -26,7 +29,15 @@ const parseSitemap = (xml) =>
     lastmod: /<lastmod>\s*([^<\s]+)\s*<\/lastmod>/.exec(m[1])?.[1],
   })).filter((e) => e.loc);
 
-export async function siteCheck({ base, sample = 0, recent = 5, maxConsoleErrors = Infinity, playwright }) {
+// failure -> URL path it is about (image: the picture, link: the target), for matching the known list
+export const failurePath = (f) => {
+  if (f.kind === 'link') return f.detail.split(' -> ')[0];
+  if (f.kind === 'image') { try { return new URL(f.detail).pathname; } catch { return f.detail; } }
+  return null;
+};
+export const loadKnown = (file) => (file && existsSync(file) ? JSON.parse(readFileSync(file, 'utf8')).known ?? [] : []);
+
+export async function siteCheck({ base, sample = 0, recent = 5, maxConsoleErrors = Infinity, playwright, known = [] }) {
   const { chromium } = playwright ?? require(process.env.PLAYWRIGHT_MODULE || 'playwright');
   const origin = new URL(base).origin;
   const failures = [];
@@ -87,7 +98,16 @@ export async function siteCheck({ base, sample = 0, recent = 5, maxConsoleErrors
       if (st !== 200) fail(icon, 'icon', `status ${st}`);
     }
     if (consoleErrors > maxConsoleErrors) fail('(all pages)', 'console', `${consoleErrors} console errors > ${maxConsoleErrors}`);
-    return { base: origin, pages: paths.length, consoleErrors, failures, ok: failures.length === 0 };
+    const listed = (f) => known.find((k) => k.kind === f.kind && k.path === failurePath(f));
+    const knownHits = failures.filter(listed).map((f) => ({ ...f, reason: listed(f).reason }));
+    const left = failures.filter((f) => !listed(f));
+    // a listed path that works again: say so, whether or not this run's page sample reached it
+    const warnings = [];
+    for (const k of known) {
+      const st = await statusOnce(new URL(k.path, origin).href);
+      if (st === 200) warnings.push(`fixed — remove from the known list: ${k.kind} ${k.path}`);
+    }
+    return { base: origin, pages: paths.length, consoleErrors, failures: left, known: knownHits, warnings, ok: left.length === 0 };
   } finally {
     await browser.close();
   }
@@ -100,6 +120,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     sample: Number(arg('sample', 0)),
     recent: Number(arg('recent', 5)),
     maxConsoleErrors: arg('max-console-errors') === undefined ? Infinity : Number(arg('max-console-errors')),
+    known: loadKnown(arg('known', fileURLToPath(new URL('./site_check_known.json', import.meta.url)))),
   });
   const out = JSON.stringify(result, null, 2);
   if (arg('out')) writeFileSync(arg('out'), out + '\n');

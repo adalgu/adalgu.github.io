@@ -1,0 +1,77 @@
+{
+  "_about": "Already-broken things site_check.mjs reports as known instead of failing. Matched by kind + URL path (any page, any host). Anything not listed still fails. When a listed path answers 200 again the check warns 'fixed — remove from this list'. Post text is not changed for these (commander decides in the morning, BLOG-017).",
+  "known": [
+    {
+      "kind": "image",
+      "path": "/posts/2020-06-13-seoul-metro-data-openapi/featured10-32.png",
+      "reason": "Seoul Metro post picture missing before the move: also 404 on the live site (Anton round 2 F6, jared F10: nothing to restore)",
+      "since": "2026-11-09"
+    },
+    {
+      "kind": "image",
+      "path": "/posts/2020-06-13-seoul-metro-data-openapi/featured12-01.png",
+      "reason": "Seoul Metro post picture missing before the move: also 404 on the live site (Anton round 2 F6, jared F10: nothing to restore)",
+      "since": "2026-11-09"
+    },
+    {
+      "kind": "image",
+      "path": "/posts/2020-06-13-seoul-metro-data-openapi/featured15-52.png",
+      "reason": "Seoul Metro post picture missing before the move: also 404 on the live site (Anton round 2 F6, jared F10: nothing to restore)",
+      "since": "2026-11-09"
+    },
+    {
+      "kind": "image",
+      "path": "/posts/2020-06-13-seoul-metro-data-openapi/featured17-01.png",
+      "reason": "Seoul Metro post picture missing before the move: also 404 on the live site (Anton round 2 F6, jared F10: nothing to restore)",
+      "since": "2026-11-09"
+    },
+    {
+      "kind": "image",
+      "path": "/posts/2020-06-13-seoul-metro-data-openapi/featured36-40.png",
+      "reason": "Seoul Metro post picture missing before the move: also 404 on the live site (Anton round 2 F6, jared F10: nothing to restore)",
+      "since": "2026-11-09"
+    },
+    {
+      "kind": "image",
+      "path": "/posts/2020-06-13-seoul-metro-data-openapi/featured37-54.png",
+      "reason": "Seoul Metro post picture missing before the move: also 404 on the live site (Anton round 2 F6, jared F10: nothing to restore)",
+      "since": "2026-11-09"
+    },
+    {
+      "kind": "image",
+      "path": "/posts/2020-06-13-seoul-metro-data-openapi/featured44-49.png",
+      "reason": "Seoul Metro post picture missing before the move: also 404 on the live site (Anton round 2 F6, jared F10: nothing to restore)",
+      "since": "2026-11-09"
+    },
+    {
+      "kind": "image",
+      "path": "/posts/2020-06-13-seoul-metro-data-openapi/featured46-33.png",
+      "reason": "Seoul Metro post picture missing before the move: also 404 on the live site (Anton round 2 F6, jared F10: nothing to restore)",
+      "since": "2026-11-09"
+    },
+    {
+      "kind": "image",
+      "path": "/posts/2020-06-13-seoul-metro-data-openapi/featured49-37.png",
+      "reason": "Seoul Metro post picture missing before the move: also 404 on the live site (Anton round 2 F6, jared F10: nothing to restore)",
+      "since": "2026-11-09"
+    },
+    {
+      "kind": "image",
+      "path": "/posts/2020-06-13-seoul-metro-data-openapi/featured59-02.png",
+      "reason": "Seoul Metro post picture missing before the move: also 404 on the live site (Anton round 2 F6, jared F10: nothing to restore)",
+      "since": "2026-11-09"
+    },
+    {
+      "kind": "link",
+      "path": "/post/2018-11-09-r-practice-note/",
+      "reason": "old /post/ URL linked from brain-to-web-pipeline-13-years-journey; the R practice note has no page today (Anton round 2 F6, jared F10: no same post to point at)",
+      "since": "2026-11-09"
+    },
+    {
+      "kind": "link",
+      "path": "/post/2020-01-30-vscode-markdown-writing/",
+      "reason": "old /post/ URL linked from brain-to-web-pipeline-13-years-journey; the VSCode writing post has no page today (Anton round 2 F6, jared F10: no same post to point at)",
+      "since": "2026-11-09"
+    }
+  ]
+}
