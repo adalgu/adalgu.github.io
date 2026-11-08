@@ -249,7 +249,8 @@ class EngineTests(unittest.TestCase):
         return engine.push(self.io, DB, self.repo.path, list(slugs), SITE, now=self.client.now, add_column=True, **kw)
 
     def pull(self, fetch=None):
-        results, changes = engine.plan_pull(self.io, DB, self.repo.path, SITE, fetch=fetch or self.fail_fetch)
+        results, changes = engine.plan_pull(self.io, DB, self.repo.path, SITE, fetch=fetch or self.fail_fetch,
+                                            git=engine.Git(self.repo.path))
         done = engine.apply_pull(self.io, self.repo.path, changes, "main", now=self.client.now,
                                  open_pr=lambda *a: self.prs.append(a) or f"pr/{len(self.prs)}")
         return [r for r in results if r.action not in ("commit", "pr", "none")] + done
@@ -315,7 +316,7 @@ class EngineTests(unittest.TestCase):
         self.repo.commit("repo edit")
         git(self.repo.path, "push", "-q", "origin", "main")
         self.client.human_edit(page_id, edit_paragraph("첫 문단", "노션에서 고친 첫 문단"))
-        self.assertEqual([r.action for r in self.push()], ["conflict-pending"])  # Notion edit not overwritten
+        self.assertEqual([r.action for r in self.push()], ["skip"])  # Notion edit not overwritten
         main_before = git(self.repo.remote, "rev-parse", "main")
         results = self.pull()
         self.assertEqual([r.action for r in results], ["pr"])
@@ -325,10 +326,67 @@ class EngineTests(unittest.TestCase):
         self.assertEqual(git(self.repo.remote, "rev-parse", "main"), main_before)  # main untouched
         self.assertIn("노션에서 고친 첫 문단", git(self.repo.remote, "show", f"{branch}:content/posts/hello/index.md"))
         self.assertEqual(git(self.repo.path, "rev-parse", "--abbrev-ref", "HEAD"), "main")
-        self.assertEqual([r.action for r in self.pull()], ["bot"])  # same edit never opens a second PR
+
+        # BLOG-017 F3: PR not merged yet -> pushing the repo copy again leaves the Notion edit alone
+        notion_body = lambda: blocks_to_markdown(self.client.children[page_id])
+        self.assertEqual([r.action for r in self.push()], ["skip"])
+        skipped = self.push(open_conflict=lambda slug: "https://github.example/pr/1")
+        self.assertIn("conflict PR open https://github.example/pr/1", skipped[0].detail)
+        self.assertIn("노션에서 고친 첫 문단", notion_body())
+        self.assertNotIn("저장소에서 고침", notion_body())
+        self.assertEqual([r.action for r in self.pull()], ["skip"])  # branch open: no second PR, no re-render
         self.assertEqual(len(self.prs), 1)
-        # after the PR is merged the repo is the truth again: push rewrites Notion once
-        self.assertEqual([r.action for r in self.push()], ["write"])
+
+        # the branch starts at the version both sides agreed on, so merging it is a real three-way merge
+        git(self.repo.path, "fetch", "-q", "origin")
+        git(self.repo.path, "merge", "-q", "--no-edit", f"origin/{branch}")
+        merged = self.repo.index()
+        self.assertIn("노션에서 고친 첫 문단", merged)
+        self.assertIn("끝 문단을 저장소에서 고침.", merged)
+        git(self.repo.path, "push", "-q", "origin", "main")
+        self.assertEqual([r.action for r in self.pull()], ["skip"])  # merged edit: pull leaves it to push
+        self.assertEqual([r.action for r in self.push()], ["write"])  # merged: the repo is the truth again
+        self.assertIn("노션에서 고친 첫 문단", notion_body())
+        self.assertIn("저장소에서 고침", notion_body())
+        self.assertEqual([r.action for r in self.pull()], ["bot"])
+        self.assertEqual([r.action for r in self.push()], ["same"])
+
+    def test_notion_cover_change_comes_back(self):
+        # BLOG-017 F4: only the page cover changed in Notion
+        self.push()
+        page_id = self.page()["id"]
+        self.client.pages[page_id]["cover"] = {"type": "external", "external": {"url": "https://img.example/new.jpg"}}
+        self.client.touch(page_id, "person")
+        self.assertEqual([r.action for r in self.pull()], ["commit"])
+        index = self.repo.index()
+        self.assertIn("image: https://img.example/new.jpg", index)
+        self.assertNotIn("relative: true", index)
+        self.assertIn("hiddenInSingle: false", index)
+        self.assertEqual([r.action for r in self.push()], ["same"])  # cover is in the hash both sides agree on
+        self.assertEqual([r.action for r in self.pull()], ["bot"])
+
+    def test_notion_file_cover_is_downloaded(self):
+        self.push()
+        page_id = self.page()["id"]
+        signed = "https://prod-files-secure.s3.us-west-2.amazonaws.com/x/cover.png?X-Amz-Signature=abc"
+        self.client.pages[page_id]["cover"] = {"type": "file", "file": {"url": signed}}
+        self.client.touch(page_id, "person")
+        self.assertEqual([r.action for r in self.pull(fetch=lambda url: (b"new-cover-bytes", "image/png"))], ["commit"])
+        name = "cover-" + __import__("hashlib").sha256(b"new-cover-bytes").hexdigest()[:8] + ".png"
+        self.assertEqual((self.repo.path / "content/posts/hello" / name).read_bytes(), b"new-cover-bytes")
+        self.assertIn(f"image: {name}", self.repo.index())
+        self.assertIn("relative: true", self.repo.index())
+        self.assertNotIn("amazonaws", self.repo.index())
+        # pushed back, Notion shows the bundle copy from the site; pulling that again changes nothing
+        self.assertEqual([r.action for r in self.push()], ["same"])
+
+    def test_unchanged_cover_causes_no_front_matter_churn(self):
+        self.push()
+        page_id = self.page()["id"]
+        self.client.human_edit(page_id, edit_paragraph("끝 문단.", "끝 문단만 바꿈."))
+        self.pull()
+        self.assertIn('title: "시험 글"', self.repo.index())  # front matter kept byte for byte
+        self.assertIn("  image: cover.jpg\n  relative: true\n", self.repo.index())
 
     def test_bot_edit_is_skipped(self):
         self.push()

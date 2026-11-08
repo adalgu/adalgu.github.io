@@ -1,8 +1,11 @@
 """push (repo -> Notion) and pull (Notion -> repo). Pure decisions + an IO object + a git object, so the
 fake-client tests in tests/test_ssot_engine.py drive exactly the code the workflow runs."""
+import hashlib
+import json
 import mimetypes
 import re
 import subprocess
+import tempfile
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
@@ -137,7 +140,7 @@ def find_page(io, database_id, bundle):
 @dataclass
 class Result:
     slug: str
-    action: str  # same | write | create | skip | commit | pr | bot | unchanged | conflict-pending | none
+    action: str  # same | write | create | skip | commit | pr | bot | unchanged | none
     detail: str = ""
 
 
@@ -155,7 +158,21 @@ def check_schema(io, database_id, add_column=False, dry_run=False):
     return schema
 
 
-def push(io, database_id, repo, slugs, site, now=utcnow, only=(), dry_run=False, add_column=False):
+def edit_marker(page):
+    """Trailer every Notion -> repo commit carries; once it is in the bundle's history the edit is in the repo."""
+    return f"Notion-Edit: {page['id']} {page.get('last_edited_time', '')}"
+
+
+def notion_edit_merged(repo, slug, page):
+    """This exact Notion edit (page id + edit time) already reached the repo — e.g. its conflict PR was merged."""
+    log = subprocess.run(["git", "-C", str(repo), "log", "--format=%B", "--", f"{POSTS}/{slug}"],
+                         capture_output=True, text=True, check=False).stdout
+    return edit_marker(page) in log
+
+
+def push(io, database_id, repo, slugs, site, now=utcnow, only=(), dry_run=False, add_column=False,
+         open_conflict=None):
+    """open_conflict(slug) -> URL of an open sync/notion-<slug>-* PR or None (CLI: gh; tests: a fake)."""
     schema = check_schema(io, database_id, add_column, dry_run)
     results = []
     for slug in slugs:
@@ -173,9 +190,13 @@ def push(io, database_id, repo, slugs, site, now=utcnow, only=(), dry_run=False,
             if synced_hash == hash_:
                 results.append(Result(slug, "same", page["id"]))
                 continue
-            if human_edit_since_sync(page):
-                # never overwrite a Notion edit that has not come back yet: pull turns it into a PR
-                results.append(Result(slug, "conflict-pending", page["id"]))
+            pr = open_conflict(slug) if open_conflict else None
+            if pr:
+                results.append(Result(slug, "skip", f"conflict PR open {pr} — Notion keeps its edit until it is merged"))
+                continue
+            if human_edit_since_sync(page) and not notion_edit_merged(repo, slug, page):
+                # never overwrite a Notion edit that has not come back yet: pull turns it into a commit or a PR
+                results.append(Result(slug, "skip", "Notion edit not in the repo yet — pull brings it back first"))
                 continue
         blocks = md_to_blocks(bundle.body, image_url=lambda src: bundle_url(site, slug, src))
         if dry_run:
@@ -232,6 +253,30 @@ def _image_name(block, url, content_type):
     return f"notion-{block['id'].replace('-', '')[:12]}{ext}"
 
 
+def page_cover_back(cover, prefix, fetch, files):
+    """Notion page cover -> (image, bundle-relative?) or None (no cover / http — mixed content, left as is).
+    file (signed, expires in an hour) = downloaded into the bundle as cover-<content sha8>.<ext> (same picture,
+    same name: re-pulling never renames). Our own bundle URL = that file again. Other https = kept as the URL:
+    Hugo takes an absolute cover, pulling never fetches third-party pictures, and a person who pastes a link
+    in Notion keeps a link."""
+    cover = cover or {}
+    kind = cover.get("type")
+    url = (cover.get(kind) or {}).get("url", "") if kind else ""
+    if not url:
+        return None
+    if kind == "file":
+        content, content_type = fetch(url)
+        ext = Path(urlparse(url).path).suffix.lower()
+        if not ext or len(ext) > 5:
+            ext = mimetypes.guess_extension((content_type or "").split(";")[0]) or ".png"
+        name = f"cover-{hashlib.sha256(content).hexdigest()[:8]}{ext}"
+        files[name] = content
+        return name, True
+    if url.startswith(prefix):
+        return url[len(prefix):], True
+    return (url, False) if url.startswith("https://") else None
+
+
 def render_page(io, page, bundle, site, fetch):
     """-> (meta, body, new files). Notion file images are downloaded into the bundle (their URLs expire in an
     hour); external images that point at this bundle on the site go back to bundle-relative paths."""
@@ -252,6 +297,17 @@ def render_page(io, page, bundle, site, fetch):
     body = blocks_to_markdown(io.children(page["id"]), io.children, image_src)
     props = page.get("properties") or {}
     meta = dict(bundle.meta)
+    cover = page_cover_back(page.get("cover"), prefix, fetch, files)
+    old_cover = meta.get("cover") if isinstance(meta.get("cover"), dict) else {}
+    if cover and cover[0] != old_cover.get("image"):
+        image, relative = cover
+        new_cover = {k: v for k, v in old_cover.items() if k != "relative"}
+        new_cover["image"] = image
+        if relative:
+            new_cover["relative"] = True
+        new_cover.setdefault("hiddenInSingle", False)  # the site hides covers by default (config cover.hidden*)
+        new_cover.setdefault("hiddenInList", False)
+        meta["cover"] = new_cover
     title = plain(props.get("Name"))
     if title:
         meta["title"] = title
@@ -264,7 +320,11 @@ def render_page(io, page, bundle, site, fetch):
     return meta, body, files
 
 
-def plan_pull(io, database_id, repo, site, page_ids=(), only=(), fetch=download, assume_person=False):
+def pr_branch(slug, page):
+    return f"sync/notion-{slug}-{re.sub(r'[^0-9]', '', page.get('last_edited_time', ''))[:12]}"
+
+
+def plan_pull(io, database_id, repo, site, page_ids=(), only=(), fetch=download, assume_person=False, git=None):
     """Decide what comes back. Nothing is written here.
     assume_person (test hook, needs explicit page_ids): treat these pages' last edit as a person's even when an
     integration made it — agents edit Notion through the same integration the engine uses."""
@@ -294,6 +354,12 @@ def plan_pull(io, database_id, repo, site, page_ids=(), only=(), fetch=download,
         if not human_edit_since_sync(page):
             bot = (page.get("last_edited_by") or {}).get("type") == "bot"
             results.append(Result(slug, "bot" if bot else "unchanged", page["id"]))
+            continue
+        if notion_edit_merged(repo, slug, page):
+            results.append(Result(slug, "skip", "this Notion edit is already in the repo (merged) — push writes Notion"))
+            continue
+        if git is not None and git.remote_has_branch(pr_branch(slug, page)):
+            results.append(Result(slug, "skip", f"{pr_branch(slug, page)} already open — waiting for its merge"))
             continue
         meta, body, files = render_page(io, page, bundle, site, fetch)
         new_hash = content_hash(meta, body, file_hashes(bundle.path, files))
@@ -330,6 +396,53 @@ def gh_pr(repo, branch, base, title, body):  # pragma: no cover - needs gh + net
     return out.stdout.strip()
 
 
+def synced_commit(repo, slug, synced_hash, limit=50):
+    """Newest commit whose copy of the bundle hashes to synced_hash — the version both sides last agreed on.
+    The conflict branch starts there, so merging the PR is a real three-way merge of the two edits.
+    None when not found (no git, history rewritten): the branch then starts at the base head."""
+    folder = f"{POSTS}/{slug}"
+    out = subprocess.run(["git", "-C", str(repo), "rev-list", f"-{limit}", "HEAD", "--", folder],
+                         capture_output=True, text=True, check=False)
+    if out.returncode != 0:
+        return None
+    for sha in out.stdout.split():
+        names = subprocess.run(["git", "-C", str(repo), "ls-tree", "--name-only", f"{sha}:{folder}"],
+                               capture_output=True, text=True, check=False).stdout.split()
+        if "index.md" not in names:
+            continue
+        with tempfile.TemporaryDirectory() as tmp:
+            copy = Path(tmp) / slug
+            copy.mkdir()
+            for name in names:
+                blob = subprocess.run(["git", "-C", str(repo), "show", f"{sha}:{folder}/{name}"],
+                                      capture_output=True, check=False).stdout
+                (copy / name).write_bytes(blob)
+            bundle = read_bundle(copy)
+            if bundle and bundle.hash == synced_hash:
+                return sha
+    return None
+
+
+def gh_open_conflicts(repo):  # pragma: no cover - needs gh + network
+    """-> open_conflict(slug) for push: URL of an open sync/notion-<slug>-* PR. gh missing or failing = no PR
+    known; the person-edit guard still keeps Notion's edit (SyncHash is never moved by a PR)."""
+    found = None
+
+    def lookup(slug):
+        nonlocal found
+        if found is None:
+            out = subprocess.run(["gh", "pr", "list", "--state", "open", "--json", "headRefName,url", "--limit", "200"],
+                                 cwd=repo, capture_output=True, text=True, check=False)
+            try:
+                found = json.loads(out.stdout) if out.returncode == 0 else []
+            except ValueError:
+                found = []
+            if out.returncode != 0:
+                print("ssot: gh pr list failed — open conflict PRs unknown, the person-edit guard still applies")
+        return next((pr["url"] for pr in found if pr["headRefName"].startswith(f"sync/notion-{slug}-")), None)
+    return lookup
+
+
 def _write(repo, change):
     folder = Path(repo) / POSTS / change.slug
     (folder / "index.md").write_text(change.index, encoding="utf-8")
@@ -347,33 +460,37 @@ def apply_pull(io, repo, changes, base, now=utcnow, git=None, open_pr=gh_pr, pus
     for change in commits:
         path = _write(repo, change)
         git.run("add", "--", path)
-        git.run("commit", "-m", f"sync(notion): {change.slug} <- Notion edit {change.edited}\n\nSyncHash {change.new_hash}")
+        git.run("commit", "-m", f"sync(notion): {change.slug} <- Notion edit {change.edited}\n\n"
+                f"SyncHash {change.new_hash}\n{edit_marker(change.page)}")
     if commits and push:
         git.run("push", git.remote, f"HEAD:{base}")
     for change in commits:
         io.update_page(change.page["id"], properties={SYNC_PROP: sync_value(change.new_hash, now())})
         done.append(Result(change.slug, "commit", git.head()))
     for change in [c for c in changes if c.mode == "pr"]:
-        stamp = re.sub(r"[^0-9]", "", change.edited)[:12] or iso(now())
-        branch = f"sync/notion-{change.slug}-{stamp}"
+        branch = pr_branch(change.slug, change.page)
         if push and git.remote_has_branch(branch):
             done.append(Result(change.slug, "skip", f"{branch} already open"))
             continue
-        git.run("checkout", "-q", "-b", branch)
+        start = synced_commit(repo, change.slug, change.synced_hash)
+        git.run("checkout", "-q", "-b", branch, *([start] if start else []))
         try:
             path = _write(repo, change)
             git.run("add", "--", path)
-            git.run("commit", "-m", f"sync(notion): {change.slug} <- Notion edit {change.edited} (repo also changed)")
+            git.run("commit", "-m", f"sync(notion): {change.slug} <- Notion edit {change.edited} (repo also changed)\n\n"
+                    f"{edit_marker(change.page)}")
             if push:
                 git.run("push", "-u", git.remote, branch)
             url = open_pr(repo, branch, base, f"sync(notion): {change.slug} — Notion and repo both changed",
                           f"Notion page {change.page['id']} was edited at {change.edited} while the repo copy also "
                           f"changed since the last sync ({change.synced_hash}).\n\nThis branch holds the Notion "
-                          f"version of the bundle. Resolve against {base}; merging pushes the result back to Notion.")
+                          f"version of the bundle. Resolve against {base}; merging pushes the result back to Notion. "
+                          f"Keep the commit trailer `{edit_marker(change.page)}` (merge, rebase or squash all keep it): "
+                          f"that is how push knows this Notion edit is in the repo. Until then Notion is not overwritten.")
         finally:
             git.run("checkout", "-q", base)
-        # the Notion edit now lives in the PR: mark it consumed (same hash, new time) so it is not pulled twice
-        io.update_page(change.page["id"], properties={SYNC_PROP: sync_value(change.synced_hash, now())})
+        # SyncHash is NOT touched here: the page keeps its person edit, so push leaves Notion alone until the PR is
+        # merged (its Notion-Edit trailer then reaches the repo history) and pull skips the open branch
         done.append(Result(change.slug, "pr", url))
     for change in [c for c in changes if c.mode == "none"]:
         io.update_page(change.page["id"], properties={SYNC_PROP: sync_value(change.new_hash, now())})

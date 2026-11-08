@@ -13,7 +13,7 @@ import json
 import os
 import sys
 
-from .engine import Git, apply_pull, changed_slugs, check_schema, plan_pull, push
+from .engine import Git, apply_pull, changed_slugs, check_schema, gh_open_conflicts, plan_pull, push
 from .notion_io import NotionIO
 
 
@@ -44,11 +44,12 @@ def main(argv=None, io=None):
     if args.command == "push":
         slugs = args.slug or changed_slugs(args.repo, args.before, args.after)
         results = push(io, args.database, args.repo, slugs, args.site, only=only, dry_run=args.dry_run,
-                       add_column=args.add_sync_column)
+                       add_column=args.add_sync_column, open_conflict=gh_open_conflicts(args.repo))
     else:
         check_schema(io, args.database, args.add_sync_column, args.dry_run)
         results, changes = plan_pull(io, args.database, args.repo, args.site, page_ids=args.page_id, only=only,
-                                     assume_person=args.assume_person_edit)
+                                     assume_person=args.assume_person_edit,
+                                     git=None if args.no_git_push else Git(args.repo))
         if not args.dry_run:
             results = [r for r in results if r.action not in ("commit", "pr", "none")]
             results += apply_pull(io, args.repo, changes, args.base, git=Git(args.repo), push=not args.no_git_push)

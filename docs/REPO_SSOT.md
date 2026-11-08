@@ -16,10 +16,17 @@ local ──git push──▶ GitHub repo (SSOT) ──push job──▶ Notion 
   body back to Markdown. Notion *file* images are downloaded into the bundle (their URLs expire in an hour).
   External images that point back at the bundle become relative paths again. Title, Description and Tags
   come back too; other front matter stays byte for byte.
+  - The page cover comes back too. A Notion *file* cover is downloaded as `cover-<content sha8>.<ext>`, so the
+    same picture always gets the same name. Our own bundle URL maps back to the bundle file. Any other https
+    cover is kept as its URL: Hugo takes an absolute cover, and pull never fetches third-party pictures.
+    An http cover is ignored (mixed content).
   - The repo copy is untouched since the last sync: one commit on the base branch, then the deploy workflow
     starts.
   - The repo copy changed too: branch `sync/notion-<slug>-<Notion edit time>` and a PR. Nothing is
-    overwritten, and main is not touched.
+    overwritten, and main is not touched. The branch starts at the commit whose bundle matches the last
+    agreed hash, so merging the PR is a real three-way merge of the two edits.
+  - Every Notion → repo commit carries the trailer `Notion-Edit: <page id> <edit time>`. A merge, a rebase or a
+    squash merge all keep it.
 
 ## How ping-pong and duplicates are prevented
 
@@ -27,8 +34,8 @@ local ──git push──▶ GitHub repo (SSOT) ──push job──▶ Notion 
 |---|---|---|
 | `SyncHash` property: `sha256:<bundle hash> <UTC time>` | written last by every push and pull | push skips a page whose hash already matches. A pulled edit is not pushed back. |
 | last editor is a bot ⇒ skip | `human_edit_since_sync` | every engine write ends with the integration as last editor, so pull never reads our own writes |
-| push never overwrites an unsynced Notion edit | push → `conflict-pending` | an edit made in Notion between two pushes waits for pull, which opens the PR |
-| deterministic PR branch name + SyncHash time moved after the PR opens | `apply_pull` | the same Notion edit never opens a second PR |
+| push never overwrites an unsynced Notion edit: open `sync/notion-<slug>-*` PR, or a person edit whose `Notion-Edit` trailer is not in the bundle's history yet ⇒ push `skip` | `push` | Notion keeps the person's edit while its conflict PR is open. Opening the PR never touches SyncHash. |
+| deterministic PR branch name; branch already on the remote ⇒ pull `skip`; trailer already merged ⇒ pull `skip` | `plan_pull` | the same Notion edit never opens a second PR, even after the merged branch is deleted |
 | Notion page found by `notion_id` (front matter), then by `Slug`; two pages with one slug ⇒ stop | `find_page` | the same post never gets two pages |
 | commit and git push first, SyncHash after | `apply_pull` | a failed git push leaves Notion "not synced", so the edit is retried and never lost |
 
@@ -38,8 +45,10 @@ change, and the content hash then decides whether there is anything to bring bac
 Known limits:
 - Another integration (a Notion automation, another bot) editing a page after a person hides that person's
   edit, because bot edits are skipped.
-- A page whose PR is closed without merging gets the repo version on the next push of that bundle. The
-  Notion edit then lives only in the closed PR's branch.
+- A conflict PR closed without merging leaves that bundle's push skipped while the Notion page keeps the
+  edit. To release it, either:
+  - edit the page in Notion again, to the repo text, so pull finds nothing new; or
+  - merge the PR.
 - Round trip covers paragraphs (line breaks kept), `#`–`###` headings, `-`/`1.` lists, fenced code,
   quotes, `---`, `![alt](src)` images, and `**bold** *italic* ~~strike~~ \`code\` [links](url)`.
   Deeper headings, nested lists and Markdown tables come back flattened.
