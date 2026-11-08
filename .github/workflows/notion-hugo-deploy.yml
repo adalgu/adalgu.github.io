@@ -55,6 +55,10 @@ jobs:
           pip install "notion-client>=2.0.0,<2.5.0" python-dotenv pyyaml fs tabulate "setuptools<81"
           python scripts/import_leftover_notion_pages.py
 
+      # BLOG-017 addendum 5 (D-20261109-27): every tracked path under content/ is ASCII (Korean URLs live in url:)
+      - name: Content paths are ASCII
+        run: python scripts/check_ascii_paths.py
+
       # BLOG-017 F1: replaces check_flat_posts.sh (flat Notion file count as success). Two published pages at one
       # URL (a leftover flat copy, two bundles with one slug) stop the build here.
       - name: Every URL once
