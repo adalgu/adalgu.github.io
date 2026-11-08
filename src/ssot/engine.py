@@ -12,6 +12,7 @@ from pathlib import Path
 from urllib.parse import quote, urlparse
 
 from .bundle import all_bundles, content_hash, file_hashes, read_bundle, render_index
+from .notion_io import field_limit_reasons
 from .markdown import md_to_blocks, blocks_to_markdown, rich_text, text_of_plain
 
 SYNC_PROP = "SyncHash"   # rich_text: "<sha256:…> <ISO time>" — the bundle hash both sides last agreed on
@@ -247,7 +248,7 @@ NOTION_LIST_LIMIT = 100    # blocks per children array / rich text items per arr
 def invalid_reasons(blocks, depth=0):
     """What the Notion API would refuse, checked before anything is deleted (addendum 9): nesting deeper than two
     levels in one request, a column without children, a column list with fewer than two columns, more than 100
-    children or rich text items in one array."""
+    children or rich text items in one array (text, caption, table cells), a rich text item over 2000 characters."""
     reasons = []
     if depth > 0 and len(blocks) > NOTION_LIST_LIMIT:
         reasons.append(f"children>{NOTION_LIST_LIMIT}")
@@ -255,8 +256,7 @@ def invalid_reasons(blocks, depth=0):
         kind = block["type"]
         data = block.get(kind) or {}
         kids = data.get("children") or []
-        if len(data.get("rich_text") or []) > NOTION_LIST_LIMIT:
-            reasons.append(f"{kind}:rich_text>{NOTION_LIST_LIMIT}")
+        reasons += field_limit_reasons(kind, data)  # rich_text, caption and table cells: items and characters
         if kind == "column" and not kids:
             reasons.append("empty column")
         if kind == "column_list" and len(kids) < 2:
