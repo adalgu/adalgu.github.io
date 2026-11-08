@@ -3,6 +3,7 @@
     push --before SHA --after SHA        bundles changed by a push -> Notion (no --before = every bundle)
     push --slug SLUG [--slug …]          these bundles -> Notion
     pull [--page-id ID …] [--base main]  Notion edits -> commit on --base, or sync/notion-* branch + PR
+    pull --page-id ID --assume-person-edit   test hook: that page's bot edit counts as a person's
 Common: --database (or NOTION_DATABASE_ID_POSTS) --site https://example.com --only SLUG (allowlist)
         --dry-run (decide and print, write nothing) --add-sync-column (adds the SyncHash column once).
 Key: NOTION_TOKEN or NOTION_API_KEY.
@@ -31,6 +32,8 @@ def main(argv=None, io=None):
     parser.add_argument("--base", default="main")
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--add-sync-column", action="store_true")
+    parser.add_argument("--assume-person-edit", action="store_true",
+                        help="pull test hook: count the given --page-id's last edit as a person's (agents edit as a bot)")
     parser.add_argument("--no-git-push", action="store_true", help="pull: commit locally, do not push (tests, local runs)")
     args = parser.parse_args(argv)
     if not args.database or not args.site.startswith("https://"):
@@ -44,7 +47,8 @@ def main(argv=None, io=None):
                        add_column=args.add_sync_column)
     else:
         check_schema(io, args.database, args.add_sync_column, args.dry_run)
-        results, changes = plan_pull(io, args.database, args.repo, args.site, page_ids=args.page_id, only=only)
+        results, changes = plan_pull(io, args.database, args.repo, args.site, page_ids=args.page_id, only=only,
+                                     assume_person=args.assume_person_edit)
         if not args.dry_run:
             results = [r for r in results if r.action not in ("commit", "pr", "none")]
             results += apply_pull(io, args.repo, changes, args.base, git=Git(args.repo), push=not args.no_git_push)

@@ -44,6 +44,11 @@ Known limits:
   quotes, `---`, `![alt](src)` images, and `**bold** *italic* ~~strike~~ \`code\` [links](url)`.
   Deeper headings, nested lists and Markdown tables come back flattened.
 
+**Test hook**: agents edit Notion through the same integration the engine uses, so their edits count as bot
+edits and are skipped. `pull --page-id <one test page> --assume-person-edit` (workflow_dispatch input
+`assume_person`) counts that one page's last edit as a person's. It refuses to run without `--page-id`, and
+cron and the webhook never set it.
+
 ## Setup
 
 1. Notion DB: needs a `SyncHash` column of type rich_text. Run once with `--add-sync-column`. That adds

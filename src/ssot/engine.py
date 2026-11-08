@@ -264,8 +264,12 @@ def render_page(io, page, bundle, site, fetch):
     return meta, body, files
 
 
-def plan_pull(io, database_id, repo, site, page_ids=(), only=(), fetch=download):
-    """Decide what comes back. Nothing is written here."""
+def plan_pull(io, database_id, repo, site, page_ids=(), only=(), fetch=download, assume_person=False):
+    """Decide what comes back. Nothing is written here.
+    assume_person (test hook, needs explicit page_ids): treat these pages' last edit as a person's even when an
+    integration made it — agents edit Notion through the same integration the engine uses."""
+    if assume_person and not page_ids:
+        raise SystemExit("ssot: --assume-person-edit needs --page-id (one test page, never a whole DB scan)")
     bundles = all_bundles(Path(repo) / POSTS)
     by_id = {str(b.meta.get("notion_id")).replace("-", ""): b for b in bundles if b.meta.get("notion_id")}
     by_slug = {str(b.meta.get("slug") or b.slug): b for b in bundles}
@@ -285,6 +289,8 @@ def plan_pull(io, database_id, repo, site, page_ids=(), only=(), fetch=download)
         if synced_hash is None:
             results.append(Result(slug, "skip", "never synced (push first)"))
             continue
+        if assume_person:
+            page = dict(page, last_edited_by={**(page.get("last_edited_by") or {}), "type": "person"})
         if not human_edit_since_sync(page):
             bot = (page.get("last_edited_by") or {}).get("type") == "bot"
             results.append(Result(slug, "bot" if bot else "unchanged", page["id"]))

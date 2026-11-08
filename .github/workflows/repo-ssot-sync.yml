@@ -18,6 +18,11 @@ on:
         description: "Notion page id (empty = check every page)"
         required: false
         default: ""
+      assume_person:
+        description: "Test only: count this page's last (agent/bot) edit as a person's — needs page_id"
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: write                    # commit the Notion edit
@@ -75,7 +80,9 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          python -m src.ssot pull --base "$BASE_BRANCH" ${PAGE_ID:+--page-id "$PAGE_ID"}
+          ASSUME=""
+          if [ "${{ github.event.inputs.assume_person }}" = "true" ]; then ASSUME="--assume-person-edit"; fi
+          python -m src.ssot pull --base "$BASE_BRANCH" ${PAGE_ID:+--page-id "$PAGE_ID"} $ASSUME
       # pushes made with GITHUB_TOKEN start no workflow; workflow_dispatch is the documented exception
       - name: Deploy the committed edit
         if: steps.pull.outputs.committed != '0' && env.DEPLOY_WORKFLOW != ''

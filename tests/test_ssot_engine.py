@@ -347,6 +347,18 @@ class EngineTests(unittest.TestCase):
         self.assertEqual([r.action for r in self.pull()], ["commit"])
         self.assertIn("사람이 고친 문단.", self.repo.index())
 
+    def test_assume_person_hook_needs_a_page_id(self):
+        self.push()
+        page_id = self.page()["id"]
+        self.client.human_edit(page_id, edit_paragraph("끝 문단.", "에이전트가 고친 문단."), editor="bot")
+        with self.assertRaises(SystemExit):
+            engine.plan_pull(self.io, DB, self.repo.path, SITE, assume_person=True)
+        results, changes = engine.plan_pull(self.io, DB, self.repo.path, SITE, page_ids=[page_id], assume_person=True)
+        self.assertEqual([r.action for r in results], ["commit"])
+        engine.apply_pull(self.io, self.repo.path, changes, "main", now=self.client.now)
+        self.assertIn("에이전트가 고친 문단.", self.repo.index())
+        self.assertEqual([r.action for r in self.pull()], ["bot"])  # without the hook the stamp write is ours again
+
     def test_notion_file_image_is_downloaded_into_the_bundle(self):
         self.push()
         page_id = self.page()["id"]
