@@ -10,28 +10,55 @@
 
 ## Writing posts (repo is the source of truth) — for AI agents and people
 
-This repo is the one source of every post; Notion is an editable mirror (BLOG-014, test branch `test/repo-ssot`).
+This repo is the one source of every post. Notion is an editable mirror (BRIEF-BL-005, BLOG-014/017).
 Full guide: [docs/REPO_SSOT.md](docs/REPO_SSOT.md).
 
 1. `git pull`. Notion edits arrive as commits from `github-actions[bot]`.
-2. Write `content/posts/<slug>/index.md` (front matter `title`, `date`, `slug`, `description`, `tags`, `draft`)
-   and put its images in the same folder.
-3. Before pushing:
-   - Run `hugo server -D` and check the post.
-   - Every image loads.
-   - No broken links.
-   - Every URL is https.
-4. `git push`. Deploy and the Notion page update follow.
+2. Write `content/posts/<slug>/index.md` (front matter `title`, `date`, `slug`, `description`, `tags`,
+   `draft`) and put its images in the same folder.
+3. Run `make check` (or `npm run check`): pull, hugo build, static server, browser check. It checks that every
+   image has naturalWidth > 0, there is no `http://` href or src, there are no internal 4xx and the icons
+   return 200. It prints JSON and an exit code.
+4. `git push`. These follow by themselves:
+   - deploy (`notion-hugo-deploy.yml`);
+   - the live-site browser check (`site-check` job);
+   - the Notion page update (`repo-ssot-sync.yml`).
 
-Never rename a bundle or change `slug:`; that is the URL.
+Never rename a bundle or change `slug:`; that is the URL. Two published pages at one URL stop the build
+(`scripts/check_duplicate_urls.py`).
 
-**Urgent fix in Notion**: within 30 minutes (or right away through the webhook), a commit
-`sync(notion): <slug> <- Notion edit …` lands and deploys. If the repo copy also changed, a PR
-`sync(notion): <slug> — Notion and repo both changed` opens instead. Resolve it like a merge conflict; nothing is
-overwritten.
+**Urgent fix in Notion**:
+- Within 30 minutes (or right away through the webhook), a commit `sync(notion): <slug> <- Notion edit …`
+  lands and deploys. The page cover comes back too.
+- If the repo copy also changed, a PR `sync(notion): <slug> — Notion and repo both changed` opens instead.
+  Until it is merged, pushes leave that Notion page alone. Merge it like any PR; the merge pushes the result
+  back to Notion.
 
-**Turn it off**: `git revert <commit that added .github/workflows/repo-ssot-sync.yml> && git push`.
-To go back to the old flow, restore the `schedule:` lines in `notion-hugo-deploy.yml`.
+### First run on main (after the merge card) — in this order
+
+1. The Notion DB has the `SyncHash` column (rich_text; added 2026-11-09, BLOG-014). The repo secrets
+   `NOTION_TOKEN` and `NOTION_DATABASE_ID_POSTS` are already set. Repo variable `SSOT_ONLY` stays empty.
+2. **Dry run first**: Actions → Repo SSOT sync → Run workflow on `main`, direction `push`, `dry_run` on. The log
+   lists `write`, `create` or `same` for every bundle. Moved posts are found by their `notion_id`, so none
+   should say `create`.
+3. The merge push itself runs `push-to-notion` for every bundle the merge touched. For each one it:
+   1. sets Source = hugo, skipRendering = on and the other properties;
+   2. replaces the body;
+   3. writes SyncHash **last**.
+
+   The job stops at the first error and the remaining pages are untouched. Rerunning (step 2 without
+   `dry_run`) resumes: pages already written match their hash and say `same`.
+4. Pull starts on the next 30-minute tick. Pages never written by push have no SyncHash and are skipped
+   (`never synced`).
+
+### Turn it off / go back
+
+- **Stop syncing only**: `git revert <commit that added .github/workflows/repo-ssot-sync.yml> && git push`.
+- **Back to the old flow** (Notion as the source):
+  1. `git revert -m 1 <merge commit of this PR> && git push`. This restores the hourly import, its cache and
+     the mirror job, and removes the moved bundles.
+  2. `python scripts/release_notion_pages.py --apply` (dry run without `--apply`). This sets Source = notion and
+     skipRendering = off on the moved posts' pages, so the old import takes them again.
 
 ## Why Notion-Hugo?
 
