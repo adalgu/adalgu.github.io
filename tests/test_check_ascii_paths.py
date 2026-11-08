@@ -58,6 +58,13 @@ class AsciiPathTests(unittest.TestCase):
         self.assertTrue((self.repo / "content/posts/post-20260515-3617522e/image-01.png").is_file())
         self.assertEqual(quiet(rename.main, ["--repo", str(self.repo), "--apply"]), 0)  # nothing left to do
 
+    def test_untracked_and_build_time_files_count_too(self):
+        # Anton round 5 P2: git's list missed a file the build writes (leftover import) — the check walks the tree
+        quiet(rename.main, ["--repo", str(self.repo), "--apply"])
+        self.assertEqual(quiet(check.main, ["--repo", str(self.repo)]), 0)
+        (self.repo / "content/posts/2026-11-09-새-글.md").write_text("flat\n", encoding="utf-8")  # never git-added
+        self.assertEqual(quiet(check.main, ["--repo", str(self.repo)]), 1)
+
     def test_this_repo_is_all_ascii(self):
         self.assertEqual(quiet(check.main, ["--repo", str(ROOT)]), 0)
 
