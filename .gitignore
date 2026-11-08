@@ -73,4 +73,4 @@ logs/
 !.env.example
 
 # Docker production artifacts
-docker-compose.override.yml
+docker-compose.override.ymlnode_modules/
