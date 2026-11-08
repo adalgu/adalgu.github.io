@@ -1,7 +1,7 @@
 name: Hugo → GitHub Pages (repo is the source)
 
 # BLOG-017 (BRIEF-BL-005 §4): the old hourly Notion → Hugo import and its content/posts cache are retired.
-# Every post is a repo bundle (content/posts/<slug>/). Notion edits come back as commits through
+# Every post is a repo bundle (content/posts/<slug>/), except the few listed in config/notion_leftover_pages.txt. Notion edits come back as commits through
 # repo-ssot-sync.yml, which then starts this workflow (workflow_dispatch). Repo → Notion is repo-ssot-sync.yml too
 # (the old `mirror` job is gone: two writers to one Notion page would fight over the body).
 #
@@ -44,6 +44,16 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PYTHON_VERSION }}
+
+      # BLOG-017 F1: posts not moved into the repo yet (config/notion_leftover_pages.txt — today one, kept out of
+      # git by the gitleaks hook) are imported as flat files for this build only: listed pages only, no cache,
+      # no orphan cleanup. A listed page that has a repo bundle is skipped. Unreadable page = build fails.
+      - name: Import leftover Notion pages (listed only)
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+        run: |
+          pip install "notion-client>=2.0.0,<2.5.0" python-dotenv pyyaml fs tabulate "setuptools<81"
+          python scripts/import_leftover_notion_pages.py
 
       # BLOG-017 F1: replaces check_flat_posts.sh (flat Notion file count as success). Two published pages at one
       # URL (a leftover flat copy, two bundles with one slug) stop the build here.
