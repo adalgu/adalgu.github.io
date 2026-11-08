@@ -1,5 +1,8 @@
 # Hugo 원본 흐름 (BL-003)
 
+> **Superseded (BLOG-017)**: the repo is now the only source and Notion a synced mirror. See [REPO_SSOT.md](REPO_SSOT.md).
+> The cache restore (`restore_hand_posts.sh`) and the flat-post gate (`check_flat_posts.sh`) below were removed with the old import.
+
 새 글은 **저장소 Markdown이 원본**이다. Notion 블로그 DB는 배포 뒤 받아 가는 거울이다.
 옛 글(Notion에서 쓴 글)과 Notion → Hugo 가져오기는 그대로 돈다.
 
