@@ -197,6 +197,10 @@ class FakeClient:
                 and not c[1].endswith("/query")]
 
 
+def rich(text):
+    return [{"type": "text", "text": {"content": text}}]
+
+
 def git(repo, *args):
     return subprocess.run(["git", "-C", str(repo), *args], check=True, capture_output=True, text=True).stdout.strip()
 
@@ -407,6 +411,30 @@ class EngineTests(unittest.TestCase):
         # and back: Notion -> Markdown gives the same table text, so a pull of an untouched page changes nothing
         self.assertEqual(blocks_to_markdown(stored, self.client.children.get), self.TABLE_MD)
         self.assertEqual([r.action for r in self.pull()], ["bot"])
+
+    def test_table_header_settings_round_trip_all_four(self):
+        # BLOG-017 addendum 7 (Anton round 6): has_column_header / has_row_header used to come back as (True, False)
+        from src.ssot.markdown import table_block
+        rows = ["| 항목 | 값 |", "| --- | --- |", "| 가 | 1 |", "| 나 | 2 |"]
+        for flags in ((True, False), (False, False), (True, True), (False, True)):
+            with self.subTest(flags=flags):
+                client = FakeClient()
+                client.pages["p"] = {"id": "p"}
+                client._store_blocks("p", [{"type": "paragraph", "paragraph": {"rich_text": rich("앞")}}, table_block(rows, flags)])
+                md = blocks_to_markdown(client.children["p"], client.children.get)
+                self.assertEqual("notion-table:" in md, flags != (True, False))  # default needs no note
+                back = [b for b in md_to_blocks(md) if b["type"] == "table"][0]["table"]
+                self.assertEqual((back["has_column_header"], back["has_row_header"]), flags)
+                self.assertEqual(len(back["children"]), 3)
+                self.assertEqual([b["type"] for b in md_to_blocks(md)], ["paragraph", "table"])  # the note is no paragraph
+                client2 = FakeClient()
+                client2.pages["p"] = {"id": "p"}
+                client2._store_blocks("p", md_to_blocks(md))
+                self.assertEqual(blocks_to_markdown(client2.children["p"], client2.children.get), md)  # stable
+
+    def test_a_stray_note_without_a_table_stays_text(self):
+        md = "<!-- notion-table: column_header=false row_header=true -->\n\n문단.\n"
+        self.assertEqual([b["type"] for b in md_to_blocks(md)], ["paragraph", "paragraph"])
 
     def test_table_cells_with_escaped_pipe_and_short_rows(self):
         blocks = md_to_blocks("| a | b \\| c |\n|---|---|\n| 1 |\n")

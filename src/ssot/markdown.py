@@ -17,6 +17,10 @@ CODE_LANGUAGES = {
 INLINE = re.compile(r"\*\*(.+?)\*\*|~~(.+?)~~|`([^`]+)`|\[([^\]]+)\]\(([^)\s]+)\)|(?<![*\w])\*([^*\s][^*]*?)\*(?!\*)")
 IMAGE = re.compile(r'!\[([^\]]*)\]\(([^)\s]+)(?:\s+"[^"]*")?\)')
 LIST_TYPES = ("bulleted_list_item", "numbered_list_item")
+# Notion table header settings that a pipe table cannot say (BLOG-017 addendum 7): written on the line right above
+# the table only when they differ from what a pipe table means (column header on, row header off). Hugo keeps an
+# HTML comment out of sight.
+TABLE_NOTE = re.compile(r"^<!--\s*notion-table:\s*column_header=(true|false)\s+row_header=(true|false)\s*-->$")
 TABLE_SEP = re.compile(r"^\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)*\|?$")
 
 
@@ -74,22 +78,30 @@ def table_cells(line):
     return [cell.strip().replace("\\|", "|") for cell in re.split(r"(?<!\\)\|", body)]
 
 
-def table_block(lines):
-    """Pipe-table lines -> one Notion table block with its table_row children (cells rich text)."""
+def table_note(column_header, row_header):
+    return f"<!-- notion-table: column_header={str(bool(column_header)).lower()} row_header={str(bool(row_header)).lower()} -->"
+
+
+def table_block(lines, flags=None):
+    """Pipe-table lines -> one Notion table block with its table_row children (cells rich text).
+    flags = (column_header, row_header) from a notion-table note above the table; without one, a separator row
+    means a column header and there is no row header."""
     rows = [table_cells(line) for line in lines]
-    header = len(rows) > 1 and bool(TABLE_SEP.match(lines[1].strip()))
-    if header:
+    separator = len(rows) > 1 and bool(TABLE_SEP.match(lines[1].strip()))
+    if separator:
         rows = [rows[0]] + rows[2:]
+    header, row_header = flags if flags else (separator, False)
     width = max(len(r) for r in rows)
     children = [{"object": "block", "type": "table_row",
                  "table_row": {"cells": [rich_text(c) for c in row + [""] * (width - len(row))]}} for row in rows]
     return {"object": "block", "type": "table",
-            "table": {"table_width": width, "has_column_header": header, "has_row_header": False, "children": children}}
+            "table": {"table_width": width, "has_column_header": header, "has_row_header": row_header, "children": children}}
 
 
 def md_to_blocks(markdown, image_url=lambda src: src):
     """image_url(src) -> absolute https URL Notion can show (bundle files live on the site)."""
     blocks, para, lines = [], [], markdown.splitlines()
+    table_flags = None
 
     def flush():
         if para:
@@ -113,13 +125,17 @@ def md_to_blocks(markdown, image_url=lambda src: src):
                                     "language": language if language in CODE_LANGUAGES else "plain text"}})
         elif not stripped:
             flush()
+        elif (note := TABLE_NOTE.match(stripped)) and i + 1 < len(lines) and lines[i + 1].strip().startswith("|"):
+            flush()
+            table_flags = (note.group(1) == "true", note.group(2) == "true")  # belongs to the table on the next line
         elif stripped.startswith("|") and stripped.count("|") >= 2:
             flush()
             rows = [stripped]
             while i + 1 < len(lines) and lines[i + 1].strip().startswith("|"):
                 i += 1
                 rows.append(lines[i].strip())
-            blocks.append(table_block(rows))
+            blocks.append(table_block(rows, table_flags))
+            table_flags = None
         elif m := re.match(r"(#{1,6})\s+(.*)", stripped):
             flush()
             blocks.append(_text_block(f"heading_{min(len(m.group(1)), 3)}", m.group(2)))
@@ -214,6 +230,9 @@ def blocks_to_markdown(blocks, children_of=lambda block_id: [], image_src=None):
             text = f"<details>\n<summary>{text_of(data.get('rich_text'))}</summary>\n\n{inner}\n</details>"
         elif kind == "table":
             text = _table(children_of(block["id"])) if block.get("has_children") else ""
+            flags = (bool(data.get("has_column_header")), bool(data.get("has_row_header")))
+            if text and flags != (True, False):  # what a plain pipe table means; anything else is kept in a note
+                text = table_note(*flags) + "\n" + text
         else:
             continue
         if block.get("has_children") and kind not in ("toggle", "table"):
