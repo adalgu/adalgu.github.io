@@ -101,11 +101,35 @@ class NotionIO:
         return self._call(f"blocks/{block_id}", "DELETE")
 
     def append(self, block_id, children):
+        created = []
         for at in range(0, len(children), APPEND_LIMIT):
-            self._call(f"blocks/{block_id}/children", "PATCH", body={"children": children[at:at + APPEND_LIMIT]})
+            found = self._call(f"blocks/{block_id}/children", "PATCH", body={"children": children[at:at + APPEND_LIMIT]})
+            created += (found or {}).get("results", []) if isinstance(found, dict) else []
+        return created
+
+    def tree(self, block_id):
+        """The blocks under block_id with their children (key _children), read to the end."""
+        out = []
+        for block in self.children(block_id):
+            if block.get("has_children") and block["type"] not in ("child_page", "child_database"):
+                block = dict(block, _children=self.tree(block["id"]))
+            out.append(block)
+        return out
+
+    def append_staged(self, block_id, blocks):
+        """Append level by level (each block, then its children under the new id), so no request nests deeper than
+        Notion allows. Used to put an old body back."""
+        flat = [{k: v for k, v in b.items() if k != "_kids"} for b in blocks]
+        created = self.append(block_id, flat)
+        for made, block in zip(created, blocks):
+            if block.get("_kids"):
+                self.append_staged(made["id"], block["_kids"])
 
     def replace_children(self, block_id, children, rounds=3):
-        """Old body out (read to the end, delete, re-read until empty), new body in."""
+        """Old body out, new body in — atomically as far as the API allows (BLOG-017 addendum 9): the old blocks are
+        read first and kept in memory; if adding the new body fails, whatever got added is removed and the old body
+        is put back, then the error is raised. Callers validate the new body before calling (engine.invalid_reasons)."""
+        old_tree = self.tree(block_id)
         for _ in range(rounds):
             old = self.children(block_id)
             if not old:
@@ -115,4 +139,57 @@ class NotionIO:
         else:
             if self.children(block_id):
                 raise RuntimeError(f"ssot: {block_id} still has old blocks after {rounds} rounds — new body not appended")
-        self.append(block_id, children)
+        try:
+            self.append(block_id, children)
+        except Exception:
+            for item in self.children(block_id):
+                self.delete_block(item["id"])
+            self.append_staged(block_id, [writable(b) for b in old_tree if writable(b)])
+            raise
+
+
+READ_ONLY = {"id", "object", "created_time", "last_edited_time", "created_by", "last_edited_by", "has_children",
+             "archived", "in_trash", "parent", "_children"}
+CANNOT_CREATE = {"child_page", "child_database", "unsupported", "link_preview", "synced_block", "template", "ai_block"}
+
+
+def _writable_text(items):
+    out = []
+    for item in items or []:
+        kind = item.get("type", "text")
+        piece = {"type": kind, kind: item.get(kind) or {"content": item.get("plain_text", "")}}
+        if kind == "text" and item.get("href") and not (piece["text"] or {}).get("link"):
+            piece["text"] = dict(piece["text"], link={"url": item["href"]})
+        marks = {k: v for k, v in (item.get("annotations") or {}).items() if v and k != "color"}
+        if marks:
+            piece["annotations"] = marks
+        out.append(piece)
+    return out
+
+
+def writable(block):
+    """A block as read → the same block as a create request (children under _kids for append_staged). None when the
+    API cannot create that kind. A Notion-hosted file (signed URL) goes back as an external link to it."""
+    kind = block.get("type")
+    if kind in CANNOT_CREATE:
+        return None
+    data = {k: v for k, v in (block.get(kind) or {}).items() if k not in READ_ONLY}
+    for key in ("rich_text", "caption"):
+        if key in data:
+            data[key] = _writable_text(data[key])
+    if "cells" in data:
+        data["cells"] = [_writable_text(cell) for cell in data["cells"]]
+    if data.get("type") == "file" and isinstance(data.get("file"), dict):
+        data = dict(data, type="external", external={"url": data["file"].get("url", "")})
+        data.pop("file", None)
+    out = {"object": "block", "type": kind, kind: data}
+    kids = [w for w in (writable(c) for c in block.get("_children") or []) if w]
+    if kind == "table":  # Notion wants a table's rows with the table
+        data["children"] = kids
+    elif kind == "column_list":  # and columns (each with at least one child) with the column list
+        data["children"] = [dict(c, column=dict(c["column"], children=[{k: v for k, v in g.items() if k != "_kids"}
+                                                                         for g in c.get("_kids") or []]))
+                            for c in kids if c.get("_kids")]
+    elif kids:
+        out["_kids"] = kids
+    return out

@@ -128,6 +128,31 @@ def md_to_blocks(markdown, image_url=lambda src: src):
             blocks.append(_text_block("paragraph", "\n".join(para)))
             para.clear()
 
+    def nest(block, start):
+        """Lines indented by two spaces right under a list item, to-do or callout are its child blocks
+        (BLOG-017 addendum 9: they used to come back flattened). Returns the index of the last line used."""
+        j, got = start, []
+        while j < len(lines):
+            if lines[j].startswith("  ") and lines[j].strip():
+                got.append(lines[j][2:])
+                j += 1
+            elif not lines[j].strip():
+                k = j
+                while k < len(lines) and not lines[k].strip():
+                    k += 1
+                if k < len(lines) and lines[k].startswith("  "):
+                    got.extend("" for _ in range(j, k))
+                    j = k
+                else:
+                    break
+            else:
+                break
+        if got:
+            kids = md_to_blocks("\n".join(got), image_url)
+            if kids:
+                block[block["type"]]["children"] = kids
+        return j - 1
+
     i = 0
     while i < len(lines):
         line = lines[i]
@@ -188,12 +213,16 @@ def md_to_blocks(markdown, image_url=lambda src: src):
             callout = {"rich_text": rich_text("\n".join(quote)), "color": fields.get("color", "default")}
             if fields.get("icon"):
                 callout["icon"] = {"type": "emoji", "emoji": fields["icon"]}
+            elif fields.get("icon_url"):
+                callout["icon"] = {"type": "external", "external": {"url": fields["icon_url"]}}
             blocks.append({"object": "block", "type": "callout", "callout": callout})
+            i = nest(blocks[-1], i + 1)
         elif m := TODO.fullmatch(stripped):
             flush()
             block = _text_block("to_do", m.group(2))
             block["to_do"]["checked"] = m.group(1) != " "
             blocks.append(block)
+            i = nest(block, i + 1)
         elif stripped.startswith("|") and stripped.count("|") >= 2:
             flush()
             rows = [stripped]
@@ -218,9 +247,11 @@ def md_to_blocks(markdown, image_url=lambda src: src):
         elif m := re.match(r"[-*+]\s+(.*)", stripped):
             flush()
             blocks.append(_text_block("bulleted_list_item", m.group(1)))
+            i = nest(blocks[-1], i + 1)
         elif m := re.match(r"\d+[.)]\s+(.*)", stripped):
             flush()
             blocks.append(_text_block("numbered_list_item", m.group(1)))
+            i = nest(blocks[-1], i + 1)
         elif stripped.startswith(">"):
             flush()
             quote = [stripped[1:].strip()]
@@ -228,6 +259,7 @@ def md_to_blocks(markdown, image_url=lambda src: src):
                 i += 1
                 quote.append(lines[i].strip()[1:].strip())
             blocks.append(_text_block("quote", "\n".join(quote)))
+            i = nest(blocks[-1], i + 1)
         else:
             para.append(stripped)
         i += 1
@@ -290,8 +322,10 @@ def blocks_to_markdown(blocks, children_of=lambda block_id: [], image_src=None):
             src = image_src(block) if image_src else (data.get(data.get("type")) or {}).get("url", "")
             text = f"![{text_of_plain(data.get('caption'))}]({src})"
         elif kind == "callout":
-            icon = (data.get("icon") or {}).get("emoji") if (data.get("icon") or {}).get("type") == "emoji" else None
-            note = "<!-- notion-callout:" + (f" icon={icon}" if icon else "") + f" color={data.get('color') or 'default'} -->"
+            icon = data.get("icon") or {}
+            mark = (f" icon={icon['emoji']}" if icon.get("type") == "emoji" and icon.get("emoji") else
+                    f" icon_url={icon['external']['url']}" if icon.get("type") == "external" and (icon.get("external") or {}).get("url") else "")
+            note = "<!-- notion-callout:" + mark + f" color={data.get('color') or 'default'} -->"
             text = note + "\n" + "\n".join("> " + line for line in text_of(data.get("rich_text")).split("\n"))
         elif kind == "link_to_page":
             target = data.get("type") or "page_id"
@@ -314,7 +348,7 @@ def blocks_to_markdown(blocks, children_of=lambda block_id: [], image_src=None):
         else:
             continue
         if block.get("has_children") and kind not in ("toggle", "table", "column_list"):
-            inner = blocks_to_markdown(children_of(block["id"]), children_of, image_src)
+            inner = blocks_to_markdown(children_of(block["id"]), children_of, image_src).rstrip("\n")
             if inner:
                 text += "\n" + "\n".join("  " + line if line else line for line in inner.split("\n"))
         parts.append((kind, text))

@@ -63,9 +63,10 @@ def read_form(items):
     out = []
     for item in items or []:
         if item.get("type") == "mention":  # Notion fills plain_text (the page title) and href itself
-            page_id = item["mention"]["page"]["id"]
-            out.append({"type": "mention", "mention": item["mention"], "plain_text": "연결된 쪽",
-                        "href": "https://www.notion.so/" + page_id.replace("-", ""),
+            page = (item["mention"].get("page") or {}).get("id")
+            out.append({"type": "mention", "mention": item["mention"],
+                        "plain_text": "연결된 쪽" if page else str((item["mention"].get("date") or {}).get("start", "")),
+                        "href": "https://www.notion.so/" + page.replace("-", "") if page else None,
                         "annotations": {k: False for k in ("bold", "italic", "strikethrough", "underline", "code")}})
             continue
         text = item.get("text") or {}
@@ -86,6 +87,7 @@ class FakeClient:
         self.seq = 0
         self.calls = []
         self.users_forbidden = False  # True = integration without the user-information capability
+        self.fail_appends_after = None  # N = the (N+1)th append call fails
 
     # helpers
     def now(self):
@@ -118,6 +120,7 @@ class FakeClient:
                 page["properties"][name] = {"type": kind, kind: value[kind]}
 
     def _store_blocks(self, parent, blocks):
+        stored_list = []
         for block in blocks:
             kind = block["type"]
             data = dict(block.get(kind) or {})
@@ -129,8 +132,27 @@ class FakeClient:
             nested = data.pop("children", None)  # Notion stores nested children (a table's rows) under the block
             stored = {"object": "block", "id": self._id("b"), "type": kind, kind: data, "has_children": bool(nested)}
             self.children.setdefault(parent, []).append(stored)
+            stored_list.append(stored)
             if nested:
                 self._store_blocks(stored["id"], nested)
+        return stored_list
+
+    @staticmethod
+    def _nesting(blocks):
+        return max([0] + [1 + FakeClient._nesting((b.get(b["type"]) or {}).get("children") or []) for b in blocks
+                          if (b.get(b["type"]) or {}).get("children")])
+
+    def _refuse(self, blocks):
+        """What the real API refuses (addendum 9): more than two nested levels in one request, empty columns."""
+        if self._nesting(blocks) > 2:
+            raise RuntimeError("400 validation_error: nesting deeper than two levels")
+        stack = list(blocks)
+        while stack:
+            b = stack.pop()
+            data = b.get(b["type"]) or {}
+            if b["type"] == "column" and not data.get("children"):
+                raise RuntimeError("400 validation_error: column needs children")
+            stack += data.get("children") or []
 
     def human_edit(self, page_id, change, editor="person"):
         change(self.children[page_id])
@@ -192,9 +214,15 @@ class FakeClient:
                 self.touch(owner)
                 return {}
             if method == "PATCH":
-                self._store_blocks(parts[1], body["children"])
+                self._refuse(body["children"])
+                if self.fail_appends_after is not None:  # test hook: one append call falls over
+                    if self.fail_appends_after <= 0:
+                        self.fail_appends_after = None
+                        raise RuntimeError("503 service_unavailable")
+                    self.fail_appends_after -= 1
+                stored = self._store_blocks(parts[1], copy.deepcopy(body["children"]))
                 self.touch(self._owner(parts[1]))
-                return {}
+                return {"results": stored}
             return self._page(self.children.get(parts[1], []), query or {})
         raise AssertionError(path)
 
@@ -474,9 +502,107 @@ class EngineTests(unittest.TestCase):
         bracketed = md_to_blocks("[[Notion] 노션과 도메인 연결하기](https://app.notion.com/p/736f0e70d77e447a9cb9a7b85b984c96) 끝")
         self.assertEqual(bracketed[0]["paragraph"]["rich_text"][0]["type"], "mention")  # title with [..] inside
         # a paragraph that is only a mention is content, not an empty spacer (counted on the write side too)
-        self.assertEqual(engine.block_kind_counts(bracketed[:1]), {"paragraph": 1, "mention:page": 1})
+        self.assertEqual(engine.block_kind_counts(bracketed[:1]), {"paragraph": 1, "mention:page": 1, "@0:page>paragraph": 1})
         only = md_to_blocks("[쪽](https://app.notion.com/p/6e1afcdae6484028a78af10c3041f82c)")
-        self.assertEqual(engine.block_kind_counts(only), {"paragraph": 1, "mention:page": 1})
+        self.assertEqual(engine.block_kind_counts(only), {"paragraph": 1, "mention:page": 1, "@0:page>paragraph": 1})
+
+    # ---- BLOG-017 addendum 9 (Anton r8) ----
+    def _page_with(self, build):
+        """push hello, then make its Notion body = build(page_id) as a bot edit; returns page id."""
+        self.push()
+        page_id = self.page()["id"]
+        self.client.children[page_id] = []
+        build(page_id)
+        self.client.touch(page_id, "bot")
+        return page_id
+
+    def _tree(self, block_id, depth=0):
+        out = []
+        for b in self.client.children.get(block_id, []):
+            data = b[b["type"]]
+            extra = data.get("icon") if b["type"] == "callout" else data.get("checked") if b["type"] == "to_do" else ""
+            out.append(("  " * depth) + b["type"] + (f" {extra}" if extra not in ("", None) else ""))
+            out += self._tree(b["id"], depth + 1)
+        return out
+
+    def _repo_from_notion(self, page_id, extra="저장소 끝 줄."):
+        md = blocks_to_markdown(self.client.children[page_id], self.client.children.get)
+        head = POST.split("---", 2)
+        self.repo.write("hello", "---" + head[1] + "---\n\n" + md + "\n" + extra + "\n")
+        return md
+
+    NESTED_MD = ("- 부모\n  - 자식\n\n- [ ] 할 일\n  - [x] 하위 할 일\n\n"
+                 "<!-- notion-callout: icon=💡 color=default -->\n> 콜아웃\n  콜아웃 안 문단\n\n"
+                 "<!-- notion-callout: icon_url=https://img.example/i.png color=blue_background -->\n> 외부 아이콘\n\n"
+                 "> 인용\n  1. 인용 안 번호\n")
+
+    def test_nested_children_and_external_icon_round_trip(self):
+        page_id = self._page_with(lambda pid: self.client._store_blocks(pid, md_to_blocks(self.NESTED_MD)))
+        before = self._tree(page_id)
+        self.assertEqual(before, ["bulleted_list_item", "  bulleted_list_item", "to_do False", "  to_do True",
+                                  "callout {'type': 'emoji', 'emoji': '💡'}", "  paragraph",
+                                  "callout {'type': 'external', 'external': {'url': 'https://img.example/i.png'}}",
+                                  "quote", "  numbered_list_item"])
+        md = self._repo_from_notion(page_id)
+        self.assertEqual(md, self.NESTED_MD)
+        (result,) = self.push()
+        self.assertEqual(result.action, "write")
+        self.assertEqual(self._tree(page_id), before + ["paragraph"])  # same nesting, same icons, plus the new line
+
+    def test_guard_counts_mentions_in_table_cells(self):
+        date = {"type": "mention", "mention": {"type": "date", "date": {"start": "2026-11-09"}}}
+
+        def build(pid):
+            self.client._store_blocks(pid, [{"type": "table", "table": {"table_width": 2, "has_column_header": True, "has_row_header": False,
+                                                                       "children": [{"type": "table_row", "table_row": {"cells": [rich("a"), rich("b")]}},
+                                                                                    {"type": "table_row", "table_row": {"cells": [[date], rich("d")]}}]}}])
+        page_id = self._page_with(build)
+        self.client.children[self.client.children[page_id][0]["id"]][1]["table_row"]["cells"][0] = [
+            {"type": "mention", "mention": date["mention"], "plain_text": "2026-11-09", "href": None, "annotations": {}}]
+        self._repo_from_notion(page_id)
+        writes = len(self.client.writes())
+        (result,) = self.push()
+        self.assertEqual(result.action, "skip")
+        self.assertIn("mention:date:1→0", result.detail)
+        self.assertEqual(len(self.client.writes()), writes)
+
+    def test_guard_skips_a_structure_change_with_equal_kind_counts(self):
+        page_id = self._page_with(lambda pid: self.client._store_blocks(pid, md_to_blocks("- 부모\n  - 자식\n")))
+        self.repo.write("hello", POST.replace("끝 문단.", "- 부모\n- 자식"))  # same kinds, nesting gone
+        writes = len(self.client.writes())
+        (result,) = self.push()
+        self.assertEqual(result.action, "skip")
+        self.assertIn("@1:bulleted_list_item>bulleted_list_item:1→0", result.detail)
+        self.assertEqual(len(self.client.writes()), writes)
+
+    def test_bodies_notion_would_refuse_are_skipped_before_any_delete(self):
+        for name, md, reason in (
+                ("empty column", "<!-- notion-columns -->\n\n<!-- notion-column -->\n\n<!-- notion-column -->\n\n오른쪽\n\n<!-- /notion-columns -->\n", "empty column"),
+                ("table in column", "<!-- notion-columns -->\n\n<!-- notion-column -->\n\n| h |\n| --- |\n| v |\n\n"
+                                    "<!-- notion-column -->\n\n오른쪽\n\n<!-- /notion-columns -->\n", "nesting>2")):
+            with self.subTest(name):
+                self.setUp()
+                self.push()
+                page_id = self.page()["id"]
+                before = self._tree(page_id)
+                self.repo.write("hello", POST.replace("끝 문단.", "끝 문단.\n\n" + md))
+                writes = len(self.client.writes())
+                (result,) = self.push()
+                self.assertEqual(result.action, "skip")
+                self.assertIn(reason, result.detail)
+                self.assertEqual(len(self.client.writes()), writes)  # nothing deleted, nothing written
+                self.assertEqual(self._tree(page_id), before)
+
+    def test_failed_append_puts_the_old_body_back(self):
+        page_id = self._page_with(lambda pid: self.client._store_blocks(pid, md_to_blocks(self.NESTED_MD + "\n| a | b |\n| --- | --- |\n| 1 | 2 |\n")))
+        before = self._tree(page_id)
+        synced_before = engine.sync_state(self.client.pages[page_id])
+        self.repo.write("hello", POST.replace("끝 문단.", "완전히 다른 본문.\n\n" + self.NESTED_MD + "\n| a | b |\n| --- | --- |\n| 1 | 2 |"))
+        self.client.fail_appends_after = 0  # the next append dies after the old blocks are gone
+        with self.assertRaises(RuntimeError):
+            self.push()
+        self.assertEqual(self._tree(page_id), before)  # old body back, nesting and icons included
+        self.assertEqual(engine.sync_state(self.client.pages[page_id])[0], synced_before[0])  # SyncHash untouched
 
     def test_push_never_shrinks_a_notion_page(self):
         # the general guard: any kind fewer after the write = skip that page, Notion untouched, dry_run says so too
