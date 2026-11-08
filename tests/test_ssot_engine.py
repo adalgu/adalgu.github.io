@@ -62,6 +62,12 @@ print("hi")
 def read_form(items):
     out = []
     for item in items or []:
+        if item.get("type") == "mention":  # Notion fills plain_text (the page title) and href itself
+            page_id = item["mention"]["page"]["id"]
+            out.append({"type": "mention", "mention": item["mention"], "plain_text": "연결된 쪽",
+                        "href": "https://www.notion.so/" + page_id.replace("-", ""),
+                        "annotations": {k: False for k in ("bold", "italic", "strikethrough", "underline", "code")}})
+            continue
         text = item.get("text") or {}
         marks = {k: False for k in ("bold", "italic", "strikethrough", "underline", "code")}
         marks.update(item.get("annotations") or {})
@@ -435,6 +441,62 @@ class EngineTests(unittest.TestCase):
     def test_a_stray_note_without_a_table_stays_text(self):
         md = "<!-- notion-table: column_header=false row_header=true -->\n\n문단.\n"
         self.assertEqual([b["type"] for b in md_to_blocks(md)], ["paragraph", "paragraph"])
+
+    RICH_MD = ("앞 문단 [연결된 쪽](https://www.notion.so/a08d8d61be324e079dab548db6407849) 언급.\n\n"
+               "<!-- notion-callout: icon=💡 color=gray_background -->\n> 알아 둘 것\n> 둘째 줄\n\n"
+               "- [ ] 할 일 하나\n- [x] 끝낸 일\n\n"
+               "<!-- notion-link-to-page: page_id=a08d8d61-be32-4e07-9dab-548db6407849 -->\n\n"
+               "<!-- notion-columns -->\n\n<!-- notion-column width=0.5 -->\n\n왼쪽 문단\n\n- 왼쪽 목록\n\n"
+               "<!-- notion-column width=0.5 -->\n\n오른쪽 문단\n\n<!-- /notion-columns -->\n\n뒤 문단.\n")
+
+    def test_callout_todo_link_mention_columns_round_trip(self):
+        # BLOG-017 addendum 8 (Anton round 7): these kinds used to vanish on the way back to Notion
+        blocks = md_to_blocks(self.RICH_MD)
+        self.assertEqual([b["type"] for b in blocks],
+                         ["paragraph", "callout", "to_do", "to_do", "link_to_page", "column_list", "paragraph"])
+        self.assertEqual(blocks[0]["paragraph"]["rich_text"][1]["type"], "mention")
+        self.assertEqual(blocks[1]["callout"]["icon"], {"type": "emoji", "emoji": "💡"})
+        self.assertEqual([b["to_do"]["checked"] for b in blocks[2:4]], [False, True])
+        cols = blocks[5]["column_list"]["children"]
+        self.assertEqual([[k["type"] for k in c["column"]["children"]] for c in cols], [["paragraph", "bulleted_list_item"], ["paragraph"]])
+        client = FakeClient()
+        client.pages["p"] = {"id": "p"}
+        client._store_blocks("p", blocks)
+        md = blocks_to_markdown(client.children["p"], client.children.get)
+        self.assertEqual(md, self.RICH_MD)  # Notion -> Markdown gives the same text back
+        counts = engine.block_kind_counts(md_to_blocks(md))
+        self.assertEqual(counts, engine.notion_kind_counts(NotionIO(client), "p"))  # every kind, same number
+        self.assertEqual(counts["mention:page"], 1)
+        self.assertEqual(counts["column"], 2)
+        # Notion also hands page mentions out as app.notion.com/p/<id> (seen on live pages)
+        alt = md_to_blocks("[쪽](https://app.notion.com/p/6e1afcdae6484028a78af10c3041f82c) 보기")[0]["paragraph"]["rich_text"][0]
+        self.assertEqual(alt["mention"]["page"]["id"], "6e1afcda-e648-4028-a78a-f10c3041f82c")
+        bracketed = md_to_blocks("[[Notion] 노션과 도메인 연결하기](https://app.notion.com/p/736f0e70d77e447a9cb9a7b85b984c96) 끝")
+        self.assertEqual(bracketed[0]["paragraph"]["rich_text"][0]["type"], "mention")  # title with [..] inside
+        # a paragraph that is only a mention is content, not an empty spacer (counted on the write side too)
+        self.assertEqual(engine.block_kind_counts(bracketed[:1]), {"paragraph": 1, "mention:page": 1})
+        only = md_to_blocks("[쪽](https://app.notion.com/p/6e1afcdae6484028a78af10c3041f82c)")
+        self.assertEqual(engine.block_kind_counts(only), {"paragraph": 1, "mention:page": 1})
+
+    def test_push_never_shrinks_a_notion_page(self):
+        # the general guard: any kind fewer after the write = skip that page, Notion untouched, dry_run says so too
+        self.push()
+        page_id = self.page()["id"]
+
+        self.client.human_edit(page_id, lambda blocks: self.client._store_blocks(page_id, md_to_blocks(self.RICH_MD)),
+                               editor="bot")  # a bot edit: pull skips it, push must still not erase it
+        self.repo.write("hello", POST.replace("끝 문단.", "저장소에서 바꾼 끝 문단."))
+        writes = len(self.client.writes())
+        for dry in (True, False):
+            (result,) = self.push(dry_run=dry)
+            self.assertEqual(result.action, "skip")
+            self.assertTrue(result.detail.startswith("lossy "), result.detail)
+            for kind in ("callout:1→0", "column:2→0", "column_list:1→0", "link_to_page:1→0", "mention:page:1→0", "to_do:2→0"):
+                self.assertIn(kind, result.detail)
+        self.assertEqual(len(self.client.writes()), writes)  # Notion writes 0
+        # the same content written in Markdown with the notes goes through
+        self.repo.write("hello", POST.replace("끝 문단.", "저장소에서 바꾼 끝 문단.\n\n" + self.RICH_MD))
+        self.assertEqual([r.action for r in self.push()], ["write"])
 
     def test_table_cells_with_escaped_pipe_and_short_rows(self):
         blocks = md_to_blocks("| a | b \\| c |\n|---|---|\n| 1 |\n")
