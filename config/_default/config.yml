@@ -23,7 +23,8 @@ params:
   keywords: [Blog, Portfolio, PaperMod]
   author: Gunn Kim
   # author: ["Me", "You"] # multiple authors
-  images: ["<link or path of image for opengraph, twitter-cards>"]
+  # 사이트 기본 공유 그림 없음: 표지(cover.image) 없는 글은 og:image·twitter:image를 아예 내지 않는다(BLOG-011 — 자리표시 문자열이 깨진 주소로 나가던 것).
+  images: []
   DateFormat: "January 2, 2006"
   defaultTheme: auto # dark, light
   disableThemeToggle: false
