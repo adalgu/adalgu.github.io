@@ -53,12 +53,20 @@ Never rename a bundle or change `slug:`; that is the URL. Two published pages at
 
 ### Turn it off / go back
 
-- **Stop syncing only**: `git revert <commit that added .github/workflows/repo-ssot-sync.yml> && git push`.
-- **Back to the old flow** (Notion as the source):
-  1. `git revert -m 1 <merge commit of this PR> && git push`. This restores the hourly import, its cache and
-     the mirror job, and removes the moved bundles.
-  2. `python scripts/release_notion_pages.py --apply` (dry run without `--apply`). This sets Source = notion and
-     skipRendering = off on the moved posts' pages, so the old import takes them again.
+- **Stop syncing only** (no commit, undo with `enable`): `gh workflow disable repo-ssot-sync.yml`, or use
+  Actions → Repo SSOT sync → ⋯ → Disable workflow. Deploys keep running, and Notion and the repo stay as they
+  are.
+- **Back to the old flow** (Notion as the source). Run these on main **before** reverting, in this order: the
+  revert removes `scripts/release_notion_pages.py`, `src/ssot/` and the moved bundles that step 2 reads.
+  1. `gh workflow disable repo-ssot-sync.yml`. This stops sync, so no push rewrites Notion while you work.
+  2. `python scripts/release_notion_pages.py`, a dry run that lists the moved posts' pages it would change.
+     Then run it with `--apply`. That sets Source = notion and skipRendering = off on them, so the old import
+     takes them again. Key: `NOTION_TOKEN` or `NOTION_API_KEY`.
+  3. `git revert -m 1 <merge commit of this PR> && git push`. This brings back the hourly import, its cache and
+     the mirror job, and removes the moved bundles. Within the hour the import writes those posts again as flat
+     files at the same URLs (same slugs).
+
+  The SyncHash column stays in the DB; nothing reads it after the revert.
 
 ## Why Notion-Hugo?
 
