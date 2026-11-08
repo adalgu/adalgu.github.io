@@ -8,7 +8,7 @@ categories: ["메모"]
 draft: true
 ---
 
-이 글은 BL-003 흐름 시험용이다. `draft: true`라 운영 빌드(`hugo --minify`)에는 나오지 않는다.
+이 글은 BL-003·BLOG-014 왕복 시험용이다. `draft: true`라 운영 빌드(`hugo --minify`)에는 나오지 않는다.
 
 ## 흐름
 
