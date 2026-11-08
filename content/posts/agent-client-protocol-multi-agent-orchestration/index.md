@@ -110,6 +110,7 @@ Claude Code는 이미 탁월한 코딩 에이전트다. Codex도 마찬가지다
 
 **핵심 차이를 한 줄로**: Agent-in-Agent는 "에이전트의 능력을 코드로 재구현"하고, ACP는 "에이전트의 능력을 프로토콜로 빌려쓴다."
 
+<!-- notion-table: column_header=true row_header=true -->
 | Agent-in-Agent   | Agent-via-Protocol (ACP)   |
 |:-----------------|:---------------------------|
 | **접근**           | 에이전트를 코드로 재구현              |

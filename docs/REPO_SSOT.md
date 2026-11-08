@@ -61,6 +61,16 @@ edits and are skipped. `pull --page-id <one test page> --assume-person-edit` (wo
 `assume_person`) counts that one page's last edit as a person's. It refuses to run without `--page-id`, and
 cron and the webhook never set it.
 
+**Write safety (BLOG-017 addenda 8–9)**: before a push rewrites a page it compares what is on Notion with what it
+would write.
+- Block kinds are counted recursively, and mentions in rich text and table cells are counted too.
+- Structure is compared as well: each block's depth and the kind of its parent.
+- If anything would drop, the page is skipped (`lossy …`).
+- A body the API would refuse is skipped before anything is deleted (`invalid …`): nesting deeper than two levels
+  in one request, an empty column, a column list with one column, more than 100 items in one array.
+- The old body is read and kept in memory first. If adding the new body still fails, whatever was added is
+  removed and the old body is put back. A Notion-hosted file comes back as a link to its signed URL.
+
 ## Setup
 
 1. Notion DB: needs a `SyncHash` column of type rich_text. Run once with `--add-sync-column`. That adds

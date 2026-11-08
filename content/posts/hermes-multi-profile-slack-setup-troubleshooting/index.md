@@ -70,6 +70,7 @@ hermes -p <name> gateway status       # 상태 확인
 
 Hermes의 Slack 연동은 Socket Mode 기반이고, 토큰이 두 종류 필요하다. 이 둘의 역할이 다르고, 유효성이 따로 논다는 게 핵심이다.
 
+<!-- notion-table: column_header=false row_header=false -->
 | **.env 키**          | **토큰 형태**   | **용도**                       | **어디서 발급**                                                               |
 |:--------------------|:------------|:-----------------------------|:-------------------------------------------------------------------------|
 | **SLACK_APP_TOKEN** | `xapp-...`  | 이벤트 수신 (Socket Mode 연결)      | Slack 앱 → Basic Information → App-Level Tokens (`connections:write` 스코프) |
@@ -111,6 +112,7 @@ The server responded with: {'ok': False, 'error': 'invalid_auth'}
 2026-05-22 15:00:14 WARN  ... users.conversations ... invalid_auth ← Web API(xoxb) 실패
 ```
 
+<!-- notion-table: column_header=false row_header=false -->
 | **토큰**                     | **상태**                                              |
 |:---------------------------|:----------------------------------------------------|
 | **SLACK_APP_TOKEN (xapp)** | ✅ 정상 — Socket Mode로 `New_Workspace`에 인증됨 → 이벤트는 들어옴 |

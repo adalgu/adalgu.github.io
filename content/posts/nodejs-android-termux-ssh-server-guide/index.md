@@ -38,21 +38,25 @@ title: '[node.js] 원격으로 안드로이드폰 서버(termux) 접속하기(SS
 
 2. **openssh**를 설치
 
+<!-- notion-table: column_header=false row_header=false -->
 | `$ apt install openssh`   |
 |---------------------------|
 
 3. ssh용 공용 ID 키를 생성(yes치고 엔터 탁탁탁)
 
+<!-- notion-table: column_header=false row_header=false -->
 | `$ ssh-keygen`   |
 |------------------|
 
 4. openssh를 실행 (백그라운드에서 실행됨)
 
+<!-- notion-table: column_header=false row_header=false -->
 | `$ sshd`   |
 |------------|
 
 5. 계정 비밀번호를 설정합니다.(원격 접속시 사용할 암호 입력)
 
+<!-- notion-table: column_header=false row_header=false -->
 | `$ passwd`   |
 |--------------|
 

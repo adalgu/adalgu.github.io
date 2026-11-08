@@ -8,15 +8,27 @@ Covered: paragraphs (line breaks kept), # / ## / ###, - and 1. lists, ``` code, 
 tables, callouts, nested children) is rendered the way src/render.py does, one way only.
 """
 import re
+import textwrap
 
 TEXT_LIMIT = 2000  # characters per Notion rich_text item
 CODE_LANGUAGES = {
     "bash", "c", "c++", "css", "go", "html", "java", "javascript", "json", "kotlin", "markdown", "python",
     "ruby", "rust", "shell", "sql", "swift", "typescript", "yaml",
 }
-INLINE = re.compile(r"\*\*(.+?)\*\*|~~(.+?)~~|`([^`]+)`|\[([^\]]+)\]\(([^)\s]+)\)|(?<![*\w])\*([^*\s][^*]*?)\*(?!\*)")
+INLINE = re.compile(r"\*\*(.+?)\*\*|~~(.+?)~~|`([^`]+)`|\[((?:[^\[\]]|\[[^\[\]]*\])+)\]\(([^)\s]+)\)|(?<![*\w])\*([^*\s][^*]*?)\*(?!\*)")  # link labels may hold one [..] (Notion titles like "[Notion] …")
 IMAGE = re.compile(r'!\[([^\]]*)\]\(([^)\s]+)(?:\s+"[^"]*")?\)')
-LIST_TYPES = ("bulleted_list_item", "numbered_list_item")
+LIST_TYPES = ("bulleted_list_item", "numbered_list_item", "to_do")
+# BLOG-017 addendum 8: Notion kinds a pipe of Markdown cannot say are kept in HTML comments (Hugo shows nothing new).
+NOTION_PAGE = re.compile(r"^https://(?:www\.notion\.so/|app\.notion\.com/p/)(?:[^/?#]*-)?([0-9a-f]{32})(?:[?#].*)?$")
+CALLOUT_NOTE = re.compile(r"^<!--\s*notion-callout:(.*?)-->$")
+LINK_NOTE = re.compile(r"^<!--\s*notion-link-to-page:\s*(page_id|database_id)=([0-9a-f-]{32,36})\s*-->$")
+COLUMNS_OPEN, COLUMNS_CLOSE = "<!-- notion-columns -->", "<!-- /notion-columns -->"
+COLUMN_NOTE = re.compile(r"^<!--\s*notion-column(?:\s+width=([0-9.]+))?\s*-->$")
+TODO = re.compile(r"[-*+]\s+\[( |x|X)\]\s+(.*)")
+# Notion table header settings that a pipe table cannot say (BLOG-017 addendum 7): written on the line right above
+# the table only when they differ from what a pipe table means (column header on, row header off). Hugo keeps an
+# HTML comment out of sight.
+TABLE_NOTE = re.compile(r"^<!--\s*notion-table:\s*column_header=(true|false)\s+row_header=(true|false)\s*-->$")
 TABLE_SEP = re.compile(r"^\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)*\|?$")
 
 
@@ -46,6 +58,10 @@ def rich_text(text):
             push(strike, strikethrough=True)
         elif code is not None:
             push(code, code=True)
+        elif label is not None and (page := NOTION_PAGE.match(url)):
+            raw = page.group(1)  # a Notion page link = page mention (Notion shows the page title)
+            out.append({"type": "mention", "mention": {"type": "page", "page": {"id": "-".join(
+                (raw[:8], raw[8:12], raw[12:16], raw[16:20], raw[20:]))}}})
         elif label is not None:
             push(label, link=url)
         else:
@@ -74,27 +90,69 @@ def table_cells(line):
     return [cell.strip().replace("\\|", "|") for cell in re.split(r"(?<!\\)\|", body)]
 
 
-def table_block(lines):
-    """Pipe-table lines -> one Notion table block with its table_row children (cells rich text)."""
+def table_note(column_header, row_header):
+    return f"<!-- notion-table: column_header={str(bool(column_header)).lower()} row_header={str(bool(row_header)).lower()} -->"
+
+
+def table_block(lines, flags=None):
+    """Pipe-table lines -> one Notion table block with its table_row children (cells rich text).
+    flags = (column_header, row_header) from a notion-table note above the table; without one, a separator row
+    means a column header and there is no row header."""
     rows = [table_cells(line) for line in lines]
-    header = len(rows) > 1 and bool(TABLE_SEP.match(lines[1].strip()))
-    if header:
+    separator = len(rows) > 1 and bool(TABLE_SEP.match(lines[1].strip()))
+    if separator:
         rows = [rows[0]] + rows[2:]
+    header, row_header = flags if flags else (separator, False)
     width = max(len(r) for r in rows)
     children = [{"object": "block", "type": "table_row",
                  "table_row": {"cells": [rich_text(c) for c in row + [""] * (width - len(row))]}} for row in rows]
     return {"object": "block", "type": "table",
-            "table": {"table_width": width, "has_column_header": header, "has_row_header": False, "children": children}}
+            "table": {"table_width": width, "has_column_header": header, "has_row_header": row_header, "children": children}}
+
+
+def _uuid(raw):
+    raw = raw.replace("-", "")
+    return "-".join((raw[:8], raw[8:12], raw[12:16], raw[16:20], raw[20:]))
+
+
+def _note_fields(text):
+    return dict(re.findall(r"(\w+)=(\S+)", text))
 
 
 def md_to_blocks(markdown, image_url=lambda src: src):
     """image_url(src) -> absolute https URL Notion can show (bundle files live on the site)."""
     blocks, para, lines = [], [], markdown.splitlines()
+    table_flags = None
 
     def flush():
         if para:
             blocks.append(_text_block("paragraph", "\n".join(para)))
             para.clear()
+
+    def nest(block, start):
+        """Lines indented by two spaces right under a list item, to-do or callout are its child blocks
+        (BLOG-017 addendum 9: they used to come back flattened). Returns the index of the last line used."""
+        j, got = start, []
+        while j < len(lines):
+            if lines[j].startswith("  ") and lines[j].strip():
+                got.append(lines[j][2:])
+                j += 1
+            elif not lines[j].strip():
+                k = j
+                while k < len(lines) and not lines[k].strip():
+                    k += 1
+                if k < len(lines) and lines[k].startswith("  "):
+                    got.extend("" for _ in range(j, k))
+                    j = k
+                else:
+                    break
+            else:
+                break
+        if got:  # deeper indent than two spaces is one level, not a staircase: strip what all child lines share
+            kids = md_to_blocks(textwrap.dedent("\n".join(got)), image_url)
+            if kids:
+                block[block["type"]]["children"] = kids
+        return j - 1
 
     i = 0
     while i < len(lines):
@@ -113,13 +171,67 @@ def md_to_blocks(markdown, image_url=lambda src: src):
                                     "language": language if language in CODE_LANGUAGES else "plain text"}})
         elif not stripped:
             flush()
+        elif (note := TABLE_NOTE.match(stripped)) and i + 1 < len(lines) and lines[i + 1].strip().startswith("|"):
+            flush()
+            table_flags = (note.group(1) == "true", note.group(2) == "true")  # belongs to the table on the next line
+        elif stripped == COLUMNS_OPEN:
+            flush()
+            depth, j, body = 1, i + 1, []
+            while j < len(lines) and depth:
+                inner = lines[j].strip()
+                depth += (inner == COLUMNS_OPEN) - (inner == COLUMNS_CLOSE)
+                if depth:
+                    body.append(lines[j])
+                j += 1
+            columns, current, width = [], None, None
+            for line in body:
+                if col := COLUMN_NOTE.match(line.strip()):
+                    if current is not None:
+                        columns.append((width, current))
+                    current, width = [], col.group(1)
+                elif current is not None:
+                    current.append(line)
+            if current is not None:
+                columns.append((width, current))
+            kids = []
+            for width, part in columns:
+                column = {"children": md_to_blocks("\n".join(part), image_url)}
+                if width:
+                    column["width_ratio"] = float(width)
+                kids.append({"object": "block", "type": "column", "column": column})
+            blocks.append({"object": "block", "type": "column_list", "column_list": {"children": kids}})
+            i = j - 1
+        elif (link := LINK_NOTE.match(stripped)):
+            flush()
+            blocks.append({"object": "block", "type": "link_to_page", "link_to_page": {"type": link.group(1), link.group(1): _uuid(link.group(2))}})
+        elif (note := CALLOUT_NOTE.match(stripped)) and i + 1 < len(lines) and lines[i + 1].startswith(">"):
+            flush()
+            quote = []
+            while i + 1 < len(lines) and lines[i + 1].startswith(">"):
+                i += 1
+                quote.append(lines[i].strip()[1:].strip())
+            fields = _note_fields(note.group(1))
+            callout = {"rich_text": rich_text("\n".join(quote)), "color": fields.get("color", "default")}
+            if fields.get("icon"):
+                callout["icon"] = {"type": "emoji", "emoji": fields["icon"]}
+            elif fields.get("icon_url"):
+                callout["icon"] = {"type": "external", "external": {"url": fields["icon_url"]}}
+            blocks.append({"object": "block", "type": "callout", "callout": callout})
+            i = nest(blocks[-1], i + 1)
+        elif m := TODO.fullmatch(stripped):
+            flush()
+            block = _text_block("to_do", m.group(2))
+            block["to_do"]["checked"] = m.group(1) != " "
+            blocks.append(block)
+            i = nest(block, i + 1)
         elif stripped.startswith("|") and stripped.count("|") >= 2:
             flush()
             rows = [stripped]
             while i + 1 < len(lines) and lines[i + 1].strip().startswith("|"):
                 i += 1
                 rows.append(lines[i].strip())
-            blocks.append(table_block(rows))
+            blocks.append(table_block(rows, table_flags))
+            table_flags = None
         elif m := re.match(r"(#{1,6})\s+(.*)", stripped):
             flush()
             blocks.append(_text_block(f"heading_{min(len(m.group(1)), 3)}", m.group(2)))
@@ -136,16 +248,19 @@ def md_to_blocks(markdown, image_url=lambda src: src):
         elif m := re.match(r"[-*+]\s+(.*)", stripped):
             flush()
             blocks.append(_text_block("bulleted_list_item", m.group(1)))
+            i = nest(blocks[-1], i + 1)
         elif m := re.match(r"\d+[.)]\s+(.*)", stripped):
             flush()
             blocks.append(_text_block("numbered_list_item", m.group(1)))
+            i = nest(blocks[-1], i + 1)
         elif stripped.startswith(">"):
             flush()
             quote = [stripped[1:].strip()]
-            while i + 1 < len(lines) and lines[i + 1].strip().startswith(">"):
+            while i + 1 < len(lines) and lines[i + 1].startswith(">"):
                 i += 1
                 quote.append(lines[i].strip()[1:].strip())
             blocks.append(_text_block("quote", "\n".join(quote)))
+            i = nest(blocks[-1], i + 1)
         else:
             para.append(stripped)
         i += 1
@@ -208,16 +323,33 @@ def blocks_to_markdown(blocks, children_of=lambda block_id: [], image_src=None):
             src = image_src(block) if image_src else (data.get(data.get("type")) or {}).get("url", "")
             text = f"![{text_of_plain(data.get('caption'))}]({src})"
         elif kind == "callout":
-            text = "> " + text_of(data.get("rich_text"))
+            icon = data.get("icon") or {}
+            mark = (f" icon={icon['emoji']}" if icon.get("type") == "emoji" and icon.get("emoji") else
+                    f" icon_url={icon['external']['url']}" if icon.get("type") == "external" and (icon.get("external") or {}).get("url") else "")
+            note = "<!-- notion-callout:" + mark + f" color={data.get('color') or 'default'} -->"
+            text = note + "\n" + "\n".join("> " + line for line in text_of(data.get("rich_text")).split("\n"))
+        elif kind == "link_to_page":
+            target = data.get("type") or "page_id"
+            text = f"<!-- notion-link-to-page: {target}={data.get(target, '')} -->"
+        elif kind == "column_list":
+            parts_md = []
+            for column in children_of(block["id"]):
+                width = (column.get("column") or {}).get("width_ratio")
+                parts_md.append((f"<!-- notion-column width={width} -->" if width else "<!-- notion-column -->") + "\n\n"
+                                + blocks_to_markdown(children_of(column["id"]), children_of, image_src).rstrip("\n"))
+            text = COLUMNS_OPEN + "\n\n" + "\n\n".join(parts_md) + "\n\n" + COLUMNS_CLOSE
         elif kind == "toggle":
             inner = blocks_to_markdown(children_of(block["id"]), children_of, image_src) if block.get("has_children") else ""
             text = f"<details>\n<summary>{text_of(data.get('rich_text'))}</summary>\n\n{inner}\n</details>"
         elif kind == "table":
             text = _table(children_of(block["id"])) if block.get("has_children") else ""
+            flags = (bool(data.get("has_column_header")), bool(data.get("has_row_header")))
+            if text and flags != (True, False):  # what a plain pipe table means; anything else is kept in a note
+                text = table_note(*flags) + "\n" + text
         else:
             continue
-        if block.get("has_children") and kind not in ("toggle", "table"):
-            inner = blocks_to_markdown(children_of(block["id"]), children_of, image_src)
+        if block.get("has_children") and kind not in ("toggle", "table", "column_list"):
+            inner = blocks_to_markdown(children_of(block["id"]), children_of, image_src).rstrip("\n")
             if inner:
                 text += "\n" + "\n".join("  " + line if line else line for line in inner.split("\n"))
         parts.append((kind, text))

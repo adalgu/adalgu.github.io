@@ -12,6 +12,7 @@ from pathlib import Path
 from urllib.parse import quote, urlparse
 
 from .bundle import all_bundles, content_hash, file_hashes, read_bundle, render_index
+from .notion_io import field_limit_reasons
 from .markdown import md_to_blocks, blocks_to_markdown, rich_text, text_of_plain
 
 SYNC_PROP = "SyncHash"   # rich_text: "<sha256:…> <ISO time>" — the bundle hash both sides last agreed on
@@ -193,6 +194,84 @@ def notion_edit_merged(repo, slug, page):
     return edit_marker(page) in log
 
 
+def _count_item(counts, kind, data):
+    items = data.get("rich_text") or []
+    if kind == "paragraph" and not text_of_plain(items).strip() and not any(i.get("type") == "mention" for i in items):
+        return  # empty paragraphs are spacing, not content (Markdown keeps no blank paragraph)
+    counts[kind] = counts.get(kind, 0) + 1
+    inline = list(items) + [item for cell in data.get("cells") or [] for item in cell or []]  # table cells too (addendum 9)
+    for item in inline:
+        if item.get("type") == "mention":
+            key = "mention:" + str((item.get("mention") or {}).get("type"))
+            counts[key] = counts.get(key, 0) + 1
+
+
+def _count_place(counts, kind, data, depth, parent):
+    """Structure key: depth and parent kind (addendum 9 — same kinds in a different nesting is a change too)."""
+    items = data.get("rich_text") or []
+    if kind == "paragraph" and not text_of_plain(items).strip() and not any(i.get("type") == "mention" for i in items):
+        return
+    key = f"@{depth}:{parent}>{kind}"
+    counts[key] = counts.get(key, 0) + 1
+
+
+def notion_kind_counts(io, block_id, counts=None, depth=0, parent="page"):
+    """Block kinds on a Notion page, recursive (columns, toggles, table rows, callout children), plus mentions in
+    rich text and table cells, plus structure keys @<depth>:<parent>><kind>."""
+    counts = {} if counts is None else counts
+    for block in io.children(block_id):
+        kind = block["type"]
+        data = block.get(kind) or {}
+        _count_item(counts, kind, data)
+        _count_place(counts, kind, data, depth, parent)
+        if block.get("has_children") and kind not in ("child_page", "child_database"):
+            notion_kind_counts(io, block["id"], counts, depth + 1, kind)
+    return counts
+
+
+def block_kind_counts(blocks, counts=None, depth=0, parent="page"):
+    """Same count for the blocks a push would write (nested children ride inside the block data)."""
+    counts = {} if counts is None else counts
+    for block in blocks:
+        kind = block["type"]
+        data = block.get(kind) or {}
+        _count_item(counts, kind, data)
+        _count_place(counts, kind, data, depth, parent)
+        block_kind_counts(data.get("children") or [], counts, depth + 1, kind)
+    return counts
+
+
+NOTION_NEST_LIMIT = 2      # child levels one append may carry under the blocks it adds (Notion API)
+NOTION_LIST_LIMIT = 100    # blocks per children array / rich text items per array
+
+
+def invalid_reasons(blocks, depth=0):
+    """What the Notion API would refuse, checked before anything is deleted (addendum 9): nesting deeper than two
+    levels in one request, a column without children, a column list with fewer than two columns, more than 100
+    children or rich text items in one array (text, caption, table cells), a rich text item over 2000 characters."""
+    reasons = []
+    if depth > 0 and len(blocks) > NOTION_LIST_LIMIT:
+        reasons.append(f"children>{NOTION_LIST_LIMIT}")
+    for block in blocks:
+        kind = block["type"]
+        data = block.get(kind) or {}
+        kids = data.get("children") or []
+        reasons += field_limit_reasons(kind, data)  # rich_text, caption and table cells: items and characters
+        if kind == "column" and not kids:
+            reasons.append("empty column")
+        if kind == "column_list" and len(kids) < 2:
+            reasons.append("column_list<2 columns")
+        if kids and depth + 1 > NOTION_NEST_LIMIT:
+            reasons.append(f"nesting>{NOTION_NEST_LIMIT} ({kind})")
+        reasons += invalid_reasons(kids, depth + 1)
+    return sorted(set(reasons))
+
+
+def lossy_kinds(before, after):
+    """Kinds the write would leave fewer of. BLOG-017 addendum 8: a push never shrinks a Notion page."""
+    return {kind: (n, after.get(kind, 0)) for kind, n in sorted(before.items()) if after.get(kind, 0) < n}
+
+
 def push(io, database_id, repo, slugs, site, now=utcnow, only=(), dry_run=False, add_column=False,
          open_conflict=None):
     """open_conflict(slug) -> URL of an open sync/notion-<slug>-* PR or None (CLI: gh; tests: a fake)."""
@@ -222,6 +301,15 @@ def push(io, database_id, repo, slugs, site, now=utcnow, only=(), dry_run=False,
                 results.append(say("push", Result(slug, "skip", "Notion edit not in the repo yet — pull brings it back first")))
                 continue
         blocks = md_to_blocks(bundle.body, image_url=lambda src: bundle_url(site, slug, src, page_path(bundle)))
+        if page is not None:
+            lost = lossy_kinds(notion_kind_counts(io, page["id"]), block_kind_counts(blocks))
+            if lost:  # dry_run says the same; kinds first, then structure keys (@depth:parent>kind)
+                results.append(say("push", Result(slug, "skip", "lossy " + ",".join(f"{k}:{a}→{b}" for k, (a, b) in lost.items()))))
+                continue
+        bad = invalid_reasons(blocks)
+        if bad:  # Notion would refuse it: never start a delete we cannot finish
+            results.append(say("push", Result(slug, "skip", "invalid " + ",".join(bad))))
+            continue
         if dry_run:
             results.append(say("push", Result(slug, "write" if page else "create", "dry-run")))
             continue
