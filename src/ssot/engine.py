@@ -324,7 +324,8 @@ def pr_branch(slug, page):
     return f"sync/notion-{slug}-{re.sub(r'[^0-9]', '', page.get('last_edited_time', ''))[:12]}"
 
 
-def plan_pull(io, database_id, repo, site, page_ids=(), only=(), fetch=download, assume_person=False, git=None):
+def plan_pull(io, database_id, repo, site, page_ids=(), only=(), fetch=download, assume_person=False, git=None,
+              pr_lookup=None):
     """Decide what comes back. Nothing is written here.
     assume_person (test hook, needs explicit page_ids): treat these pages' last edit as a person's even when an
     integration made it — agents edit Notion through the same integration the engine uses."""
@@ -359,7 +360,13 @@ def plan_pull(io, database_id, repo, site, page_ids=(), only=(), fetch=download,
             results.append(Result(slug, "skip", "this Notion edit is already in the repo (merged) — push writes Notion"))
             continue
         if git is not None and git.remote_has_branch(pr_branch(slug, page)):
-            results.append(Result(slug, "skip", f"{pr_branch(slug, page)} already open — waiting for its merge"))
+            pr = (pr_lookup or (lambda b: gh_pr_for_branch(repo, b)))(pr_branch(slug, page))
+            if pr:
+                results.append(Result(slug, "skip", f"{pr_branch(slug, page)} has PR {pr} — waiting for its merge"))
+            else:
+                # BLOG-017 F5': branch pushed but its PR never opened (API failure) — a branch is not a finished job
+                results.append(Result(slug, "pr", f"{pr_branch(slug, page)} without a PR — retrying the PR"))
+                changes.append(Change(slug, page, "pr", "", {}, synced_hash, synced_hash, page.get("last_edited_time", "")))
             continue
         meta, body, files = render_page(io, page, bundle, site, fetch)
         new_hash = content_hash(meta, body, file_hashes(bundle.path, files))
@@ -388,6 +395,18 @@ class Git:
 
     def head(self):
         return self.run("rev-parse", "HEAD").stdout.strip()
+
+
+def gh_pr_for_branch(repo, branch):  # pragma: no cover - needs gh + network
+    """URL of any PR (open, closed or merged) whose head is this branch; None when there is none or gh fails
+    (then the PR is created again: gh refuses a duplicate, so a wrong 'none' costs one refused call)."""
+    out = subprocess.run(["gh", "pr", "list", "--head", branch, "--state", "all", "--json", "url", "--limit", "1"],
+                         cwd=repo, capture_output=True, text=True, check=False)
+    try:
+        found = json.loads(out.stdout) if out.returncode == 0 else []
+    except ValueError:
+        found = []
+    return found[0]["url"] if found else None
 
 
 def gh_pr(repo, branch, base, title, body):  # pragma: no cover - needs gh + network
@@ -451,7 +470,16 @@ def _write(repo, change):
     return f"{POSTS}/{change.slug}"
 
 
-def apply_pull(io, repo, changes, base, now=utcnow, git=None, open_pr=gh_pr, push=True):
+def _open_conflict_pr(open_pr, repo, branch, base, change):
+    return open_pr(repo, branch, base, f"sync(notion): {change.slug} — Notion and repo both changed",
+                   f"Notion page {change.page['id']} was edited at {change.edited} while the repo copy also "
+                   f"changed since the last sync ({change.synced_hash}).\n\nThis branch holds the Notion "
+                   f"version of the bundle. Resolve against {base}; merging pushes the result back to Notion. "
+                   f"Keep the commit trailer `{edit_marker(change.page)}` (merge, rebase or squash all keep it): "
+                   f"that is how push knows this Notion edit is in the repo. Until then Notion is not overwritten.")
+
+
+def apply_pull(io, repo, changes, base, now=utcnow, git=None, open_pr=gh_pr, push=True, pr_lookup=None):
     """Commits first, pushes, and only then stamps SyncHash — a failed push leaves Notion saying 'not synced',
     so the next run tries again instead of the repo later overwriting the Notion edit."""
     git = git or Git(repo)
@@ -470,7 +498,11 @@ def apply_pull(io, repo, changes, base, now=utcnow, git=None, open_pr=gh_pr, pus
     for change in [c for c in changes if c.mode == "pr"]:
         branch = pr_branch(change.slug, change.page)
         if push and git.remote_has_branch(branch):
-            done.append(Result(change.slug, "skip", f"{branch} already open"))
+            pr = (pr_lookup or (lambda b: gh_pr_for_branch(repo, b)))(branch)
+            if pr:
+                done.append(Result(change.slug, "skip", f"{branch} has PR {pr}"))
+            else:  # F5': the branch went up but the PR call failed last time — open the PR now, no new commit
+                done.append(Result(change.slug, "pr", _open_conflict_pr(open_pr, repo, branch, base, change)))
             continue
         start = synced_commit(repo, change.slug, change.synced_hash)
         git.run("checkout", "-q", "-b", branch, *([start] if start else []))
@@ -481,12 +513,7 @@ def apply_pull(io, repo, changes, base, now=utcnow, git=None, open_pr=gh_pr, pus
                     f"{edit_marker(change.page)}")
             if push:
                 git.run("push", "-u", git.remote, branch)
-            url = open_pr(repo, branch, base, f"sync(notion): {change.slug} — Notion and repo both changed",
-                          f"Notion page {change.page['id']} was edited at {change.edited} while the repo copy also "
-                          f"changed since the last sync ({change.synced_hash}).\n\nThis branch holds the Notion "
-                          f"version of the bundle. Resolve against {base}; merging pushes the result back to Notion. "
-                          f"Keep the commit trailer `{edit_marker(change.page)}` (merge, rebase or squash all keep it): "
-                          f"that is how push knows this Notion edit is in the repo. Until then Notion is not overwritten.")
+            url = _open_conflict_pr(open_pr, repo, branch, base, change)
         finally:
             git.run("checkout", "-q", base)
         # SyncHash is NOT touched here: the page keeps its person edit, so push leaves Notion alone until the PR is

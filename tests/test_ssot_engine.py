@@ -248,11 +248,15 @@ class EngineTests(unittest.TestCase):
     def push(self, slugs=("hello",), **kw):
         return engine.push(self.io, DB, self.repo.path, list(slugs), SITE, now=self.client.now, add_column=True, **kw)
 
-    def pull(self, fetch=None):
+    def pr_lookup(self, branch):  # the fake GitHub: PRs opened through open_pr, by head branch
+        return next((f"pr/{n}" for n, a in enumerate(self.prs, 1) if a[1] == branch), None)
+
+    def pull(self, fetch=None, open_pr=None):
         results, changes = engine.plan_pull(self.io, DB, self.repo.path, SITE, fetch=fetch or self.fail_fetch,
-                                            git=engine.Git(self.repo.path))
+                                            git=engine.Git(self.repo.path), pr_lookup=self.pr_lookup)
         done = engine.apply_pull(self.io, self.repo.path, changes, "main", now=self.client.now,
-                                 open_pr=lambda *a: self.prs.append(a) or f"pr/{len(self.prs)}")
+                                 open_pr=open_pr or (lambda *a: self.prs.append(a) or f"pr/{len(self.prs)}"),
+                                 pr_lookup=self.pr_lookup)
         return [r for r in results if r.action not in ("commit", "pr", "none")] + done
 
     @staticmethod
@@ -350,6 +354,29 @@ class EngineTests(unittest.TestCase):
         self.assertIn("저장소에서 고침", notion_body())
         self.assertEqual([r.action for r in self.pull()], ["bot"])
         self.assertEqual([r.action for r in self.push()], ["same"])
+
+    def test_failed_pr_call_is_retried_on_the_next_run(self):
+        # BLOG-017 F5' (Anton engine-edge-probe failed_pr_retry): branch pushed, PR API failed
+        self.push()
+        page_id = self.page()["id"]
+        self.repo.write("hello", POST.replace("끝 문단.", "저장소 쪽 고침."))
+        self.repo.commit("repo edit")
+        git(self.repo.path, "push", "-q", "origin", "main")
+        self.client.human_edit(page_id, edit_paragraph("첫 문단", "노션 쪽 고침"))
+
+        def broken(*args):
+            raise RuntimeError("PR API down")
+        with self.assertRaises(RuntimeError):
+            self.pull(open_pr=broken)
+        branches = git(self.repo.remote, "for-each-ref", "--format=%(refname)", "refs/heads/sync").splitlines()
+        self.assertEqual(len(branches), 1)
+        self.assertEqual(self.prs, [])
+        self.assertEqual([r.action for r in self.pull()], ["pr"])  # branch without PR = retry, not skip
+        self.assertEqual(len(self.prs), 1)
+        self.assertEqual(self.prs[0][1], branches[0].removeprefix("refs/heads/"))
+        self.assertEqual(len(git(self.repo.remote, "for-each-ref", "--format=%(refname)", "refs/heads/sync").splitlines()), 1)
+        self.assertEqual([r.action for r in self.pull()], ["skip"])  # PR now exists: nothing more
+        self.assertEqual(len(self.prs), 1)
 
     def test_notion_cover_change_comes_back(self):
         # BLOG-017 F4: only the page cover changed in Notion
