@@ -23,6 +23,7 @@ import yaml
 ROOT = Path(__file__).resolve().parent.parent
 TEXT_LIMIT = 2000      # Notion rich_text 한 칸 글자 한도
 APPEND_LIMIT = 100     # 한 번에 붙일 수 있는 블록 수
+CLEAR_ROUNDS = 3       # 옛 본문 지우기: 다시 읽어 남은 게 있으면 이만큼까지 되풀이
 
 
 # ---------- 손글 읽기 ----------
@@ -214,11 +215,35 @@ def mirror_post(client, database_id, schema, post, test=False, replace_body=Fals
     page_id = ours[0]["id"]
     client.pages.update(page_id=page_id, properties=props)
     if replace_body:
-        old = client.blocks.children.list(block_id=page_id).get("results", [])
-        for item in old:
-            client.blocks.delete(block_id=item["id"])
+        _clear_children(client, page_id)
         _append(client, page_id, children)
     return "update", page_id
+
+
+def _child_ids(client, page_id):
+    """쪽의 모든 자식 블록 id — 한 번에 100개씩이라 has_more/next_cursor 끝까지 읽는다."""
+    ids, cursor = [], None
+    while True:
+        kwargs = {"block_id": page_id, "page_size": APPEND_LIMIT}
+        if cursor:
+            kwargs["start_cursor"] = cursor
+        body = client.blocks.children.list(**kwargs)
+        ids += [item["id"] for item in body.get("results", [])]
+        cursor = body.get("next_cursor")
+        if not body.get("has_more") or not cursor:
+            return ids
+
+
+def _clear_children(client, page_id, rounds=CLEAR_ROUNDS):
+    """옛 본문 블록 전부 지움. 다 모은 뒤 지우고(지우며 넘기면 커서가 어긋남) 다시 읽어 0개일 때까지.
+    BLOG-011 보탬 1: 첫 100개만 지워 103블록 쪽에 옛 3블록이 맨 앞에 남던 것."""
+    for _ in range(rounds):
+        ids = _child_ids(client, page_id)
+        if not ids:
+            return
+        for block_id in ids:
+            client.blocks.delete(block_id=block_id)
+    raise RuntimeError(f"mirror: {page_id} 옛 본문이 {rounds}번 지운 뒤에도 남음 — 새 본문 붙이지 않고 멈춤")
 
 
 def _append(client, page_id, children):
