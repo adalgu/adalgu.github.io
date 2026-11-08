@@ -354,7 +354,30 @@ class PropertyMapper:
                 else:
                     hugo_properties[hugo_key] = notion_properties[key]
 
+        # 6. 대표 이미지(D-20261109-04): Notion 쪽 기본 커버가 외부 https 주소면 앞머리 cover로.
+        cover = self.cover_from_page(page, hugo_properties.get("title"))
+        if cover:
+            hugo_properties["cover"] = cover
+
         return hugo_properties
+
+    @staticmethod
+    def cover_from_page(page, title=None):
+        """Notion 쪽 커버(page.cover) → Hugo cover. 외부(external) https 주소만 쓴다 —
+        Notion 파일 커버(file)는 서명 주소가 한 시간 뒤 만료되고, http는 https 쪽에서 혼합 콘텐츠로 막힌다.
+        사이트 설정은 커버를 숨기므로(config cover.hidden*) 이 글만 쪽·목록에 보이게 한다."""
+        cover = (page or {}).get("cover") or {}
+        if cover.get("type") != "external":
+            return None
+        url = str((cover.get("external") or {}).get("url") or "").strip()
+        if not url.startswith("https://"):
+            return None
+        return {
+            "image": url,
+            "alt": f"{title} 대표 이미지" if title else "대표 이미지",
+            "hiddenInSingle": False,
+            "hiddenInList": False,
+        }
 
     def create_hugo_frontmatter(self, notion_properties, page):
         """
