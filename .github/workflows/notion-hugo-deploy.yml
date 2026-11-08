@@ -1,28 +1,16 @@
-name: Notion → Hugo → GitHub Pages
+name: Hugo → GitHub Pages (repo is the source)
+
+# BLOG-017 (BRIEF-BL-005 §4): the old hourly Notion → Hugo import and its content/posts cache are retired.
+# Every post is a repo bundle (content/posts/<slug>/). Notion edits come back as commits through
+# repo-ssot-sync.yml, which then starts this workflow (workflow_dispatch). Repo → Notion is repo-ssot-sync.yml too
+# (the old `mirror` job is gone: two writers to one Notion page would fight over the body).
+#
+# Fires on main only. On any other branch a manual run builds and checks but never deploys (deploy: if main).
 
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
-
-  # BLOG-014 test/repo-ssot: hourly Notion -> Hugo import retired on this branch (repo is the source;
-  # repo-ssot-sync.yml brings Notion edits back). main keeps it until the merge card.
-  # schedule:
-  #   - cron: '0 */1 * * *'  # 매시간 실행
-  
   workflow_dispatch:
-    inputs:
-      sync_mode:
-        description: 'Sync mode (incremental or full-sync)'
-        required: false
-        default: 'incremental'
-        type: choice
-        options:
-        - incremental
-        - full-sync
-  
-  repository_dispatch:
-    types: [trigger-hugo-build]
 
 permissions:
   contents: read
@@ -36,8 +24,6 @@ concurrency:
 env:
   HUGO_VERSION: 0.128.0
   PYTHON_VERSION: "3.10"
-  STATE_FILE: .notion-hugo-state.json
-  FLAT_COUNT_FILE: .notion-hugo-flat-count # BLOG-010: 직전 성공 때 Notion 평평한 글 수(캐시에 실림)
 
 jobs:
   build:
@@ -55,126 +41,18 @@ jobs:
           sudo dpkg -i ${{ runner.temp }}/hugo.deb
 
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
-      - name: Install Python dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install "notion-client>=2.0.0,<2.5.0" python-dotenv pyyaml fs tabulate
-
-      - name: Restore Notion sync state
-        uses: actions/cache@v4
-        with:
-          path: |
-            ${{ env.STATE_FILE }}
-            ${{ env.FLAT_COUNT_FILE }}
-            content/posts/
-          key: notion-state-${{ github.ref_name }}-${{ github.run_id }}
-          restore-keys: |
-            notion-state-${{ github.ref_name }}-
-            notion-state-
-
-      # BL-003: 캐시가 content/posts/ 를 통째로 풀어 손글 묶음(content/posts/<slug>/)을 옛 판으로 덮을 수 있다.
-      # 추적 파일은 이번 커밋 판으로 다시 깔고, 저장소에서 지운 묶음은 지운다(Notion 평평한 글은 그대로).
-      - name: Restore hand-written posts from git
-        run: scripts/restore_hand_posts.sh
-
-      - name: Determine sync mode
-        id: sync-mode
-        run: |
-          # 동기화 모드 결정 로직 개선
-          COMMIT_MSG="${{ github.event.head_commit.message }}"
-          if [[ -z "$COMMIT_MSG" ]]; then
-            COMMIT_MSG="$(git log -1 --pretty=%B)"
-          fi
-          REF_NAME="${{ github.ref_name }}"
-          EVENT_NAME="${{ github.event_name }}"
-          MANUAL_INPUT="${{ github.event.inputs.sync_mode }}"
-          
-          echo "Debug info:"
-          echo "- Commit message: '$COMMIT_MSG'"
-          echo "- Ref name: '$REF_NAME'"
-          echo "- Event name: '$EVENT_NAME'"
-          echo "- Manual input: '$MANUAL_INPUT'"
-          
-          # 우선순위별 모드 결정
-          if [[ "$EVENT_NAME" == "workflow_dispatch" && -n "$MANUAL_INPUT" ]]; then
-            # 1순위: 수동 실행 시 사용자가 직접 선택한 모드
-            SYNC_MODE="$MANUAL_INPUT"
-            echo "📝 User selected mode: $SYNC_MODE"
-          elif [[ "$COMMIT_MSG" == *"[full-sync]"* ]] || \
-               [[ "$COMMIT_MSG" == *"[force-rebuild]"* ]]; then
-            # 2순위: 커밋 메시지의 키워드
-            SYNC_MODE="full-sync"
-            echo "🏷️ Keyword-triggered full sync"
-          elif [[ "$REF_NAME" == *"full-sync"* ]]; then
-            # 3순위: 브랜치명에 full-sync 포함
-            SYNC_MODE="full-sync"
-            echo "🌿 Branch-triggered full sync"
-          elif [[ "$EVENT_NAME" == "schedule" ]]; then
-            # 4순위: 스케줄 실행은 full-sync (정기 동기화)
-            SYNC_MODE="full-sync"
-            echo "⏰ Scheduled full sync"
-          else
-            # 기본: incremental 모드
-            SYNC_MODE="incremental"
-            echo "⚡ Default incremental sync"
-          fi
-          
-          echo "mode=$SYNC_MODE" >> $GITHUB_OUTPUT
-          
-          if [[ "$SYNC_MODE" == "full-sync" ]]; then
-            echo "🔄 Full sync mode activated"
-          else
-            echo "⚡ Incremental sync mode activated"
-          fi
-          
-          echo "Final sync mode: $SYNC_MODE"
-
-      - name: Debug Secrets
-        run: |
-          if [ -n "${{ secrets.NOTION_TOKEN }}" ]; then
-            echo "✅ NOTION_TOKEN secret is loaded."
-          else
-            echo "❌ NOTION_TOKEN secret is NOT loaded or is empty."
-          fi
-          if [ -n "${{ secrets.NOTION_DATABASE_ID_POSTS }}" ]; then
-            echo "✅ NOTION_DATABASE_ID_POSTS secret is loaded."
-          else
-            echo "❌ NOTION_DATABASE_ID_POSTS secret is NOT loaded or is empty."
-          fi
-
-      - name: Generate Markdown from Notion
-        env:
-          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
-          NOTION_DATABASE_ID_POSTS: ${{ secrets.NOTION_DATABASE_ID_POSTS }}
-        run: |
-          SYNC_MODE="${{ steps.sync-mode.outputs.mode }}"
-          echo "Running with sync mode: $SYNC_MODE"
-          
-          # Run Notion sync and capture exit code
-          set -e  # Exit on error
-          if [[ "$SYNC_MODE" == "full-sync" ]]; then
-            echo "🔄 Executing full synchronization..."
-            python notion_hugo_app.py --full-sync --state-file $STATE_FILE
-          else
-            echo "⚡ Executing incremental synchronization..."
-            python notion_hugo_app.py --incremental --state-file $STATE_FILE
-          fi
-          
-          # Verify content was generated (BLOG-010: Notion 평평한 글 수로 — 손글 묶음은 세지 않음)
-          scripts/check_flat_posts.sh content/posts "$FLAT_COUNT_FILE" 50
-          
-          echo "✅ Content generation successful"
+      # BLOG-017 F1: replaces check_flat_posts.sh (flat Notion file count as success). Two published pages at one
+      # URL (a leftover flat copy, two bundles with one slug) stop the build here.
+      - name: Every URL once
+        run: python scripts/check_duplicate_urls.py
 
       - name: Setup GitHub Pages
         id: pages
         uses: actions/configure-pages@v5
-
-      - name: Install Node.js dependencies
-        run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
 
       - name: Build with Hugo
         env:
@@ -186,25 +64,11 @@ jobs:
           BASE_URL="${{ steps.pages.outputs.base_url }}"
           BASE_URL="${BASE_URL/#http:\/\//https://}"
           hugo --minify --baseURL "${BASE_URL}/"
-          
-          # Validate Hugo build output
-          if [ ! -d "public" ] || [ -z "$(ls -A public)" ]; then
-            echo "❌ Hugo build failed - public directory is empty"
+
+          if [ ! -f "public/index.html" ] || [ "$(wc -c < public/index.html)" -lt 100 ]; then
+            echo "❌ Hugo build failed - no usable public/index.html"
             exit 1
           fi
-          
-          if [ ! -f "public/index.html" ]; then
-            echo "❌ Hugo build failed - no index.html generated"
-            exit 1
-          fi
-          
-          # Check if index.html has reasonable content
-          INDEX_SIZE=$(wc -c < "public/index.html")
-          if [ "$INDEX_SIZE" -lt 100 ]; then
-            echo "❌ Hugo build failed - index.html too small ($INDEX_SIZE bytes)"
-            exit 1
-          fi
-          
           echo "✅ Hugo build validation successful"
 
       - name: Upload artifact
@@ -213,38 +77,37 @@ jobs:
           path: ./public
 
   deploy:
+    if: github.ref == 'refs/heads/main'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
+    outputs:
+      page_url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
 
-  # BL-003: 배포 뒤 손글(draft: false) → Notion 블로그 DB 거울(Slug upsert, Source = hugo).
-  # 스위치 = 저장소 변수 NOTION_MIRROR (on 일 때만). 켜기 전에 DB에 Source 칸과 키 쓰기 권한이 있어야 한다.
-  # 거울이 실패해도 사이트 배포에는 영향 없음.
-  mirror:
-    if: vars.NOTION_MIRROR == 'on' && github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+  # BLOG-017 F6 (dinesh, ci/site-check-job.yml): open the live site in a browser after the deploy.
+  # Fails on: broken <img> (naturalWidth 0), any http:// href/src, internal link 4xx/5xx, icon not 200.
+  site-check:
     runs-on: ubuntu-latest
     needs: deploy
-    continue-on-error: true
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          python-version: ${{ env.PYTHON_VERSION }}
-
-      - name: Install Python dependencies
-        run: pip install "notion-client>=2.0.0,<2.5.0" pyyaml
-
-      - name: Mirror hand-written posts to Notion
+          node-version: 22
+      - run: npm install --no-audit --no-fund   # no lockfile yet; pins playwright via package.json
+      - run: npx playwright install --with-deps chromium
+      - name: Check the live site
         env:
-          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
-          NOTION_DATABASE_ID_POSTS: ${{ secrets.NOTION_DATABASE_ID_POSTS }}
-        run: python scripts/mirror_to_notion.py
+          SITE_URL: ${{ needs.deploy.outputs.page_url || 'https://gunn.kim' }}
+        run: node scripts/site_check.mjs --base "$SITE_URL" --sample 20 --recent 5 --out site-check.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: site-check
+          path: site-check.json
