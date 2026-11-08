@@ -74,3 +74,6 @@ logs/
 
 # Docker production artifacts
 docker-compose.override.yml
+
+# Node
+node_modules/

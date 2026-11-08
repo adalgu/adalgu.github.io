@@ -1,0 +1,12 @@
+{
+  "name": "blog-site-check",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "sh scripts/check.sh",
+    "test:check": "node --test scripts/site_check.test.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.63.0"
+  }
+}
