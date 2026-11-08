@@ -1,0 +1,91 @@
+# Repo-as-SSOT sync (BLOG-014, test branch test/repo-ssot): repo -> Notion on push, Notion -> repo every 30 min /
+# on a Notion webhook / by hand. Engine: src/ssot (vendored from notion-hugo-flow, see src/ssot/VENDORED).
+# TEST BRANCH: only the BL-003 test post syncs (SSOT_ONLY), commits go to this branch, no deploy.
+# GitHub runs schedule, repository_dispatch and workflow_dispatch only from the DEFAULT branch's copy of
+# this file; on another branch only `push` fires (commit message "[ssot-pull]" runs the pull job there).
+name: Repo SSOT sync
+
+on:
+  push:
+    branches: [test/repo-ssot]       # base branch (main after the merge card)
+  schedule:
+    - cron: "*/30 * * * *"           # Notion -> repo check every 30 min. Hourly: "0 * * * *" (the one place)
+  repository_dispatch:
+    types: [notion-changed]          # webhook relay: {"event_type":"notion-changed","client_payload":{"page_id":"<id>"}}
+  workflow_dispatch:
+    inputs:
+      page_id:
+        description: "Notion page id (empty = check every page)"
+        required: false
+        default: ""
+      assume_person:
+        description: "Test only: count this page's last (agent/bot) edit as a person's — needs page_id"
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write                    # commit the Notion edit
+  pull-requests: write               # open the conflict PR
+  actions: write                     # start the deploy workflow after a commit
+
+concurrency:
+  group: repo-ssot-sync              # one sync at a time; never cancelled half way
+  cancel-in-progress: false
+
+env:
+  PYTHON_VERSION: "3.10"
+  BASE_BRANCH: test/repo-ssot        # where Notion edits are committed (main after the merge card)
+  SSOT_SITE: https://gunn.kim        # bundle images are shown in Notion from https://<site>/posts/<slug>/<file>
+  SSOT_ONLY: bl003-hugo-first-test   # test branch: the BL-003 test page only (main: ${{ vars.SSOT_ONLY }}, empty = every bundle)
+  DEPLOY_WORKFLOW: ''                # test branch: no deploy (main: notion-hugo-deploy.yml)
+
+jobs:
+  push-to-notion:
+    if: github.event_name == 'push' && !contains(github.event.head_commit.message, '[ssot-pull]')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - run: pip install "notion-client>=2.0.0,<2.5.0" pyyaml requests
+      - name: Changed bundles -> Notion (properties + body)
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DATABASE_ID_POSTS: ${{ secrets.NOTION_DATABASE_ID_POSTS }}
+        run: python -m src.ssot push --before "${{ github.event.before }}" --after "${{ github.sha }}"
+
+  pull-from-notion:
+    if: github.event_name != 'push' || contains(github.event.head_commit.message, '[ssot-pull]')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.BASE_BRANCH }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - run: pip install "notion-client>=2.0.0,<2.5.0" pyyaml requests
+      - name: Notion edits -> commit (repo untouched since sync) or branch + PR (both changed)
+        id: pull
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DATABASE_ID_POSTS: ${{ secrets.NOTION_DATABASE_ID_POSTS }}
+          GH_TOKEN: ${{ github.token }}
+          PAGE_ID: ${{ github.event.client_payload.page_id || github.event.inputs.page_id }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          ASSUME=""
+          if [ "${{ github.event.inputs.assume_person }}" = "true" ]; then ASSUME="--assume-person-edit"; fi
+          python -m src.ssot pull --base "$BASE_BRANCH" ${PAGE_ID:+--page-id "$PAGE_ID"} $ASSUME
+      # pushes made with GITHUB_TOKEN start no workflow; workflow_dispatch is the documented exception
+      - name: Deploy the committed edit
+        if: steps.pull.outputs.committed != '0' && env.DEPLOY_WORKFLOW != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run "$DEPLOY_WORKFLOW" --ref "$BASE_BRANCH"

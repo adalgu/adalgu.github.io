@@ -5,8 +5,10 @@ on:
   push:
     branches: ["main"]
 
-  schedule:
-    - cron: '0 */1 * * *'  # 매시간 실행
+  # BLOG-014 test/repo-ssot: hourly Notion -> Hugo import retired on this branch (repo is the source;
+  # repo-ssot-sync.yml brings Notion edits back). main keeps it until the merge card.
+  # schedule:
+  #   - cron: '0 */1 * * *'  # 매시간 실행
   
   workflow_dispatch:
     inputs:
