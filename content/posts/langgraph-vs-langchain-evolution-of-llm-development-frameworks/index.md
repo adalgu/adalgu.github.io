@@ -46,6 +46,7 @@ LangGraph는 주로 다음과 같은 상황에서 사용됩니다:
 
 ## 랭그래프와 랭체인 비교
 
+<!-- notion-table: column_header=false row_header=false -->
 | 특징    | 랭체인(LangChain)           | 랭그래프(LangGraph)        |
 |:------|:-------------------------|:-----------------------|
 | 발표    | 2022년 10월                | 2024년 1월               |
