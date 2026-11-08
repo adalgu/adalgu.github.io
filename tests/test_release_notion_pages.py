@@ -24,7 +24,9 @@ class ReleaseTests(unittest.TestCase):
         self.client.pages["moved-1"] = {"id": "moved-1", "properties": {}}
         self.client._store_props(self.client.pages["moved-1"],
                                  {"Source": {"select": {"name": "hugo"}}, "skipRendering": {"checkbox": True}})
-        for slug, front in (("moved", "notion_id: moved-1\n"), ("repo-first", "")):
+        self.client.pages["moved-2"] = {"id": "moved-2", "properties": {}}  # moved but never synced: Source empty
+        self.client._store_props(self.client.pages["moved-2"], {"skipRendering": {"checkbox": False}})
+        for slug, front in (("moved", "notion_id: moved-1\n"), ("moved-unsynced", "notion_id: moved-2\n"), ("repo-first", "")):
             (posts / slug).mkdir(parents=True)
             (posts / slug / "index.md").write_text(f"---\ntitle: t\n{front}---\n\nbody\n", encoding="utf-8")
 

@@ -37,7 +37,7 @@ def main(argv=None, io=None):
         page = io.page(str(notion_id))
         props = page.get("properties") or {}
         want = {}
-        if plain(props.get("Source")).lower() != "notion" and "Source" in props:
+        if plain(props.get("Source")).lower() == "hugo":  # only what the sync engine marked; an empty Source stays empty
             want["Source"] = {"select": {"name": "notion"}}
         if (props.get("skipRendering") or {}).get("checkbox"):
             want["skipRendering"] = {"checkbox": False}
