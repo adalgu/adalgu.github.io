@@ -8,6 +8,66 @@
 [![Python](https://img.shields.io/badge/Python-3.8%2B-3776AB?logo=python&logoColor=white)](https://www.python.org)
 [![License](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](LICENSE)
 
+## Writing posts (repo is the source of truth) — for AI agents and people
+
+This repo is the one source of every post. Notion is an editable mirror (BRIEF-BL-005, BLOG-014/017).
+Full guide: [docs/REPO_SSOT.md](docs/REPO_SSOT.md).
+
+1. `git pull`. Notion edits arrive as commits from `github-actions[bot]`.
+2. Write `content/posts/<slug>/index.md` (front matter `title`, `date`, `slug`, `description`, `tags`,
+   `draft`) and put its images in the same folder.
+3. Run `make check` (or `npm run check`): pull, hugo build, static server, browser check. It checks that every
+   image has naturalWidth > 0, there is no `http://` href or src, there are no internal 4xx and the icons
+   return 200. It prints JSON and an exit code.
+4. `git push`. These follow by themselves:
+   - deploy (`notion-hugo-deploy.yml`);
+   - the live-site browser check (`site-check` job);
+   - the Notion page update (`repo-ssot-sync.yml`).
+
+Never rename a bundle or change `slug:`; that is the URL. Two published pages at one URL stop the build
+(`scripts/check_duplicate_urls.py`).
+
+**Urgent fix in Notion**:
+- Within 30 minutes (or right away through the webhook), a commit `sync(notion): <slug> <- Notion edit …`
+  lands and deploys. The page cover comes back too.
+- If the repo copy also changed, a PR `sync(notion): <slug> — Notion and repo both changed` opens instead.
+  Until it is merged, pushes leave that Notion page alone. Merge it like any PR; the merge pushes the result
+  back to Notion.
+
+### First run on main (after the merge card) — in this order
+
+1. The Notion DB has the `SyncHash` column (rich_text; added 2026-11-09, BLOG-014). The repo secrets
+   `NOTION_TOKEN` and `NOTION_DATABASE_ID_POSTS` are already set. Repo variable `SSOT_ONLY` stays empty.
+2. **Dry run first**: Actions → Repo SSOT sync → Run workflow on `main`, direction `push`, `dry_run` on. The log
+   lists `write`, `create` or `same` for every bundle. Moved posts are found by their `notion_id`, so none
+   should say `create`.
+3. The merge push itself runs `push-to-notion` for every bundle the merge touched. For each one it:
+   1. sets Source = hugo, skipRendering = on and the other properties;
+   2. replaces the body;
+   3. writes SyncHash **last**.
+
+   The job stops at the first error and the remaining pages are untouched. Rerunning (step 2 without
+   `dry_run`) resumes: pages already written match their hash and say `same`.
+4. Pull starts on the next 30-minute tick. Pages never written by push have no SyncHash and are skipped
+   (`never synced`).
+
+### Turn it off / go back
+
+- **Stop syncing only** (no commit, undo with `enable`): `gh workflow disable repo-ssot-sync.yml`, or use
+  Actions → Repo SSOT sync → ⋯ → Disable workflow. Deploys keep running, and Notion and the repo stay as they
+  are.
+- **Back to the old flow** (Notion as the source). Run these on main **before** reverting, in this order: the
+  revert removes `scripts/release_notion_pages.py`, `src/ssot/` and the moved bundles that step 2 reads.
+  1. `gh workflow disable repo-ssot-sync.yml`. This stops sync, so no push rewrites Notion while you work.
+  2. `python scripts/release_notion_pages.py`, a dry run that lists the moved posts' pages it would change.
+     Then run it with `--apply`. That sets Source = notion and skipRendering = off on them, so the old import
+     takes them again. Key: `NOTION_TOKEN` or `NOTION_API_KEY`.
+  3. `git revert -m 1 <merge commit of this PR> && git push`. This brings back the hourly import, its cache and
+     the mirror job, and removes the moved bundles. Within the hour the import writes those posts again as flat
+     files at the same URLs (same slugs).
+
+  The SyncHash column stays in the DB; nothing reads it after the revert.
+
 ## Why Notion-Hugo?
 
 **Write in Notion. Publish with Hugo. Deploy anywhere.**

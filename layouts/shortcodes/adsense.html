@@ -1,13 +1,22 @@
+{{- /* Google AdSense in-article unit. BLOG-017 addendum 3: draws nothing unless config params
+       adsense.client and adsense.slot are both set and are not the YOUR_… placeholders — a placeholder unit made
+       googleads answer 400 and the browser log console errors (site-wide auto ads come from extend_head.html). */ -}}
+{{- $ad := dict -}}
+{{- with site.Params.adsense }}{{ $ad = . }}{{ end -}}
+{{- $client := printf "%v" (index $ad "client" | default "") -}}
+{{- $slot := printf "%v" (index $ad "slot" | default "") -}}
+{{- if and $client $slot (not (strings.Contains $client "YOUR_")) (not (strings.Contains $slot "YOUR_")) }}
 <!-- Google AdSense 광고 코드 -->
 <div class="adsense-container">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ $client }}" crossorigin="anonymous"></script>
   <ins class="adsbygoogle"
        style="display:block"
-       data-ad-client="ca-pub-YOUR_AD_CLIENT_ID"
-       data-ad-slot="YOUR_AD_SLOT"
+       data-ad-client="{{ $client }}"
+       data-ad-slot="{{ $slot }}"
        data-ad-format="auto"
        data-full-width-responsive="true"></ins>
   <script>
        (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
 </div>
+{{- end -}}

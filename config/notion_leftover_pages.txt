@@ -1,0 +1,7 @@
+# BLOG-017 F1: Notion pages that are still published from Notion (not moved into a repo bundle).
+# The build imports exactly these as flat posts (scripts/import_leftover_notion_pages.py) — no other page,
+# no cache, no deleting. Move a post into content/posts/<slug>/ and remove its line here.
+#
+# google-colab-kogpt-korean-language-model-tutorial — not moved: its body holds an old Jupyter token string,
+# which the gitleaks hook blocks from the repo (BLOG-017 F2, jared). Redact it in Notion, then move it.
+9cee1df3-c7b0-47c6-a163-ce7c9b961f38

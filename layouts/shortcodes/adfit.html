@@ -1,8 +1,15 @@
+{{- /* Kakao AdFit unit. BLOG-017 addendum 3: draws nothing unless config param adfit.unit is set and is not the
+       YOUR_… placeholder. */ -}}
+{{- $ad := dict -}}
+{{- with site.Params.adfit }}{{ $ad = . }}{{ end -}}
+{{- $unit := printf "%v" (index $ad "unit" | default "") -}}
+{{- if and $unit (not (strings.Contains $unit "YOUR_")) }}
 <!-- Kakao AdFit 광고 코드 -->
 <div class="adfit-container">
   <ins class="kakao_ad_area" style="display:none;"
-       data-ad-unit="YOUR_AD_UNIT"
+       data-ad-unit="{{ $unit }}"
        data-ad-width="320"
        data-ad-height="100"></ins>
-  <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+  <script type="text/javascript" src="https://t1.daumcdn.net/kas/static/ba.min.js" async></script>
 </div>
+{{- end -}}

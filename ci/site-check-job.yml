@@ -1,0 +1,23 @@
+# Workflow fragment for Gilfoyle: paste under `jobs:` in .github/workflows/notion-hugo-deploy.yml.
+# Runs after the Pages deploy and opens the live site in a browser (scripts/site_check.mjs).
+# Fails the job on: broken <img> (naturalWidth 0), any http:// href/src, internal link 4xx/5xx, icon not 200.
+# `needs: deploy` and the `deploy` job id match the current workflow; adjust if renamed.
+  site-check:
+    runs-on: ubuntu-latest
+    needs: deploy
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-audit --no-fund   # no lockfile yet; pins playwright via package.json
+      - run: npx playwright install --with-deps chromium
+      - name: Check the live site
+        env:
+          SITE_URL: ${{ needs.deploy.outputs.page_url || 'https://gunn.kim' }}
+        run: node scripts/site_check.mjs --base "$SITE_URL" --sample 20 --recent 5 --out site-check.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: site-check
+          path: site-check.json
