@@ -118,34 +118,107 @@ class NotionIO:
 
     def append_staged(self, block_id, blocks):
         """Append level by level (each block, then its children under the new id), so no request nests deeper than
-        Notion allows. Used to put an old body back."""
-        flat = [{k: v for k, v in b.items() if k != "_kids"} for b in blocks]
-        created = self.append(block_id, flat)
-        for made, block in zip(created, blocks):
-            if block.get("_kids"):
-                self.append_staged(made["id"], block["_kids"])
+        Notion allows. Used to put an old body back. A table goes in with its rows (Notion wants them together, and
+        a row has no children); a column list goes in with one placeholder paragraph per column (a column needs a
+        child), the columns are filled level by level, then the placeholders go (BLOG-017 addendum 10: a table or a
+        callout inside a column used to be refused at depth 3 or lose its children)."""
+        for at in range(0, len(blocks), APPEND_LIMIT):
+            chunk = blocks[at:at + APPEND_LIMIT]
+            flat = [_request_form(b) for b in chunk]
+            created = self.append(block_id, flat)
+            for made, block in zip(created, chunk):
+                kind, kids = block.get("type"), block.get("_kids") or []
+                if kind == "table" or not kids:
+                    continue
+                if kind == "column_list":
+                    for column, spec in zip(self.children(made["id"]), kids):
+                        holders = self.children(column["id"])
+                        self.append_staged(column["id"], spec.get("_kids") or [])
+                        for holder in holders:
+                            self.delete_block(holder["id"])
+                else:
+                    self.append_staged(made["id"], kids)
 
     def replace_children(self, block_id, children, rounds=3):
-        """Old body out, new body in — atomically as far as the API allows (BLOG-017 addendum 9): the old blocks are
-        read first and kept in memory; if adding the new body fails, whatever got added is removed and the old body
-        is put back, then the error is raised. Callers validate the new body before calling (engine.invalid_reasons)."""
+        """Old body out, new body in — atomically as far as the API allows (BLOG-017 addenda 9-10): the old blocks are
+        read first (children and grandchildren too) and turned into the requests that would put them back. If that
+        copy could not be written back (engine/Notion limits), nothing is deleted. Everything after the first delete
+        — the delete rounds included — is inside the guard: if it fails, whatever got added is removed and the old
+        body is put back, then the error is raised. Callers validate the new body before calling
+        (engine.invalid_reasons)."""
         old_tree = self.tree(block_id)
-        for _ in range(rounds):
-            old = self.children(block_id)
-            if not old:
-                break
-            for item in old:
-                self.delete_block(item["id"])
-        else:
-            if self.children(block_id):
-                raise RuntimeError(f"ssot: {block_id} still has old blocks after {rounds} rounds — new body not appended")
+        plan = [w for w in (writable(b) for b in old_tree) if w]
+        bad = restore_reasons(plan)
+        if bad:
+            raise RuntimeError(f"ssot: {block_id} old body could not be put back ({', '.join(bad)}) — nothing deleted")
         try:
+            for _ in range(rounds):
+                old = self.children(block_id)
+                if not old:
+                    break
+                for item in old:
+                    self.delete_block(item["id"])
+            else:
+                if self.children(block_id):
+                    raise RuntimeError(f"ssot: {block_id} still has old blocks after {rounds} rounds — new body not appended")
             self.append(block_id, children)
-        except Exception:
-            for item in self.children(block_id):
-                self.delete_block(item["id"])
-            self.append_staged(block_id, [writable(b) for b in old_tree if writable(b)])
+        except Exception as error:
+            try:
+                for item in self.children(block_id):
+                    self.delete_block(item["id"])
+                self.append_staged(block_id, plan)
+            except Exception as again:
+                raise RuntimeError(f"ssot: {block_id} body replace failed ({error}) and putting the old body back failed too ({again})") from error
             raise
+
+
+def _request_form(block):
+    """One block as the body of an append request: no _kids; a table keeps its rows, a column list gets a
+    placeholder paragraph in each column."""
+    kind = block["type"]
+    out = {k: v for k, v in block.items() if k != "_kids"}
+    kids = block.get("_kids") or []
+    if kind == "table":
+        out[kind] = dict(out[kind], children=[{k: v for k, v in r.items() if k != "_kids"} for r in kids])
+    elif kind == "column_list":
+        out[kind] = dict(out[kind], children=[
+            {"object": "block", "type": "column", "column": dict(c["column"], children=[
+                {"object": "block", "type": "paragraph", "paragraph": {"rich_text": []}}])} for c in kids])
+    return out
+
+
+TEXT_ITEM_LIMIT = 2000  # characters in one rich text item
+ARRAY_LIMIT = 100       # rich text items in one array, blocks in one children array
+
+
+def field_limit_reasons(kind, data):
+    """Rich text arrays Notion would refuse in this block's data: a text field, an image caption, or a table row's
+    cells with more than 100 items, or an item with more than 2000 characters."""
+    reasons = []
+    arrays = [(key, data.get(key)) for key in ("rich_text", "caption")]
+    arrays += [("cells", cell) for cell in data.get("cells") or []]
+    for key, items in arrays:
+        items = items or []
+        if len(items) > ARRAY_LIMIT:
+            reasons.append(f"{kind}:{key}>{ARRAY_LIMIT}")
+        if any(len(((i.get(i.get("type", "text")) or {}).get("content")) or "") > TEXT_ITEM_LIMIT for i in items):
+            reasons.append(f"{kind}:{key} item>{TEXT_ITEM_LIMIT} chars")
+    return reasons
+
+
+def restore_reasons(plan):
+    """Why this copy of the old body could not be written back (checked before the first delete)."""
+    reasons = []
+    for block in plan:
+        kind = block["type"]
+        reasons += field_limit_reasons(kind, block.get(kind) or {})
+        kids = block.get("_kids") or []
+        if kind == "table" and len(kids) > ARRAY_LIMIT:
+            reasons.append(f"table:rows>{ARRAY_LIMIT}")
+        if kind == "column_list" and len(kids) < 2:
+            reasons.append("column_list<2 columns")
+        reasons += restore_reasons(kids)
+    return sorted(set(reasons))
 
 
 READ_ONLY = {"id", "object", "created_time", "last_edited_time", "created_by", "last_edited_by", "has_children",
@@ -184,12 +257,6 @@ def writable(block):
         data.pop("file", None)
     out = {"object": "block", "type": kind, kind: data}
     kids = [w for w in (writable(c) for c in block.get("_children") or []) if w]
-    if kind == "table":  # Notion wants a table's rows with the table
-        data["children"] = kids
-    elif kind == "column_list":  # and columns (each with at least one child) with the column list
-        data["children"] = [dict(c, column=dict(c["column"], children=[{k: v for k, v in g.items() if k != "_kids"}
-                                                                         for g in c.get("_kids") or []]))
-                            for c in kids if c.get("_kids")]
-    elif kids:
+    if kids:  # table rows, columns and their blocks, nested blocks: all stay under _kids (append_staged puts them back)
         out["_kids"] = kids
     return out
