@@ -1,6 +1,8 @@
 """Repo-SSOT sync engine against a fake Notion (client.request level, 100 per page, minute-rounded
 last_edited_time, bot/person editors) and real git repos in a temp folder. Network 0."""
+import contextlib
 import copy
+import io
 import os
 import subprocess
 import tempfile
@@ -377,6 +379,42 @@ class EngineTests(unittest.TestCase):
         self.assertEqual(len(git(self.repo.remote, "for-each-ref", "--format=%(refname)", "refs/heads/sync").splitlines()), 1)
         self.assertEqual([r.action for r in self.pull()], ["skip"])  # PR now exists: nothing more
         self.assertEqual(len(self.prs), 1)
+
+    def test_korean_bundle_folder_in_push_range(self):
+        # BLOG-017 addendum 4: run 42507506203 died with Errno 36 on a Korean bundle folder (git quoted the path)
+        slug = "스몰토크는-왜-중요한가"
+        before = git(self.repo.path, "rev-parse", "HEAD")
+        self.repo.write(slug, POST.replace("slug: hello", f"slug: {slug}"), {"cover.jpg": b"jpeg"})
+        self.repo.write("hello", POST.replace("끝 문단.", "끝 문단 바꿈."))
+        after = self.repo.commit("korean bundle")
+        slugs = engine.changed_slugs(self.repo.path, before, after)
+        self.assertEqual(slugs, sorted(["hello", slug]))
+        results = self.push(slugs)
+        self.assertEqual(sorted(r.action for r in results), ["create", "create"])
+        page = next(p for p in self.client.pages.values() if engine.plain(p["properties"]["Slug"]) == slug)
+        self.assertEqual(page["cover"]["external"]["url"], f"{SITE}/posts/{slug}/cover.jpg")
+        # the conflict-branch start point reads the same folder through git ls-tree
+        self.assertEqual(engine.synced_commit(self.repo.path, slug, engine.read_bundle(self.repo.path / "content/posts" / slug).hash),
+                         after)
+
+    def test_every_write_is_logged_before_a_later_failure(self):
+        self.repo.write("second", POST.replace("slug: hello", "slug: second"))
+        self.repo.commit("second")
+        real_append, calls = self.io.append, []
+
+        def append(block_id, children):
+            calls.append(block_id)
+            if len(calls) == 2:
+                raise RuntimeError("Notion down")
+            return real_append(block_id, children)
+        self.io.append = append
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out), self.assertRaises(RuntimeError):
+            self.push(["hello", "second"])
+        lines = out.getvalue().splitlines()
+        self.assertTrue(lines[0].startswith("ssot push: writing hello"))
+        self.assertTrue(lines[1].startswith("ssot push: create hello p"))
+        self.assertTrue(lines[2].startswith("ssot push: writing second"))  # the page that failed is named too
 
     def test_notion_cover_change_comes_back(self):
         # BLOG-017 F4: only the page cover changed in Notion

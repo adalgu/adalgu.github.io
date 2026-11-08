@@ -52,9 +52,10 @@ def main(argv=None, io=None):
                                      git=None if args.no_git_push else Git(args.repo))
         if not args.dry_run:
             results = [r for r in results if r.action not in ("commit", "pr", "none")]
+        for result in results:  # plan decisions (apply_pull prints its own lines as it goes)
+            print(f"ssot pull: {result.action} {result.slug} {result.detail}", flush=True)
+        if not args.dry_run:
             results += apply_pull(io, args.repo, changes, args.base, git=Git(args.repo), push=not args.no_git_push)
-    for result in results:
-        print(f"ssot {args.command}: {result.action} {result.slug} {result.detail}")
     summary = {}
     for result in results:
         summary[result.action] = summary.get(result.action, 0) + 1
