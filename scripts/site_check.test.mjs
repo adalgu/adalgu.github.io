@@ -19,6 +19,9 @@ const SITES = {
   // BLOG-017 known list: one listed broken picture + one listed dead link, and one unlisted broken picture
   knownMix: { '/': page('<img src="/old/gone.png"><a href="/post/old/">old</a><img src="/a.png">') },
   knownPlusNew: { '/': page('<img src="/old/gone.png"><img src="/new-broken.png">') },
+  consoleErr: { '/': page('<img src="/a.png"><script>console.error("boom")</script>') },
+  httpMix: { '/': page('<img src="/a.png"><a href="http://main.py/">main.py</a>') },
+  httpOther: { '/': page('<img src="/a.png"><a href="http://main.py/">main.py</a><a href="http://other.test/x">x</a>') },
 };
 const servers = {};
 const serve = (name, pages) => new Promise((ok) => {
@@ -59,14 +62,55 @@ test('known breakage is reported, not failed; a listed path that works warns', a
 test('anything not on the known list still fails', async () => {
   const r = await check('knownPlusNew', { known: KNOWN });
   assert.equal(r.ok, false);
-  assert.deepEqual(r.failures.map((f) => new URL(f.detail).pathname), ['/new-broken.png']);
+  assert.deepEqual(r.failures.filter((f) => f.kind === 'image').map((f) => new URL(f.detail).pathname), ['/new-broken.png']);
+  assert.deepEqual(kinds(r), ['console', 'image']); // the unlisted 404 also logs a console error that counts
   assert.equal(r.known.length, 1);
 });
-test('the real list file parses: 12 entries, each with kind, path, reason, since', async () => {
+test('the real list file parses: 13 entries, each with kind, path, reason, since', async () => {
   const { loadKnown } = await import('./site_check.mjs');
   const list = loadKnown(new URL('./site_check_known.json', import.meta.url).pathname);
-  assert.equal(list.length, 12);
-  for (const k of list) assert.ok(['image', 'link'].includes(k.kind) && k.path.startsWith('/') && k.reason && k.since);
+  assert.equal(list.length, 13);
+  for (const k of list) {
+    assert.ok(['image', 'link', 'http'].includes(k.kind) && k.reason && k.since);
+    assert.ok(k.kind === 'http' ? k.path.startsWith('http://') : k.path.startsWith('/'));
+  }
+});
+// BLOG-017 addendum 2 (Anton round 3 F6): a console error fails by default; a limit can be given
+test('one console error = failure by default', async () => {
+  const r = await check('consoleErr');
+  assert.equal(r.ok, false);
+  assert.deepEqual(kinds(r), ['console']);
+  assert.equal(r.consoleErrors, 1);
+  assert.match(r.consoleSamples[0].text, /boom/);
+});
+test('console limit given = passes', async () => { assert.equal((await check('consoleErr', { maxConsoleErrors: 1 })).ok, true); });
+test("a listed picture's own 404 console error is not counted", async () => {
+  const r = await check('knownMix', { known: KNOWN });
+  assert.equal(r.ok, true);
+  assert.equal(r.consoleErrors, 0);
+  assert.ok(r.knownConsoleErrors >= 1);
+});
+// D-20261109-21: http://main.py/ on the known list
+const HTTP_KNOWN = [{ kind: 'http', path: 'http://main.py/', reason: 'r', since: '2026-11-09' }];
+test('listed http:// target passes', async () => {
+  const r = await check('httpMix', { known: HTTP_KNOWN });
+  assert.equal(r.ok, true);
+  assert.deepEqual(r.known.map((k) => k.detail), ['href=http://main.py/']);
+});
+test('unlisted http:// target still fails next to a listed one', async () => {
+  const r = await check('httpOther', { known: HTTP_KNOWN });
+  assert.equal(r.ok, false);
+  assert.deepEqual(r.failures.map((f) => f.detail), ['href=http://other.test/x']);
+});
+test('a known line without a path hides nothing', async () => {
+  // path missing or null: console/icon/page failures have no path either, so null === null must not match them
+  const noPath = [{ kind: 'http', reason: 'r', since: '2026-11-09' }, { kind: 'console', path: null, reason: 'r', since: '2026-11-09' }];
+  const http = await check('httpMix', { known: noPath });
+  assert.equal(http.ok, false);
+  assert.deepEqual(http.known, []);
+  const consoleRun = await check('consoleErr', { known: noPath });
+  assert.equal(consoleRun.ok, false);
+  assert.deepEqual(kinds(consoleRun), ['console']);
 });
 test('pickPages: sample spreads and keeps the newest', () => {
   const entries = Array.from({ length: 30 }, (_, i) => ({ loc: `https://x/${i}`, lastmod: `2026-01-${String(i + 1).padStart(2, '0')}` }));
