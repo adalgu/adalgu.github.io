@@ -1,6 +1,11 @@
 <!-- URL Redirect Script -->
 {{ partial "redirect.html" . }}
 
+{{- /* slot r10-P06: 분석·광고 스크립트는 운영 빌드에서만(hugo.IsProduction) — 개발 서버·미리보기는 GA 수치·광고 요청을 더럽히지 않게.
+     운영 빌드 = CI(HUGO_ENVIRONMENT=production)·Dockerfile·그냥 `hugo`. slot r12-P05: 두 도메인 preconnect 힌트를 스크립트 앞에. */}}
+{{- if hugo.IsProduction }}
+<link rel="preconnect" href="https://www.googletagmanager.com" />
+<link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin />
 <!-- Google tag (gtag.js) -->
 <script
   async
@@ -20,3 +25,4 @@
   src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3695098602071408"
   crossorigin="anonymous"
 ></script>
+{{- end }}
