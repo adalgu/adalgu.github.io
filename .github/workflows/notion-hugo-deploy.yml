@@ -85,6 +85,9 @@ jobs:
           fi
           echo "✅ Hugo build validation successful"
 
+      - name: 404 page check
+        run: python scripts/check_404_page.py public
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
