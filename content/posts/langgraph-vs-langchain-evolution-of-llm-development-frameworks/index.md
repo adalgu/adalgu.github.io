@@ -19,6 +19,12 @@ summary: 대규모 언어 모델(LLM) 기반 애플리케이션 개발이 급증
   나스닥 지수 분석 및 포트폴리오 최적화 예제를 통해 LangGraph의 실용성을 확인해보세요.
 tags: *id001
 title: '랭그래프 vs. 랭체인 : LLM 개발 프레임워크의 진화'
+cover:
+  image: "cover.jpg"
+  alt: "랭그래프 vs. 랭체인 : LLM 개발 프레임워크의 진화 대표 이미지"
+  relative: true
+  hiddenInSingle: false
+  hiddenInList: false
 ---
 
 ## AI 개발의 새로운 지평

@@ -17,6 +17,12 @@ summary: LangChain의 새로운 라이브러리 LangGraph를 소개합니다. La
   S&P 500 지수 데이터를 검색하고 시각화하는 방법을 알아보세요.
 tags: *id001
 title: 'LangGraph 사용법: 멀티 에이전트로 S&P 500 데이터 시각화하기'
+cover:
+  image: "cover.jpg"
+  alt: "LangGraph 사용법: 멀티 에이전트로 S&P 500 데이터 시각화하기 대표 이미지"
+  relative: true
+  hiddenInSingle: false
+  hiddenInList: false
 ---
 
 # LangChain이 만든 멀티 에이전트 라이브러리 LangGraph를 알아보자
