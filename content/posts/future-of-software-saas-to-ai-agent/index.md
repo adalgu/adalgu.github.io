@@ -16,6 +16,12 @@ summary: CD를 사서 깔던 시절부터 구독하는 SaaS 시대를 넘어, �
   1조 달러 소프트웨어 시장과 16조 달러 서비스 시장의 차이를 통해, 급변하는 IT 트렌드와 미래 기회를 누구나 알기 쉽게 정리해 드립니다.
 tags: *id001
 title: 'AI Eats Everything: 소프트웨어는 어떻게 진화하는가'
+cover:
+  image: "cover.jpg"
+  alt: "AI Eats Everything: 소프트웨어는 어떻게 진화하는가 대표 이미지"
+  relative: true
+  hiddenInSingle: false
+  hiddenInList: false
 ---
 
 ![](image-01.png)

@@ -19,6 +19,12 @@ summary: '『Inner Excellence』를 읽다가 발견한 오래된 사고 패턴.
 title: '
 
   인지왜곡을 메타인지하며 알게 된 것들 — 예단은 어떻게 현실을 왜곡하는가'
+cover:
+  image: "cover.jpg"
+  alt: "인지왜곡을 메타인지하며 알게 된 것들 — 예단은 어떻게 현실을 왜곡하는가 대표 이미지"
+  relative: true
+  hiddenInSingle: false
+  hiddenInList: false
 ---
 
 # **인지왜곡을 메타인지하며 알게 된 것들**

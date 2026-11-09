@@ -15,6 +15,12 @@ summary: 인공지능 시대, 지능보다 중요한 것은 무엇일까요? 젠
   통찰을 엮어 비즈니스 생존의 핵심 무기인 '리질리언스(회복탄력성)'의 진정한 의미를 탐구합니다.
 tags: *id001
 title: '유퀴즈 젠슨 황 인터뷰로 깨달은 성공의 본질: 지능보다 ''회복탄력성’'
+cover:
+  image: "cover.jpg"
+  alt: "유퀴즈 젠슨 황 인터뷰로 깨달은 성공의 본질: 지능보다 '회복탄력성’ 대표 이미지"
+  relative: true
+  hiddenInSingle: false
+  hiddenInList: false
 ---
 
 

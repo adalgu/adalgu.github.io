@@ -16,6 +16,12 @@ summary: '''일단 코딩''하는 습관이 기술 부채를 만듭니다. GitHu
   개발''로 이끄는지, TDD와는 어떤 관계인지 알아봅니다.'
 tags: *id001
 title: '코딩보다 생각이 먼저다: GitHub이 제안하는 SDD(사양 주도 개발)'
+cover:
+  image: "cover.jpg"
+  alt: "코딩보다 생각이 먼저다: GitHub이 제안하는 SDD(사양 주도 개발) 대표 이미지"
+  relative: true
+  hiddenInSingle: false
+  hiddenInList: false
 ---
 
 ![](image-01.png)

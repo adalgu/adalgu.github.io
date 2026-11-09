@@ -15,6 +15,12 @@ summary: Hermes 멀티 프로필 기능을 활용해 다수의 Slack 워크스�
   xoxb) 충돌 및 `invalid_auth` 에러의 원인과 명확한 해결책을 공유합니다.
 tags: *id001
 title: Hermes 멀티 프로필로 여러 Slack 워크스페이스에 에이전트 붙이기 — 그리고 invalid_auth 함정
+cover:
+  image: "cover.jpg"
+  alt: "Hermes 멀티 프로필로 여러 Slack 워크스페이스에 에이전트 붙이기 — 그리고 invalid_auth 함정 대표 이미지"
+  relative: true
+  hiddenInSingle: false
+  hiddenInList: false
 ---
 
 ## Hermes 멀티 프로필로 여러 Slack 워크스페이스에 에이전트 붙이기
