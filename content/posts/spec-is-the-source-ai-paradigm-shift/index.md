@@ -16,6 +16,12 @@ summary: 생성형 AI의 발전으로 구현 비용이 0에 수렴하면서 소�
   Alignment), 에이전트 오케스트레이션 등 미래의 기획자와 연구원이 갖춰야 할 구체적인 기술 역량을 제시합니다.
 tags: *id001
 title: '"프롬프트가 곧 소스코드다" (Spec is the Source)'
+cover:
+  image: "cover.jpg"
+  alt: "\"프롬프트가 곧 소스코드다\" (Spec is the Source) 대표 이미지"
+  relative: true
+  hiddenInSingle: false
+  hiddenInList: false
 ---
 
 ![](image-01.png)

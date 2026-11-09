@@ -8,6 +8,12 @@ notion_id: 3617522e-eb2f-805c-992e-e2619356e918
 url: "/posts/스몰토크는-왜-중요한가/"
 subtitle: ''
 title: 스몰토크는 왜 중요한가
+cover:
+  image: "cover.jpg"
+  alt: "스몰토크는 왜 중요한가 대표 이미지"
+  relative: true
+  hiddenInSingle: false
+  hiddenInList: false
 ---
 
 # **스몰토크는 왜 중요한가**

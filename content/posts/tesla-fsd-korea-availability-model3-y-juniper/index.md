@@ -11,6 +11,12 @@ subtitle: ''
 summary: 2025년 12월, 테슬라 FSD가 한국에 출시되었지만 모델 3(하이랜드)와 모델 Y(주니퍼)는 사용할 수 없습니다. 한미 FTA와
   중국산 생산지의 관계, HW 4.0 탑재 여부에 따른 모델별 FSD 적용 가능성과 향후 전망을 정리했습니다.
 title: '한국 테슬라 FSD 사용 가능 차량 총정리: 미국산 vs 중국산, HW 4.0 차이점'
+cover:
+  image: "cover.jpg"
+  alt: "한국 테슬라 FSD 사용 가능 차량 총정리: 미국산 vs 중국산, HW 4.0 차이점 대표 이미지"
+  relative: true
+  hiddenInSingle: false
+  hiddenInList: false
 ---
 
 ![](image-01.png)
