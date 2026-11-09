@@ -3,6 +3,8 @@
 .RelPermalink -}} {{- else -}} {{- if strings.Contains $link "{{% relref" -}}
 {{- /* Skip problematic relref shortcodes */ -}} {{- $link = "#" -}} {{- end -}}
 {{- end -}} {{- end -}}
-<a href="{{ $link | safeURL }}" {{ with .Title}} title="{{ . }}" {{ end }}>
+{{- /* slot r10-P05: 바깥 링크(http로 시작, 이 사이트 주소 아님)에만 rel="noopener noreferrer". 안쪽 링크·relref "#"·title은 그대로 */ -}}
+{{- $outside := and $isRemote (ne (urls.Parse $link).Host (urls.Parse site.BaseURL).Host) -}}
+<a href="{{ $link | safeURL }}" {{ with .Title}} title="{{ . }}" {{ end }}{{ if $outside }} rel="noopener noreferrer"{{ end }}>
   {{- .Text | safeHTML -}}
 </a>
