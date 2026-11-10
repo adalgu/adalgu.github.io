@@ -1,0 +1,7 @@
+/* 글 하단 '다음에 읽을 글'(slot r6-P05). PaperMod는 assets/css/extended/*.css를 함께 묶는다. */
+.related-posts { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border); }
+.related-posts-title { font-size: 1.1rem; margin-bottom: 10px; }
+.related-posts ul { list-style: none; padding: 0; margin: 0; }
+.related-posts li { padding: 6px 0; }
+.related-posts a { color: var(--primary); text-decoration: none; box-shadow: 0 1px 0 var(--secondary); }
+.related-posts a:hover { box-shadow: 0 1px 0 var(--primary); }

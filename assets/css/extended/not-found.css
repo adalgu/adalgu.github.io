@@ -1,0 +1,10 @@
+/* 404 페이지(slot r6-P06·r13-P05): 테마 .not-found는 큰 숫자 하나용(절대 위치·가로 flex·160px)이라
+   안내 문장·최근 글 목록이 화면 밖으로 밀린다 — 보통 글 흐름으로 되돌린다. */
+.not-found { position: static; display: block; height: auto; font-size: 1rem; font-weight: 400; padding: 40px 0; }
+.not-found h1 { font-size: 1.6rem; margin-bottom: 12px; }
+.not-found p { margin: 8px 0; }
+.not-found-recent { margin: 24px 0 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.not-found-recent h2 { font-size: 1.1rem; margin-bottom: 8px; }
+.not-found-recent ul { list-style: none; padding: 0; margin: 0; }
+.not-found-recent li { padding: 6px 0; }
+.not-found a { color: var(--primary); box-shadow: 0 1px 0 var(--secondary); }

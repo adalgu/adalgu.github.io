@@ -1,0 +1,31 @@
+{{- /* 다음에 읽을 글 3개(slot r6-P05). 1순위 Hugo 내장 Related(태그·키워드·날짜, config/_default/related.toml),
+       3개가 안 되면 같은 섹션의 가까운 날짜 글로 채운다. 자기 자신·중복 0. 글(posts)에만. */ -}}
+{{- if and (eq .Section "posts") (not .Params.hideRelated) }}
+{{- $self := . }}
+{{- $picked := slice }}
+{{- range site.RegularPages.Related . }}
+  {{- if and (lt (len $picked) 3) (eq .Section "posts") (ne .Permalink $self.Permalink) }}
+    {{- $picked = $picked | append . }}
+  {{- end }}
+{{- end }}
+{{- if lt (len $picked) 3 }}
+  {{- $pool := where site.RegularPages "Section" "posts" }}
+  {{- $older := where $pool "Date" "lt" $self.Date }}
+  {{- $newer := where $pool "Date" "ge" $self.Date }}
+  {{- range (append ($newer.ByDate) ($older.ByDate.Reverse)) }}
+    {{- if and (lt (len $picked) 3) (ne .Permalink $self.Permalink) (not (in $picked .)) }}
+      {{- $picked = $picked | append . }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+{{- with $picked }}
+<nav class="related-posts" aria-label="다음에 읽을 글" data-testid="related-posts">
+  <h2 class="related-posts-title">다음에 읽을 글</h2>
+  <ul>
+    {{- range . }}
+    <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+    {{- end }}
+  </ul>
+</nav>
+{{- end }}
+{{- end }}

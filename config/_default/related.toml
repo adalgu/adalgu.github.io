@@ -1,0 +1,16 @@
+# 글 하단 '다음에 읽을 글'(slot r6-P05) — Hugo 내장 Related 설정. 태그 > 키워드 > 날짜.
+threshold = 0
+includeNewer = true
+toLower = true
+
+[[indices]]
+name = "tags"
+weight = 100
+
+[[indices]]
+name = "keywords"
+weight = 80
+
+[[indices]]
+name = "date"
+weight = 10

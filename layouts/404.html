@@ -1,14 +1,26 @@
 {{ define "main" }}
 <main class="main">
   <div class="not-found">
-    <h1>404 - Page Not Found</h1>
-    <p>The page you're looking for might have been moved or renamed.</p>
-    <p>We're trying to find the correct page for you...</p>
+    <h1>404 - 페이지를 찾을 수 없습니다</h1>
+    <p>주소가 바뀌었거나 없어진 글입니다.</p>
+    {{- /* r13-P05: 옛 주소 꼴(날짜·post-)에 맞을 때만 아래 스크립트가 이 상자를 보인다 */}}
     <div id="redirect-info" style="margin-top: 20px; padding: 10px; background: #f0f0f0; border-radius: 5px; display: none;">
-      <p><strong>Attempting to redirect...</strong></p>
+      <p><strong>옮겨진 글을 찾는 중입니다…</strong></p>
       <p id="redirect-details"></p>
     </div>
-    <p><a href="{{ "/" | relURL }}">Go back to homepage</a></p>
+    {{- /* r6-P06: 최근 글 5개 + 홈 링크 — 죽은 링크로 들어온 독자가 사이트 안에 머물게 */}}
+    {{- $recent := first 5 (where site.RegularPages "Section" "posts").ByDate.Reverse }}
+    {{- with $recent }}
+    <section class="not-found-recent" data-testid="not-found-recent">
+      <h2>최근 글</h2>
+      <ul>
+        {{- range . }}
+        <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+        {{- end }}
+      </ul>
+    </section>
+    {{- end }}
+    <p><a href="{{ "/" | relURL }}" data-testid="not-found-home">홈으로 가기</a></p>
   </div>
 </main>
 
@@ -22,12 +34,11 @@
     const redirectInfo = document.getElementById('redirect-info');
     const redirectDetails = document.getElementById('redirect-details');
     
-    // Show redirect attempt info
-    if (redirectInfo && redirectDetails) {
-        redirectInfo.style.display = 'block';
-        redirectDetails.innerHTML = `Looking for alternative URLs for: <code>${currentPath}</code>`;
+    // r13-P06: 404 도달 기록(깨진 유입 주소 측정). GA가 안 실린 빌드(개발·미리보기)에선 부르지 않음.
+    if (typeof gtag === 'function') {
+        gtag('event', 'page_not_found', { page_path: currentPath });
     }
-    
+
     // Extract slug from path
     const pathParts = currentPath.split('/').filter(part => part);
     const lastPart = pathParts[pathParts.length - 1];
@@ -56,8 +67,14 @@
                 const newSlug = pattern.transform(lastPart);
                 const newUrl = window.location.origin + '/posts/' + newSlug + '/';
                 
-                if (redirectDetails) {
-                    redirectDetails.innerHTML += `<br>Trying: <a href="${newUrl}">${newUrl}</a>`;
+                // r13-P05: 꼴이 맞을 때만 상자를 보인다(주소는 글자로만 넣음 — 주소 속 HTML이 실행되지 않게)
+                if (redirectInfo && redirectDetails) {
+                    redirectInfo.style.display = 'block';
+                    const link = document.createElement('a');
+                    link.href = newUrl;
+                    link.textContent = newUrl;
+                    redirectDetails.textContent = '이동할 주소: ';
+                    redirectDetails.appendChild(link);
                 }
                 
                 // Wait a moment then redirect

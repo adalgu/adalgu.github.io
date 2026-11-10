@@ -3,6 +3,8 @@
   <img
     src="{{ .Destination | safeURL }}"
     alt="{{ .Text }}"
+    loading="lazy"
+    decoding="async"
     {{-
     with
     .Title
@@ -15,5 +17,5 @@
   <figcaption>{{ .Title }}</figcaption>
 </figure>
 {{ else }}
-<img src="{{ .Destination | safeURL }}" alt="{{ .Text }}" />
+<img src="{{ .Destination | safeURL }}" alt="{{ .Text }}" loading="lazy" decoding="async" />
 {{ end }}
