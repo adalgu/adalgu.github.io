@@ -868,8 +868,7 @@ adalgu처럼:
 - [GitLab 저장소 히스토리](https://gitlab.com/adalgu/adalgu.gitlab.io) (2018-2022)
 - [GitHub 현재 저장소](https://github.com/adalgu/adalgu.github.io) (2022-현재)
 - [Notion-Hugo Pipeline GitHub Repository](https://github.com/adalgu/adalgu.github.io)
-- [2018년 11월 R 실습 노트](https://gunn.kim/post/2018-11-09-r-practice-note/) (현재 GitHub 저장소)
-- [2020년 VSCode 글쓰기 최적화](https://gunn.kim/post/2020-01-30-vscode-markdown-writing/) (현재 GitHub 저장소)
+- 2020년 VSCode 글쓰기 최적화 (현재 GitHub 저장소)
 ---
 
 **태그**: #외장두뇌 #브레인투웹 #노션휴고파이프라인 #아달구 #15년여정 #디지털정체성 #세상을향한감수성 #서핑웨이브스 #adalgu #PKM #생산성혁신 #RMarkdown #GitLab #Hugo #Forestry #VSCode #이미지자동화
