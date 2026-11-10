@@ -18,6 +18,12 @@ summary: 이 글에서는 인공지능의 핵심 개념 중 하나인 '파인튜
   학습 방법에 영감을 줄 수 있는지에 대해 자세히 알아봅니다.
 tags: *id001
 title: '챗GPT 파인튜닝 기초: gpt-3.5-turbo 모델 사례 분석'
+cover:
+  image: "cover.jpg"
+  alt: "챗GPT 파인튜닝 기초: gpt-3.5-turbo 모델 사례 분석 대표 이미지"
+  relative: true
+  hiddenInSingle: false
+  hiddenInList: false
 ---
 
 안녕하세요. 오늘은 챗GPT와 같은 거대언어모델에서 매우 중요한 개념인 '파인튜닝(fine-tuning)'에 대해 자세히 알아보고자 합니다. 여러분이 거대언어모델 혹은 기계 학습에 관심이 있다면, 이 개념은 여러분이 앞으로 직면할 많은 문제를 해결하는 데 큰 도움이 될 것입니다.

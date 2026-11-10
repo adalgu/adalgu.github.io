@@ -25,6 +25,12 @@ summary: 2012년 9월 9일, 비 내리는 고향 집에서 시작된 외장두�
   기술 혁신과 철학적 성찰.
 tags: *id001
 title: '🧠 Brain-to-Web 파이프라인: 13년간의 외장두뇌 진화 여정'
+cover:
+  image: "cover.jpg"
+  alt: "🧠 Brain-to-Web 파이프라인: 13년간의 외장두뇌 진화 여정 대표 이미지"
+  relative: true
+  hiddenInSingle: false
+  hiddenInList: false
 ---
 
 당시 무작정 썼던 이 글이 2025년 Brain-to-Web 파이프라인의 정확한 예언서가 될 줄 누가 알았을까요? 천리안에서 시작해 노션-휴고로 진화된 15년간의 외장두뇌 진화 여정을 함께 떠나보세요.

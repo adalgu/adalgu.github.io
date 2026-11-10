@@ -18,6 +18,12 @@ summary: ETF 투자는 다양한 자산에 분산 투자할 수 있는 좋은 �
   이해하고, 투자에 도움이 되는 정보를 얻어보세요.
 tags: *id001
 title: ETF는 수수료를 어떻게 떼갈까? 매일? 연말에 한번에? 초보 투자자를 위한 쉽게 이해하는 가이드
+cover:
+  image: "cover.jpg"
+  alt: "ETF는 수수료를 어떻게 떼갈까? 매일? 연말에 한번에? 초보 투자자를 위한 쉽게 이해하는 가이드 대표 이미지"
+  relative: true
+  hiddenInSingle: false
+  hiddenInList: false
 ---
 
 ### ETF 보수 차감 방식 이해하기: 초보 투자자를 위한 가이드
