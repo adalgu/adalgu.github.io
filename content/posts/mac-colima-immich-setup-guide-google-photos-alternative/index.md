@@ -17,6 +17,12 @@ summary: 맥미니 M1과 Colima 환경에서 Immich 사진 서버를 구축하�
   Colima를 사용하여 발생하는 권한 문제와 해결 방법, 그리고 구글 포토 대안으로서의 Immich 활용법을 실제 경험을 바탕으로 공유합니다.
 tags: *id001
 title: 'Mac + Colima 환경에서 Immich 설치기: 구글 포토를 대체한 우리 집 사진 서버 구축기'
+cover:
+  image: "cover.jpg"
+  alt: "개인 사진을 보관하는 작은 홈 서버와 저장 공간"
+  relative: true
+  hiddenInSingle: false
+  hiddenInList: false
 ---
 
 ![](image-01.png)

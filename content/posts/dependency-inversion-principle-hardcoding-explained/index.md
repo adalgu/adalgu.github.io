@@ -11,6 +11,12 @@ subtitle: 하드코딩을 피하는 패턴으로 의존성 역전을 쉽게 이�
 summary: 의존성 역전 원칙을 변수 하드코딩과 함수 하드코딩의 비교를 통해 쉽게 설명합니다. 개발자라면 누구나 알고 있는 하드코딩 문제와 연결해서
   DIP를 이해해보세요.
 title: '의존성 역전 원칙 이해하기: 변수 하드코딩에서 함수 하드코딩까지'
+cover:
+  image: "cover.jpg"
+  alt: "중앙 어댑터로 연결된 독립적인 소프트웨어 모듈"
+  relative: true
+  hiddenInSingle: false
+  hiddenInList: false
 ---
 
 # 의존성 역전 원칙 이해하기: 변수 하드코딩에서 함수 하드코딩까지

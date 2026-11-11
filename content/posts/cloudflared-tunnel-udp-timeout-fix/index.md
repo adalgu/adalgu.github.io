@@ -11,6 +11,12 @@ subtitle: ''
 summary: Cloudflared Docker 터널이 1~2분마다 끊기는 'timeout' 오류, 30초짜리 공유기 UDP 타임아웃이 원인이었습니다.
   --protocol http2 옵션으로 한 줄 만에 해결한 방법을 공유합니다.
 title: 🚀 [홈 서버 삽질] Cloudflared 터널이 1~2분마다 끊기는 현상, 드디어 잡았습니다! (원인은 공유기 UDP 타임아웃)
+cover:
+  image: "cover.jpg"
+  alt: "홈 서버와 공유기를 잇는 안정적인 데이터 터널"
+  relative: true
+  hiddenInSingle: false
+  hiddenInList: false
 ---
 
 ![](image-01.png)

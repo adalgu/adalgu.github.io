@@ -18,6 +18,12 @@ summary: AI가 웹 브라우저를 제어하는 시대가 열렸습니다. Manus
   AI 통합의 중요성, 그리고 Realtime API 연동 등 확장 아이디어를 제시합니다.
 tags: *id001
 title: 'AI 기반 웹 자동화의 부상: Browser Use와 자동화 브라우징의 미래'
+cover:
+  image: "cover.jpg"
+  alt: "브라우저 창을 따라 작업을 이어가는 자동화"
+  relative: true
+  hiddenInSingle: false
+  hiddenInList: false
 ---
 
 ## **서론**
