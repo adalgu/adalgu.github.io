@@ -17,6 +17,12 @@ summary: Termux 앱을 활용하여 안드로이드 디바이스를 Node.js 서�
   활용하는 창의적인 아이디어를 실제로 구현하는 단계별 가이드입니다.
 tags: *id001
 title: '[node.js] 안드로이드폰을 node.js 서버로 만들기'
+cover:
+  image: "cover.jpg"
+  alt: "충전기에 꽂혀 서버처럼 빛나는 오래된 휴대폰"
+  relative: true
+  hiddenInSingle: false
+  hiddenInList: false
 ---
 
 1. 안드로이드폰에 termux를 설치한다.

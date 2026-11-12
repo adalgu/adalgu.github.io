@@ -17,6 +17,12 @@ summary: 공공데이터 포털의 Open API를 활용하여 코로나19 확진�
   Colab 코드를 포함하여 실시간 데이터 분석과 시각화를 쉽게 체험할 수 있는 실용적인 가이드입니다.
 tags: *id001
 title: '[파이썬] 공공데이터 포털에서 코로나19 확진자수 구하기 (+colab 코드 포함)'
+cover:
+  image: "cover.jpg"
+  alt: "바이러스와 늘어나는 그래프, 표로 흘러드는 데이터"
+  relative: true
+  hiddenInSingle: false
+  hiddenInList: false
 ---
 
 일전에 서울시 공공데이터 포털을 통해서 지하철 승차인원수를 구한 적이 있었다. 

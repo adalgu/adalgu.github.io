@@ -17,6 +17,12 @@ summary: 서울 공공데이터 포털의 Open API를 활용하여 지하철 승
   API 인증부터 데이터 추출, 정리, 시각화까지 완벽한 워크플로우를 제공하는 실용 가이드입니다.
 tags: *id001
 title: '[파이썬] 서울 공공데이터 포털 Open API를 이용해서 지하철 승차인원수 구하기'
+cover:
+  image: "cover.jpg"
+  alt: "노을 속 지하철과 승객 흐름이 이어지는 막대그래프"
+  relative: true
+  hiddenInSingle: false
+  hiddenInList: false
 ---
 
 > 원본 그림 유실 — 이 글의 그림 10장은 옮기는 과정에서 사라졌습니다.
