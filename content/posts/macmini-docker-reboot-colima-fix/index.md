@@ -18,6 +18,12 @@ summary: 집에서 맥미니를 서버로 운영하며 Docker를 사용하던 �
   도움으로 단계별 해결 과정을 따라가며 원인을 찾고 해결하는 스토리입니다.
 tags: *id001
 title: '🛠️ 맥미니 서버 운영기: 원격 재부팅 후 Docker를 살리다'
+cover:
+  image: "cover.jpg"
+  alt: "밤 책상 위 작은 홈 서버와 재시작 표시"
+  relative: true
+  hiddenInSingle: false
+  hiddenInList: false
 ---
 
 # 🛠️ 맥미니 서버 운영기: 원격 재부팅 후 Docker를 살리다

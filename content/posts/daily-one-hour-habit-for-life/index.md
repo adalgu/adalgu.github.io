@@ -12,6 +12,12 @@ subtitle: 슬럼프 탈출에 도움이 되는 팁
 summary: 몇년 전에 후배의 페북 포스팅을 통해서 알게 된 글인데, 슬럼프에 빠져있었던 시기에 벗어나기 위한 과정에서 참고했던 좋은 글이다.
 tags: *id001
 title: '[인생] 매일 한 시간씩 하기'
+cover:
+  image: "cover.jpg"
+  alt: "아침 햇살 속 모래시계와 커피, 펼친 노트"
+  relative: true
+  hiddenInSingle: false
+  hiddenInList: false
 ---
 
 # **📌 박제를 위한 기록**

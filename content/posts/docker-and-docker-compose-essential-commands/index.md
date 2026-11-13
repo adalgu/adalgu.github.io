@@ -17,6 +17,12 @@ summary: Docker 및 Docker Compose의 기본 명령어들을 정리합니다. �
   자주 사용되는 명령어들을 상세히 설명하여 컨테이너 관리를 더욱 쉬욵게 해드립니다.
 tags: *id001
 title: 자주 쓰는 Docker 명령어 정리 시리즈
+cover:
+  image: "cover.jpg"
+  alt: "부두에 차곡차곡 쌓인 컨테이너와 크레인"
+  relative: true
+  hiddenInSingle: false
+  hiddenInList: false
 ---
 
 Docker는 컨테이너 기반 애플리케이션 개발 및 배포에 필수적인 도구인데요, 프로젝트를 진행하며 잊어버리기 쉬운 기본 명령어들을 한눈에 정리해두면 정말 유용하답니다.

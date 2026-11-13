@@ -14,6 +14,12 @@ summary: 개그우먼 이수지의 '대치동 엄마 패러디' 영상 이후, �
   급증하고 맘카페에는 관련 글이 쏟아지는 등 몽클레르 패딩의 인기가 급락하고 있다.
 tags: *id001
 title: 이수지 때문에 못 입겠어!" 강남 엄마들 몽클레르 패딩 '손절' 사태
+cover:
+  image: "cover.jpg"
+  alt: "옷장에 걸린 겨울 패딩들"
+  relative: true
+  hiddenInSingle: false
+  hiddenInList: false
 ---
 
 

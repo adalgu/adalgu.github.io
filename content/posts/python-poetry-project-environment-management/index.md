@@ -16,6 +16,12 @@ summary: Python 프로젝트 환경을 효율적으로 관리하는 데 어려�
   설정, 패키징을 간소화하는 방법을 소개합니다. '내 컴퓨터에서는 잘 돌아가는데'라는 문제를 해결하고 더 나은 개발 워크플로우를 구축해 보세요.
 tags: *id001
 title: 'Python 프로젝트 환경 관리: Poetry를 활용한 효율적인 워크플로우'
+cover:
+  image: "cover.jpg"
+  alt: "유리병마다 따로 담긴 블록, 격리된 개발 환경"
+  relative: true
+  hiddenInSingle: false
+  hiddenInList: false
 ---
 
 ## 1. 도입: 개발 환경 동기화 문제의 실제 사례
