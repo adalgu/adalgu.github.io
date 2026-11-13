@@ -16,6 +16,12 @@ summary: 제주도는 육지와 단절된 섬 환경, 현지인보다 많은 관
   이러한 갈라파고스형 환경은 모빌리티 서비스 실험과 혁신을 위한 이상적인 테스트베드이자 규제 샌드박스로 활용될 수 있는 잠재력을 가지고 있다.
 tags: *id001
 title: 모빌리티 갈라파고스, 제주도
+cover:
+  image: "cover.jpg"
+  alt: "모빌리티 갈라파고스, 제주도 대표 이미지"
+  relative: true
+  hiddenInSingle: false
+  hiddenInList: false
 ---
 
 ![](image-01.png)
