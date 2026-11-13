@@ -18,6 +18,12 @@ summary: 개발자라면 누구나 한 번쯤 Git 브랜치 이름을 어떻게 
   팀 전체의 자동화 워크플로우까지 완성한 여정을 공유합니다.
 tags: *id001
 title: Git 브랜치, 어떻게 관리해야 할까? - 개인의 기록에서 팀의 자동화까지
+cover:
+  image: "cover.jpg"
+  alt: "분기하고 합쳐지는 버전 관리와 자동화의 흐름"
+  relative: true
+  hiddenInSingle: false
+  hiddenInList: false
 ---
 
 # Git 브랜치, 어떻게 관리해야 할까? - 개인의 기록에서 팀의 자동화까지

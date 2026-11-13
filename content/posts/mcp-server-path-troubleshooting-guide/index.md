@@ -19,6 +19,12 @@ summary: MCP 서버 실행 시 발생하는 PATH 관련 오류의 근본 원인�
   제시합니다. macOS, Windows, Docker 환경별 특성과 개발자를 위한 예방책까지 포함한 종합 가이드입니다.
 tags: *id001
 title: MCP 서버 PATH 문제 완전 해결 가이드
+cover:
+  image: "cover.jpg"
+  alt: "서버로 이어지는 복잡한 경로 속 하나의 연결선"
+  relative: true
+  hiddenInSingle: false
+  hiddenInList: false
 ---
 
 # MCP 서버 PATH 문제 완전 해결 가이드

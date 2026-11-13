@@ -17,6 +17,12 @@ summary: Git의 기본적이고 필수적인 명령어들을 단계별로 설명
   실무에서 꼭 알아야 할 Git 명령어들을 정리했습니다.
 tags: *id001
 title: 자주 쓰는 Git 명령어 정리
+cover:
+  image: "cover.jpg"
+  alt: "분기와 커밋을 정리한 버전 관리의 기초"
+  relative: true
+  hiddenInSingle: false
+  hiddenInList: false
 ---
 
 # 자주 쓰는 Git 명령어 정리

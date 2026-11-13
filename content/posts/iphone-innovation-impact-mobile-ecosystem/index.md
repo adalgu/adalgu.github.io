@@ -19,6 +19,12 @@ summary: 아이폰은 단순한 기기가 아닌, 기존 기술의 혁신적 통
   변혁시킨 촉매제였습니다. 이 포스트에서는 아이폰의 성공 요인과 파급 효과, 그리고 미래 기술 혁신에 주는 교훈을 분석합니다.
 tags: *id001
 title: '아이폰 혁신 통합: 모바일 생태계와 디지털 경제에 미친 영향'
+cover:
+  image: "cover.jpg"
+  alt: "스마트폰을 중심으로 연결되는 모바일 생태계"
+  relative: true
+  hiddenInSingle: false
+  hiddenInList: false
 ---
 
 **1. 기술 통합과 혁신적 디자인**

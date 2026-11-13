@@ -11,6 +11,12 @@ subtitle: 4개 AI 모델과의 토론 실험 결과
 summary: 블로그 자동화를 고민하다 시작된 철학적 실험. Gemini-2.5-Pro, GPT-5, O3, Claude 4개 AI 모델과 함께
   'AI 시대 인간 고유성'에 대해 토론한 결과와 실용적 블로그 전략을 담았습니다.
 title: AI시대, 인간 고유의 관점은 정말 존재할까?
+cover:
+  image: "cover.jpg"
+  alt: "같은 프리즘을 다르게 비추는 두 렌즈"
+  relative: true
+  hiddenInSingle: false
+  hiddenInList: false
 ---
 
 # AI시대, 인간 고유의 관점은 정말 존재할까?

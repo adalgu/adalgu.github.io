@@ -8,6 +8,12 @@ notion_id: 2347522e-eb2f-8095-abf2-da93f992f466
 url: "/posts/인지-부하-이론과-스캐폴딩-효과-이론에서-실전-그리고-최신-연구까지/"
 subtitle: ''
 title: '인지 부하 이론과 스캐폴딩 효과: 이론에서 실전, 그리고 최신 연구까지'
+cover:
+  image: "cover.jpg"
+  alt: "학습의 계단을 받쳐 주는 스캐폴딩 구조"
+  relative: true
+  hiddenInSingle: false
+  hiddenInList: false
 ---
 
 # **인지 부하 이론과 스캐폴딩 효과: 이론에서 실전, 그리고 최신 연구까지**
