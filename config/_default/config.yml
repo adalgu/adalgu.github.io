@@ -1,5 +1,5 @@
 baseURL: "https://gunn.kim"
-title: Gunn Kim — Exobrain
+title: Exobrain · gunn.kim
 languageCode: ko
 paginate.pagerSize: 5
 theme: PaperMod
@@ -19,7 +19,7 @@ minify:
 
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
-  title: Gunn Kim — Exobrain
+  title: Exobrain · gunn.kim
   description: "Exobrain in the age of AI"
   keywords: [Blog, Portfolio, PaperMod]
   author: Gunn Kim
@@ -62,7 +62,7 @@ params:
     filename: sitemap.xml
 
   label:
-    text: "Gunn Kim"
+    text: "Exobrain · gunn.kim"
     icon: /apple-touch-icon.png
     iconHeight: 35
 
