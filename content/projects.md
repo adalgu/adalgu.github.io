@@ -8,5 +8,3 @@ url: /projects/
 [만든 방식 보기](https://markets.gunn.kim/about/)
 
 투자 권유가 아닙니다.
-
-## 블로그 엔진
