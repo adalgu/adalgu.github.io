@@ -1,0 +1,13 @@
+{{- /* TASK-628: 세로 화면 묶음. 넓은 화면 한 줄 4장, 좁은 화면 2×2. 누르면 원본 크기. */ -}}
+<figure class="shot-grid">
+  <div class="shot-grid__row">{{ .Inner }}</div>
+  {{- with .Get "caption" }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
+</figure>
+<style>
+.shot-grid{margin:1.5rem 0}
+.shot-grid__row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.5rem}
+.shot-grid__row a{display:block}
+.shot-grid__row img{width:100%;height:auto;display:block;margin:0;border-radius:6px}
+.shot-grid figcaption{font-size:.85em;margin-top:.5rem;text-align:center}
+@media (max-width:640px){.shot-grid__row{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
