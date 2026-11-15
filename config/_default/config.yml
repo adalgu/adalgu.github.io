@@ -1,5 +1,6 @@
 baseURL: "https://gunn.kim"
-title: Exobrain
+title: Gunn Kim — Exobrain
+languageCode: ko
 paginate.pagerSize: 5
 theme: PaperMod
 ignoreFiles:
@@ -18,7 +19,7 @@ minify:
 
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
-  title: Exobrain
+  title: Gunn Kim — Exobrain
   description: "Exobrain in the age of AI"
   keywords: [Blog, Portfolio, PaperMod]
   author: Gunn Kim
@@ -140,6 +141,18 @@ menu:
       name: tags
       url: /tags/
       weight: 20
+    - identifier: essays
+      name: 에세이
+      url: /tags/에세이/
+      weight: 30
+    - identifier: projects
+      name: 프로젝트
+      url: /projects/
+      weight: 40
+    - identifier: about
+      name: 소개
+      url: /about/
+      weight: 50
     # - identifier: example
     #   name: example.org
     #   url: https://example.org
