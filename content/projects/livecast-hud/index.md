@@ -23,8 +23,6 @@ ShowPostNavLinks: false
 
 한국어 발표에 영어 자막을 실시간으로 붙여 슬라이드 위에 띄웁니다. 발표자의 말을 알아듣고 전체 화면 PowerPoint나 Keynote 슬라이드 쇼 위의 얇은 자막 막대에 영어를 보여 줍니다. 대본을 미리 준비했다면 말한 문장을 대본과 맞춰 직접 써 둔 영어를 그대로 띄웁니다.
 
-<!-- 채울 것: 왜 만들었나 — 저장소 README에는 '왜 쓰나'(쓰는 사람의 이점)만 있고 만든 까닭은 없음(지휘관 말 필요) -->
-
 ## 화면
 
 {{< figure src="subtitle-bar.jpg" alt="자막 막대: 영어 두 줄, 말하는 중인 문장의 흐린 줄, 한국어 줄" caption="자막 막대. 출처 [adalgu/livecast-hud](https://github.com/adalgu/livecast-hud) (Apache-2.0)" >}}
