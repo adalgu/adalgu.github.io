@@ -62,7 +62,7 @@ params:
     filename: sitemap.xml
 
   label:
-    text: "Home"
+    text: "Gunn Kim"
     icon: /apple-touch-icon.png
     iconHeight: 35
 
@@ -125,38 +125,22 @@ params:
     keys: ["title", "permalink", "summary", "content"]
 menu:
   main:
-    # - identifier: posts
-    #   name: posts
-    #   url: /posts/
-    #   weight: 5
-    - identifier: archives
-      name: posts
-      url: /posts/
-      weight: 5
-    # - identifier: categories
-    #   name: categories
-    #   url: /categories/
-    #   weight: 10
-    - identifier: tags
-      name: tags
-      url: /tags/
-      weight: 20
     - identifier: essays
       name: 에세이
       url: /tags/에세이/
-      weight: 30
+      weight: 10
+    - identifier: archives
+      name: 글
+      url: /posts/
+      weight: 20
     - identifier: projects
       name: 프로젝트
       url: /projects/
-      weight: 40
+      weight: 30
     - identifier: about
       name: 소개
       url: /about/
-      weight: 50
-    # - identifier: example
-    #   name: example.org
-    #   url: https://example.org
-    #   weight: 30
+      weight: 40
 # Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
 pygmentsUseClasses: true
 markup:
