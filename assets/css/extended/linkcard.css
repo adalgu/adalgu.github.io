@@ -1,0 +1,11 @@
+/* TASK-591 linkcard shortcode — 그림 없는 카드도 깨지지 않게, 좁은 폭에서 넘침 0 */
+.linkcard { margin: 1.2em 0; }
+.linkcard__a { display: flex; gap: 12px; align-items: stretch; border: 1px solid var(--border); border-radius: 8px;
+  overflow: hidden; text-decoration: none; color: var(--primary); background: var(--entry); box-shadow: none; }
+.post-content .linkcard__a { box-shadow: none; }
+.linkcard__img { width: 120px; min-width: 120px; height: auto; max-height: 96px; object-fit: cover; margin: 0 !important; border-radius: 0; }
+.linkcard__body { display: flex; flex-direction: column; justify-content: center; gap: 4px; padding: 10px 12px; min-width: 0; }
+.linkcard--noimg .linkcard__body { padding-left: 14px; }
+.linkcard__title { font-weight: 600; line-height: 1.4; overflow-wrap: anywhere; }
+.linkcard__meta { font-size: .85em; color: var(--secondary); overflow-wrap: anywhere; }
+@media (max-width: 480px) { .linkcard__img { width: 88px; min-width: 88px; } }
