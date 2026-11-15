@@ -14,7 +14,10 @@ slug: "future-of-software-saas-to-ai-agent"
 subtitle: 내가 쓰던 앱들이 사라진다고? '도구'에서 '비서'로 바뀌는 소프트웨어의 미래 완벽 정리
 summary: CD를 사서 깔던 시절부터 구독하는 SaaS 시대를 넘어, 이제는 AI가 알아서 일하는 '에이전트(Agent)' 시대가 오고 있습니다.
   1조 달러 소프트웨어 시장과 16조 달러 서비스 시장의 차이를 통해, 급변하는 IT 트렌드와 미래 기회를 누구나 알기 쉽게 정리해 드립니다.
-tags: *id001
+tags:
+- SaaS
+- ai-trends
+- agentic-ai
 title: 'AI Eats Everything: 소프트웨어는 어떻게 진화하는가'
 cover:
   image: "cover.jpg"

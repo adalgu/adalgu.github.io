@@ -12,7 +12,8 @@ slug: "gangnam-moms-moncler-controversy"
 subtitle: 패러디 영상 하나가 불러온 나비효과, 몽클레르의 운명은?
 summary: 개그우먼 이수지의 '대치동 엄마 패러디' 영상 이후, 강남 엄마들 사이에서 몽클레르 패딩을 기피하는 현상이 나타나고 있다. 중고 매물이
   급증하고 맘카페에는 관련 글이 쏟아지는 등 몽클레르 패딩의 인기가 급락하고 있다.
-tags: *id001
+tags:
+- moncler
 title: 이수지 때문에 못 입겠어!" 강남 엄마들 몽클레르 패딩 '손절' 사태
 cover:
   image: "cover.jpg"

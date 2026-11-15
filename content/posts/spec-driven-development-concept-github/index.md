@@ -14,7 +14,10 @@ slug: "spec-driven-development-concept-github"
 subtitle: '''Vibe Coding''의 함정을 피하고 TDD와 함께 완성하는 견고한 설계 습관'
 summary: '''일단 코딩''하는 습관이 기술 부채를 만듭니다. GitHub의 Spec-Driven Development(SDD)가 어떻게 ''생각하는
   개발''로 이끄는지, TDD와는 어떤 관계인지 알아봅니다.'
-tags: *id001
+tags:
+- SDD
+- spec-driven-development
+- vibe-coding
 title: '코딩보다 생각이 먼저다: GitHub이 제안하는 SDD(사양 주도 개발)'
 cover:
   image: "cover.jpg"
