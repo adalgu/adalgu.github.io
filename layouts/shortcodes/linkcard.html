@@ -1,0 +1,21 @@
+{{- /* TASK-591: 기사 미리보기 카드 — 빌드 때 바깥 요청 0, 값은 인자로만.
+     {{< linkcard url="https://…" title="…" site="매체" image="그림(묶음 안 파일 또는 비움)" date="2026-11-15" >}}
+     image가 비면 그림 칸 없이 글자만. url은 http(s)만 링크로 — 아니면 글자만. */ -}}
+{{- $url := .Get "url" | default "" -}}
+{{- $title := .Get "title" | default $url -}}
+{{- $site := .Get "site" | default "" -}}
+{{- $image := .Get "image" | default "" -}}
+{{- $date := .Get "date" | default "" -}}
+{{- $ok := or (hasPrefix $url "https://") (hasPrefix $url "http://") -}}
+{{- $img := "" -}}
+{{- with $image -}}
+  {{- with $.Page.Resources.GetMatch . -}}{{- $img = .RelPermalink -}}{{- else -}}{{- if or (hasPrefix $image "/") (hasPrefix $image "https://") -}}{{- $img = $image -}}{{- end -}}{{- end -}}
+{{- end -}}
+<div class="linkcard{{ if not $img }} linkcard--noimg{{ end }}">
+{{- if $ok }}<a class="linkcard__a" href="{{ $url }}" target="_blank" rel="noopener noreferrer">{{ else }}<div class="linkcard__a">{{ end -}}
+{{- with $img }}<img class="linkcard__img" src="{{ . }}" alt="{{ $title }}" loading="lazy">{{ end -}}
+<span class="linkcard__body"><span class="linkcard__title">{{ $title }}</span>
+{{- if or $site $date }}<span class="linkcard__meta">{{ $site }}{{ if and $site $date }} · {{ end }}{{ $date }}</span>{{ end -}}
+</span>
+{{- if $ok }}</a>{{ else }}</div>{{ end -}}
+</div>
