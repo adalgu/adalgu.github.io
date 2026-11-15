@@ -1,5 +1,6 @@
 baseURL: "https://gunn.kim"
-title: Exobrain
+title: Gunn Kim — Exobrain
+languageCode: ko
 paginate.pagerSize: 5
 theme: PaperMod
 ignoreFiles:
@@ -18,14 +19,14 @@ minify:
 
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
-  title: Exobrain
+  title: Gunn Kim — Exobrain
   description: "Exobrain in the age of AI"
   keywords: [Blog, Portfolio, PaperMod]
   author: Gunn Kim
   # author: ["Me", "You"] # multiple authors
   # 사이트 기본 공유 그림 없음: 표지(cover.image) 없는 글은 og:image·twitter:image를 아예 내지 않는다(BLOG-011 — 자리표시 문자열이 깨진 주소로 나가던 것).
   images: []
-  DateFormat: "January 2, 2006"
+  DateFormat: "2006년 1월 2일"
   defaultTheme: auto # dark, light
   disableThemeToggle: false
 
@@ -61,7 +62,7 @@ params:
     filename: sitemap.xml
 
   label:
-    text: "Home"
+    text: "Gunn Kim"
     icon: /apple-touch-icon.png
     iconHeight: 35
 
@@ -124,26 +125,18 @@ params:
     keys: ["title", "permalink", "summary", "content"]
 menu:
   main:
-    # - identifier: posts
-    #   name: posts
-    #   url: /posts/
-    #   weight: 5
     - identifier: archives
-      name: posts
+      name: 글
       url: /posts/
-      weight: 5
-    # - identifier: categories
-    #   name: categories
-    #   url: /categories/
-    #   weight: 10
-    - identifier: tags
-      name: tags
-      url: /tags/
       weight: 20
-    # - identifier: example
-    #   name: example.org
-    #   url: https://example.org
-    #   weight: 30
+    - identifier: projects
+      name: 프로젝트
+      url: /projects/
+      weight: 30
+    - identifier: about
+      name: 소개
+      url: /about/
+      weight: 40
 # Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
 pygmentsUseClasses: true
 markup:
