@@ -13,12 +13,12 @@ author: Gunn Kim
 draft: false
 ---
 
-오늘 한국경제학회 뉴스레터에서 우연히 인공지능(AI)과 한국 경제 영향에 대한 세미나 소식을 보게 되었다. 지난해 이전 직장에서 썼던 [마지막 보고서](http://www.lgeri.com/report/view.do?idx=19620)가 위 세미나와 비슷한 주제였고, 회사를 옮긴 최근에도 여전히 작년 보고서를 보고 강연과 인터뷰 요청이 오고 있는지라 어떤 주제로 세미나를 하는지 궁금증에 메일을 열어 보았다.
+오늘 한국경제학회 뉴스레터에서 우연히 인공지능(AI)과 한국 경제 영향에 대한 세미나 소식을 보게 되었다. 지난해 이전 직장에서 썼던 [마지막 보고서](https://www.lgeri.com/report/view.do?idx=19620)가 위 세미나와 비슷한 주제였고, 회사를 옮긴 최근에도 여전히 작년 보고서를 보고 강연과 인터뷰 요청이 오고 있는지라 어떤 주제로 세미나를 하는지 궁금증에 메일을 열어 보았다.
 
 <details markdown="1">
 <summary>세미나 자세한 내용 접기/펼치기</summary>
 
-![](http://kea.ne.kr/resources/upload/editor/2019/08/12/d181f51a-9751-4f3b-8bd4-4ea11d582c8d_%ED%95%9C%EA%B5%AD%EA%B2%BD%EC%A0%9C%ED%8F%AC%EB%9F%BC%20%EC%84%B8%EB%AF%B8%EB%82%98%20%EC%B4%88%EC%B2%AD%EC%9E%A5_20190828.jpg)
+![](https://kea.ne.kr/resources/upload/editor/2019/08/12/d181f51a-9751-4f3b-8bd4-4ea11d582c8d_%ED%95%9C%EA%B5%AD%EA%B2%BD%EC%A0%9C%ED%8F%AC%EB%9F%BC%20%EC%84%B8%EB%AF%B8%EB%82%98%20%EC%B4%88%EC%B2%AD%EC%9E%A5_20190828.jpg)
 
 </details>
 <br></br>
