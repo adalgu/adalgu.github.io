@@ -17,6 +17,8 @@ cover:
 
 맥북의 iPhone 미러링 창을 Claude 데스크탑의 컴퓨터 사용(computer use)으로 조작하면, 미뤄 두던 아이폰 단축어 자동화를 대화하듯 만들 수 있다. 하루 저녁에 자동화 두 개를 완성했다.
 
+{{< figure src="iphone-mirroring-connecting.jpg" alt="맥의 iPhone 미러링 창. 흐린 파랑·초록 바탕 가운데에 Connecting to iPhone 13 Pro 글자가 떠 있다" caption="맥에서 iPhone 미러링을 열면 먼저 뜨는 연결 화면" width="320" >}}
+
 단축어 앱은 강력하지만, 작은 화면에서 변수를 고르고 조건문을 끌어 넣는 일이 번거로워 늘 "언젠가 해야지"로 남아 있었다. 이 글은 그 일을 Claude와 나눠서 끝낸 기록이다. 무엇이 자동으로 됐고, 어디서 사람이 손을 대야 했는지 그대로 적었다.
 
 ## 준비물과 구성
