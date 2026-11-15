@@ -1,0 +1,10 @@
+/* TASK-619 프로젝트 쪽 */
+.project-item { margin: 0 0 3rem; }
+.post-content .project-title { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin: 0 0 .75rem; }
+.project-status { font-size: .75rem; font-weight: 500; padding: .1rem .55rem; border-radius: 999px; border: 1px solid var(--border); color: var(--secondary); }
+.project-status.is-live { color: #1a7f4b; border-color: #1a7f4b; }
+.project-shot { margin: 0 0 .75rem; }
+.project-shot img { width: 100%; height: auto; border: 1px solid var(--border); border-radius: 6px; }
+.project-shot figcaption { font-size: .8rem; color: var(--secondary); margin-top: .35rem; }
+.project-desc p { margin: 0 0 .5rem; }
+.project-link { margin: 0; }

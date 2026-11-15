@@ -1,0 +1,11 @@
+{{- /* TASK-619 프로젝트 항목 한 덩이: title img alt status href [link] [gif] [source] + 안쪽 = 한 줄 소개 */ -}}
+{{- $status := .Get "status" -}}
+<section class="project-item">
+  <h2 class="project-title">{{ .Get "title" }} <span class="project-status{{ if hasPrefix $status "돌아감" }} is-live{{ end }}">{{ $status }}</span></h2>
+  <figure class="project-shot">
+    <a href="{{ with .Get "gif" }}{{ . }}{{ else }}{{ .Get "href" }}{{ end }}"><img src="{{ .Get "img" }}" alt="{{ .Get "alt" }}" loading="lazy" width="1200"></a>
+    {{- with .Get "caption" }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
+  </figure>
+  <div class="project-desc">{{ .Inner | markdownify }}</div>
+  <p class="project-link"><a href="{{ .Get "href" }}">{{ .Get "link" | default "보기" }} →</a></p>
+</section>
