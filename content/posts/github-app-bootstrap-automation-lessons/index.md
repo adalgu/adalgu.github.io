@@ -20,7 +20,11 @@ slug: "github-app-bootstrap-automation-lessons"
 subtitle: Manifest부터 App JWT, installation token 폐기까지 실제 자동화에서 확인한 GitHub App 보안 계약
 summary: 최소 권한 GitHub App bootstrap을 자동화하며 만난 manifest 필드, CSRF state, App JWT Bearer
   인증, 부분 생성 복구, token 폐기 문제와 해결 원칙을 정리합니다.
-tags: *id001
+tags:
+- DevOps
+- API
+- troubleshooting
+- CI/CD
 title: GitHub App Bootstrap을 자동화하며 만난 여섯 개의 함정
 ---
 

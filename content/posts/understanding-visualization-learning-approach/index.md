@@ -11,7 +11,8 @@ notion_id: 1b27522e-eb2f-8133-ba79-c8a592c36cad
 slug: "understanding-visualization-learning-approach"
 subtitle: 진정한 이해의 기준과 학습 방법에 대한 생각
 summary: 복잡한 개념을 진정으로 이해했다는 것은 무엇일까요? '그림이 그려진다'는 표현을 통해 이해의 본질과 효과적인 학습 방법에 대해 탐구합니다.
-tags: *id001
+tags:
+- essay
 title: '"그림이 그려진다" = 이해하고 있다'
 cover:
   image: "cover.jpg"

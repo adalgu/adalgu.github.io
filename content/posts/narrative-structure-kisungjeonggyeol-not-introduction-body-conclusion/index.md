@@ -14,7 +14,9 @@ slug: "narrative-structure-kisungjeonggyeol-not-introduction-body-conclusion"
 subtitle: 리듬과 흐름이 있는 글쓰기를 위한 중요한 구조적 교훈
 summary: 서론-본론-결론은 공식적인 글쓰기 구조지만 재미있는 글을 쓰고 싶다면 기승전결 구조를 인식해야 합니다. 이 글은 박종인의 '기자의
   글쓰기'에서 발취한 항리한 작문 구조에 대한 통찼력 있는 통찼을 제공합니다. 리듬 있는 글쓰기의 부당탈탈한 매력을 발견해 보세요.
-tags: *id001
+tags:
+- writing
+- essay
 title: 서론-본론-결론이 아니다. 기승전결이다.
 cover:
   image: "cover.jpg"

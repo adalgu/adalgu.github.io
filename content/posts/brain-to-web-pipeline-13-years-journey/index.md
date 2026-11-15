@@ -23,7 +23,17 @@ subtitle: 2012년 예언이 2025년 현실이 되기까지 - 디지털 정체성
 summary: 2012년 9월 9일, 비 내리는 고향 집에서 시작된 외장두뇌 프로젝트가 어떻게 13년 만에 완전 자동화된 Brain-to-Web
   파이프라인으로 진화했는지 복기하는 감동적인 개발 여정 스토리. 천리안부터 노션-휴고까지, adalgu라는 디지털 정체성과 함께 걸어온 15년간의
   기술 혁신과 철학적 성찰.
-tags: *id001
+tags:
+- exobrain
+- Brain-to-Web
+- notion-hugo-pipeline
+- dev-journey
+- digital-identity
+- adalgu
+- productivity-innovation
+- PKM
+- automation
+- memoir
 title: '🧠 Brain-to-Web 파이프라인: 13년간의 외장두뇌 진화 여정'
 cover:
   image: "cover.jpg"

@@ -10,7 +10,9 @@ description: ''
 draft: false
 lastmod: '2026-11-08T15:46:00.000Z'
 notion_id: 40a7522e-eb2f-8157-952f-e50a3b188a91
-url: "/posts/광군제-쇼핑-영상을-다-보는-대신-ai-브라우저에게-출처를-따라가게-했다/"
+url: "/posts/singles-day-shopping-ai-browser-sources/"
+aliases:
+  - "/posts/광군제-쇼핑-영상을-다-보는-대신-ai-브라우저에게-출처를-따라가게-했다/"
 subtitle: ''
 title: 광군제 쇼핑, 영상을 다 보는 대신 AI 브라우저에게 출처를 따라가게 했다
 ---
