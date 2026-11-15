@@ -1,0 +1,22 @@
+{{- define "main" }}
+{{- /* TASK-625 프로젝트 목록: content/projects/<이름>/index.md 하나 = 카드 하나 (머리말: title summary status cover weight links repo_public version) */ -}}
+<header class="page-header">
+  <h1>{{ .Title }}</h1>
+  {{- with .Params.summary }}<div class="post-description">{{ . }}</div>{{ end }}
+</header>
+<div class="project-cards">
+  {{- range .Pages.ByWeight }}
+  {{- $p := . }}
+  <div class="project-card">
+    {{- with .Resources.GetMatch (.Params.cover.image | default "cover.*") }}
+    <img src="{{ .RelPermalink }}" alt="{{ $p.Params.cover.alt }}" loading="lazy" width="{{ .Width }}" height="{{ .Height }}">
+    {{- end }}
+    <div class="project-card-body">
+      <h2 class="project-card-title"><a class="project-card-link" href="{{ .RelPermalink }}">{{ .Title }}</a> {{ with .Params.status }}<span class="project-status{{ if eq . "돌아감" }} is-live{{ end }}">{{ . }}</span>{{ end }}</h2>
+      {{- with .Params.summary }}<p>{{ . }}</p>{{ end }}
+      {{ partial "project-links.html" . }}
+    </div>
+  </div>
+  {{- end }}
+</div>
+{{- end }}
