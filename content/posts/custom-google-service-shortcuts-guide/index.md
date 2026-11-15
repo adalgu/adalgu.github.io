@@ -21,7 +21,7 @@ cover:
   hiddenInList: false
 ---
 
-안녕하세요! 요즘 디지털 생활에서 스마트하게 일하는 방법을 찾고 계신가요? 여러분처럼 여러 구글 계정을 jongjong이용하는 저도 그랬답니다. 그래서 오늘은 구글 드라이브, 지메일, 유튜브 같은 구글 서비스를 쉽고 빠르게 이용할 수 있는 꿀팁, 바로 '맞춤형 인터넷 바로가기' 만드는 방법을 소개하려고 해요. 시작해볼까요?
+안녕하세요! 요즘 디지털 생활에서 스마트하게 일하는 방법을 찾고 계신가요? 여러분처럼 여러 구글 계정을 종종 이용하는 저도 그랬답니다. 그래서 오늘은 구글 드라이브, 지메일, 유튜브 같은 구글 서비스를 쉽고 빠르게 이용할 수 있는 꿀팁, 바로 '맞춤형 인터넷 바로가기' 만드는 방법을 소개하려고 해요. 시작해볼까요?
 
 ### **맞춤형 인터넷 바로가기의 매력**
 
@@ -36,7 +36,7 @@ cover:
 3단계: 이제 바로가기를 마우스 오른쪽 버튼으로 클릭하고 '속성'을 봐요. URL 부분을 아래와 같이 바꿔주세요:
 
 ```plain text
-<https://accounts.google.com/AccountChooser?Email=여러분의이메일주소&continue=원하는구글서비스URL>
+https://accounts.google.com/AccountChooser?Email=여러분의이메일주소&continue=원하는구글서비스URL
 
 ```
 
@@ -47,7 +47,7 @@ cover:
 자, 이제 실제로 한번 해볼까요? 시작은 구글 드라이브로 해봐요. 일단 구글 드라이브 페이지에 들어가서 바로가기를 만들고, 속성에서 URL을 아래와 같이 변경해주세요. 여러분의 이메일 주소를 넣어야 한다는 거, 잊지 마세요!
 
 ```plain text
-<https://accounts.google.com/AccountChooser?Email=여러분의이메일@gmail.com&continue=https://drive.google.com/drive/my-drive>
+https://accounts.google.com/AccountChooser?Email=여러분의이메일@gmail.com&continue=https://drive.google.com/drive/my-drive
 
 ```
 
@@ -58,7 +58,7 @@ cover:
 유튜브도 자주 보시죠? 유튜브 바로가기도 마찬가지로 설정할 수 있어요. 바로가기를 만들고, 속성에서 URL을 아래와 같이 바꿔보세요.
 
 ```plain text
-<https://accounts.google.com/AccountChooser?Email=여러분의이메일@gmail.com&continue=https://www.youtube.com/>
+https://accounts.google.com/AccountChooser?Email=여러분의이메일@gmail.com&continue=https://www.youtube.com/
 
 ```
 
@@ -66,10 +66,10 @@ cover:
 
 ### **지메일 바로가기로 메일 관리 깔끔하게!**
 
-메일 확인도 일이죠. 하지만 지메일 바로가기를 설정해두면 그것도 문제 없어요. 바로가기를 만들고 속성에서 URL을 아래와 같이 변경해보세요.
+메일 확인도 일이죠. 하지만 지메일 바로가기를 설정해두면 그것도 문제없어요. 바로가기를 만들고 속성에서 URL을 아래와 같이 변경해보세요.
 
 ```plain text
-<https://accounts.google.com/AccountChooser?Email=여러분의이메일@gmail.com&continue=https://mail.google.com/mail/u/0/#inbox>
+https://accounts.google.com/AccountChooser?Email=여러분의이메일@gmail.com&continue=https://mail.google.com/mail/u/0/#inbox
 
 ```
 
@@ -82,7 +82,7 @@ cover:
 문서 작업도 많으시죠? 구글 문서 바로가기 하나면, 문서 열기부터 편집까지 순식간이에요. 바로가기를 만들고, URL을 아래와 같이 변경해주세요:
 
 ```plain text
-<https://accounts.google.com/AccountChooser?Email=여러분의이메일@gmail.com&continue=https://docs.google.com/document/u/0/>
+https://accounts.google.com/AccountChooser?Email=여러분의이메일@gmail.com&continue=https://docs.google.com/document/u/0/
 
 ```
 
@@ -93,7 +93,7 @@ cover:
 코딩이나 데이터 과학에 관심이 많으신가요? 구글 콜랩 바로가기가 있으면, 학습 환경으로 바로 점프할 수 있어요. 바로가기를 만들고 URL을 이렇게 바꿔보세요:
 
 ```plain text
-<https://accounts.google.com/AccountChooser?Email=여러분의이메일@gmail.com&continue=https://colab.research.google.com/>
+https://accounts.google.com/AccountChooser?Email=여러분의이메일@gmail.com&continue=https://colab.research.google.com/
 
 ```
 
@@ -104,7 +104,7 @@ cover:
 사진 정리도 중요하죠? 구글 포토 바로가기가 있으면, 언제든지 소중한 사진들을 빠르게 볼 수 있어요. 바로가기를 만들고, URL을 아래와 같이 변경해보세요:
 
 ```plain text
-<https://accounts.google.com/AccountChooser?Email=여러분의이메일@gmail.com&continue=https://photos.google.com/>
+https://accounts.google.com/AccountChooser?Email=여러분의이메일@gmail.com&continue=https://photos.google.com/
 
 ```
 
@@ -112,12 +112,12 @@ cover:
 
 ---
 
-### **바로가기 설정시 자주 발생하는 문제 해결하기**
+### **바로가기 설정 시 자주 발생하는 문제 해결하기**
 
 여러분이 바로가기를 설정할 때 몇 가지 문제에 직면할 수도 있어요. 하지만 걱정하지 마세요! 여기 몇 가지 해결책을 준비했습니다.
 
 - **바로가기가 작동하지 않을 때**: 주소를 정확히 입력했는지 확인해 보세요. 오타 한 글자도 문제를 일으킬 수 있어요!
-- **올바른 계정으로 로그인되지 않을 때**: 이메일 주소가 정확한지 다시 한 번 확인해보세요. 여러분의 구글 계정 이메일 주소가 정확히 맞아야 해요.
+- **올바른 계정으로 로그인되지 않을 때**: 이메일 주소가 정확한지 다시 한번 확인해보세요. 여러분의 구글 계정 이메일 주소가 정확히 맞아야 해요.
 - **보안 문제에 대한 우려**: 바로가기를 사용하면 편리하지만, 보안을 위해 사용하는 컴퓨터나 디바이스에만 설정하는 것이 좋습니다. 공용 컴퓨터에는 사용하지 않는 것이 안전해요.
 ### **안전하게 사용하기: 보안 고려사항**
 
@@ -133,7 +133,7 @@ cover:
 ---
 
 
-마지막 단계로, 독자들이 자주 물어볼만한 질문들을 FAQ 형태로 정리해보겠습니다. 이것으로 글의 마무리를 지어볼게요.
+마지막 단계로, 독자들이 자주 물어볼 만한 질문들을 FAQ 형태로 정리해보겠습니다. 이것으로 글의 마무리를 지어볼게요.
 
 ### **자주 묻는 질문들(FAQ)**
 

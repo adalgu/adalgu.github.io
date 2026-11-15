@@ -39,13 +39,13 @@ cover:
 
 ### 📋 목차
 
-1. [문제 상황과 증상](https://claude.ai/chat/05bf3460-b348-405b-89a9-b8e13a9fc10a#%EB%AC%B8%EC%A0%9C-%EC%83%81%ED%99%A9%EA%B3%BC-%EC%A6%9D%EC%83%81)
-1. [근본 원인 분석](https://claude.ai/chat/05bf3460-b348-405b-89a9-b8e13a9fc10a#%EA%B7%BC%EB%B3%B8-%EC%9B%90%EC%9D%B8-%EB%B6%84%EC%84%9D)
-1. [즉시 해결 방법](https://claude.ai/chat/05bf3460-b348-405b-89a9-b8e13a9fc10a#%EC%A6%89%EC%8B%9C-%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95)
-1. [플랫폼별 특성](https://claude.ai/chat/05bf3460-b348-405b-89a9-b8e13a9fc10a#%ED%94%8C%EB%9E%AB%ED%8F%BC%EB%B3%84-%ED%8A%B9%EC%84%B1)
-1. [개발자를 위한 예방책](https://claude.ai/chat/05bf3460-b348-405b-89a9-b8e13a9fc10a#%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%A5%BC-%EC%9C%84%ED%95%9C-%EC%98%88%EB%B0%A9%EC%B1%85)
-1. [테스트 및 검증](https://claude.ai/chat/05bf3460-b348-405b-89a9-b8e13a9fc10a#%ED%85%8C%EC%8A%A4%ED%8A%B8-%EB%B0%8F-%EA%B2%80%EC%A6%9D)
-1. [빠른 해결 체크리스트](https://claude.ai/chat/05bf3460-b348-405b-89a9-b8e13a9fc10a#%EB%B9%A0%EB%A5%B8-%ED%95%B4%EA%B2%B0-%EC%B2%B4%ED%81%AC%EB%A6%AC%EC%8A%A4%ED%8A%B8)
+1. [문제 상황과 증상](#문제-상황과-증상)
+1. [근본 원인 분석](#근본-원인-분석)
+1. [즉시 해결 방법](#즉시-해결-방법)
+1. [플랫폼별 특성](#플랫폼별-특성)
+1. [개발자를 위한 예방책](#개발자를-위한-예방책)
+1. [테스트 및 검증](#테스트-및-검증)
+1. [빠른 해결 체크리스트](#빠른-해결-체크리스트)
 ---
 
 ## 문제 상황과 증상
@@ -358,7 +358,7 @@ docker run --rm -v $(pwd):/app alpine:latest /bin/sh -c 'cd /app && your-test'
 
 ## 빠른 해결 체크리스트
 
-### ⚡ 즉시 확인사항
+### ⚡ 즉시 확인 사항
 
 [ ] 터미널에서 `which uvx` 실행 → 경로 확인
 [ ] GUI 환경 PATH 확인: `launchctl getenv PATH`

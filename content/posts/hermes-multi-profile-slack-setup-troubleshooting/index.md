@@ -53,7 +53,7 @@ hermes profile create <name>          # 예: hermes profile create custom_profil
 hermes profile list                   # 생성 확인
 ```
 
-**2) 이 프로필 컨텍스트로 설정 (모든 명령에 -p )**
+**2) 이 프로필 컨텍스트로 설정 (모든 명령에 `-p <name>`)**
 
 ```plain text
 hermes -p <name> setup                # 전체 설정 마법사 (모델/툴/게이트웨이 한번에)
@@ -89,7 +89,7 @@ Hermes의 Slack 연동은 Socket Mode 기반이고, 토큰이 두 종류 필요�
 **왜 둘로 나뉘는가**
 
 - xapp (app-level token)은 앱 자체에 묶인다. 앱을 워크스페이스에 재설치해도 보통 그대로 살아남는다. → Socket Mode가 계속 붙는다.
-- xoxb (bot token)은 "이 앱이 이 워크스페이스에 설치된 인스턴스" 에 묶인다. 앱을 재설치하거나 토큰을 재생성하면 값이 바뀐다. 옛 값은 즉시 무효가 된다.
+- xoxb (bot token)은 "이 앱이 이 워크스페이스에 설치된 인스턴스"에 묶인다. 앱을 재설치하거나 토큰을 재생성하면 값이 바뀐다. 옛 값은 즉시 무효가 된다.
 - **결과적으로** xapp는 맞는데 xoxb만 틀린 어긋난 상태가 너무 쉽게 만들어진다. 이게 정확히 우리가 겪은 증상이다.
 
 ![](image-01.png)
@@ -232,7 +232,7 @@ python3 -c "import hashlib,sys; print(hashlib.sha256(sys.argv[1].encode()).hexdi
 [ ] `xapp`와 `xoxb`가 같은 앱의 것인지 확인 (섞이면 `invalid_auth`).
 [ ] `SLACK_HOME_CHANNEL`, `SLACK_ALLOWED_USERS` 설정.
 [ ] 다른 프로필과 토큰을 공유하지 않는다. 안 쓰는 플랫폼 토큰은 `.env`에서 제거.
-[ ] `.env` 저장 → `auth.test`로 `ok:true` 먼저 확인 → 그 다음 게이트웨이 기동.
+[ ] `.env` 저장 → `auth.test`로 `ok:true` 먼저 확인 → 그다음 게이트웨이 기동.
 [ ] `.env`를 나중에 고쳤으면 → `gateway restart` (절대 `-all` 말고 `p <name>`).
 [ ] `gateway.error.log`에 `invalid_auth` / `_lock`이 없는지 확인.
 ### 9. 부록

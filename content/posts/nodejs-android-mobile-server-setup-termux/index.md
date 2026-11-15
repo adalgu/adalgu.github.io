@@ -54,7 +54,7 @@ $ npm init
 Express 모듈 설치
 $ npm install express --save
 
-여기서 골치아픈 폴더 권한 문제 발생
+여기서 골치 아픈 폴더 권한 문제 발생
 
 
 결국, termux용 node.js(nodejs-lts) 재설치 필요([참고](https://github.com/npm/cli/issues/5114))
@@ -91,7 +91,7 @@ app.listen(3000, function() {
 1. 서버 실행
 `node index.js`
 
-'Example app listening on port 3000!’
+'Example app listening on port 3000!'
 
 1. 서버 접속
 브라우저에서 “localhost:3000” 또는 안드로이드폰 “IP주소:3000” 입력
@@ -101,7 +101,7 @@ app.listen(3000, function() {
 
 1. 외부 IP로 접속해 보자
 - 크게 1) 공유기 포트포워딩 방법(ddns 사용)과 2) Ngrok 사용 방법
-- 둘다 할만한데, 공유기 건들기가 귀찮으면,
+- 둘 다 할만한데, 공유기 건들기가 귀찮으면,
 - 2) Ngrok으로 가능
 
 Termux용 Ngrok 설치 필요
@@ -118,17 +118,17 @@ bash install.sh
 
 
 1. Ngrok 백그라운드로 실행
-이유 : Termux는 맥 터미널처럼 여러개 탭으로 실행이 불가능
+이유 : Termux는 맥 터미널처럼 여러 개 탭으로 실행이 불가능
 
-- 즉, Ngrok를 실행시켜 놓고, Node.js를 실행해야 함.
+- 즉, Ngrok을 실행시켜 놓고, Node.js를 실행해야 함.
 
 방법 : `ngrok http 3000 > /dev/null &`
 
-- 이렇게 입력하면, 백그라운드에서 ngrok 실행(termux 종료시 ngrok 연결 종료)
+- 이렇게 입력하면, 백그라운드에서 ngrok 실행(termux 종료 시 ngrok 연결 종료)
 
 추가 : authtoken 물려서 실행하기
 
-- ngrok에 무료 회원 가입하면 authtoken 발급됨. 이것을 ngrok 실행시 연결하면 8시간 이상 가동
+- ngrok에 무료 회원 가입하면 authtoken 발급됨. 이것을 ngrok 실행 시 연결하면 8시간 이상 가동
 - `ngrok http 3000 —authtoken [대괄호지우고받아온인증토큰입력] > /dev/null &` 
 이렇게 하면 백그라운드에서 ngrok 실행됨.
 

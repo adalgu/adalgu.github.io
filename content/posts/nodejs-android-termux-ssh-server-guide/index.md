@@ -24,7 +24,7 @@ tags: *id001
 title: '[node.js] 원격으로 안드로이드폰 서버(termux) 접속하기(SSH)'
 ---
 
-앞에서 안드로이드폰을 node.js 서버로 만들기를 성공했다면, 이제는 개발이 편하게 SSH를 이용한 원격접속을 시도해 보자.
+앞에서 안드로이드폰을 node.js 서버로 만들기를 성공했다면, 이제는 개발이 편하게 SSH를 이용한 원격 접속을 시도해 보자.
 
 
 # **원격 접속(SSH)**
@@ -42,7 +42,7 @@ title: '[node.js] 원격으로 안드로이드폰 서버(termux) 접속하기(SS
 | `$ apt install openssh`   |
 |---------------------------|
 
-3. ssh용 공용 ID 키를 생성(yes치고 엔터 탁탁탁)
+3. ssh용 공용 ID 키를 생성(yes 치고 엔터 탁탁탁)
 
 <!-- notion-table: column_header=false row_header=false -->
 | `$ ssh-keygen`   |
@@ -54,7 +54,7 @@ title: '[node.js] 원격으로 안드로이드폰 서버(termux) 접속하기(SS
 | `$ sshd`   |
 |------------|
 
-5. 계정 비밀번호를 설정합니다.(원격 접속시 사용할 암호 입력)
+5. 계정 비밀번호를 설정합니다.(원격 접속 시 사용할 암호 입력)
 
 <!-- notion-table: column_header=false row_header=false -->
 | `$ passwd`   |
