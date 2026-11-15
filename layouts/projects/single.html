@@ -1,0 +1,16 @@
+{{- define "main" }}
+{{- /* TASK-625 프로젝트 쪽: 머리(이름·상태·한 줄) + 본문(무엇·화면·어떻게) + 링크·버전 */ -}}
+<article class="post-single project-page">
+  <header class="post-header">
+    <h1 class="post-title">{{ .Title }} {{ with .Params.status }}<span class="project-status{{ if eq . "돌아감" }} is-live{{ end }}">{{ . }}</span>{{ end }}</h1>
+    {{- with .Params.summary }}<div class="post-description">{{ . }}</div>{{ end }}
+  </header>
+  <div class="post-content">
+    {{ .Content }}
+    <h2 id="links">링크와 버전</h2>
+    {{ partial "project-links.html" . }}
+    <p class="project-version">버전: {{ with .Params.version }}{{ . }}{{ with $.Params.version_note }} ({{ . }}){{ end }}{{ else }}{{ $.Params.version_note | default "버전 표시 없음" }}{{ end }}</p>
+    <p><a href="{{ .Parent.RelPermalink }}">← 프로젝트 목록</a></p>
+  </div>
+</article>
+{{- end }}

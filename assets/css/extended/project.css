@@ -1,10 +1,24 @@
-/* TASK-619 프로젝트 쪽 */
-.project-item { margin: 0 0 3rem; }
-.post-content .project-title { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin: 0 0 .75rem; }
+/* 프로젝트 상태 표 (TASK-619) */
 .project-status { font-size: .75rem; font-weight: 500; padding: .1rem .55rem; border-radius: 999px; border: 1px solid var(--border); color: var(--secondary); }
 .project-status.is-live { color: #1a7f4b; border-color: #1a7f4b; }
-.project-shot { margin: 0 0 .75rem; }
-.project-shot img { width: 100%; height: auto; border: 1px solid var(--border); border-radius: 6px; }
-.project-shot figcaption { font-size: .8rem; color: var(--secondary); margin-top: .35rem; }
-.project-desc p { margin: 0 0 .5rem; }
-.project-link { margin: 0; }
+/* TASK-625 카드 목록·프로젝트 쪽 */
+.project-cards { display: grid; gap: 1.25rem; }
+.project-card { display: block; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: var(--entry); color: inherit; text-decoration: none; transition: transform .1s; }
+.project-card:hover { transform: translateY(-2px); }
+.project-card img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; object-position: left top; border-bottom: 1px solid var(--border); }
+.project-card-body { padding: .9rem 1rem 1rem; }
+.project-card-title { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; font-size: 1.25rem; margin: 0 0 .4rem; }
+.project-card-body p { margin: 0; color: var(--secondary); font-size: .95rem; line-height: 1.6; }
+.project-page .post-title { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; }
+.project-page .post-content figure img { border: 1px solid var(--border); border-radius: 6px; }
+@media (min-width: 760px) { .project-cards { grid-template-columns: 1fr 1fr; } }
+
+/* 카드 전체 누름: 제목 링크를 카드 크기로 늘림, 링크 줄은 그 위 */
+.project-card { position: relative; }
+.project-card-link { color: inherit; text-decoration: none; }
+.project-card-link::after { content: ""; position: absolute; inset: 0; }
+.project-links { list-style: none; padding: 0; margin: 8px 0 0; display: flex; flex-wrap: wrap; gap: 6px 14px; }
+.post-content .project-links li { margin: 0; }
+.project-links a { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 5px; font-size: 0.9em; color: var(--primary); box-shadow: none; text-decoration: underline; text-underline-offset: 3px; }
+.link-icon { flex: none; }
+.post-content ul.project-links { padding-left: 0; }

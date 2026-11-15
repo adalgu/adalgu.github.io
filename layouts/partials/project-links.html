@@ -1,0 +1,14 @@
+{{- /* TASK-625 링크 줄: 머리말 links [{kind repo|site|demo|post, url, label}] — repo는 repo_public: true일 때만. url이 묶음 안 파일 이름이면 그 파일 주소로 */ -}}
+{{- $p := . -}}
+{{- $names := dict "repo" "저장소" "site" "사이트" "demo" "데모" "post" "글" -}}
+{{- with $p.Params.links }}
+<ul class="project-links">
+  {{- range . }}
+  {{- if and (eq .kind "repo") (not $p.Params.repo_public) }}{{ continue }}{{ end }}
+  {{- $url := .url -}}
+  {{- with $p.Resources.GetMatch .url }}{{ $url = .RelPermalink }}{{ end }}
+  {{- $kindName := index $names .kind | default .kind }}
+  <li><a class="project-link link-{{ .kind }}" href="{{ $url }}" aria-label="{{ $kindName }}: {{ .label }}">{{ partial (printf "icons/%s.html" .kind) . }}<span>{{ .label }}</span></a></li>
+  {{- end }}
+</ul>
+{{- end }}
