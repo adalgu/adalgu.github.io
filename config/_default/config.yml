@@ -125,10 +125,6 @@ params:
     keys: ["title", "permalink", "summary", "content"]
 menu:
   main:
-    - identifier: essays
-      name: 에세이
-      url: /tags/essay/
-      weight: 10
     - identifier: archives
       name: 글
       url: /posts/
