@@ -7,4 +7,4 @@
 {{- $outside := and $isRemote (ne (urls.Parse $link).Host (urls.Parse site.BaseURL).Host) -}}
 <a href="{{ $link | safeURL }}" {{ with .Title}} title="{{ . }}" {{ end }}{{ if $outside }} rel="noopener noreferrer"{{ end }}>
   {{- .Text | safeHTML -}}
-</a>
+</a>{{- /* no whitespace after the link */ -}}
