@@ -127,7 +127,7 @@ menu:
   main:
     - identifier: essays
       name: 에세이
-      url: /tags/에세이/
+      url: /tags/essay/
       weight: 10
     - identifier: archives
       name: 글
