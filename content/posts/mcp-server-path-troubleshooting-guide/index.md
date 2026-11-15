@@ -17,7 +17,13 @@ slug: "mcp-server-path-troubleshooting-guide"
 subtitle: '"spawn uvx ENOENT" 에러를 중심으로 한 실용적 해결 가이드'
 summary: MCP 서버 실행 시 발생하는 PATH 관련 오류의 근본 원인을 분석하고, GUI 환경과 터미널 환경의 차이점을 이해하여 완전한 해결책을
   제시합니다. macOS, Windows, Docker 환경별 특성과 개발자를 위한 예방책까지 포함한 종합 가이드입니다.
-tags: *id001
+tags:
+- MCP
+- software-development
+- troubleshooting
+- PATH
+- macOS
+- Node.js
 title: MCP 서버 PATH 문제 완전 해결 가이드
 cover:
   image: "cover.jpg"

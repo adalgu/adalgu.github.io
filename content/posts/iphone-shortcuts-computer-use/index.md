@@ -3,7 +3,7 @@ title: "Claude 컴퓨터 사용 + iPhone 미러링으로 까다로운 아이폰 
 date: 2026-11-09T00:18:00+09:00
 slug: iphone-shortcuts-computer-use
 description: "맥의 iPhone 미러링 창을 Claude 컴퓨터 사용으로 조작해, 미뤄 두던 아이폰 단축어 자동화 두 개를 대화하듯 만든 기록."
-tags: ["AI", "아이폰 단축어", "자동화"]
+tags: ["AI", "iphone-shortcuts", "automation"]
 draft: false
 cover:
   image: "cover.jpg"

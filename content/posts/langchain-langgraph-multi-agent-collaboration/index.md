@@ -15,7 +15,11 @@ slug: "langchain-langgraph-multi-agent-collaboration"
 subtitle: 'LangGraph: 멀티 에이전트 콜라보레이션의 새로운 표준'
 summary: LangChain의 새로운 라이브러리 LangGraph를 소개합니다. LangGraph를 사용하여 멀티 에이전트 콜라보레이션을 구현하고
   S&P 500 지수 데이터를 검색하고 시각화하는 방법을 알아보세요.
-tags: *id001
+tags:
+- LangChain
+- LangGraph
+- LLM
+- multi-agent
 title: 'LangGraph 사용법: 멀티 에이전트로 S&P 500 데이터 시각화하기'
 cover:
   image: "cover.jpg"

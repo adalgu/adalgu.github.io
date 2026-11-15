@@ -14,7 +14,10 @@ slug: "mobility-galapagos-jeju-island"
 subtitle: 제주도는 천혜의 규제 샌드박스다!
 summary: 제주도는 육지와 단절된 섬 환경, 현지인보다 많은 관광객, 전국 최고 수준의 전기차 보급률 등 독특한 모빌리티 생태계를 보유하고 있다.
   이러한 갈라파고스형 환경은 모빌리티 서비스 실험과 혁신을 위한 이상적인 테스트베드이자 규제 샌드박스로 활용될 수 있는 잠재력을 가지고 있다.
-tags: *id001
+tags:
+- jeju
+- mobility
+- galapagos
 title: 모빌리티 갈라파고스, 제주도
 cover:
   image: "cover.jpg"

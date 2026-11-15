@@ -22,7 +22,11 @@ subtitle: '타임폴리오 코리아 플러스배당액티브 ETF를 예시로 �
   **'
 summary: 이 포스트에서는 파이썬을 사용하여 Active ETF의 종목 변동을 분석하는 방법을 소개합니다. 타임폴리오 자산운용의 '타임폴리오
   코리아 플러스배당액티브 ETF'를 예시로 데이터 수집, 분석, 시각화를 통해 매니저의 투자 전략을 파악하는 방법을 배워보세요.
-tags: *id001
+tags:
+- Python
+- investing
+- ETF
+- data-analysis
 title: 파이썬으로 Active ETF 종목 변동 분석하기
 ---
 

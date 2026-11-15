@@ -7,7 +7,7 @@ description: 'AI 부정행위를 막으려면 우리는 어디까지 감시해�
 summary: 'AI 부정행위를 막으려면 우리는 어디까지 감시해야 할까?'
 draft: false
 tags:
-  - 에세이
+  - essay
 slug: "tazza-exam-hall"
 cover:
   image: "cover.jpg"

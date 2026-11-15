@@ -13,7 +13,8 @@ slug: "resilience-jensen-huang"
 subtitle: '젠슨 황에게서 찾은 비즈니스의 진짜 무기: 리질리언스(Resilience)'
 summary: 인공지능 시대, 지능보다 중요한 것은 무엇일까요? 젠슨 황 엔비디아 CEO의 유퀴즈 인터뷰와 ITF 2026 서밋, 그리고 국내 창업가들의
   통찰을 엮어 비즈니스 생존의 핵심 무기인 '리질리언스(회복탄력성)'의 진정한 의미를 탐구합니다.
-tags: *id001
+tags:
+- resilience
 title: '유퀴즈 젠슨 황 인터뷰로 깨달은 성공의 본질: 지능보다 ''회복탄력성’'
 cover:
   image: "cover.jpg"

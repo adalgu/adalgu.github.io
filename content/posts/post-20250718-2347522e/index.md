@@ -5,7 +5,9 @@ description: ''
 draft: false
 lastmod: '2025-11-17T21:51:00.000Z'
 notion_id: 2347522e-eb2f-8095-abf2-da93f992f466
-url: "/posts/인지-부하-이론과-스캐폴딩-효과-이론에서-실전-그리고-최신-연구까지/"
+url: "/posts/cognitive-load-theory-and-scaffolding/"
+aliases:
+  - "/posts/인지-부하-이론과-스캐폴딩-효과-이론에서-실전-그리고-최신-연구까지/"
 subtitle: ''
 title: '인지 부하 이론과 스캐폴딩 효과: 이론에서 실전, 그리고 최신 연구까지'
 cover:

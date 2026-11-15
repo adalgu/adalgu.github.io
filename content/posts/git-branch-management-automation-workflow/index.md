@@ -16,7 +16,12 @@ slug: "git-branch-management-automation-workflow"
 subtitle: 브랜치 네이밍 고민에서 시작된 팀 워크플로우 자동화 여정
 summary: 개발자라면 누구나 한 번쯤 Git 브랜치 이름을 어떻게 지을지 고민해 본 경험이 있을 겁니다. 단순한 브랜치 네이밍 고민에서 시작해
   팀 전체의 자동화 워크플로우까지 완성한 여정을 공유합니다.
-tags: *id001
+tags:
+- Git
+- branch-management
+- automation
+- CI/CD
+- workflow
 title: Git 브랜치, 어떻게 관리해야 할까? - 개인의 기록에서 팀의 자동화까지
 cover:
   image: "cover.jpg"

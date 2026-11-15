@@ -3,7 +3,7 @@ title: "AI 브라우저와 대화하며 출퇴근 플레이리스트 216곡을 �
 date: 2026-11-09T00:07:00+09:00
 slug: ai-browser-commute-playlist
 description: "AI 브라우저에게 유튜브 뮤직 작업을 맡겨, 대화만으로 출퇴근 플레이리스트 216곡을 만든 과정과 배운 점."
-tags: ["AI", "음악", "자동화"]
+tags: ["AI", "music", "automation"]
 draft: false
 cover:
   image: "cover.jpg"

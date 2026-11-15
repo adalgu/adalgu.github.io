@@ -20,7 +20,11 @@ slug: "agent-client-protocol-multi-agent-orchestration"
 subtitle: Agent-in-Agent의 함정과 ACP(Agent Client Protocol)로 여는 멀티 에이전트 시대
 summary: Agent-in-Agent vs ACP(Agent Client Protocol) — 멀티 에이전트 오케스트레이션의 두 가지 접근을
   실전 경험과 함께 비교한다.
-tags: *id001
+tags:
+- AI
+- agent
+- ACP
+- multi-agent
 title: 에이전트를 만들지 말고, 연결하라 — ACP가 바꾸는 멀티 에이전트 오케스트레이션
 ---
 
