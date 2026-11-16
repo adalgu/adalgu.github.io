@@ -1,4 +1,5 @@
 ---
+translationKey: "agent-client-protocol-multi-agent-orchestration"
 author: Gunn Kim
 cover:
   alt: 에이전트를 만들지 말고, 연결하라 — ACP가 바꾸는 멀티 에이전트 오케스트레이션 대표 이미지

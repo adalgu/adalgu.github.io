@@ -1,4 +1,5 @@
 ---
+translationKey: "ai-browser-commute-playlist"
 title: "AI 브라우저와 대화하며 출퇴근 플레이리스트 216곡을 만들었다"
 date: 2026-11-09T00:07:00+09:00
 slug: ai-browser-commute-playlist

@@ -1,4 +1,5 @@
 ---
+translationKey: "github-actions-60day-inactivity-trap"
 author: Gunn Kim
 cover:
   alt: GitHub Actions 60일 비활성화 함정과 Notion-Hugo 복구기 대표 이미지
