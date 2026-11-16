@@ -1,6 +1,6 @@
 ---
 title: "🚀 [Home Server War Stories] I Finally Fixed My Cloudflared Tunnel Dropping Every 1–2 Minutes! (The Culprit: My Router's UDP Timeout)"
-description: "The 'timeout' errors that kept dropping my Cloudflared Docker tunnel every 1–2 minutes turned out to be caused by my router's 30-second UDP timeout."
+description: "The 'timeout' errors that kept dropping my Cloudflared Docker tunnel every 1–2 minutes turned out to be caused by my router's 30-second UDP timeout. Here's how I fixed it with a single line: the --protocol http2 option."
 draft: false
 translationKey: "cloudflared-tunnel-udp-timeout-fix"
 author: Gunn Kim
@@ -10,7 +10,7 @@ notion_id: 2ab7522e-eb2f-80cc-9428-cc598a2c9861
 slug: "cloudflared-tunnel-udp-timeout-fix"
 cover:
   image: "cover.jpg"
-  alt: "홈 서버와 공유기를 잇는 안정적인 데이터 터널"
+  alt: "A stable data tunnel linking a home server and a router"
   relative: true
   hiddenInSingle: false
   hiddenInList: false
@@ -21,7 +21,7 @@ Hi there! I've been running a home server for N months now.
 
 Today I want to share a miserable problem I wrestled with for nearly a month, and the almost embarrassingly simple fix.
 
-If you've ever found yourself saying **"My services behind a Cloudflared tunnel keep dropping and reconnecting every 1–2 minutes!"** or **"My SSH session keeps dying!"**, this post will save you some time.
+If you're someone saying **"My services behind a Cloudflared tunnel keep dropping and reconnecting every 1–2 minutes!"** or **"My SSH session keeps dying!"**, this post will save you some time.
 
 ### 😭 The symptoms that tormented me for a month
 
@@ -62,7 +62,7 @@ By default, `cloudflared` tries to talk to Cloudflare's edge servers over **QUIC
 
 "UDP... timeout...?"
 
-On a hunch, I logged into the settings page of my main home router (an ipTIME, a router brand found in a huge number of Korean homes).
+On a hunch, I logged into the settings page of my main home router (an ipTIME, a common Korean home router brand).
 
 > ❗️ (Pro tip) How to find the IP of the router your Mac mini is connected to
 
@@ -118,7 +118,7 @@ YAML
     restart: unless-stopped
     environment:
       - CLOUDFLARE_TUNNEL_TOKEN
-    # ... (기타 설정) ...`
+    # ... (other settings) ...`
 
 **After: **`**docker-compose.yml**`** (the final fix):**
 
@@ -133,8 +133,8 @@ YAML
       - CLOUDFLARE_TUNNEL_TOKEN
       # 👇 [Fix] add this one line!
       - TUNNEL_TRANSPORT_PROTOCOL=http2
-    # ... (기타 설정) ...
-    dns: # (선택 사항) It also helps to point DNS at Cloudflare.
+    # ... (other settings) ...
+    dns: # (Optional) It also helps to point DNS at Cloudflare.
       - "1.1.1.1"
       - "1.0.0.1"`
 
