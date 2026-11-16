@@ -3,6 +3,7 @@ title: "I Built a 216-Song Commute Playlist by Chatting with an AI Browser"
 description: "How I handed the YouTube Music work to an AI browser and built a 216-song commute playlist through conversation alone, plus what I learned along the way."
 draft: false
 translationKey: "ai-browser-commute-playlist"
+url: "/en/posts/ai-browser-commute-playlist/"
 date: 2026-11-09T00:07:00+09:00
 slug: ai-browser-commute-playlist
 tags: ["AI", "music", "automation"]

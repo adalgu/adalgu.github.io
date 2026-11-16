@@ -3,6 +3,7 @@ title: "The Complete Guide to Fixing MCP Server PATH Problems"
 description: "Analyzes the root cause of PATH-related errors when running MCP servers and, by explaining how GUI and terminal environments differ, offers a complete solution. A comprehensive guide that covers macOS, Windows, and Docker specifics as well as prevention measures for developers."
 draft: false
 translationKey: "mcp-server-path-troubleshooting-guide"
+url: "/en/posts/mcp-server-path-troubleshooting-guide/"
 author: Gunn Kim
 date: '2025-07-14'
 keywords: &id001

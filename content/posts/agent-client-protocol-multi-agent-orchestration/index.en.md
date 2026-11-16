@@ -3,6 +3,7 @@ title: "Don't Build Agents, Connect Them — How ACP Is Changing Multi-Agent Orc
 description: "Agent-in-Agent vs. ACP (Agent Client Protocol) — two approaches to multi-agent orchestration"
 draft: false
 translationKey: "agent-client-protocol-multi-agent-orchestration"
+url: "/en/posts/agent-client-protocol-multi-agent-orchestration/"
 author: Gunn Kim
 cover:
   alt: "Cover image for \"Don't Build Agents, Connect Them — How ACP Is Changing Multi-Agent Orchestration\""

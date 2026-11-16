@@ -3,6 +3,7 @@ title: "🚀 [Home Server War Stories] I Finally Fixed My Cloudflared Tunnel Dro
 description: "The 'timeout' errors that kept dropping my Cloudflared Docker tunnel every 1–2 minutes turned out to be caused by my router's 30-second UDP timeout. Here's how I fixed it with a single line: the --protocol http2 option."
 draft: false
 translationKey: "cloudflared-tunnel-udp-timeout-fix"
+url: "/en/posts/cloudflared-tunnel-udp-timeout-fix/"
 author: Gunn Kim
 date: '2025-11-14'
 lastmod: '2025-11-14T12:58:00.000Z'

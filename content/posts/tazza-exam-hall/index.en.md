@@ -3,6 +3,7 @@ title: "When the Exam Hall Turns Into the Gambling Table from Tazza"
 description: "How far do we have to take surveillance to stop AI-assisted cheating?"
 draft: false
 translationKey: "tazza-exam-hall"
+url: "/en/posts/tazza-exam-hall/"
 author: Gunn Kim
 date: '2026-11-15'
 tags:

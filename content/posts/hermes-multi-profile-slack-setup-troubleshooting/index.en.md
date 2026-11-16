@@ -3,6 +3,7 @@ title: "Attaching Agents to Multiple Slack Workspaces with Hermes Multi-Profile 
 description: "How to connect bots to multiple Slack workspaces with Hermes's multi-profile feature, plus the causes of and clear fixes for the Slack token (xapp, xoxb) conflicts and `invalid_auth` errors you commonly hit during the integration."
 draft: false
 translationKey: "hermes-multi-profile-slack-setup-troubleshooting"
+url: "/en/posts/hermes-multi-profile-slack-setup-troubleshooting/"
 author: Gunn Kim
 date: '2026-05-27'
 keywords: &id001

@@ -3,6 +3,7 @@ title: "Six Pitfalls I Hit While Automating a GitHub App Bootstrap"
 description: "The manifest fields, CSRF state, App JWT Bearer authentication, partial-creation recovery, and token revocation problems I hit while automating a least-privilege GitHub App bootstrap, and the principles for solving them"
 draft: false
 translationKey: "github-app-bootstrap-automation-lessons"
+url: "/en/posts/github-app-bootstrap-automation-lessons/"
 author: Gunn Kim
 cover:
   alt: "Cover image for \"Six Pitfalls I Hit While Automating a GitHub App Bootstrap\""

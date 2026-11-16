@@ -3,6 +3,7 @@ title: "🧠 Brain-to-Web Pipeline: The 13-Year Evolution of an External Brain"
 description: "A look back at how the external brain project that began on a rainy September 9, 2012, at my family home evolved, 13 years later, into a fully automated Brain-to-Web pipeline: a development journey from Chollian to Notion-Hugo, and 15 years of technical innovation and philosophical reflection alongside the digital identity adalgu."
 draft: false
 translationKey: "brain-to-web-pipeline-13-years-journey"
+url: "/en/posts/brain-to-web-pipeline-13-years-journey/"
 author: Gunn Kim
 date: '2025-06-24'
 keywords: &id001

@@ -3,6 +3,7 @@ title: "The GitHub Actions 60-Day Inactivity Trap and How I Recovered My Notion-
 description: "Why did a blog deployment workflow running on a regular cron schedule quietly stop? An analysis of GitHub's 60-day inactivity policy (disabled_inactivity) and how I recovered."
 draft: false
 translationKey: "github-actions-60day-inactivity-trap"
+url: "/en/posts/github-actions-60day-inactivity-trap/"
 author: Gunn Kim
 cover:
   alt: Cover image for "The GitHub Actions 60-Day Inactivity Trap and How I Recovered My Notion-Hugo Pipeline"
