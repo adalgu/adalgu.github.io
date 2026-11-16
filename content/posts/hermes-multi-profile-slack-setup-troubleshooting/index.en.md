@@ -1,6 +1,6 @@
 ---
 title: "Attaching Agents to Multiple Slack Workspaces with Hermes Multi-Profile — and the invalid_auth Trap"
-description: "How to connect bots to multiple Slack workspaces using Hermes's multi-profile feature, and the Slack… you commonly run into during the integration"
+description: "How to connect bots to multiple Slack workspaces with Hermes's multi-profile feature, plus the causes of and clear fixes for the Slack token (xapp, xoxb) conflicts and `invalid_auth` errors you commonly hit during the integration."
 draft: false
 translationKey: "hermes-multi-profile-slack-setup-troubleshooting"
 author: Gunn Kim
@@ -14,14 +14,14 @@ slug: "hermes-multi-profile-slack-setup-troubleshooting"
 tags: *id001
 cover:
   image: "cover.jpg"
-  alt: "Hermes 멀티 프로필로 여러 Slack 워크스페이스에 에이전트 붙이기 — 그리고 invalid_auth 함정 대표 이미지"
+  alt: "Cover image for \"Attaching Agents to Multiple Slack Workspaces with Hermes Multi-Profile — and the invalid_auth Trap\""
   relative: true
   hiddenInSingle: false
   hiddenInList: false
 ---
 ## Attaching Agents to Multiple Slack Workspaces with Hermes Multi-Profile
 
-This is a write-up of how to run several Hermes Agent instances on a single machine, one per profile, and connect each profile to a different Slack workspace. While attaching one particular profile (`custom_profile`) to a new workspace (`New_Workspace`, team `T_NEW`), I lost a good while to a "looks connected but never replies" symptom, and the cause turned out to be an invalid Slack bot token (`invalid_auth`). I'm preserving the whole process here so I don't get stuck in the same place the next time I create more profiles.
+A write-up of how to run several Hermes Agent instances on a single machine, one per profile, and connect each profile to a different Slack workspace. While attaching one particular profile (`custom_profile`) to a new workspace (`New_Workspace`, team `T_NEW`), I lost a good while to a "looks connected but never replies" symptom, and the cause turned out to be an invalid Slack bot token (`invalid_auth`). I'm recording the whole process here so I don't get stuck in the same place the next time I create more profiles.
 
 ### 1. The big picture: what a profile is and why you'd use one
 
@@ -49,7 +49,7 @@ hermes profile create <name>          # e.g. hermes profile create custom_profil
 hermes profile list                   # confirm it was created
 ```
 
-**2) Configure in this profile's context (-p on every command)**
+**2) Configure in this profile's context (`-p <name>` on every command)**
 
 ```plain text
 hermes -p <name> setup                # full setup wizard (model/tools/gateway all at once)
@@ -68,9 +68,9 @@ hermes -p <name> gateway status       # check status
 
 - Profile-related subcommands: `create`, `list`, `switch`, `use`, `delete`.
 - **Caution:** `hermes profile delete <name>` wipes that profile's entire `HERMES_HOME` (sessions and memory included). Don't use it carelessly.
-### 3. The two Slack tokens — this is where 90% get stuck
+### 3. The two Slack tokens — where 90% of people get stuck
 
-Hermes's Slack integration is based on Socket Mode and needs two kinds of token. The key point is that the two play different roles and that their validity is independent of each other.
+Hermes's Slack integration is based on Socket Mode and needs two kinds of token. The key point is that they play different roles and are valid or invalid independently of each other.
 
 <!-- notion-table: column_header=false row_header=false -->
 | **.env key** | **Token format** | **Purpose** | **Where it's issued** |
@@ -95,7 +95,7 @@ Hermes's Slack integration is based on Socket Mode and needs two kinds of token.
 **Symptom**
 
 - The bot appears to be authenticated to the workspace. DMs/mentions come in too (the channel directory updates in real time).
-- But it doesn't reply. It felt like something that "was working, then stopped and got tangled."
+- But it doesn't reply. It felt like it "was working, then stopped and got tangled."
 **What was actually happening**
 
 The gateway log had this showing up every 5 minutes, more than 1,400 times:
@@ -124,7 +124,7 @@ In other words, a half connection that can only receive and can't send. It was a
 
 **The decisive check — auth.test**
 
-Token validity can be determined in one second with Slack's `auth.test` (read-only). **Don't print the token to the screen**; read it straight from `.env` and pass it in the header:
+You can tell whether a token is valid in one second with Slack's `auth.test` (read-only). **Don't print the token to the screen**; read it straight from `.env` and pass it in the header:
 
 ```plain text
 cd ~/.hermes
@@ -264,4 +264,4 @@ hermes -p <name> gateway status [--deep] [-l/--full]
 
 **One-line summary**
 
-If Socket Mode (`xapp`) connects but the bot doesn't reply, nine times out of ten the `xoxb` bot token is invalid. Check it instantly with `auth.test`, and if you've fixed `.env`, don't forget to restart the gateway. Tokens come as one pair from the same app per profile and workspace, and are never to be shared.
+If Socket Mode (`xapp`) connects but the bot doesn't reply, nine times out of ten the `xoxb` bot token is invalid. Check it instantly with `auth.test`, and if you've fixed `.env`, don't forget to restart the gateway. Give each profile and workspace its own pair of tokens from the same app, and never share them.

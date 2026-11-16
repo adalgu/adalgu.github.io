@@ -5,16 +5,16 @@ draft: false
 translationKey: "agent-client-protocol-multi-agent-orchestration"
 author: Gunn Kim
 cover:
-  alt: 에이전트를 만들지 말고, 연결하라 — ACP가 바꾸는 멀티 에이전트 오케스트레이션 대표 이미지
+  alt: "Cover image for \"Don't Build Agents, Connect Them — How ACP Is Changing Multi-Agent Orchestration\""
   hiddenInList: false
   hiddenInSingle: false
   image: https://i.imgur.com/qHiosRH.jpeg
 date: '2026-03-02'
 keywords: &id001
 - AI
-- 에이전트
+- agent
 - ACP
-- 멀티에이전트
+- multi-agent
 lastmod: '2026-03-02T01:32:00.000Z'
 notion_id: 3177522e-eb2f-8178-9c13-c49638317336
 slug: "agent-client-protocol-multi-agent-orchestration"
@@ -36,7 +36,7 @@ A protocol is **an agreed-upon way of having a conversation**.
 
 Think about parcel delivery. The sender puts the item in a box, writes the address, and pays the shipping fee. The recipient tracks it by waybill number, signs, and takes delivery. That procedure is nearly identical no matter which courier in the country you use. That's a protocol. What if every courier had its own box sizes, its own way of writing addresses, its own pickup procedure? You'd have to learn a different method for each courier just to send something. Chaos.
 
-The internet works the way it does thanks to a protocol called **HTTP**. Whether it's a server at Naver (네이버), Google, or Kakao (카카오) — Naver and Kakao being Korea's dominant portal and messaging platforms — a web browser sends requests and receives responses in exactly the same way. It doesn't matter what language the server was written in or what operating system it runs on. Everything connects because there's a common language called HTTP.
+The internet works the way it does thanks to a protocol called **HTTP**. Whether the server belongs to Naver (네이버, Korea's largest web portal), Google, or Kakao (카카오, the company behind Korea's dominant messenger), a web browser sends requests and receives responses in exactly the same way. It doesn't matter what language the server was written in or what operating system it runs on. Everything connects because there's a common language called HTTP.
 
 Before HTTP came along, web servers and browsers each communicated in their own way. There was no standard. Once HTTP unified all of that, the web grew explosively. **A single standard changed the entire ecosystem.**
 
@@ -70,7 +70,7 @@ MCP (Model Context Protocol) gets mentioned a lot these days too. MCP and ACP lo
 
 **MCP is a protocol for "giving tools to a model."** It connects web search tools, file system tools, and database tools in a standardized way so that an LLM can use them. The model is the protagonist, and tools are a means of extending the model's capabilities.
 
-**ACP is a protocol for "connecting agents as agents."** It lets another agent or an orchestrator call and manage already-finished agents (Claude Code, Codex, and so on) in a standard way. The orchestrator is the protagonist, and each agent is an independent actor.
+**ACP is a protocol for "connecting agents to agents."** It lets another agent or an orchestrator call and manage already-finished agents (Claude Code, Codex, and so on) in a standard way. The orchestrator is the protagonist, and each agent is an independent actor.
 
 Put simply: MCP is "model + tools," and ACP is "agent + agent."
 
@@ -84,9 +84,9 @@ Now for the central contrast. The difference between these two approaches isn't 
 
 ### Melanie Li's Experiment: The "Build It Yourself" Approach
 
-AI engineer Melanie Li shared her experience building a multi-agent system. Here's the summary.
+AI engineer Melanie Li shared what it was like to build a multi-agent system. Here's the summary.
 
-She implemented the sub-agents herself using the OpenAI Agent SDK. She defined a coding agent, a review agent, and a test agent each in code, and hand-wrote the communication logic, state management, and error handling between them.
+Li built the sub-agents directly with the OpenAI Agent SDK, defining a coding agent, a review agent, and a test agent each in code and hand-writing the communication logic, state management, and error handling between them.
 
 The result? **3x the latency, 3–5x the cost, and debugging hell.**
 
@@ -128,13 +128,13 @@ Concepts alone aren't enough. Let me share how I actually use this.
 
 ### Case 1: A 12-Hour Autonomous Development Cron
 
-Every night at midnight, a cron job runs. It reads the labeled items among my GitHub issues and, for each issue, spawns a Claude Code session through ACP. Claude Code writes the code, opens a PR, and ends the session. Because a TTL is set, no matter how long it takes, the session shuts down automatically once the specified time has passed.
+Every night at midnight, a cron job runs. It reads the GitHub issues that carry a label and, for each issue, spawns a Claude Code session through ACP. Claude Code writes the code, opens a PR, and ends the session. Because a TTL is set, no matter how long it takes, the session shuts down automatically once the specified time has passed.
 
 All of this runs on a few dozen lines of config. If I'd implemented the same thing with the Agent SDK? Session management code, retry logic, error handling, timeout management... the codebase would have been three times bigger.
 
 ### Case 2: Multi-Agent Code Review
 
-When a PR goes up, two agents review it in sequence. First Codex analyzes code quality and potential bugs; then Claude Code takes those results and re-reviews from an architectural perspective. The two agents run as mutually independent processes, and ACP relays the results.
+When a PR goes up, two agents review it in sequence. First Codex analyzes code quality and potential bugs; then Claude Code takes those results and re-reviews from an architectural perspective. The two agents run as separate, independent processes, and ACP relays the results.
 
 If I'd implemented this the Agent-in-Agent way, the orchestrator agent would have to alternate between playing "the Codex role" and "the Claude Code role." In the end that's a single LLM imitating two roles, and the real strengths of each specialized agent disappear.
 
@@ -154,9 +154,9 @@ Here's the core insight I took away from these experiences.
 
 **Complexity always comes from the wrong level of abstraction.**
 
-When building multi-agent systems, a lot of people think at the "LLM level." What prompt to use, how to define the agent's role, how to pass context along. Implement multi-agent at this level and you end up like Melanie Li's case.
+When building multi-agent systems, a lot of people think at the "LLM level." What prompt to use, how to define the agent's role, how to pass context along. Implement multi-agent at this level and you end up where Melanie Li did.
 
-ACP raises the level of abstraction by one step. You think not at the level of the LLM but at the level of the **agent process**. Each agent is an independent unit of execution, and the protocol is the infrastructure that connects them. The orchestrator only has to decide "which agent gets which task," not "which model to use."
+ACP raises the level of abstraction a notch. You think not at the level of the LLM but at the level of the **agent process**. Each agent is an independent unit of execution, and the protocol is the infrastructure that connects them. The orchestrator only has to decide "which agent gets which task," not "which model to use."
 
 This also ties into a classic principle of software engineering: Separation of Concerns. The orchestrator decides "what to do," ACP handles "how to connect," and the individual agents take care of "how to actually do it."
 
@@ -172,7 +172,7 @@ HTTP → REST → the explosive growth of the web ecosystem. That resembles the 
 
 When you first encounter AI agents, you get the urge to "build one myself." The urge to define in code an agent that behaves exactly the way you want, and to control everything. I get it. I was the same.
 
-But there's something I came to realize through real-world work. Trying to "rebuild in my own way" agents that brilliant experts have spent years honing delivers extremely little for the cost and time it takes.
+But there's something I came to realize through real-world work. Trying to "rebuild my own way" agents that top experts have spent years refining returns very little for the cost and time involved.
 
 Just as HTTP unified the web, ACP could become the standard for agent orchestration. It's still early days, but the direction is clear. From an era of building agents to an era of connecting them.
 

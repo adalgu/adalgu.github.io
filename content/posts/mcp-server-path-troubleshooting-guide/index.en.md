@@ -1,14 +1,14 @@
 ---
 title: "The Complete Guide to Fixing MCP Server PATH Problems"
-description: "An analysis of the root cause of the PATH-related errors that come up when running MCP servers, and, by understanding how GUI and terminal environments differ, a complete"
+description: "Analyzes the root cause of PATH-related errors when running MCP servers and, by explaining how GUI and terminal environments differ, offers a complete solution. A comprehensive guide that covers macOS, Windows, and Docker specifics as well as prevention measures for developers."
 draft: false
 translationKey: "mcp-server-path-troubleshooting-guide"
 author: Gunn Kim
 date: '2025-07-14'
 keywords: &id001
 - MCP
-- 개발
-- 트러블슈팅
+- software-development
+- troubleshooting
 - PATH
 - macOS
 - Node.js
@@ -24,7 +24,7 @@ tags:
 - Node.js
 cover:
   image: "cover.jpg"
-  alt: "서버로 이어지는 복잡한 경로 속 하나의 연결선"
+  alt: "A single connecting line through a tangle of paths leading to a server"
   relative: true
   hiddenInSingle: false
   hiddenInList: false
@@ -35,13 +35,13 @@ cover:
 
 ### 📋 Table of Contents
 
-1. [The Problem and Its Symptoms](https://claude.ai/chat/05bf3460-b348-405b-89a9-b8e13a9fc10a#%EB%AC%B8%EC%A0%9C-%EC%83%81%ED%99%A9%EA%B3%BC-%EC%A6%9D%EC%83%81)
-1. [Root Cause Analysis](https://claude.ai/chat/05bf3460-b348-405b-89a9-b8e13a9fc10a#%EA%B7%BC%EB%B3%B8-%EC%9B%90%EC%9D%B8-%EB%B6%84%EC%84%9D)
-1. [Immediate Fixes](https://claude.ai/chat/05bf3460-b348-405b-89a9-b8e13a9fc10a#%EC%A6%89%EC%8B%9C-%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95)
-1. [Platform-Specific Notes](https://claude.ai/chat/05bf3460-b348-405b-89a9-b8e13a9fc10a#%ED%94%8C%EB%9E%AB%ED%8F%BC%EB%B3%84-%ED%8A%B9%EC%84%B1)
-1. [Prevention for Developers](https://claude.ai/chat/05bf3460-b348-405b-89a9-b8e13a9fc10a#%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%A5%BC-%EC%9C%84%ED%95%9C-%EC%98%88%EB%B0%A9%EC%B1%85)
-1. [Testing and Verification](https://claude.ai/chat/05bf3460-b348-405b-89a9-b8e13a9fc10a#%ED%85%8C%EC%8A%A4%ED%8A%B8-%EB%B0%8F-%EA%B2%80%EC%A6%9D)
-1. [Quick-Fix Checklist](https://claude.ai/chat/05bf3460-b348-405b-89a9-b8e13a9fc10a#%EB%B9%A0%EB%A5%B8-%ED%95%B4%EA%B2%B0-%EC%B2%B4%ED%81%AC%EB%A6%AC%EC%8A%A4%ED%8A%B8)
+1. [The Problem and Its Symptoms](#the-problem-and-its-symptoms)
+1. [Root Cause Analysis](#root-cause-analysis)
+1. [Immediate Fixes](#immediate-fixes)
+1. [Platform-Specific Notes](#platform-specific-notes)
+1. [Prevention for Developers](#prevention-for-developers)
+1. [Testing and Verification](#testing-and-verification)
+1. [Quick-Fix Checklist](#quick-fix-checklist)
 ---
 
 ## The Problem and Its Symptoms
@@ -143,7 +143,7 @@ echo $PATH
 
 **Pros:**
 
-- ✅ Fixes it immediately
+- ✅ Works immediately
 - ✅ No environment variables to set
 **Cons:**
 
@@ -354,7 +354,7 @@ docker run --rm -v $(pwd):/app alpine:latest /bin/sh -c 'cd /app && your-test'
 
 ## Quick-Fix Checklist
 
-### ⚡ Check These First
+### ⚡ Check Right Away
 
 [ ] Run `which uvx` in the terminal → note the path
 [ ] Check the GUI environment's PATH: `launchctl getenv PATH`
