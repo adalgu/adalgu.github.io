@@ -1,4 +1,5 @@
 ---
+translationKey: "github-app-bootstrap-automation-lessons"
 author: Gunn Kim
 cover:
   alt: GitHub App Bootstrap을 자동화하며 만난 여섯 개의 함정 대표 이미지

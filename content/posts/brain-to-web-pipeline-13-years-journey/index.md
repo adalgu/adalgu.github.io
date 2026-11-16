@@ -1,4 +1,5 @@
 ---
+translationKey: "brain-to-web-pipeline-13-years-journey"
 author: Gunn Kim
 date: '2025-06-24'
 description: 2012년 9월 9일, 비 내리는 고향 집에서 시작된 외장두뇌 프로젝트가 어떻게 13년 만에 완전 자동화된 Brain-to-Web

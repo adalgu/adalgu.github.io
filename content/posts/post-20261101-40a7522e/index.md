@@ -1,4 +1,5 @@
 ---
+translationKey: "post-20261101-40a7522e"
 author: Gunn Kim
 cover:
   alt: 광군제 쇼핑, 영상을 다 보는 대신 AI 브라우저에게 출처를 따라가게 했다 대표 이미지

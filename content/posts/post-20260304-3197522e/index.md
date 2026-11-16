@@ -1,4 +1,5 @@
 ---
+translationKey: "post-20260304-3197522e"
 author: Gunn Kim
 date: '2026-03-04'
 description: ''

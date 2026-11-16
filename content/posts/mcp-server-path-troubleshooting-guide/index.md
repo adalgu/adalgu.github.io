@@ -1,4 +1,5 @@
 ---
+translationKey: "mcp-server-path-troubleshooting-guide"
 author: Gunn Kim
 date: '2025-07-14'
 description: MCP 서버 실행 시 발생하는 PATH 관련 오류의 근본 원인을 분석하고, GUI 환경과 터미널 환경의 차이점을 이해하여 완전한

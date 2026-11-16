@@ -1,4 +1,5 @@
 ---
+translationKey: "cloudflared-tunnel-udp-timeout-fix"
 author: Gunn Kim
 date: '2025-11-14'
 description: Cloudflared Docker 터널이 1~2분마다 끊기는 'timeout' 오류, 30초짜리 공유기 UDP 타임아웃이 원인이었습니다.

@@ -1,4 +1,5 @@
 ---
+translationKey: "hermes-multi-profile-slack-setup-troubleshooting"
 author: Gunn Kim
 date: '2026-05-27'
 description: Hermes 멀티 프로필 기능을 활용해 다수의 Slack 워크스페이스에 봇을 연결하는 과정과, 연동 중 흔히 겪는 Slack

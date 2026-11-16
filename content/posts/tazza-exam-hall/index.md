@@ -1,4 +1,5 @@
 ---
+translationKey: "tazza-exam-hall"
 author: Gunn Kim
 date: '2026-11-15'
 title: '〈타짜〉의 도박판이 된 시험장'
