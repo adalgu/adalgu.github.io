@@ -10,7 +10,7 @@ lastmod: '2026-03-04T14:47:00.000Z'
 notion_id: 3197522e-eb2f-80cd-8d46-f734c9fc956f
 cover:
   image: "cover.jpg"
-  alt: "야생마가 된 AI, 누가 더 정교한 '마구(Harness)'를 쥐는가 대표 이미지"
+  alt: "Cover image for: AI Has Become a Wild Horse: Who Holds the More Refined Harness?"
   relative: true
   hiddenInSingle: false
   hiddenInList: false
@@ -35,7 +35,7 @@ If early prompt engineering was manual control, with a person holding the reins 
 
 This powerful concept of the harness is now widening its view to **multi-agent systems** that overcome the limits of a single model. No matter how fine the steed, it cannot carry a heavy load across every stretch of rough terrain alone. Rather than relying on one giant general-purpose model, recent AI architectures are developing into a 'multi-horse carriage' (다두마차, 多頭馬車), hitching several horses with different specialties (specialized small models and the like) to a single carriage.
 
-The most important element in this multi-horse system is **orchestration**: getting the horses to gallop flat out in the same direction without tangling their lines. When the research agent fetches the latest data, the analysis agent processes it, and the review agent checks for logical errors, all keeping in step. When a system that governs this intricate teamwork is in place, we experience an explosive leap in productivity that goes beyond a simple arithmetic sum.
+The most important element in this multi-horse system is **orchestration**: getting the horses to gallop flat out in the same direction without tangling their lines. The research agent fetches the latest data, the analysis agent processes it, and the review agent checks for logical errors, all keeping in step. When a system that governs this intricate teamwork is in place, we experience an explosive leap in productivity that goes beyond a simple arithmetic sum.
 
 ### Development 3: The Circuit Breaker That Stops a Runaway, and the Human as 'Final Coachman'
 

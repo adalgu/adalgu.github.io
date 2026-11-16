@@ -8,7 +8,7 @@ slug: ai-browser-commute-playlist
 tags: ["AI", "music", "automation"]
 cover:
   image: "cover.jpg"
-  alt: "가을 아침 고속도로를 달리는 차 안, 거치대의 휴대폰에 음악 재생목록이 떠 있는 일러스트"
+  alt: "Illustration of a phone in a car mount showing a music playlist, inside a car driving on a highway on an autumn morning"
   relative: true
   hiddenInSingle: false
   hiddenInList: false
@@ -47,6 +47,8 @@ I didn't start by writing a long description of my taste. I had the AI browser r
 - **korea list**: 262 songs
 - **Good List (좋은리스트)**: 86 songs
 
+{{< figure src="01-original-list.jpg" link="01-original-list.jpg" alt="YouTube Music playlist screen. On the left, the title Good List and 86 tracks; on the right, the song list. The account name is blurred" caption="My existing playlist, Good List (86 songs). Account name blurred" >}}
+
 What the two lists had in common was pretty clear.
 
 - **High-note ballads** from the likes of SG Wannabe (SG워너비), M.C the Max (엠씨더맥스), Park Hyo-shin (박효신), and Gummy (거미)
@@ -61,6 +63,8 @@ I didn't take a hundred recommendations all at once. I got them **ten at a time*
 
 For each song, the AI browser found a listening link on YouTube and attached it, along with a short explanation of why it was recommended. Because I could listen right away and decide, choosing felt like less of a burden.
 
+{{< figure src="05-aside-round1.jpg" link="05-aside-round1.jpg" alt="AI browser chat screen. My request at the top, below it the 10-song list for round 1 with a YouTube link and reason for each, and at the bottom confirmed so far 0/100" caption="Round 1 recommendations. Each song came with a YouTube link and a reason" >}}
+
 | Round | My reaction | What changed in the next recommendations |
 |---|---|---|
 | 1 | Picked 9 of 10. I know Epik High's ‘One’, but I'm not a fan | Kept Epik High, but recommended songs with a different mood |
@@ -69,6 +73,8 @@ For each song, the AI browser found a listening link on YouTube and attached it,
 | 4 | Picked all 10 | Widened the range to Kim Kyung-ho (김경호), The Cross (더 크로스), Zico (지코), N.Flying (엔플라잉), and others |
 
 In particular, the recommendations changed dramatically after one remark: “the artists keep overlapping” (“가수가 계속 겹친다”). Instead of the same artists repeating, a variety of artists took turns, which made the list less tedious for commuting.
+
+{{< figure src="06-aside-feedback-rotation.jpg" link="06-aside-feedback-rotation.jpg" alt="AI browser chat screen. At the top, my request to drop QWER and rotate artists; below it, the 10-song artist-rotation list for round 4 and confirmed so far 27/100" caption="Round 4 recommendations, after I said the artists keep overlapping" >}}
 
 ## 3. I mixed in pop at only about 1.5 songs per 10
 
@@ -92,6 +98,8 @@ As I went through the recommendations, songs I had loved long ago kept coming to
 - Nami (나미)'s **You, Whom I Want to Be Close To (가까이 하고 싶은 그대)**
 
 There turned out to be several hip-hop songs titled ‘First Feeling’. The AI browser found the candidates and showed them to me, and it added the song after I confirmed it was the Vasco one. That confirmation step helped keep the wrong songs from getting in.
+
+{{< figure src="02-search-song.jpg" link="02-search-song.jpg" alt="YouTube Music search screen. The search box reads 첫느낌 힙합, and below it are several songs with the same title" caption="Search results for ‘첫느낌 힙합’ (First Feeling hip-hop). Several songs share the title" >}}
 
 ## 5. I grew it from 100 songs to 216
 
@@ -117,7 +125,7 @@ Partway through, I also got 20 city pop recommendations and picked just some of 
 - Kim Hyun-chul (김현철), **What's Wrong (왜 그래)**
 - YUKIKA (유키카), **Soul Lady (서울여자)**
 
-After that, I also added songs by favorite artist.
+After that, I also added songs by favorite artists.
 
 - **Lee Seung-chul (이승철):** Jasmine Flower (말리꽃), Destiny (인연), Shout (소리쳐), Western Sky (서쪽 하늘), No One Else (그런 사람 또 없습니다)
 - **Kim Gun-mo (김건모):** Beautiful Farewell (아름다운 이별), Moon of Seoul (서울의 달), I'm Sorry (미안해요), Excuse (핑계), Sleepless Night, Rain Is Falling (잠 못 드는 밤 비는 내리고), The Way I Look (내 모습을), Sadder Today Than Yesterday (어제보다 슬픈 오늘), To You (너에게)
@@ -127,9 +135,15 @@ After that, I also added songs by favorite artist.
 
 Once the song selection was done, the AI browser created a new private playlist on YouTube Music. Then it searched for each song, checked the artist and version, and added it to the playlist.
 
+{{< figure src="03-save-to-playlist.jpg" link="03-save-to-playlist.jpg" alt="YouTube Music Save to playlist dialog. Under Recent, the 216-song commute playlist is shown; other playlists are blurred" caption="The save-to-playlist dialog (captured after all 216 songs were in). Other playlists blurred" >}}
+
 Adding hundreds of songs at once also taught me an important lesson. At first I assumed every song I'd picked had gone in, but when I actually checked, only some of them had been saved. After that we added them in several batches, yet even when the “saved” notification appeared, some songs were missing from the actual list.
 
+{{< figure src="07-aside-honest-status.jpg" link="07-aside-honest-status.jpg" alt="AI browser chat screen. A report that only 4 songs were actually in the playlist and the remaining 198 had not been added yet, alongside that playlist screen" caption="A progress report that stated the actual number of songs saved" >}}
+
 In the end, the AI browser reopened the actual playlist, checked the song count, cross-checked for the missing songs, and filled them in. It would have been quite a chore if a person had to compare everything one by one at the end.
+
+{{< figure src="04-final-playlist.jpg" link="04-final-playlist.jpg" alt="YouTube Music playlist screen. Commute playlist, private, 216 tracks, with the song list. The account name is blurred" caption="The finished commute playlist (216 songs)" >}}
 
 The lesson here is clear.
 

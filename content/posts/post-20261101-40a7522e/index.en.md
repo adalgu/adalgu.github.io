@@ -6,7 +6,7 @@ translationKey: "post-20261101-40a7522e"
 url: "/en/posts/singles-day-shopping-ai-browser-sources/"
 author: Gunn Kim
 cover:
-  alt: 광군제 쇼핑, 영상을 다 보는 대신 AI 브라우저에게 출처를 따라가게 했다 대표 이미지
+  alt: "Cover image for: Singles' Day Shopping: Instead of Watching Every Video, I Had an AI Browser Follow the Sources"
   hiddenInList: false
   hiddenInSingle: false
   image: https://gunn.kim/covers/guanggunje.jpg
@@ -82,7 +82,7 @@ Partway through the shopping, I also asked something like this:
 
 People remember products less by exact model name than by context — “that cable that reels in, the one so-and-so showed.” An AI browser that keeps the conversation going helped me recover that memory.
 
-It separated out two candidates from the research record.
+The research record let me tell two candidates apart.
 
 The one Dr. Jang introduced was the Baseus 240W retractable cable, and the one HomeLabs introduced was a 3-pack of Toocki 100W retractable cables. The wattage, the bundle, and the codes were all different.
 
@@ -129,7 +129,7 @@ Once the needs were split up like this, the criteria for comparing products chan
 
 With AiQUE, the price and even whether it could ship varied by color. When I checked, the 1,000-Won Mart had green at $4.51 and white at $4.69, and pink was marked as unavailable for delivery. The actual order was two green and two white.
 
-The AI, for its part, suggested trying a small quantity first given the chance of defects, but I decided to buy all four for family trips at once. That kind of choice is the user's to make. The AI can flag risks and help compare against my purpose, but it can't decide my life's priorities for me.
+The AI, for its part, suggested trying a small quantity first given the chance of defects, but I decided to buy all four for family trips at once. That kind of choice is the user's to make. The AI can flag risks and help compare against my purpose, but it can't set the priorities of my everyday life for me.
 
 Nor did I take the name “sanitizer” or the seller's “99.99%” line as proof of performance. **Reading shopping information and proving that a product works are different things.**
 

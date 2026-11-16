@@ -10,7 +10,7 @@ tags:
 slug: "tazza-exam-hall"
 cover:
   image: "cover.jpg"
-  alt: "여러 대의 감시 렌즈가 시험지 위를 비추는 가운데, 붉은 화투패 느낌의 조각들과 빛 사이 그림자 틈에 숨은 작은 물체"
+  alt: "Several surveillance lenses shine down on an exam paper, while a small object hides in a gap of shadow between red, hwatu-card-like fragments and the light"
   relative: true
   hiddenInSingle: false
   hiddenInList: false
@@ -187,7 +187,7 @@ We need to advance the technology for stopping cheating with AI.
 
 At the same time, we need to think about what we call ability in the age of AI, and how it should be verified.
 
-Because there are problems that can't be solved just by controlling the exam hall ever more perfectly.
+That is because there are problems that can't be solved just by controlling the exam hall ever more perfectly.
 
 A story that began with the gambling table in *Tazza* ends up at a slightly different question.
 
