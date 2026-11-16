@@ -1,6 +1,6 @@
 ---
 title: "🧠 Brain-to-Web Pipeline: The 13-Year Evolution of an External Brain"
-description: "How the external brain project that began on a rainy September 9, 2012, at my family home became, 13 years later, a fully automated Brain-to-Web"
+description: "A look back at how the external brain project that began on a rainy September 9, 2012, at my family home evolved, 13 years later, into a fully automated Brain-to-Web pipeline: a development journey from Chollian to Notion-Hugo, and 15 years of technical innovation and philosophical reflection alongside the digital identity adalgu."
 draft: false
 translationKey: "brain-to-web-pipeline-13-years-journey"
 author: Gunn Kim
@@ -350,7 +350,7 @@ Moving from GitLab to GitHub brought a new turning point:
 
 ### 1. The Persistence Principle - Since 2012
 
-**2012 insight**: "This too shall pass" (이 또한 지나가리다) → the need for platform independence
+**2012 insight**: "This too shall pass" (이 또한 지나가리라) → the need for platform independence
 
 **2025 implementation**: full ownership built on GitHub + Markdown
 
@@ -451,7 +451,7 @@ Moving from GitLab to GitHub brought a new turning point:
 
 ### 2012: Awareness of the Problem and a Sense of Direction
 
-> "The existence of a blog like this... given the function of an economist, who must heighten his sensibility, process the information he takes in 'with a warm heart and a cool head,' and then express it in speech and writing..." (이런 블로그의 존재는... 감수성을 끌어올려 받아들인 정보들을 '뜨거운 가슴과 차가운 머리로' 처리한 후 말과 글로써 표현해야 하는 이코노미스트의 기능상...)
+> "The existence of a blog like this... given the role of an economist, who must heighten their sensibility, process the information they take in 'with a warm heart and a cool head,' and then express it in speech and writing..." (이런 블로그의 존재는... 감수성을 끌어올려 받아들인 정보들을 '뜨거운 가슴과 차가운 머리로' 처리한 후 말과 글로써 표현해야 하는 이코노미스트의 기능상...)
 
 ### 2018: Searching for Practical Solutions (Found in the GitLab History)
 
@@ -476,7 +476,7 @@ In 2012, I wrote this:
 
 > "That subtle pull of surfing (riding the waves), which also matches my usual motto: don't swing between joy and despair at life's crests (the good times) and troughs (rock bottom), but 'enjoy life like riding the waves!'" (인생에서의 마루(호시절)와 골(바닥)에서 일희일비 하지 말고, '인생을 파도 타듯 즐기자!'라는 평소의 모토와도 일치하는 서핑(파도타기)의 그 미묘한 끌림)
 
-Fifteen years later, the **philosophy of riding waves** has become the **design principle of Brain-to-Web**:
+Fifteen years later, the **philosophy of riding the waves** has become the **design principle of Brain-to-Web**:
 
 ### 🌊 Reading the Waves = Sensing Trends
 
@@ -657,7 +657,7 @@ If the 2012 prophecy became reality in 2025, what will be possible in 2040?
 
 ```
 
-**Will the adalgu of 2040 still be adalgu?** Probably. Because just as a middle schooler's insight from 15 years ago still held 15 years later, a true digital identity transcends time.
+**Will the adalgu of 2040 still be adalgu?** Probably, because just as a middle schooler's insight from 15 years ago still held 15 years later, a true digital identity transcends time.
 
 ## 🔬 15 Years of Lessons and Realizations
 

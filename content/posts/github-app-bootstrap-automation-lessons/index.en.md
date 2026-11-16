@@ -1,11 +1,11 @@
 ---
 title: "Six Pitfalls I Hit While Automating a GitHub App Bootstrap"
-description: "The manifest fields, CSRF state, and App JWT I ran into while automating a least-privilege GitHub App bootstrap"
+description: "The manifest fields, CSRF state, App JWT Bearer authentication, partial-creation recovery, and token revocation problems I hit while automating a least-privilege GitHub App bootstrap, and the principles for solving them"
 draft: false
 translationKey: "github-app-bootstrap-automation-lessons"
 author: Gunn Kim
 cover:
-  alt: GitHub App Bootstrap을 자동화하며 만난 여섯 개의 함정 대표 이미지
+  alt: "Cover image for \"Six Pitfalls I Hit While Automating a GitHub App Bootstrap\""
   hiddenInList: false
   hiddenInSingle: false
   image: https://gunn.kim/covers/github-app-bootstrap.jpg
@@ -13,7 +13,7 @@ date: '2026-07-20'
 keywords: &id001
 - DevOps
 - API
-- 트러블슈팅
+- troubleshooting
 - CI/CD
 lastmod: '2026-11-08T15:46:00.000Z'
 notion_id: 3a37522e-eb2f-816f-adea-fc7cd1ea9de3
@@ -126,7 +126,7 @@ This partially created state must not be mistaken for a normal completion. There
 
 1. A human deletes the partially created App and creates it again with the fixed helper.
 1. Generate a new private key in the App settings and carry out an approved recovery procedure.
-The automation must not delete the App on its own, either. Deletion is a change to an external asset that then needs recovery, so it must always have a human's explicit approval.
+The automation must not delete the App on its own, either. Deletion changes an external asset in a way that would need recovery, so it must always have a human's explicit approval.
 
 # Pitfall 4. A user token couldn't list the installations
 
@@ -146,7 +146,7 @@ When locating the installation target, don't rely on the App ID alone. Also chec
 
 # Pitfall 5. The JWT had to be sent as Bearer
 
-The most clear-cut authentication failure happened at the following stage.
+The clearest authentication failure happened at the following stage.
 
 ```plain text
 stage=app/installations
@@ -186,7 +186,7 @@ The final verification combined the following two pieces of evidence.
 installation object obtained with the App JWT\n  +\n/installation/repositories result obtained with the installation token
 ```
 
-Calling one more legacy endpoint as a redundant check didn't make anything safer. If anything, it only added a point of failure exposed to API changes.
+Calling one more legacy endpoint as a redundant check didn't make anything safer. If anything, it just added another place to break when the API changes.
 
 # Balancing redaction and diagnosability
 
@@ -196,7 +196,7 @@ The early failure reports showed every API error like this.
 error_code=command_failed\nstage=api
 ```
 
-That prevented secret leaks, but with no way to tell which call had failed, debugging was expensive. On the other hand, printing the full endpoint as is can end up recording values that don't belong in logs, such as the manifest conversion code or the installation ID.
+That prevented secret leaks, but with no way to tell which call had failed, debugging was expensive. On the other hand, printing the full endpoint as is can end up recording unnecessary values such as the manifest conversion code or the installation ID.
 
 In the end I used the following principles.
 

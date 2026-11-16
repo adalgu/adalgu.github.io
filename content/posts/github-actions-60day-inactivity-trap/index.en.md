@@ -1,11 +1,11 @@
 ---
 title: "The GitHub Actions 60-Day Inactivity Trap and How I Recovered My Notion-Hugo Pipeline"
-description: "Why did a blog deployment workflow running on a regular cron schedule quietly stop? GitHub's 60-day inactivity policy (disabled_inactivity)"
+description: "Why did a blog deployment workflow running on a regular cron schedule quietly stop? An analysis of GitHub's 60-day inactivity policy (disabled_inactivity) and how I recovered."
 draft: false
 translationKey: "github-actions-60day-inactivity-trap"
 author: Gunn Kim
 cover:
-  alt: GitHub Actions 60일 비활성화 함정과 Notion-Hugo 복구기 대표 이미지
+  alt: Cover image for "The GitHub Actions 60-Day Inactivity Trap and How I Recovered My Notion-Hugo Pipeline"
   hiddenInList: false
   hiddenInSingle: false
   image: https://gunn.kim/covers/github-actions-60day.jpg
@@ -27,7 +27,7 @@ My personal tech blog ([gunn.kim](https://gunn.kim)) runs on a fully automated p
 
 Recently, though, I wrote a new post and switched on `isPublished: true`, and hours later it still hadn't shown up on the website.
 
-I hadn't run a manual build locally, and the Notion API key hadn't expired either. So what on earth was wrong?
+I hadn't run a manual build locally, and the Notion API key hadn't expired either. So what was the problem?
 
 ---
 
@@ -51,7 +51,7 @@ The status wasn't `active`. It was locked in **`disabled_inactivity`**!
 
 According to GitHub's official documentation:
 
-> **In a public or private repository, if there are no commits or activity for 60 days, scheduled workflows (`schedule` cron) are automatically disabled to avoid wasting money and compute resources.** (In public/private repositories, if there are no commits or activity for 60 days, scheduled workflows (`schedule` cron) are automatically disabled to prevent waste of cost and computing resources.)
+> **In a public or private repository with no commits or activity for 60 days, scheduled workflows (`schedule` cron) are automatically disabled to avoid wasting cost and compute resources.**
 
 The last commit was sometime around May 2026, and in the 60 days after that the repository itself saw no Git commits at all.
 
