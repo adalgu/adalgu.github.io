@@ -1,0 +1,9 @@
+ko:
+  languageCode: ko-KR
+  languageName: 한국어
+  weight: 1
+en:
+  languageCode: en-US
+  languageName: English
+  weight: 2
+  title: Exobrain
