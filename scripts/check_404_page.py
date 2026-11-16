@@ -44,7 +44,9 @@ def main(argv):
         errors.append("redirect box shown before the old-address pattern test")
     if html.count("page_not_found") != 1:
         errors.append(f"page_not_found calls in 404.html: {html.count('page_not_found')} (want 1)")
-    others = [p for p in public.rglob("*.html") if p != page and "page_not_found" in p.read_text(encoding="utf-8", errors="ignore")]
+    # A second language builds its own <lang>/404.html; GitHub Pages only ever serves the root 404.html.
+    lang_copies = {p for p in public.glob("*/404.html") if re.fullmatch(r"[a-z]{2}", p.parent.name)}
+    others = [p for p in public.rglob("*.html") if p != page and p not in lang_copies and "page_not_found" in p.read_text(encoding="utf-8", errors="ignore")]
     errors += [f"page_not_found outside 404: {p.relative_to(public)}" for p in others[:5]]
     for error in errors:
         print("❌ check_404_page:", error)
