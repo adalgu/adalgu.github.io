@@ -10,6 +10,7 @@ keywords: &id001
 lastmod: '2025-12-23T03:46:00.000Z'
 notion_id: 2d27522e-eb2f-80c8-998f-dfc8243f1913
 slug: "spec-is-the-source-ai-paradigm-shift"
+translationKey: "spec-is-the-source-ai-paradigm-shift"
 subtitle: AI 시대, 구현의 민주화와 기획자의 새로운 정의
 summary: 생성형 AI의 발전으로 구현 비용이 0에 수렴하면서 소프트웨어 개발의 패러다임이 바뀌고 있습니다. 본 글에서는 자연어 프롬프트가 새로운
   소스코드가 되고, AI가 생성한 결과물이 바이너리가 되는 'Spec-Driven' 시대를 조망합니다. 단순한 글쓰기를 넘어 AI와의 의도 정렬(Intent
