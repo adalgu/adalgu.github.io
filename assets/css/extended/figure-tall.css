@@ -1,0 +1,3 @@
+/* 세로 사진 높이 상한(TASK-592): 데스크탑은 가운데·높이 560px까지, 폰(≤600px)은 폭 가득 */
+.post-content figure.tall img { max-height: 560px; width: auto; max-width: 100%; margin: 0 auto; display: block; }
+@media (max-width: 600px) { .post-content figure.tall img { width: 100%; max-height: none; height: auto; } }
