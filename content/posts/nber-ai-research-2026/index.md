@@ -2,7 +2,6 @@
 author: Gunn Kim
 date: '2026-11-28'
 title: '2026년 NBER AI 연구 지도'
-description: '2026년 11월 28일 기준 · NBER 워킹페이퍼를 중심으로'
 summary: '2026년 11월 28일 기준 · NBER 워킹페이퍼를 중심으로'
 draft: false
 slug: "nber-ai-research-2026"
